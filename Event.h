@@ -1,28 +1,24 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include <boost/date.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include <string>
-#include "Record.hpp"
 
 class Event{
 	public:
 		Event();
-		Event(std::string name, std::string date, std::string creator,int id_number);
+		Event(std::string input_name, std::string input_date, std::string input_creator, int input_id_number);
 		~Event();
+		boost::gregorian::date get_date();
 		std::string get_name();
 		std::string get_creator();
 		int get_id_number();
-		Record* availabilites;
-		
 		
 		//std::string get_description(); //Optional
 	private:
-		Record* availabilites;
-		//boost::gregorian::date date; //Careful!, not sure how to do this yet.
-	
+		boost::gregorian::date date;
 		std::string name;
-		std::string creator_username;
+		std::string creator;
 		int id_number;
 		
 		//std::string description; //Optional
