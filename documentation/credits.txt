@@ -1,3 +1,4 @@
 Libraries Used
 	Boost C++ Libraries
-		http://www.boost.org/
+		Found at: http://www.boost.org/
+		Documentation at: http://www.boost.org/doc/
