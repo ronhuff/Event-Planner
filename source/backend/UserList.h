@@ -7,7 +7,7 @@ class UserList{
 	public:
 		UserList();
 	private:
-		//Vector of Users
+		//User list
 };
 
 #endif
