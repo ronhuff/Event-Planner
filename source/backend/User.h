@@ -3,6 +3,10 @@
 
 #include <string>
 
+/*
+ * TO BE IMPLEMENTED BY: DOUG
+ */
+
 class User{
 	public:
 		User();
