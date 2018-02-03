@@ -3,6 +3,7 @@
 
 #include "Event.h"
 #include "Record.h"
+#include "User.h"
 #include <fstream>
 #include <string>
 #include <vector>
