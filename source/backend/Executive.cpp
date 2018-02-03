@@ -1,4 +1,5 @@
 #include "Executive.h"
+
 Executive::Executive(){
 	event_list = new std::vector<Event>();
 	
@@ -14,30 +15,34 @@ int Executive::get_event_num(){
 bool Executive::generate_event(std::string name, std::string date){
 	try{		
 		//Create the event at the back of the vector.
-		event_list.push_back(Event(name,date,current_user.get_real_name,user,date,get_event_num()));
+		event_list->push_back(Event(name,current_user.get_real_name(),date,get_event_num()));
 		
 		//Using the event at the back of the list (that we just created), we create the info and record files that correspond to it.
 		std::ofstream file_info_writer(
-			"./data/info_"+std::string(event_list.back().get_id_number())+".txt")
+			"./data/info_"
+			+ (event_list->back().get_id_number())
+			+ std::string(".txt")
 			);
 		std::ofstream file_record_writer(
-			"./data/record_"+std::string(event_list.back().get_id_number())+".txt")
+			"./data/record_"
+			+ (event_list->back().get_id_number())
+			+ std::string(".txt")
 			);
 		return true;
 	}catch(std::string m){
 		return false;
 	}
 }
-bool does_file_exist(DataFile type, std::string identifer){
+bool Executive::does_file_exist(DataFile type, std::string identifer){
 	//The name of the file we are looking for.
 	std::string file_name = "./data/"; 
 	
 	//Add the "prefix" of the file.
 	switch(type){
-		case DF_EVENT:
+		case df_event:
 			file_name+="info_";
 		break;
-		case DF_USER:
+		case df_user:
 			file_name+="user_";
 		break;
 	}
@@ -46,5 +51,5 @@ bool does_file_exist(DataFile type, std::string identifer){
 	file_name += (identifer + ".txt");
 	
 	//Returns whether a file exists or not.
-	return (boost::filesystem(exists));
+	return (boost::filesystem::exists(file_name));
 }
