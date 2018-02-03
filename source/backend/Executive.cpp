@@ -46,7 +46,7 @@ bool Executive::generate_event(std::string name, std::string date){
 			);
 			
 		//Now, we write the basic information of the event to the file in question.
-		file_info_writer << new_event.get_name() << '\n' << new_event.get_date() << '\n' << new_event.get_creator() << '\n' << new_event.get_event_num();
+		file_info_writer << new_event.get_name() << '\n' << new_event.get_date() << '\n' << new_event.get_creator() << '\n' << new_event.get_id_number();
 		
 		//Close the files.
 		file_info_writer.close();
