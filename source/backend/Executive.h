@@ -1,11 +1,11 @@
 #ifndef EXECUTIVE_H
 #define EXECUTIVE_H
 
-#include "UserList.h"
 #include "Event.h"
 #include "Record.h"
 #include <fstream>
 #include <string>
+#include <vector>
 
 class Executive{
 	public:
@@ -25,7 +25,7 @@ class Executive{
 		 */
 		int get_event_num();
 		/**
-		 * This method creates an event. 
+		 * This method creates an event and generates files representing it. 
 		 * @param name The name of the event.
 		 * @param date The date of the event.
 		 * @return true if the event was created, false otherwise.
@@ -42,8 +42,12 @@ class Executive{
 	private:
 		User current_user;
 		int event_num;
+		/**
+		 * This is a vector of Events.
+		 * This contains all Events that are available.
+		 */
+		std::vector<Event>* event_list;
 		//List of users
-		//List of events
 };
 
 #endif
