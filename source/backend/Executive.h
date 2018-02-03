@@ -45,9 +45,9 @@ class Executive{
 		 * An enum representing the various information types that are saved. 
 		 */
 		enum DataFile{
-			int DF_EVENT,	/**< Represents Event text files. */
-			int DF_USER		/**< Represents User text files. */
-		}
+			df_event,	/**< Represents Event text files. */
+			df_user		/**< Represents User text files. */
+		};
 		/**
 		 * This helper method verifies if a file exists. 
 		 * @param type A value from the DataFile enum
