@@ -38,11 +38,3 @@ std::string Event::get_creator(){
 int Event::get_id_number(){
 	return id_number;
 }
-bool Event::create_time(std::string hhu){
-}
-bool Event::remove_time(std::string hhu){
-}
-bool Event::add_user_to_time(std::string hour_and_increment, User u){
-}
-bool Event::remove_user_from_time(std::string hour_and_increment, User u){
-}

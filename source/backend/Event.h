@@ -6,7 +6,8 @@
 #include "Record.h"
 
 /**
- * Event Class. The class encapsulates the basic details of an event and contains a reference to its attendence record.
+ * Event Class. 
+ * The class encapsulates the basic details of an event and contains a reference to its attendence record.
  */
 
 class Event{
@@ -50,32 +51,6 @@ class Event{
 		 * @return the id number as an integer.
 		 */
 		int get_id_number();
-		/**
-		 * A mutator method that adds time to the attendence records.
-		 * @param hhu The hour-increment to be added, which is a system where the first two characters represent the hour (0-23) and the last character represents the 20 minute increment (0-2, where 0 means HH:00, 1 means (HH:20), 2 means (HH:40).
-		 * @return true if the time was created, false otherwise.
-		 */
-		bool create_time(std::string hhu);
-		/**
-		 * A mutator method that removes time from the attendence records.
-		 * @param hhu The hour-increment to be removed, which is a system where the first two characters represent the hour (0-23) and the last character represents the 20 minute increment (0-2, where 0 means HH:00, 1 means (HH:20), 2 means (HH:40).
-		 * @return true if the time was removed, false otherwise.
-		 */
-		bool remove_time(std::string hhu);
-		/**
-		 * A mutator method that adds a user to a time slot.
-		 * @param hhu The hour-increment that the user will be added to, which is a system where the first two characters represent the hour (0-23) and the last character represents the 20 minute increment (0-2, where 0 means HH:00, 1 means (HH:20), 2 means (HH:40).
-		 * @param u The user in question who wants to be added to the time slot
-		 * @return true if the addition was successful, false otherwise.
-		 */
-		bool add_user_to_time(std::string hour_and_increment, User u);
-		/**
-		 * A mutator method that removes a user from a time slot.
-		 * @param hhu The hour-increment that the user will be removed from, which is a system where the first two characters represent the hour (0-23) and the last character represents the 20 minute increment (0-2, where 0 means HH:00, 1 means (HH:20), 2 means (HH:40).
-		 * @param u The user in question who wants to be removed from the time slot
-		 * @return true if the addition was successful, false otherwise.
-		 */
-		bool remove_user_from_time(std::string hour_and_increment, User u);
 	private:
 		/**
 		 * The date variable.
