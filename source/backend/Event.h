@@ -72,11 +72,6 @@ class Event{
 		 * This is the identifer number assigned to an event.
 		 */
 		int id_number;
-		/**
-		 * A reference to the record.
-		 * The record contains the time slots that the event cover and who can attend at each time slot.
-		 */
-		Record* record;
 };
 
 #endif
