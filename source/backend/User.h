@@ -13,6 +13,7 @@ class User{
 	private:
 		std::string user_name;
 		std::string real_name;
+		//Attending events (list of ids)
 };
 
 #endif

@@ -18,7 +18,10 @@ class Executive{
 		
 		void delete_event(int event_id);
 	private:
+		User current_user;
 		int event_num;
+		//List of users
+		//List of events
 };
 
 #endif

@@ -3,6 +3,7 @@
 
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <string>
+#include "Record.h"
 
 class Event{
 	public:
@@ -20,6 +21,7 @@ class Event{
 		std::string name;
 		std::string creator;
 		int id_number;
+		//List of records
 		
 		//std::string description; //Optional
 		//bool completed; //Optional
