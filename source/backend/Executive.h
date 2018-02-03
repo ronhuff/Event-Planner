@@ -46,8 +46,9 @@ class Executive{
 		 * An enum representing the various information types that are saved. 
 		 */
 		enum DataFile{
-			df_event,	/**< Represents Event text files. */
-			df_user		/**< Represents User text files. */
+			df_event,		/**< Represents Event text files. */
+			df_user,		/**< Represents User text files. */
+			df_event_list	/**< Represents the event list text file. */
 		};
 		/**
 		 * This helper method verifies if a file exists. 
@@ -55,11 +56,11 @@ class Executive{
 		 * @param identifer The variable part of the file's name that we are trying to verify, like the "23" in "record_23.txt" or "Daniel" in "user_Daniel.txt"
 		 * @return true if the file in question exists, false otherwise.
 		 */
-		bool does_file_exist(DataFile type, std::string identifer);
+		bool does_file_exist(DataFile type, std::string identifer = "");
 	
 	
 		User current_user;
-		int event_num;
+		int event_num = 0;
 		/**
 		 * This is a vector of Events.
 		 * This contains all Events that are available.
