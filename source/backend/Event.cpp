@@ -22,12 +22,10 @@ Event::Event(std::string input_name, std::string input_date, std::string input_c
 	id_number = input_id_number;
 }
 Event::~Event(){
-	if(record != nullptr){
-		delete record;
-	}
+
 }
 std::string Event::get_date(){
-	return date.to_simple_string();
+	return boost:gregorian:to_simple_string(date);
 }
 std::string Event::get_name(){
 	return name;
