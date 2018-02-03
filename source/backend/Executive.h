@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <boost/filesystem.hpp>
 
 class Executive{
 	public:
@@ -40,6 +41,22 @@ class Executive{
 		
 		void write_user(std::string user_name);
 	private:
+		/**
+		 * An enum representing the various information types that are saved. 
+		 */
+		enum DataFile{
+			int DF_EVENT,	/**< Represents Event text files. */
+			int DF_USER		/**< Represents User text files. */
+		}
+		/**
+		 * This helper method verifies if a file exists. 
+		 * @param type A value from the DataFile enum
+		 * @param identifer The variable part of the file's name that we are trying to verify, like the "23" in "record_23.txt" or "Daniel" in "user_Daniel.txt"
+		 * @return true if the file in question exists, false otherwise.
+		 */
+		bool does_file_exist(DataFile type, std::string identifer);
+	
+	
 		User current_user;
 		int event_num;
 		/**
