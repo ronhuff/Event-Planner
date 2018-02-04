@@ -4,15 +4,26 @@ Executive::Executive(){
 	//Initialization of objects
 	event_list = new std::vector<Event>();
 	
+	//If the directory does not already exist, make it.
 	if(!does_file_exist(df_event_list)){
-		std::ifstream create_directory_and_file("./data/EventList.txt");
+		boost::filesystem::create_directory("data");
+		std::ofstream create_directory_and_file("./data/EventList.txt");
+		create_directory_and_file << event_num;
 		create_directory_and_file.close();
 	}
-			
+	
 	//Rebuild all information from .txt files
-	for(auto&& it : directory_iterator(boost::filesystem::path("./data/"))){
+	std::string viewing_file;
+	for(auto&& it : boost::filesystem::directory_iterator(boost::filesystem::path("./data"))){
 		//This iterates over every file in the directory
 		//The name of the file is accessed with it.filename()
+		//We will look at the first four characters
+		viewing_file = it.path().filename().string();
+		if(viewing_file.substr(0,4)=="info"){
+			//This is an info file.
+			rebuild_event(viewing_file);
+		}
+		
 	}
 }
 Executive::~Executive(){
