@@ -4,6 +4,7 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <string>
 #include "Record.h"
+#include <exception>
 
 /**
  * Event Class. 
@@ -24,6 +25,7 @@ class Event{
 		 * @param input_date The date of the event.
 		 * @param input_create The creator of the event.
 		 * @param input_id_number The id number associated with the event.
+		 * @throw std::logic_error This error occurs whenever an event is put into a holiday.
 		 */
 		Event(std::string input_name, std::string input_date, std::string input_creator, int input_id_number);
 		/**

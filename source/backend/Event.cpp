@@ -8,13 +8,13 @@ Event::Event(std::string input_name, std::string input_date, std::string input_c
 	//We cannot schedule on these days
 	if(date.month() == 12 && date.day() == 25){
 		//Christmas
-		throw "holiday";
+		throw std::logic_error("cannot assign event to holiday");
 	}else if(date.month() == 1 && date.day() == 1){
 		//New Years
-		throw "holiday";
+		throw std::logic_error("cannot assign event to holiday");
 	}else if(date.month() == 7 && date.day() == 4){
-		//July
-		throw "holiday";
+		//July 4
+		throw std::logic_error("cannot assign event to holiday");
 	}
 	
 	name = input_name;
