@@ -63,8 +63,10 @@ bool Executive::generate_event(std::string name, std::string date){
 		file_info_writer.close();
 		file_record_writer.close();
 		
+		//Event created.
 		return true;
-	}catch(std::string m){
+	}catch(std::logic_error m){
+		//The event was a holiday was it? Return false.
 		return false;
 	}
 }
