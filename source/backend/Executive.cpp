@@ -80,4 +80,11 @@ bool Executive::does_file_exist(DataFile type, std::string identifer){
 	//Returns whether a file exists or not.
 	return (boost::filesystem::exists(file_name));
 }
-
+void Executive::rebuild_event(std::string filename){
+	std::ifstream text_file("./data/" + filename);
+	int num;
+	std::string name,date,creator;
+	
+	text_file >> name >> date >> creator >> num;
+	event_list->push_back(Event(name,date,creator,num));
+}
