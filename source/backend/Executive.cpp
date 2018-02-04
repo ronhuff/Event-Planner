@@ -102,6 +102,35 @@ bool Executive::does_file_exist(DataFile type, std::string identifer){
 	//Returns whether a file exists or not.
 	return (boost::filesystem::exists(file_name));
 }
+bool Executive::delete_event(int event_id){
+	if(!does_file_exist(df_event,std::to_string(event_id))){
+		//The event with that id does not even exist.
+		return false;
+	}else{
+		//First, we delete the event from our vector.
+		for(auto&& x = event_list->begin(); x != event_list->end(); x++){
+			//Iterate over every element in the vector.
+			if(x->get_id_number() == event_id){
+				//This element is the one to be removed.
+				event_list->erase(x);
+				break;
+			}
+		}
+		//We remove the files from the data folder.
+		boost::filesystem::remove(
+			"./data/record_"
+			+ std::to_string(event_id)
+			+ std::string(".txt")
+		);
+		boost::filesystem::remove(
+			"./data/info_"
+			+ std::to_string(event_id)
+			+ std::string(".txt")
+		);
+		//We have removed the event from existence.
+		return true;
+	}
+}
 void Executive::rebuild_event(std::string filename){
 	std::ifstream text_file("./data/" + filename);
 	int num;
