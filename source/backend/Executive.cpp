@@ -6,10 +6,16 @@ Executive::Executive(){
 	
 	//If the directory does not already exist, make it.
 	if(!does_file_exist(df_event_list)){
+		//Create the directory.
 		boost::filesystem::create_directory("data");
+		//Generate the file.
 		std::ofstream create_directory_and_file("./data/EventList.txt");
-		create_directory_and_file << event_num;
 		create_directory_and_file.close();
+	}else{
+		//Read the file.
+		std::ifstream event_list("./data/EventList.txt");
+		event_num << event_list;
+		event_list.close();
 	}
 	
 	//Rebuild all information from .txt files
@@ -27,13 +33,16 @@ Executive::Executive(){
 	}
 }
 Executive::~Executive(){
-	
-	
 	delete event_list;
 }
 int Executive::get_event_num(){
 	//Increment event_num before returning it because this will guarantee unique numbers.
 	event_num++;
+	//Save the event_num in this session.
+	std::ofstream event_list("./data/EventList.txt");
+	event_list << event_num;
+	event_list.close();
+	
 	return event_num;
 }
 bool Executive::generate_event(std::string name, std::string date){
