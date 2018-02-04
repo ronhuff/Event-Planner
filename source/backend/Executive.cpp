@@ -14,7 +14,7 @@ Executive::Executive(){
 	}else{
 		//Read the file.
 		std::ifstream event_list("./data/EventList.txt");
-		event_num << event_list;
+		event_num >> event_list;
 		event_list.close();
 	}
 	
