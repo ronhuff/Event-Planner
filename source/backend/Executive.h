@@ -14,28 +14,41 @@ class Executive{
 		/**
 		 * The empty constructor. 
 		 * This builds the Executive class.
+		 * @pre None.
+		 * @post Executive is created.
+		 * If data and EventList.txt don't exist, they are created.
+		 * Executive reads various files in data if they exist to recreate objects.
 		 */
 		Executive();
 		/**
-		 * The empty constructor. 
+		 * The empty destructor. 
 		 * This destroys the Executive class.
+		 * @pre Executive exists.
+		 * @post Executive is destroyed along with any objects it created.
 		 */
 		~Executive();
 		/**
-		 * The getter method of the event num. 
+		 * The getter method of the event num.
 		 * This gets a number to assign to a new event and increments it.
+		 * @pre Executive exists.
+		 * @post "event_num" is incremented prior to being returned. 
+		 * @return The "event_num" .
 		 */
 		int get_event_num();
 		/**
 		 * This method creates an event and generates files representing it. 
 		 * @param name The name of the event.
 		 * @param date The date of the event.
+		 * @pre Executive exists.
+		 * @post A new event is created in text files and in memory. 
 		 * @return true if the event was created, false otherwise.
 		 */
 		bool generate_event(std::string name, std::string date);
 		/**
 		 * This method removes an event. 
 		 * @param event_id The id of the event to be deleted.
+		 * @pre Executive exists and the event in question with the id exists.
+		 * @post An event is deleted in text files and in memory.
 		 * @return true if the event was deleted, false otherwise.
 		 */
 		bool delete_event(int event_id);
