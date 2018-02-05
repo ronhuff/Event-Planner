@@ -133,8 +133,13 @@ bool Executive::delete_event(int event_id){
 }
 void Executive::rebuild_event(std::string filename){
 	std::ifstream text_file("./data/" + filename);
+	
 	int num;
 	std::string name,date,creator,temp;
+	
+	if(text_file.is_open()){
+		throw std::logic_error("File does not exist");
+	}
 	
 	//Put the information in various lines into these variables.
 	std::getline(text_file,name);
