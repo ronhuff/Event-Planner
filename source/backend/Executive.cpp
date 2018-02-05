@@ -134,8 +134,15 @@ bool Executive::delete_event(int event_id){
 void Executive::rebuild_event(std::string filename){
 	std::ifstream text_file("./data/" + filename);
 	int num;
-	std::string name,date,creator;
+	std::string name,date,creator,temp;
 	
-	text_file >> name >> date >> creator >> num;
+	//Put the information in various lines into these variables.
+	std::getline(text_file,name);
+	std::getline(text_file,date);
+	std::getline(text_file,creator);
+	//temp stores the int as a string, it will be converted.
+	std::getline(text_file,temp);
+	num = std::stoi(temp);
+	//Generate the event.
 	event_list->push_back(Event(name,date,creator,num));
 }
