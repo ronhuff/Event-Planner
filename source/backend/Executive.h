@@ -59,6 +59,8 @@ class Executive{
 		bool does_file_exist(DataFile type, std::string identifer = "");
 		/**
 		 * This helper method rebuilds events given a text file.
+		 * @pre The file should should actually exist.
+		 * @post The event information in the file is made into an event and put into the event_list.
 		 * @param filename The file name of the event information text file.
 		 */
 		void rebuild_event(std::string filename);
