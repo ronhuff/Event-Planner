@@ -1,20 +1,22 @@
 #ifndef RECORD_H
 #define RECORD_H
 
-#include "TimeList.h"
+#include "User.h"
+#include <string>
+#include <list>
 
 class Record{
 	public:
 		Record();
-		Record(int in_id, std::string t);
+		Record(std::string t);
 		~Record();
-		
-		void add_user(User u);
-		void remove_user(User u);
+		void add_user(User uid);
+		void remove_user(User uid);
+		std::list<User> getUserList();
+
 	private:
 		std::string time;
-		//list of users
-		//int id; //may not need this
+		std::list<User> UserList;
 };
 
 #endif
