@@ -6,30 +6,27 @@ Executive::Executive(){
 	
 	//If the directory does not already exist, make it.
 	if(!does_file_exist(df_event_list)){
-		//Create the directory.
+		//Create the directories.
 		boost::filesystem::create_directory("data");
+		boost::filesystem::create_directory("data/events");
 		//Generate the file.
-		std::ofstream create_directory_and_file("./data/EventList.txt");
+		std::ofstream create_directory_and_file(get_file_name(df_event_list));
 		create_directory_and_file.close();
 	}else{
 		//Read the file.
-		std::ifstream event_list("./data/EventList.txt");
+		std::ifstream event_list(get_file_name(df_event_list));
 		event_list >> event_num;
 		event_list.close();
 	}
 	
-	//Rebuild all information from .txt files
+	//Rebuild all information from .txt files if possible
 	std::string viewing_file;
-	for(auto&& it : boost::filesystem::directory_iterator(boost::filesystem::path("./data"))){
+	for(auto&& it : boost::filesystem::directory_iterator(boost::filesystem::path("./data/events"))){
 		//This iterates over every file in the directory
 		//The name of the file is accessed with it.filename()
 		//We will look at the first four characters
 		viewing_file = it.path().filename().string();
-		if(viewing_file.substr(0,4)=="info"){
-			//This is an info file.
-			rebuild_event(viewing_file);
-		}
-		
+		rebuild_event(viewing_file);
 	}
 }
 Executive::~Executive(){
@@ -39,7 +36,7 @@ int Executive::get_event_num(){
 	//Increment event_num before returning it because this will guarantee unique numbers.
 	event_num++;
 	//Save the event_num in this session.
-	std::ofstream event_list("./data/EventList.txt");
+	std::ofstream event_list(get_file_name(df_event_list));
 	event_list << event_num;
 	event_list.close();
 	
@@ -54,16 +51,8 @@ bool Executive::generate_event(std::string name, std::string date){
 		Event &new_event = event_list->back();
 		
 		//Using the event at the back of the list (that we just created), we create the info and record files that correspond to it.
-		std::ofstream file_info_writer(
-			"./data/info_"
-			+ std::to_string((new_event.get_id_number()))
-			+ std::string(".txt")
-			);
-		std::ofstream file_record_writer(
-			"./data/record_"
-			+ std::to_string((new_event.get_id_number()))
-			+ std::string(".txt")
-			);
+		std::ofstream file_info_writer(get_file_name(df_event,std::to_string((new_event.get_id_number()))));
+		std::ofstream file_record_writer(get_file_name(df_record,std::to_string((new_event.get_id_number()))));
 			
 		//Now, we write the basic information of the event to the file in question.
 		file_info_writer << new_event.get_name() << '\n' << new_event.get_date() << '\n' << new_event.get_creator() << '\n' << new_event.get_id_number();
@@ -80,13 +69,17 @@ bool Executive::generate_event(std::string name, std::string date){
 	}
 }
 bool Executive::does_file_exist(DataFile type, std::string identifer){
+	//Returns whether a file exists or not.
+	return (boost::filesystem::exists(get_file_name(type,identifer)));
+}
+std::string Executive::get_file_name(DataFile type, std::string identifer){
 	//The name of the file we are looking for.
 	std::string file_name = "./data/"; 
 	
 	//Add the "prefix" of the file.
 	switch(type){
 		case df_event:
-			file_name+="info_";
+			file_name+="events/info_";
 		break;
 		case df_user:
 			file_name+="user_";
@@ -94,13 +87,16 @@ bool Executive::does_file_exist(DataFile type, std::string identifer){
 		case df_event_list:
 			file_name+="EventList";
 		break;
+		case df_record:
+			file_name+="record_";
+		break;
 	}
 	
 	//Finally, add the identifer and .txt extension to the file.
 	file_name += (identifer + ".txt");
 	
 	//Returns whether a file exists or not.
-	return (boost::filesystem::exists(file_name));
+	return file_name;
 }
 bool Executive::delete_event(int event_id){
 	if(!does_file_exist(df_event,std::to_string(event_id))){
@@ -117,22 +113,14 @@ bool Executive::delete_event(int event_id){
 			}
 		}
 		//We remove the files from the data folder.
-		boost::filesystem::remove(
-			"./data/record_"
-			+ std::to_string(event_id)
-			+ std::string(".txt")
-		);
-		boost::filesystem::remove(
-			"./data/info_"
-			+ std::to_string(event_id)
-			+ std::string(".txt")
-		);
+		boost::filesystem::remove(get_file_name(df_event,std::to_string(event_id)));
+		boost::filesystem::remove(get_file_name(df_record,std::to_string(event_id)));
 		//We have removed the event from existence.
 		return true;
 	}
 }
 void Executive::rebuild_event(std::string filename){
-	std::ifstream text_file("./data/" + filename);
+	std::ifstream text_file("./data/events/" + filename);
 	
 	int num;
 	std::string name,date,creator,temp;

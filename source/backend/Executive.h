@@ -67,11 +67,14 @@ class Executive{
 		 */
 		enum DataFile{
 			df_event,		/**< Represents Event text files. */
+			df_record,		/**< Represents Event record files. */
 			df_user,		/**< Represents User text files. */
 			df_event_list	/**< Represents the event list text file. */
 		};
 		/**
 		 * This helper method verifies if a file exists. 
+		 * @pre Executive exists
+		 * @post N/A, No changes occur.
 		 * @param type A value from the DataFile enum
 		 * @param identifer The variable part of the file's name that we are trying to verify, like the "23" in "record_23.txt" or "Daniel" in "user_Daniel.txt"
 		 * @return true if the file in question exists, false otherwise.
@@ -84,6 +87,13 @@ class Executive{
 		 * @param filename The file name of the event information text file.
 		 */
 		void rebuild_event(std::string filename);
+		/**
+		 * This helper method should get the file name of data file given its parameters.
+		 * @pre Executive exists
+		 * @post N/A, No changes occur.
+		 * @param filename The file name of the event information text file.
+		 */
+		std::string get_file_name(DataFile type, std::string identifer = "");
 	
 		User current_user;
 		int event_num = 0;
