@@ -1,6 +1,7 @@
 #ifndef RECORD_H
 #define RECORD_H
 
+#include "User.h"
 
 class Record{
 	public:
@@ -12,8 +13,6 @@ class Record{
 		void remove_user(User u);
 	private:
 		std::string time;
-		//list of users
-		//int id; //may not need this
 };
 
 #endif
