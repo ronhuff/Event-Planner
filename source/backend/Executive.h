@@ -52,6 +52,13 @@ class Executive{
 		 * @return true if the event was deleted, false otherwise.
 		 */
 		bool delete_event(int event_id);
+		/**
+		 * This method returns a reference to the event list. 
+		 * @pre Executive exists.
+		 * @post No changes occur.
+		 * @return a reference to the event list.
+		 */
+		std::vector<Event>& get_event_list();
 		
 		void write_user(std::string user_name);
 	private:

@@ -151,3 +151,6 @@ void Executive::rebuild_event(std::string filename){
 	//Generate the event.
 	event_list->push_back(Event(name,date,creator,num));
 }
+std::vector<Event>& Executive::get_event_list(){
+	return (*event_list);
+}
