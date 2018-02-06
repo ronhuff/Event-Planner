@@ -84,7 +84,7 @@ bool Executive::does_file_exist(DataFile type, std::string identifer){
 	std::string file_name = "./data/"; 
 	
 	//Add the "prefix" of the file.
-	switch(df_event_list){
+	switch(type){
 		case df_event:
 			file_name+="info_";
 		break;
