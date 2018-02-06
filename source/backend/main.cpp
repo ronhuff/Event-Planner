@@ -3,7 +3,7 @@
 
 int main(int argc, char* argv[]){
 	Executive e;
-	if(argc <= 2){
+	if(argc >= 2){
 		switch(argv[1][0]){
 			case 'a':
 				if(argc == 4){
