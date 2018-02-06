@@ -14,3 +14,6 @@ std::string User::get_user_name(){
 std::string User::get_real_name(){
 	return real_name;
 }
+bool User::operator==(User rhs){
+	return (rhs.user_name == user_name);
+}
