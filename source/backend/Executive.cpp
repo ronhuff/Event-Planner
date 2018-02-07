@@ -28,6 +28,8 @@ Executive::Executive(){
 		viewing_file = it.path().filename().string();
 		rebuild_event(viewing_file);
 	}
+	//Sort the events by date.
+	sort_event_list();
 }
 Executive::~Executive(){
 	delete event_list;
@@ -141,4 +143,7 @@ void Executive::rebuild_event(std::string filename){
 }
 std::vector<Event>& Executive::get_event_list(){
 	return (*event_list);
+}
+void Executive::sort_event_list(){
+	std::sort(event_list->begin(),event_list->end());
 }

@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <boost/filesystem.hpp>
 
 class Executive{
@@ -94,7 +95,14 @@ class Executive{
 		 * @param filename The file name of the event information text file.
 		 */
 		std::string get_file_name(DataFile type, std::string identifer = "");
-	
+		/**
+		 * This helper method sorts the event list by dates.
+		 * @pre Executive exists
+		 * @post N/A, No changes occur.
+		 * @param filename The file name of the event information text file.
+		 */
+		void sort_event_list();
+		
 		User current_user;
 		int event_num = 0;
 		/**
