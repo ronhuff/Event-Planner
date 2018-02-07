@@ -68,6 +68,38 @@ class Event{
 		 * @return the id number as an integer.
 		 */
 		int get_id_number();
+		/**
+		 * An operator that compares this event's date with another's date.
+		 * @pre Event exists and rhs exists.
+		 * @post N/A.
+		 * @param rhs The value to be compared with.
+		 * @return true if the event happens after or on the same day as rhs.
+		 */
+		bool operator>=(Event rhs);
+		/**
+		 * An operator that compares this event's date with another's date.
+		 * @pre Event exists and rhs exists.
+		 * @post N/A.
+		 * @param rhs The value to be compared with.
+		 * @return true if the event happens before or on the same day as rhs.
+		 */
+		bool operator<=(Event rhs);
+		/**
+		 * An operator that compares this event's date with another's date.
+		 * @pre Event exists and rhs exists.
+		 * @post N/A.
+		 * @param rhs The value to be compared with.
+		 * @return true if the event happens after rhs.
+		 */
+		bool operator>(Event rhs);
+		/**
+		 * An operator that compares this event's date with another's date.
+		 * @pre Event exists and rhs exists.
+		 * @post N/A.
+		 * @param rhs The value to be compared with.
+		 * @return true if the event happens before rhs.
+		 */
+		bool operator<(Event rhs);
 	private:
 		/**
 		 * The date variable.

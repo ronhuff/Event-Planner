@@ -36,3 +36,15 @@ std::string Event::get_creator(){
 int Event::get_id_number(){
 	return id_number;
 }
+bool Event::operator>=(Event rhs){
+	return date >= rhs.date;
+}
+bool Event::operator<=(Event rhs){
+	return date <= rhs.date;
+}
+bool Event::operator>(Event rhs){
+	return date > rhs.date;
+}
+bool Event::operator<(Event rhs){
+	return date < rhs.date;
+}
