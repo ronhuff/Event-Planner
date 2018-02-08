@@ -8,7 +8,7 @@
 class Record{
 	public:
 		Record();
-		Record(std::string t, std::list<User> user_list);
+		Record(std::string t);
 		~Record();
 		void add_user(User uid);
 		void remove_user(User uid);
@@ -16,7 +16,7 @@ class Record{
 
 	private:
 		std::string time;
-		std::list<User> UserList;
+		std::list<User> userList;
 };
 
 #endif
