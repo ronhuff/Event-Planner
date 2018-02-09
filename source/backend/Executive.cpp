@@ -205,16 +205,17 @@ std::list<Record>* Executive::readRecord(int event_id)
 	std::list<Record>* recordList;
 	std::string tempTime, tempString;
 	
+	//open file
 	std::ifstream recordFile("./data/events/" + filename);
 	Record tempRecord;
 	
-	
+	//throw if the file does not exist
 	if(!recordFile.is_open())
 	{
 		throw std::logic_error("Record file does not exist.");
 	}
 	
-	
+	//read through the file
 	while(!recordFile.eof())
 	{
 		recordFile >> flag;
@@ -228,6 +229,7 @@ std::list<Record>* Executive::readRecord(int event_id)
 		{
 			recordFile >> tempString;
 			tempRecord.add_user(tempString);
+			recordFile >> flag;
 		}
 		recordList->push_front(tempRecord);
 	}
@@ -244,20 +246,24 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 	std::list<std::string>* tempUserlist;
 	std::string tempTime;
 	
+	//if the previous file exists, delete it
 	if(does_file_exist(df_record, std::to_string(eid)))
 	{
 		boost::filesystem::remove(filename);
 	}
 	
+	//start write a new file with the same filename
 	std::ofstream outF (filename);
 	for(auto&& it = List->begin(); it != List->end(); it++)
 	{
+		//write the time block
 		tempTime = it->getTime();
 		outF << 0 << " " << tempTime << std::endl;
 		tempUserlist = it->getUserList();
 		
 		for(auto it2 = tempUserlist->begin(); it2 != tempUserlist->end(); it2++)
 		{
+			//write the users
 			outF << 1 << " " << *it2 <<std::endl;
 		}
 	}
@@ -266,8 +272,10 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 
 bool Executive::removeRecord(int eid)
 {
+	//get filename
 	std::string filename = get_file_name(df_record, std::to_string(eid));
 	
+	//if the file exists, delete it, if the file does not exist, do nothing
 	if(does_file_exist(df_record, std::to_string(eid)))
 	{
 		boost::filesystem::remove(filename);
