@@ -255,7 +255,7 @@ std::list<Record>* Executive::readRecord(int event_id)
 {
 	std::string filename = get_file_name(df_record, std::to_string(event_id));
 	int flag = 0;
-	std::list<Record>* recordList;
+	std::list<Record>* recordList = new std::list<Record>;
 	std::string tempTime, tempString;
 	
 	//open file
