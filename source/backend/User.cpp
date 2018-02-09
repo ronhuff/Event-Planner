@@ -26,6 +26,19 @@ User::User() : user_name(""), real_name(""), attending_events(new std::list<int>
 User::User(std::string uid, std::string pnm) : user_name(uid), real_name(pnm), attending_events(new std::list<int> {-1}) {}
 
 /**
+ * Non-empty contructor. Initializes user_name, real_name, and attending_events
+ * @param std::string uid -- String that user_name gets initialized to
+ * @param std::string pnm -- String that real_name gets initialized to
+ * @param std::list<int> atev -- Integer list that attending_events gets initialized to
+ * @pre uid and pnm are valid strings
+ * @pre atev is a valid integer list container
+ * @post: user_name == uid
+ * @post: real_name == pnm
+ * @post: attending_events has all elemets from atev
+ */
+User::user(std::string uid, std::string pnm, std::list<int> atev) : user_name(uid), real_name(pnm) attending_events(new std::list<int>(atev)) {}
+
+/**
  * Retriever method for user_name member.
  * @pre: none
  * @post: none
