@@ -73,6 +73,23 @@ class Executive{
 		 */
 		bool setCurrentUser(std::string uid);
 	
+		/**
+		 * This method will add current user to a certain time block
+		 * @param the time block
+		 * @param the pointer to the record list
+		 * @pre the record list must valid
+		 * @return: bool -- TRUE if the user have be added to the record
+		 */
+		bool addUserTo(std::string time, std::list<Record>* List);
+	
+		/**
+		 * This method will remove current user from a certain time block
+		 * @param the time block
+		 * @param the pointer to the record list
+		 * @pre the record list must valid
+		 * @return: bool -- TRUE if the user have be removed from the record
+		 */
+		bool removeUserFrom(std::string time, std::list<Record>* List);
 	
 	
 			

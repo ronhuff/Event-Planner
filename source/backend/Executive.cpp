@@ -309,3 +309,37 @@ bool Executive::is_attending(int eid)
 	
 	return isAttending;
 }
+
+bool Executive::addUserTo(std::string time, std::list<Record>* List)
+{
+	bool added = false;
+	
+	for(auto&& it = List -> begin(); it != List -> end(); it++)
+	{
+		if(it -> getTime() == time) //if the time exist, add the user to that Record
+		{
+			it -> add_user(current_user -> getUserName());
+			added = true;
+		}
+	}
+	
+	return added;
+	
+}
+
+bool Executive::removeUserFrom(std::string time, std::list<Record>* List)
+{
+	bool removed = false;
+	
+	for(auto&& it = List -> begin(); it != List -> end(); it++)
+	{
+		if(it -> getTime() == time) //if the time exist, remove the user from that Record
+		{
+			it -> remove_user(current_user -> getUserName());
+			removed = true;
+		}
+	}
+	
+	return removed;
+}
+
