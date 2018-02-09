@@ -115,7 +115,14 @@ class Executive{
 		 * @return a list of Record objects
 		 */
 		std::list<Record>* createRecordList(std::list<std::string>* timeList);
-			
+		
+		/**
+		 * This method returns a list of events created by a user
+		 * @param u The user
+		 * @post NA
+		 * @return A list of events created by the user parameter
+		 */
+		std::list<Event> getEventByCreator(User u);
 	private:
 		/**
 		 * An enum representing the various information types that are saved. 

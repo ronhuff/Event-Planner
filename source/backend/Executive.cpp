@@ -409,3 +409,17 @@ std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
 	
 	return List;
 }
+std::list<Event> Executive::getEventByCreator(User u){
+	std::list<Event> list;
+	
+	for(auto&& x = eventList->begin(); x != eventList->end(); x++){
+		//Iterate over every element in the vector.
+		if(x->getCreatorUserName() == u.getUserName()){
+			//This element is the one to be removed.
+			list.push_back(*x);
+			break;
+		}
+	}
+	
+	return list;
+}
