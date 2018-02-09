@@ -34,3 +34,17 @@ CLI::newAccount(){
         std::cin >> username;
     }
 }
+
+CLI::listEvents(EventSet set, int first){
+    switch(set){
+        case attending:
+
+            break;
+        case created:
+
+            break;
+        default:
+
+            break;
+    }
+}
