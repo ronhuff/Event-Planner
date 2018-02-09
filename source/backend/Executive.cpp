@@ -343,3 +343,17 @@ bool Executive::removeUserFrom(std::string time, std::list<Record>* List)
 	return removed;
 }
 
+std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
+{
+	std::list<Record>* List = new std::list<Record>; //create a new pointer to a list
+	
+	for(auto&& it = timeList -> begin(); it != List -> end(); it++)
+	{
+		Record tempRecord(*it); // create Record object
+		List -> push_front(tempRecord); // push to the list
+	}
+	
+	delete timeList; // delete the timeList
+	
+	return List;
+}

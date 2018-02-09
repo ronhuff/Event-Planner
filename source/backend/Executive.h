@@ -91,6 +91,14 @@ class Executive{
 		 */
 		bool removeUserFrom(std::string time, std::list<Record>* List);
 	
+		/**
+		 * This method should be called when creating a new event
+		 * @param a list of time blocks
+		 * @post timeList will be deleted
+		 * @return a list of Record objects
+		 */
+		std::list<Record>* createRecordList(std::list<std::string>* timeList);
+	
 	
 			
 	private:
