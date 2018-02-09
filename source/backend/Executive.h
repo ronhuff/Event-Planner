@@ -71,8 +71,10 @@ class Executive{
 		 * @post: current_user = returned
 		 * @return: bool -- TRUE if uid is found in user.txt, FALSE otherwise
 		 */
-		bool setCurrentUser(std::string uid); 
-		
+		bool setCurrentUser(std::string uid);
+	
+	
+	
 			
 	private:
 		/**
@@ -140,6 +142,10 @@ class Executive{
 		 * This contains all Events that are available.
 		 */
 		std::vector<Event>* event_list;
+	
+		std::list<Record>* readRecord(int event_id);
+		void writeRecord(int eid, std::list<Record>* List);
+		bool removeRecord(int eid);
 
 };
 

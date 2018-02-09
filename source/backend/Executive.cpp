@@ -198,4 +198,76 @@ bool Executive::setCurrentUser(std::string uid) {
     }
 }
 
+std::list<Record>* Executive::readRecord(int event_id)
+{
+	std::string filename = get_file_name(df_record, event_id);
+	int flag = 0;
+	std::list<Record>* recordList;
+	std::string tempTime, tempString;
+	
+	std::ifstream recordFile("./data/events/" + filename);
+	
+	if(!recordFile.is_open())
+	{
+		throw std::logic_error("Record file does not exist.");
+	}
+	
+	
+	while(!recordFile.eof())
+	{
+		if(recordFile >> flag == 0)
+		{
+			recordFile >> tempTime;
+			Record tempRecord(tempTime);
+		}
+		while(recordFile >> flag != 0)
+		{
+			recordFile >> tempString;
+			tempRecord.add_user(tempString);
+		}
+		recordList.push_front(tempRecord);
+	}
+	
+	recordFile.close();
+	
+	return recordList;
+}
 
+
+void  Executive::writeRecord(int eid, std::list<Record>* List)
+{
+	std::string filename = get_file_name(df_record, eid);
+	std::list<std::string>* tempUserlist;
+	std::string tempTime;
+	
+	if(does_file_exist(df_record, eid))
+	{
+		remove(filename);
+	}
+	
+	std::ofstream outF (filename);
+	for(std::list<Record>*::iterator it = std::begin(List); it != std::end(List); it++)
+	{
+		tempTime = it.getTime();
+		outF << 0 << " " << tempTime << std::endl;
+		tempUserlist = List -> getUserList();
+		
+		for(std::list<std::string>*::iterator it2 = std::begin(tempUserlist); it2 != std::end(tempUserlist); it2++)
+		{
+			outF << 1 << " " << *it2 <<std::endl;
+		}
+	}
+	
+}
+
+bool Executive::removeRecord(int eid)
+{
+	std::string filename = get_file_name(df_record, eid);
+	
+	if(does_file_exist(df_record, id))
+	{
+		remove(filename);
+	}
+	
+	return true;
+}
