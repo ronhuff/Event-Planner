@@ -206,7 +206,7 @@ std::list<Record>* Executive::readRecord(int event_id)
 	std::string tempTime, tempString;
 	
 	//open file
-	std::ifstream recordFile("./data/events/" + filename);
+	std::ifstream recordFile("./data/records/" + filename);
 	Record tempRecord;
 	
 	//throw if the file does not exist
@@ -253,7 +253,7 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 	}
 	
 	//start write a new file with the same filename
-	std::ofstream outF (filename);
+	std::ofstream outF ("./Data/records/" + filename);
 	for(auto&& it = List->begin(); it != List->end(); it++)
 	{
 		//write the time block
@@ -278,7 +278,7 @@ bool Executive::removeRecord(int eid)
 	//if the file exists, delete it, if the file does not exist, do nothing
 	if(does_file_exist(df_record, std::to_string(eid)))
 	{
-		boost::filesystem::remove(filename);
+		boost::filesystem::remove("./Data/records/" + filename);
 	}
 	
 	return true;
