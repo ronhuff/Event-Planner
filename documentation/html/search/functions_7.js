@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['user',['User',['../classUser.html#a4a0137053e591fbb79d9057dd7d2283d',1,'User::User()'],['../classUser.html#af7ad8135c0c766d006eadedf51e34013',1,'User::User(std::string uid, std::string pnm)'],['../classUser.html#abf30fe432e25c1d0c1ad60a50604bc92',1,'User::User(std::string uid, std::string pnm, std::list&lt; int &gt; atev)']]]
+  ['readrecord',['readRecord',['../classExecutive.html#a30383784ac05bd5fd7fd40ff0277a88d',1,'Executive']]],
+  ['rebuild_5fevent',['rebuild_event',['../classExecutive.html#a84eaf2e6e3a0585c5c6466900441f14a',1,'Executive']]],
+  ['removerecord',['removeRecord',['../classExecutive.html#a3f464b27db4195c975283ce20cf3c3f9',1,'Executive']]],
+  ['removeuserfrom',['removeUserFrom',['../classExecutive.html#a1df250bced0d7d74ce5017cd1a225e4d',1,'Executive']]]
 ];

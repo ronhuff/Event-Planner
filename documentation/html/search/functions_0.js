@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['delete_5fevent',['delete_event',['../classExecutive.html#adbeb9dd09b42900ec0e303291b178bf2',1,'Executive']]],
-  ['does_5ffile_5fexist',['does_file_exist',['../classExecutive.html#a332e370efe5054f1ac6aa0fb7732da4e',1,'Executive']]]
+  ['adduserto',['addUserTo',['../classExecutive.html#a59e947ff980f9bd1ef0bb9ea8dae42b1',1,'Executive']]]
 ];

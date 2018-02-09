@@ -10,6 +10,7 @@ var searchData=
   ['get_5fid_5fnumber',['get_id_number',['../classEvent.html#a52cac94c83225a54eabc3377ab24cd01',1,'Event']]],
   ['get_5fname',['get_name',['../classEvent.html#acf7f2e864ba2d56452ad068193274e6a',1,'Event']]],
   ['getattendingevents',['getAttendingEvents',['../classUser.html#a9ef7239820bb7fdc48f988514a79286b',1,'User']]],
+  ['getcurrentuser',['getCurrentUser',['../classExecutive.html#a482f3746653c891ab8fb61e45d654e67',1,'Executive']]],
   ['getrealname',['getRealName',['../classUser.html#a708784a199b60567f59b51d5401167d3',1,'User']]],
   ['getusername',['getUserName',['../classUser.html#a7eff012d6182f6829329620d8e21b124',1,'User']]]
 ];

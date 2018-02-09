@@ -71,7 +71,6 @@ class Executive{
 		 * @post: current_user is set with appropiate parameters if file is found; is set to empty otherwise
 		 * @return: bool -- TRUE if user_<uid> is found, FALSE otherwise
 		 */
-<<<<<<< HEAD
 		bool setCurrentUser(std::string uid); 
 
 		/**
@@ -91,10 +90,6 @@ class Executive{
 		 */
 		User* getCurrentUser();
 
-		
-=======
-		bool setCurrentUser(std::string uid);
-	
 		/**
 		 * This method will add current user to a certain time block
 		 * @param the time block
@@ -120,9 +115,6 @@ class Executive{
 		 * @return a list of Record objects
 		 */
 		std::list<Record>* createRecordList(std::list<std::string>* timeList);
-	
-	
->>>>>>> e188b7d36e2d946cd8c4234ea0253b20dd6af812
 			
 	private:
 		/**
