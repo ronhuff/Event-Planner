@@ -13,16 +13,16 @@ Record::Record(std::string t)
 Record::~Record()
 {
     //Remove all users.
-    userList.clear();
+	delete userList;
 }
 
-void Record::add_user(User uid)
+void Record::add_user(std::string uid)
 {
     //add user to the list.
     userList.push_front (uid);
 }
 
-void Record::remove_user(User uid)
+void Record::remove_user(std::string uid)
 {
     //remove an user from the list, if the list is not empty.
     if(userList.empty())
@@ -34,7 +34,12 @@ void Record::remove_user(User uid)
     }
 }
 
-std::list<User> Record::getUserList()
+std::list<std::string> Record::getUserList()
 {
     return userList;
+}
+
+std::string Record::getTime()
+{
+	return (time);
 }

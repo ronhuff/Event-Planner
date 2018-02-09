@@ -1,7 +1,6 @@
 #ifndef RECORD_H
 #define RECORD_H
 
-#include "User.h"
 #include <string>
 #include <list>
 
@@ -10,13 +9,14 @@ class Record{
 		Record();
 		Record(std::string t);
 		~Record();
-		void add_user(User uid);
-		void remove_user(User uid);
-		std::list<User> getUserList();
+		void add_user(std::string uid);
+		void remove_user(std::string uid);
+		std::list<std::string> getUserList();
+		std::string getTime();
 
 	private:
 		std::string time;
-		std::list<User> userList;
+		std::list<std::string>* userList;
 };
 
 #endif
