@@ -143,8 +143,29 @@ class Executive{
 		 */
 		std::vector<Event>* event_list;
 	
+		/**
+		 *This method read through a existing record file and create a list pointer of record.
+		 *@praram the event id
+		 *@pre the record file should exist.
+		 *@post none
+		 *@return a list of Record
+		 */
 		std::list<Record>* readRecord(int event_id);
+	
+		/**
+		 *This method will write a Record file of a given list of Record
+		 *@param the event id
+		 *@param the list of Record
+		 *@post none
+		 */
 		void writeRecord(int eid, std::list<Record>* List);
+	
+		/**
+		 *This method will remove a Record file
+		 * @param teh event id
+		 * @pre the file should exist
+		 * @post remove the file
+		 */
 		bool removeRecord(int eid);
 
 };
