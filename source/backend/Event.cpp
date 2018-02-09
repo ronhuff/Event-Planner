@@ -2,7 +2,7 @@
 Event::Event(){
 	//This should never be called. This is here to applease the compiler.
 }
-Event::Event(std::string input_name, std::string input_date, std::string input_creator, int input_id_number){
+Event::Event(std::string input_name, std::string input_date, User input_creator, int input_id_number){
 	date = boost::gregorian::from_string(input_date);
 	
 	//We cannot schedule on these days
@@ -18,7 +18,8 @@ Event::Event(std::string input_name, std::string input_date, std::string input_c
 	}
 	
 	name = input_name;
-	creator = input_creator;
+	creator_real_name = input_creator.getRealName();
+	creator_user_name = input_creator.getUserName();
 	id_number = input_id_number;
 }
 Event::~Event(){
@@ -30,8 +31,11 @@ std::string Event::get_date(){
 std::string Event::get_name(){
 	return name;
 }
-std::string Event::get_creator(){
-	return creator;
+std::string Event::get_creator_user_name(){
+	return creator_user_name;
+}
+std::string Event::get_creator_real_name(){
+	return creator_real_name;
 }
 int Event::get_id_number(){
 	return id_number;

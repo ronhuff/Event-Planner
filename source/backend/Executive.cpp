@@ -30,7 +30,6 @@ Executive::Executive(){
 	for(auto&& it : boost::filesystem::directory_iterator(boost::filesystem::path("./data/events"))){
 		//This iterates over every file in the directory
 		//The name of the file is accessed with it.filename()
-		//We will look at the first four characters
 		viewing_file = it.path().filename().string();
 		rebuild_event(viewing_file);
 	}
@@ -53,7 +52,7 @@ int Executive::get_event_num(){
 bool Executive::generate_event(std::string name, std::string date){
 	try{		
 		//Create the event at the back of the vector.
-		event_list->push_back(Event(name,date,current_user -> getRealName(),get_event_num()));
+		event_list->push_back(Event(name,date,*current_user,get_event_num()));
 		
 		//This is a reference to the event we want to input data for.
 		Event &new_event = event_list->back();
@@ -63,7 +62,7 @@ bool Executive::generate_event(std::string name, std::string date){
 		std::ofstream file_record_writer(get_file_name(df_record,std::to_string((new_event.get_id_number()))));
 			
 		//Now, we write the basic information of the event to the file in question.
-		file_info_writer << new_event.get_name() << '\n' << new_event.get_date() << '\n' << new_event.get_creator() << '\n' << new_event.get_id_number();
+		file_info_writer << new_event.get_name() << '\n' << new_event.get_date() << '\n' << new_event.get_creator_user_name() << '\n' << new_event.get_creator_real_name() << '\n' << new_event.get_id_number();
 		
 		//Close the files.
 		file_info_writer.close();
@@ -131,7 +130,7 @@ void Executive::rebuild_event(std::string filename){
 	std::ifstream text_file("./data/events/" + filename);
 	
 	int num;
-	std::string name,date,creator,temp;
+	std::string name,date,creator_user_name,creator_real_name,temp;
 	
 	if(!text_file.is_open()){
 		throw std::logic_error("File does not exist");
@@ -140,12 +139,13 @@ void Executive::rebuild_event(std::string filename){
 	//Put the information in various lines into these variables.
 	std::getline(text_file,name);
 	std::getline(text_file,date);
-	std::getline(text_file,creator);
+	std::getline(text_file,creator_user_name);
+	std::getline(text_file,creator_real_name);
 	//temp stores the int as a string, it will be converted.
 	std::getline(text_file,temp);
 	num = std::stoi(temp);
 	//Generate the event.
-	event_list->push_back(Event(name,date,creator,num));
+	event_list->push_back(Event(name,date,User(creator_user_name,creator_user_name),num));
 }
 std::vector<Event>& Executive::get_event_list(){
 	return (*event_list);
