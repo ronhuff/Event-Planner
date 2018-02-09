@@ -115,7 +115,14 @@ class Executive{
 		 * @return a list of Record objects
 		 */
 		std::list<Record>* createRecordList(std::list<std::string>* timeList);
-			
+	
+		/**
+		 * This method will return a list of username which are all users attending the given event.
+		 * @param a event id
+		 * @return a list of username
+		 */
+		std::list<string>* getAttending(int eid);
+	
 	private:
 		/**
 		 * An enum representing the various information types that are saved. 

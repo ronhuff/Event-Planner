@@ -291,6 +291,24 @@ std::list<Record>* Executive::readRecord(int event_id)
 	return recordList;
 }
 
+std::list<string>* Executive::getAttending(int eid)
+{
+	std::string filename = getFileName(df_record, std::to_string(event_id));
+	std::list<Record>* List = readRecord(eid);
+	std::list<string>* UserList, tempUserList = nullptr;
+	
+	for(auto&& it = List -> begin(); it != List -> end(); it++)
+	{
+		tempUserList = it -> getUserList();
+		UserList -> merge(tempUserList);
+	}
+	
+	UserList -> unique();
+	delete List;
+	delete tempUserList;
+	
+	return UserList;
+}
 
 void  Executive::writeRecord(int eid, std::list<Record>* List)
 {
