@@ -32,7 +32,7 @@ class Event{
 		 * @param input_id_number The id number associated with the event.
 		 * @throw std::logic_error This error occurs whenever an event is put into a holiday.
 		 */
-		Event(std::string input_name, std::string input_date, std::string input_creator, int input_id_number);
+		Event(std::string input_name, std::string input_date, User input_creator, int input_id_number);
 		/**
 		 * The destructor.
 		 * @pre Event exists.
@@ -55,12 +55,19 @@ class Event{
 		 */
 		std::string get_name();
 		/**
-		 * A getter method for the creator's name.
+		 * A getter method for the creator's real name.
 		 * @pre Event exists.
 		 * @post N/A.
-		 * @return the creator's name as a string.
+		 * @return the creator's real name as a string.
 		 */
-		std::string get_creator();
+		std::string get_creator_real_name();
+		/**
+		 * A getter method for the creator's user name.
+		 * @pre Event exists.
+		 * @post N/A.
+		 * @return the creator's user name as a string.
+		 */
+		std::string get_creator_user_name();
 		/**
 		 * A getter method for the id number.
 		 * @pre Event exists.
@@ -112,10 +119,15 @@ class Event{
 		 */
 		std::string name;
 		/**
-		 * A User variable.
+		 * A variable representing the username of the creator.
 		 * This is the name of the creator.
 		 */
-		std::string creator;
+		std::string creator_user_name;
+		/**
+		 * A variable representing the realname of the creator.
+		 * This is the name of the creator.
+		 */
+		std::string creator_real_name;
 		/**
 		 * An integer variable.
 		 * This is the identifer number assigned to an event.
