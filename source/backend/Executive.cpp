@@ -283,3 +283,29 @@ bool Executive::removeRecord(int eid)
 	
 	return true;
 }
+
+bool Executive::is_attending(int eid)
+{
+	bool isAttending = false;
+	std::list<Record>* List = readRecord(eid); //get the list.
+	std::list<string>* tempUserList;
+	std::string username = current_user -> getUserName(); //get username
+	
+	//check the user is attending
+	for(auto&& it = List -> begin(); it != List -> end(); it++)
+	{
+		tempUserList = it->getUserList()
+		for(auto&& it2 = tempUserList -> begin(); it2 != tempUserList -> end(); it2++)
+		{
+			if(*it2 == username)
+			{
+				isAttending = true; //the current user is attending the event
+			}
+		}
+	}
+	
+	delete List; //delete the List
+	
+	
+	return isAttending;
+}

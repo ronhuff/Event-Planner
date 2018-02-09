@@ -167,6 +167,13 @@ class Executive{
 		 * @post remove the file
 		 */
 		bool removeRecord(int eid);
+	
+		/**
+		 * This method will check if current user is attending a event
+		 * @param the event id
+		 * @post none
+		 */
+		bool is_attending(int eid);
 
 };
 
