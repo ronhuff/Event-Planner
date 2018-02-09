@@ -11,7 +11,7 @@ class Record{
 		~Record();
 		void add_user(std::string uid);
 		void remove_user(std::string uid);
-		std::list<std::string> getUserList();
+		std::list<std::string>* getUserList();
 		std::string getTime();
 
 	private:

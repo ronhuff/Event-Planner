@@ -36,9 +36,9 @@ void Record::remove_user(std::string uid)
     }
 }
 
-std::list<std::string> Record::getUserList()
+std::list<std::string>* Record::getUserList()
 {
-    return *userList;
+    return userList;
 }
 
 std::string Record::getTime()

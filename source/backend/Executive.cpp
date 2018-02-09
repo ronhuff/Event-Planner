@@ -200,12 +200,14 @@ bool Executive::setCurrentUser(std::string uid) {
 
 std::list<Record>* Executive::readRecord(int event_id)
 {
-	std::string filename = get_file_name(df_record, event_id);
+	std::string filename = get_file_name(df_record, std::to_string(event_id));
 	int flag = 0;
 	std::list<Record>* recordList;
 	std::string tempTime, tempString;
 	
 	std::ifstream recordFile("./data/events/" + filename);
+	Record tempRecord;
+	
 	
 	if(!recordFile.is_open())
 	{
@@ -215,17 +217,19 @@ std::list<Record>* Executive::readRecord(int event_id)
 	
 	while(!recordFile.eof())
 	{
-		if(recordFile >> flag == 0)
+		recordFile >> flag;
+		if(flag == 0)
 		{
 			recordFile >> tempTime;
-			Record tempRecord(tempTime);
+			tempRecord = Record(tempTime);
 		}
-		while(recordFile >> flag != 0)
+		recordFile >> flag;
+		while(flag != 0)
 		{
 			recordFile >> tempString;
 			tempRecord.add_user(tempString);
 		}
-		recordList.push_front(tempRecord);
+		recordList->push_front(tempRecord);
 	}
 	
 	recordFile.close();
@@ -236,23 +240,23 @@ std::list<Record>* Executive::readRecord(int event_id)
 
 void  Executive::writeRecord(int eid, std::list<Record>* List)
 {
-	std::string filename = get_file_name(df_record, eid);
+	std::string filename = get_file_name(df_record, std::to_string(eid));
 	std::list<std::string>* tempUserlist;
 	std::string tempTime;
 	
-	if(does_file_exist(df_record, eid))
+	if(does_file_exist(df_record, std::to_string(eid)))
 	{
-		remove(filename);
+		boost::filesystem::remove(filename);
 	}
 	
 	std::ofstream outF (filename);
-	for(std::list<Record>*::iterator it = std::begin(List); it != std::end(List); it++)
+	for(auto&& it = List->begin(); it != List->end(); it++)
 	{
-		tempTime = it.getTime();
+		tempTime = it->getTime();
 		outF << 0 << " " << tempTime << std::endl;
-		tempUserlist = List -> getUserList();
+		tempUserlist = it->getUserList();
 		
-		for(std::list<std::string>*::iterator it2 = std::begin(tempUserlist); it2 != std::end(tempUserlist); it2++)
+		for(auto it2 = tempUserlist->begin(); it2 != tempUserlist->end(); it2++)
 		{
 			outF << 1 << " " << *it2 <<std::endl;
 		}
@@ -262,11 +266,11 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 
 bool Executive::removeRecord(int eid)
 {
-	std::string filename = get_file_name(df_record, eid);
+	std::string filename = get_file_name(df_record, std::to_string(eid));
 	
-	if(does_file_exist(df_record, id))
+	if(does_file_exist(df_record, std::to_string(eid)))
 	{
-		remove(filename);
+		boost::filesystem::remove(filename);
 	}
 	
 	return true;
