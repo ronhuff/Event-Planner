@@ -5,6 +5,7 @@
 #include "Record.h"
 #include "User.h"
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -63,15 +64,32 @@ class Executive{
 		
 		/**
 		 * Method which sets the current_user variable based on uid
-		 * If a matching user_name is in the file user.txt, then
-		 * current_user will point to a user with the respective information
-		 * otherwise, will point to a default User (see User::User())
+		 * If a matching file "user_<uid>.txt" is found, then the information
+		 * contained in that file is written to the *(current_user)
 		 * @param std::string -- uid: The username to be searched for
-		 * @pre: uid is a valid string; user.txt exists in the appropiate location
-		 * @post: current_user = returned
-		 * @return: bool -- TRUE if uid is found in user.txt, FALSE otherwise
+		 * @pre: uid is a valid string 
+		 * @post: current_user is set with appropiate parameters if file is found; is set to empty otherwise
+		 * @return: bool -- TRUE if user_<uid> is found, FALSE otherwise
 		 */
 		bool setCurrentUser(std::string uid); 
+
+		/**
+		 * Method which re-writes information about current_user back
+		 * out to it's file
+		 * @pre: current_user has a nonempty user_name
+		 * @post: user_<current_user -> user_name>.txt is updated with most recent data
+		 * @return: TRUE if operation completed successfully, FALSE otherwise
+		 */
+		bool writeCurrentUser();
+
+		/**
+		 * Retriever method which returns a pointer to current_user
+		 * @pre: none
+		 * @post: none
+		 * @return: User* -- pointer to current_user member
+		 */
+		User* getCurrentUser();
+
 		
 			
 	private:
@@ -116,14 +134,15 @@ class Executive{
 		void sort_event_list();
 
 		/**
-		 * Searches the user file for uid
-		 * @param std::string uid -- username to search for
-		 * @pre: uid is a valid string; the user file exists
-		 * @post: none
-		 * @return: Returns an open (or closed, if not found) ifstream for the user file
+		 * Converts a csv string of integer values to an integer list
+		 * @param std::list<int> int_list -- List to store the values to
+		 * @param std::string int_string -- csv string of integer values
+		 * @pre: int_string is a csv list of integer values
+		 * @post: int_list contains integer converted values contained in int_string
+		 * @return: none
 		 */
-		std::ifstream searchUserFile(std::string uid);
-		
+		void storeIntsFromString(std::list<int> &int_list, std::string int_string);
+
 		/**
 		 * User pointer which points to information about the User object of the current session
 		 */

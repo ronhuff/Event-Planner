@@ -3,12 +3,33 @@
 Executive::Executive(){
 	//Initialization of objects
 	event_list = new std::vector<Event>();
-	
-	//If the directory does not already exist, make it.
+	current_user = nullptr;
+
+	/* DIRECTORY INITIALIZATION */
+
+	if (!boost::filesystem::is_directory("data")) { //data directory does not exist; create it and sub-directories
+	    boost::filesystem::create_directory("data");
+	    boost::filesystem::create_directory("data/events");
+	    boost::filesystem::create_directory("data/records");
+	    boost::filesystem::create_directory("data/users");
+	}
+
+	if (!boost::filesystem::is_directory("data/events")) {
+	    boost::filesystem::create_directory("data/events");
+	}
+
+	if (!boost::filesystem::is_directory("data/records")) {
+	    boost::filesystem::create_directory("data/records");
+	}
+
+	if (!boost::filesystem::is_directory("data/users")) {
+	    boost::filesystem::create_directory("data/users");
+	}
+
+	/* EVENT LIST INITIALIZATION */
+
+	//If the file does not already exist, make it.
 	if(!does_file_exist(df_event_list)){
-		//Create the directories.
-		boost::filesystem::create_directory("data");
-		boost::filesystem::create_directory("data/events");
 		//Generate the file.
 		std::ofstream create_directory_and_file(get_file_name(df_event_list));
 		create_directory_and_file.close();
@@ -17,12 +38,6 @@ Executive::Executive(){
 		std::ifstream event_list(get_file_name(df_event_list));
 		event_list >> event_num;
 		event_list.close();
-	}
-
-	if (!does_file_exist(df_user)) { //Creating the user.txt file, if it doesn't exist already
-	    boost::filesystem::create_directory("data"); //Redundancy; just in case it hasn't been created already
-	    std::ofstream create_user_file(get_file_name(df_user)); //Create the user.txt file
-	    create_user_file.close();
 	}
 
 	//Rebuild all information from .txt files if possible
@@ -38,6 +53,9 @@ Executive::Executive(){
 }
 Executive::~Executive(){
 	delete event_list;
+	if (current_user != nullptr) {
+	    delete current_user;
+	}
 }
 int Executive::get_event_num(){
 	//Increment event_num before returning it because this will guarantee unique numbers.
@@ -89,13 +107,13 @@ std::string Executive::get_file_name(DataFile type, std::string identifer){
 			file_name+="events/info_";
 		break;
 		case df_user:
-			file_name+="user";
+			file_name+="users/user_";
 		break;
 		case df_event_list:
 			file_name+="EventList";
 		break;
 		case df_record:
-			file_name+="record_";
+			file_name+="records/record_";
 		break;
 	}
 	
@@ -154,47 +172,81 @@ void Executive::sort_event_list(){
 	std::sort(event_list->begin(),event_list->end());
 }
 
-std::ifstream Executive::searchUserFile(std::string uid) {
+bool Executive::setCurrentUser(std::string uid) {
+    if(does_file_exist(df_user, uid)) {
 
-    std::string temp = ""; //Temporary string variable
-    std::ifstream user;
-    user.open(get_file_name(df_user));
+	std::string pnm = "";
+	std::string attending_string = "";
+	std::list<int> attending_list;
 
-    while (temp != uid && !user.eof()) { //Search the entire file until you find uid
-	std::getline(user, temp, ';'); //Extract the first entry (username)
-	user.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //Go to the beginning of the next line
+	std::ifstream user_file;
+	user_file.open(get_file_name(df_user, uid));
+
+	std::getline(user_file, pnm, '\n'); //Store the proper name
+	std::getline(user_file, attending_string, '\n'); //Get string of attending events
+
+	storeIntsFromString(attending_list, attending_string); //Store the attending event list
+
+	current_user = new User(uid, pnm, attending_list);
+
+	user_file.close();
+
+	return (true);
+
+    }
+    else { //File does not exist; return false
+
+	current_user = new User();
+	return (false);
+
     }
 
-    user.clear();
-
-    if (temp != uid) {
-	user.close(); //Calling method (setCurrentUser) will check whether or not it's open 
-    }
-
-    return (user);
 }
 
-bool Executive::setCurrentUser(std::string uid) {
-    std::ifstream user = searchUserFile(uid); //Get the user.txt ifstream from searchUserFile
-    User* temp = nullptr;
+void Executive::storeIntsFromString(std::list<int> &int_list, std::string int_string) {
+    std::stringstream ss;
+    std::string temp_string = "";
+    int temp_int = 0;
+    ss.str(int_string);
 
-    if (user.is_open()) {  //In other words, did not close; found uid; gather data
-	std::string pnm = ""; //Real name 
-	std::string attending_events_string = ""; //String holding attending events list
-	std::list<int> attending_events; //Attending events
-	std::getline(user, pnm, ';'); //Store real name from file into pnm (stream should be over real name at this point)
-	std::getline(user, attending_events_string, '\n'); //Put the attending evetns into a string
-//	storeIntsFromString(attending_events, attending_events_string); //TODO: implement method that stores integers into a container from a string csv
+    while (!ss.eof()) {
+	std::getline(ss, temp_string, ',');
+	temp_int = std::stoi(temp_string);
+	int_list.push_back(temp_int);
+    }
+}
 
-	temp = new User(uid, pnm, attending_events); //Initialize the pointer
-	current_user = temp; //Should be no risk for dangling pointer since temp is deleted on scope-exit
-	user.close();
-	return (true); //Indicate that the was found
+User* Executive::getCurrentUser() {
+    return (current_user);
+}
+
+bool Executive::writeCurrentUser() {
+
+    std::string uid = current_user -> getUserName();
+    if (uid == "") {
+	return (false);
     }
     else {
-	temp = new User;
-	current_user = temp;
-	return (false);
+	std::string pnm = current_user -> getRealName();
+	std::list<int>* att_ev = current_user -> getAttendingEvents();
+
+	boost::filesystem::remove(get_file_name(df_user, uid)); //Remove the file to stage for new creation
+	std::ofstream user_file;
+	user_file.open(get_file_name(df_user, uid));
+
+	user_file << pnm << '\n';
+
+	for (std::list<int>::iterator it = att_ev -> begin(); it != att_ev -> end(); ++it) {
+	    if (it == att_ev -> begin())
+		user_file << *it;
+	    else
+		user_file << ',' << *it;
+	}
+	user_file << '\n';
+
+	user_file.close();
+
+	return (true);
     }
 }
 

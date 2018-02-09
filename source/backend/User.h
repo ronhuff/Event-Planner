@@ -33,6 +33,13 @@ class User {
 		User(std::string uid, std::string pnm);
 
 	    /**
+	     * User destructor; deallocates the data pointed to by std::list<int> attending_events
+	     * @pre none
+	     * @post data pointed to by attending_events is deleted
+	     */
+		~User();
+
+	    /**
 	     * Non-empty contructor. Initializes user_name, real_name, and attending_events
 	     * @param std::string uid -- String that user_name gets initialized to
 	     * @param std::string pnm -- String that real_name gets initialized to
