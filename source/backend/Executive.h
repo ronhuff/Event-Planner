@@ -36,7 +36,7 @@ class Executive{
 		 * @post "event_num" is incremented prior to being returned. 
 		 * @return The "event_num" .
 		 */
-		int get_event_num();
+		int getEventNum();
 		/**
 		 * This method creates an event and generates files representing it. 
 		 * @param name The name of the event.
@@ -45,7 +45,7 @@ class Executive{
 		 * @post A new event is created in text files and in memory. 
 		 * @return true if the event was created, false otherwise.
 		 */
-		bool generate_event(std::string name, std::string date);
+		bool generateEvent(std::string name, std::string date);
 		/**
 		 * This method removes an event. 
 		 * @param event_id The id of the event to be deleted.
@@ -53,14 +53,14 @@ class Executive{
 		 * @post An event is deleted in text files and in memory.
 		 * @return true if the event was deleted, false otherwise.
 		 */
-		bool delete_event(int event_id);
+		bool deleteEvent(int event_id);
 		/**
 		 * This method returns a reference to the event list. 
 		 * @pre Executive exists.
 		 * @post No changes occur.
 		 * @return a reference to the event list.
 		 */
-		std::vector<Event>& get_event_list();
+		std::vector<Event>& getEventList();
 		
 		/**
 		 * Method which sets the current_user variable based on uid
@@ -124,7 +124,7 @@ class Executive{
 			df_event,		/**< Represents Event text files. */
 			df_record,		/**< Represents Event record files. */
 			df_user,		/**< Represents User text files. */
-			df_event_list	/**< Represents the event list text file. */
+			df_eventList	/**< Represents the event list text file. */
 		};
 		/**
 		 * This helper method verifies if a file exists. 
@@ -134,28 +134,28 @@ class Executive{
 		 * @param identifer The variable part of the file's name that we are trying to verify, like the "23" in "record_23.txt" or "Daniel" in "user_Daniel.txt"
 		 * @return true if the file in question exists, false otherwise.
 		 */
-		bool does_file_exist(DataFile type, std::string identifer = "");
+		bool doesFileExist(DataFile type, std::string identifer = "");
 		/**
 		 * This helper method rebuilds events given a text file.
 		 * @pre The file should should actually exist.
 		 * @post The event information in the file is made into an event and put into the event_list.
 		 * @param filename The file name of the event information text file.
 		 */
-		void rebuild_event(std::string filename);
+		void rebuildEvent(std::string filename);
 		/**
 		 * This helper method should get the file name of data file given its parameters.
 		 * @pre Executive exists
 		 * @post N/A, No changes occur.
 		 * @param filename The file name of the event information text file.
 		 */
-		std::string get_file_name(DataFile type, std::string identifer = "");
+		std::string getFileName(DataFile type, std::string identifer = "");
 		/**
 		 * This helper method sorts the event list by dates.
 		 * @pre Executive exists
 		 * @post N/A, No changes occur.
 		 * @param filename The file name of the event information text file.
 		 */
-		void sort_event_list();
+		void sortEventList();
 
 		/**
 		 * Converts a csv string of integer values to an integer list
@@ -170,19 +170,19 @@ class Executive{
 		/**
 		 * User pointer which points to information about the User object of the current session
 		 */
-		User* current_user;
+		User* currentUser;
 
 		/**
 		 * Internal running tally of event identifiers; should make provisions so that no two
 		 * events get assigned the same event identifier
 		 */
-		int event_num = 0;
+		int eventNum = 0;
 
 		/**
 		 * This is a vector of Events.
 		 * This contains all Events that are available.
 		 */
-		std::vector<Event>* event_list;
+		std::vector<Event>* eventList;
 	
 		/**
 		 *This method read through a existing record file and create a list pointer of record.
@@ -214,7 +214,7 @@ class Executive{
 		 * @param the event id
 		 * @post none
 		 */
-		bool is_attending(int eid);
+		bool isAttending(int eid);
 
 };
 

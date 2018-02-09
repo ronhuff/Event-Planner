@@ -2,8 +2,8 @@
 
 Executive::Executive(){
 	//Initialization of objects
-	event_list = new std::vector<Event>();
-	current_user = nullptr;
+	eventList = new std::vector<Event>();
+	currentUser = nullptr;
 
 	/* DIRECTORY INITIALIZATION */
 
@@ -29,15 +29,15 @@ Executive::Executive(){
 	/* EVENT LIST INITIALIZATION */
 
 	//If the file does not already exist, make it.
-	if(!does_file_exist(df_event_list)){
+	if(!doesFileExist(df_eventList)){
 		//Generate the file.
-		std::ofstream create_directory_and_file(get_file_name(df_event_list));
+		std::ofstream create_directory_and_file(getFileName(df_eventList));
 		create_directory_and_file.close();
 	}else{
 		//Read the file.
-		std::ifstream event_list(get_file_name(df_event_list));
-		event_list >> event_num;
-		event_list.close();
+		std::ifstream eventList(getFileName(df_eventList));
+		eventList >> eventNum;
+		eventList.close();
 	}
 
 	//Rebuild all information from .txt files if possible
@@ -46,41 +46,41 @@ Executive::Executive(){
 		//This iterates over every file in the directory
 		//The name of the file is accessed with it.filename()
 		viewing_file = it.path().filename().string();
-		rebuild_event(viewing_file);
+		rebuildEvent(viewing_file);
 	}
 	//Sort the events by date.
-	sort_event_list();
+	sortEventList();
 }
 Executive::~Executive(){
-	delete event_list;
-	if (current_user != nullptr) {
-	    delete current_user;
+	delete eventList;
+	if (currentUser != nullptr) {
+	    delete currentUser;
 	}
 }
-int Executive::get_event_num(){
-	//Increment event_num before returning it because this will guarantee unique numbers.
-	event_num++;
-	//Save the event_num in this session.
-	std::ofstream event_list(get_file_name(df_event_list));
-	event_list << event_num;
-	event_list.close();
+int Executive::getEventNum(){
+	//Increment eventNum before returning it because this will guarantee unique numbers.
+	eventNum++;
+	//Save the eventNum in this session.
+	std::ofstream eventList(getFileName(df_eventList));
+	eventList << eventNum;
+	eventList.close();
 	
-	return event_num;
+	return eventNum;
 }
-bool Executive::generate_event(std::string name, std::string date){
+bool Executive::generateEvent(std::string name, std::string date){
 	try{		
 		//Create the event at the back of the vector.
-		event_list->push_back(Event(name,date,*current_user,get_event_num()));
+		eventList->push_back(Event(name,date,*currentUser,getEventNum()));
 		
 		//This is a reference to the event we want to input data for.
-		Event &new_event = event_list->back();
+		Event &new_event = eventList->back();
 		
 		//Using the event at the back of the list (that we just created), we create the info and record files that correspond to it.
-		std::ofstream file_info_writer(get_file_name(df_event,std::to_string((new_event.get_id_number()))));
-		std::ofstream file_record_writer(get_file_name(df_record,std::to_string((new_event.get_id_number()))));
+		std::ofstream file_info_writer(getFileName(df_event,std::to_string((new_event.getIDNumber()))));
+		std::ofstream file_record_writer(getFileName(df_record,std::to_string((new_event.getIDNumber()))));
 			
 		//Now, we write the basic information of the event to the file in question.
-		file_info_writer << new_event.get_name() << '\n' << new_event.get_date() << '\n' << new_event.get_creator_user_name() << '\n' << new_event.get_creator_real_name() << '\n' << new_event.get_id_number();
+		file_info_writer << new_event.getName() << '\n' << new_event.getDate() << '\n' << new_event.getCreatorUserName() << '\n' << new_event.getCreatorRealName() << '\n' << new_event.getIDNumber();
 		
 		//Close the files.
 		file_info_writer.close();
@@ -93,11 +93,11 @@ bool Executive::generate_event(std::string name, std::string date){
 		return false;
 	}
 }
-bool Executive::does_file_exist(DataFile type, std::string identifer){
+bool Executive::doesFileExist(DataFile type, std::string identifer){
 	//Returns whether a file exists or not.
-	return (boost::filesystem::exists(get_file_name(type,identifer)));
+	return (boost::filesystem::exists(getFileName(type,identifer)));
 }
-std::string Executive::get_file_name(DataFile type, std::string identifer){
+std::string Executive::getFileName(DataFile type, std::string identifer){
 	//The name of the file we are looking for.
 	std::string file_name = "./data/"; 
 	
@@ -109,7 +109,7 @@ std::string Executive::get_file_name(DataFile type, std::string identifer){
 		case df_user:
 			file_name+="users/user_";
 		break;
-		case df_event_list:
+		case df_eventList:
 			file_name+="EventList";
 		break;
 		case df_record:
@@ -123,28 +123,28 @@ std::string Executive::get_file_name(DataFile type, std::string identifer){
 	//Returns whether a file exists or not.
 	return file_name;
 }
-bool Executive::delete_event(int event_id){
-	if(!does_file_exist(df_event,std::to_string(event_id))){
+bool Executive::deleteEvent(int event_id){
+	if(!doesFileExist(df_event,std::to_string(event_id))){
 		//The event with that id does not even exist.
 		return false;
 	}else{
 		//First, we delete the event from our vector.
-		for(auto&& x = event_list->begin(); x != event_list->end(); x++){
+		for(auto&& x = eventList->begin(); x != eventList->end(); x++){
 			//Iterate over every element in the vector.
-			if(x->get_id_number() == event_id){
+			if(x->getIDNumber() == event_id){
 				//This element is the one to be removed.
-				event_list->erase(x);
+				eventList->erase(x);
 				break;
 			}
 		}
 		//We remove the files from the data folder.
-		boost::filesystem::remove(get_file_name(df_event,std::to_string(event_id)));
-		boost::filesystem::remove(get_file_name(df_record,std::to_string(event_id)));
+		boost::filesystem::remove(getFileName(df_event,std::to_string(event_id)));
+		boost::filesystem::remove(getFileName(df_record,std::to_string(event_id)));
 		//We have removed the event from existence.
 		return true;
 	}
 }
-void Executive::rebuild_event(std::string filename){
+void Executive::rebuildEvent(std::string filename){
 	std::ifstream text_file("./data/events/" + filename);
 	
 	int num;
@@ -163,31 +163,31 @@ void Executive::rebuild_event(std::string filename){
 	std::getline(text_file,temp);
 	num = std::stoi(temp);
 	//Generate the event.
-	event_list->push_back(Event(name,date,User(creator_user_name,creator_user_name),num));
+	eventList->push_back(Event(name,date,User(creator_user_name,creator_user_name),num));
 }
-std::vector<Event>& Executive::get_event_list(){
-	return (*event_list);
+std::vector<Event>& Executive::getEventList(){
+	return (*eventList);
 }
-void Executive::sort_event_list(){
-	std::sort(event_list->begin(),event_list->end());
+void Executive::sortEventList(){
+	std::sort(eventList->begin(),eventList->end());
 }
 
 bool Executive::setCurrentUser(std::string uid) {
-    if(does_file_exist(df_user, uid)) {
+    if(doesFileExist(df_user, uid)) {
 
 	std::string pnm = "";
 	std::string attending_string = "";
 	std::list<int> attending_list;
 
 	std::ifstream user_file;
-	user_file.open(get_file_name(df_user, uid));
+	user_file.open(getFileName(df_user, uid));
 
 	std::getline(user_file, pnm, '\n'); //Store the proper name
 	std::getline(user_file, attending_string, '\n'); //Get string of attending events
 
 	storeIntsFromString(attending_list, attending_string); //Store the attending event list
 
-	current_user = new User(uid, pnm, attending_list);
+	currentUser = new User(uid, pnm, attending_list);
 
 	user_file.close();
 
@@ -196,14 +196,13 @@ bool Executive::setCurrentUser(std::string uid) {
     }
     else { //File does not exist; return false
 
-	current_user = new User();
+	currentUser = new User();
 	return (false);
 
     }
 
 }
 
-<<<<<<< HEAD
 void Executive::storeIntsFromString(std::list<int> &int_list, std::string int_string) {
     std::stringstream ss;
     std::string temp_string = "";
@@ -218,22 +217,22 @@ void Executive::storeIntsFromString(std::list<int> &int_list, std::string int_st
 }
 
 User* Executive::getCurrentUser() {
-    return (current_user);
+    return (currentUser);
 }
 
 bool Executive::writeCurrentUser() {
 
-    std::string uid = current_user -> getUserName();
+    std::string uid = currentUser -> getUserName();
     if (uid == "") {
 	return (false);
     }
     else {
-	std::string pnm = current_user -> getRealName();
-	std::list<int>* att_ev = current_user -> getAttendingEvents();
+	std::string pnm = currentUser -> getRealName();
+	std::list<int>* att_ev = currentUser -> getAttendingEvents();
 
-	boost::filesystem::remove(get_file_name(df_user, uid)); //Remove the file to stage for new creation
+	boost::filesystem::remove(getFileName(df_user, uid)); //Remove the file to stage for new creation
 	std::ofstream user_file;
-	user_file.open(get_file_name(df_user, uid));
+	user_file.open(getFileName(df_user, uid));
 
 	user_file << pnm << '\n';
 
@@ -253,7 +252,7 @@ bool Executive::writeCurrentUser() {
 
 std::list<Record>* Executive::readRecord(int event_id)
 {
-	std::string filename = get_file_name(df_record, std::to_string(event_id));
+	std::string filename = getFileName(df_record, std::to_string(event_id));
 	int flag = 0;
 	std::list<Record>* recordList = new std::list<Record>;
 	std::string tempTime, tempString;
@@ -281,7 +280,7 @@ std::list<Record>* Executive::readRecord(int event_id)
 		while(flag != 0)
 		{
 			recordFile >> tempString;
-			tempRecord.add_user(tempString);
+			tempRecord.addUser(tempString);
 			recordFile >> flag;
 		}
 		recordList->push_front(tempRecord);
@@ -295,12 +294,12 @@ std::list<Record>* Executive::readRecord(int event_id)
 
 void  Executive::writeRecord(int eid, std::list<Record>* List)
 {
-	std::string filename = get_file_name(df_record, std::to_string(eid));
+	std::string filename = getFileName(df_record, std::to_string(eid));
 	std::list<std::string>* tempUserlist;
 	std::string tempTime;
 	
 	//if the previous file exists, delete it
-	if(does_file_exist(df_record, std::to_string(eid)))
+	if(doesFileExist(df_record, std::to_string(eid)))
 	{
 		boost::filesystem::remove(filename);
 	}
@@ -326,10 +325,10 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 bool Executive::removeRecord(int eid)
 {
 	//get filename
-	std::string filename = get_file_name(df_record, std::to_string(eid));
+	std::string filename = getFileName(df_record, std::to_string(eid));
 	
 	//if the file exists, delete it, if the file does not exist, do nothing
-	if(does_file_exist(df_record, std::to_string(eid)))
+	if(doesFileExist(df_record, std::to_string(eid)))
 	{
 		boost::filesystem::remove("./Data/records/" + filename);
 	}
@@ -337,17 +336,17 @@ bool Executive::removeRecord(int eid)
 	return true;
 }
 
-bool Executive::is_attending(int eid)
+bool Executive::isAttending(int eid)
 {
 	bool isAttending = false;
 	std::list<Record>* List = readRecord(eid); //get the list.
-	std::list<string>* tempUserList;
-	std::string username = current_user -> getUserName(); //get username
+	std::list<std::string>* tempUserList;
+	std::string username = currentUser -> getUserName(); //get username
 	
 	//check the user is attending
 	for(auto&& it = List -> begin(); it != List -> end(); it++)
 	{
-		tempUserList = it->getUserList()
+		tempUserList = it->getUserList();
 		for(auto&& it2 = tempUserList -> begin(); it2 != tempUserList -> end(); it2++)
 		{
 			if(*it2 == username)
@@ -371,7 +370,7 @@ bool Executive::addUserTo(std::string time, std::list<Record>* List)
 	{
 		if(it -> getTime() == time) //if the time exist, add the user to that Record
 		{
-			it -> add_user(current_user -> getUserName());
+			it -> addUser(currentUser -> getUserName());
 			added = true;
 		}
 	}
@@ -388,7 +387,7 @@ bool Executive::removeUserFrom(std::string time, std::list<Record>* List)
 	{
 		if(it -> getTime() == time) //if the time exist, remove the user from that Record
 		{
-			it -> remove_user(current_user -> getUserName());
+			it -> removeUser(currentUser -> getUserName());
 			removed = true;
 		}
 	}
@@ -400,7 +399,7 @@ std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
 {
 	std::list<Record>* List = new std::list<Record>; //create a new pointer to a list
 	
-	for(auto&& it = timeList -> begin(); it != List -> end(); it++)
+	for(auto&& it = timeList -> begin(); it != timeList -> end(); it++)
 	{
 		Record tempRecord(*it); // create Record object
 		List -> push_front(tempRecord); // push to the list

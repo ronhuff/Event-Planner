@@ -18,13 +18,13 @@ Record::~Record()
 	delete userList;
 }
 
-void Record::add_user(std::string uid)
+void Record::addUser(std::string uid)
 {
     //add user to the list.
     userList->push_front (uid);
 }
 
-void Record::remove_user(std::string uid)
+void Record::removeUser(std::string uid)
 {
     //remove an user from the list, if the list is not empty.
     if(userList->empty())

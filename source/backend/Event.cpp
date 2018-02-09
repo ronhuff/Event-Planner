@@ -2,8 +2,8 @@
 Event::Event(){
 	//This should never be called. This is here to applease the compiler.
 }
-Event::Event(std::string input_name, std::string input_date, User input_creator, int input_id_number){
-	date = boost::gregorian::from_string(input_date);
+Event::Event(std::string inputName, std::string inputDate, User inputCreator, int inputIDNum){
+	date = boost::gregorian::from_string(inputDate);
 	
 	//We cannot schedule on these days
 	if(date.month() == 12 && date.day() == 25){
@@ -17,28 +17,28 @@ Event::Event(std::string input_name, std::string input_date, User input_creator,
 		throw std::logic_error("cannot assign event to holiday");
 	}
 	
-	name = input_name;
-	creator_real_name = input_creator.getRealName();
-	creator_user_name = input_creator.getUserName();
-	id_number = input_id_number;
+	name = inputDate;
+	creatorRealName = inputCreator.getRealName();
+	creatorUserName = inputCreator.getUserName();
+	idNum = inputIDNum;
 }
 Event::~Event(){
 
 }
-std::string Event::get_date(){
+std::string Event::getDate(){
 	return boost::gregorian::to_simple_string(date);
 }
-std::string Event::get_name(){
+std::string Event::getName(){
 	return name;
 }
-std::string Event::get_creator_user_name(){
-	return creator_user_name;
+std::string Event::getCreatorUserName(){
+	return creatorUserName;
 }
-std::string Event::get_creator_real_name(){
-	return creator_real_name;
+std::string Event::getCreatorRealName(){
+	return creatorRealName;
 }
-int Event::get_id_number(){
-	return id_number;
+int Event::getIDNumber(){
+	return idNum;
 }
 bool Event::operator>=(Event rhs){
 	return date >= rhs.date;
