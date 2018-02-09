@@ -9,6 +9,7 @@ class CLI{
     private:
         Executive exec;
         enum EventSet{all, attending, created};
+        bool loggedin;
     public:
         void run();
     private:

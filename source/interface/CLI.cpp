@@ -2,6 +2,7 @@
 
 CLI::CLI(){
     exec = new Executive();
+    loggedin = false;
 }
 
 /*Logs a user into the application*/
@@ -14,15 +15,16 @@ void CLI::login(){
 
         if(identifier == "CreateAccount"){
             newAccount();
+        }else if(exec->setCurrentUser(identifier)){
+            loggedin = true;
         }else{
-            //Attempt Login
-            if()
+            std::cout << "No valid username input.\n";
         }
     }
 }
 
 void logout(){
-
+    loggedin = false;
 }
 
 void CLI::newAccount(){
@@ -36,6 +38,8 @@ void CLI::newAccount(){
 
         std::cout << "Enter your prefered username: ";
         std::cin >> username;
+
+
     }
 }
 
