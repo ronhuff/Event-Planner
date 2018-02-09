@@ -20,3 +20,17 @@ CLI::login(){
         }
     }
 }
+
+CLI::newAccount(){
+    std::string name;
+    std::string username;
+    bool validIdentifier = false;
+
+    while(!validIdentifier){
+        std::cout << "Enter your full name: ";
+        std::cin >> name;
+
+        std::cout << "Enter your prefered username: ";
+        std::cin >> username;
+    }
+}
