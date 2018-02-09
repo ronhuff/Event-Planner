@@ -61,7 +61,19 @@ class Executive{
 		 */
 		std::vector<Event>& get_event_list();
 		
-		void write_user(std::string user_name);
+		/**
+		 * Method which sets the current_user variable based on uid
+		 * If a matching user_name is in the file user.txt, then
+		 * current_user will point to a user with the respective information
+		 * otherwise, will point to a default User (see User::User())
+		 * @param std::string -- uid: The username to be searched for
+		 * @pre: uid is a valid string; user.txt exists in the appropiate location
+		 * @post: current_user = returned
+		 * @return: bool -- TRUE if uid is found in user.txt, FALSE otherwise
+		 */
+		bool setCurrentUser(std::string uid); 
+		
+			
 	private:
 		/**
 		 * An enum representing the various information types that are saved. 
@@ -102,15 +114,32 @@ class Executive{
 		 * @param filename The file name of the event information text file.
 		 */
 		void sort_event_list();
+
+		/**
+		 * Searches the user file for uid
+		 * @param std::string uid -- username to search for
+		 * @pre: uid is a valid string; the user file exists
+		 * @post: none
+		 * @return: Returns TRUE if uid is found; false otherwise
+		 */
+		bool searchUserFile(std::string uid);
 		
-		User current_user;
+		/**
+		 * User pointer which points to information about the User object of the current session
+		 */
+		User* current_user;
+
+		/**
+		 * Internal running tally of event identifiers; should make provisions so that no two
+		 * events get assigned the same event identifier
+		 */
 		int event_num = 0;
+
 		/**
 		 * This is a vector of Events.
 		 * This contains all Events that are available.
 		 */
 		std::vector<Event>* event_list;
-		//List of users
 };
 
 #endif

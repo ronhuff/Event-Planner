@@ -18,7 +18,13 @@ Executive::Executive(){
 		event_list >> event_num;
 		event_list.close();
 	}
-	
+
+	if (!does_file_exist(df_user)) { //Creating the user.txt file, if it doesn't exist already
+	    boost::filesystem::create_directory("data"); //Redundancy; just in case it hasn't been created already
+	    std::ofstream create_user_file(get_file_name(df_user)); //Create the user.txt file
+	    create_user_file.close();
+	}
+
 	//Rebuild all information from .txt files if possible
 	std::string viewing_file;
 	for(auto&& it : boost::filesystem::directory_iterator(boost::filesystem::path("./data/events"))){
@@ -47,7 +53,7 @@ int Executive::get_event_num(){
 bool Executive::generate_event(std::string name, std::string date){
 	try{		
 		//Create the event at the back of the vector.
-		event_list->push_back(Event(name,date,current_user.get_real_name(),get_event_num()));
+		event_list->push_back(Event(name,date,current_user -> getRealName(),get_event_num()));
 		
 		//This is a reference to the event we want to input data for.
 		Event &new_event = event_list->back();
@@ -84,7 +90,7 @@ std::string Executive::get_file_name(DataFile type, std::string identifer){
 			file_name+="events/info_";
 		break;
 		case df_user:
-			file_name+="user_";
+			file_name+="user";
 		break;
 		case df_event_list:
 			file_name+="EventList";
