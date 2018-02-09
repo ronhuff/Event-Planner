@@ -120,9 +120,9 @@ class Executive{
 		 * @param std::string uid -- username to search for
 		 * @pre: uid is a valid string; the user file exists
 		 * @post: none
-		 * @return: Returns TRUE if uid is found; false otherwise
+		 * @return: Returns an open (or closed, if not found) ifstream for the user file
 		 */
-		bool searchUserFile(std::string uid);
+		std::ifstream searchUserFile(std::string uid);
 		
 		/**
 		 * User pointer which points to information about the User object of the current session
@@ -140,6 +140,7 @@ class Executive{
 		 * This contains all Events that are available.
 		 */
 		std::vector<Event>* event_list;
+
 };
 
 #endif
