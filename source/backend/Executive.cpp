@@ -18,13 +18,7 @@ Executive::Executive(){
 		event_list >> event_num;
 		event_list.close();
 	}
-
-	if (!does_file_exist(df_user)) { //Creating the user.txt file, if it doesn't exist already
-	    boost::filesystem::create_directory("data"); //Redundancy; just in case it hasn't been created already
-	    std::ofstream create_user_file(get_file_name(df_user)); //Create the user.txt file
-	    create_user_file.close();
-	}
-
+	
 	//Rebuild all information from .txt files if possible
 	std::string viewing_file;
 	for(auto&& it : boost::filesystem::directory_iterator(boost::filesystem::path("./data/events"))){
@@ -53,7 +47,7 @@ int Executive::get_event_num(){
 bool Executive::generate_event(std::string name, std::string date){
 	try{		
 		//Create the event at the back of the vector.
-		event_list->push_back(Event(name,date,current_user -> getRealName(),get_event_num()));
+		event_list->push_back(Event(name,date,current_user.get_real_name(),get_event_num()));
 		
 		//This is a reference to the event we want to input data for.
 		Event &new_event = event_list->back();
@@ -90,7 +84,7 @@ std::string Executive::get_file_name(DataFile type, std::string identifer){
 			file_name+="events/info_";
 		break;
 		case df_user:
-			file_name+="user";
+			file_name+="user_";
 		break;
 		case df_event_list:
 			file_name+="EventList";
@@ -153,49 +147,3 @@ std::vector<Event>& Executive::get_event_list(){
 void Executive::sort_event_list(){
 	std::sort(event_list->begin(),event_list->end());
 }
-
-std::ifstream Executive::searchUserFile(std::string uid) {
-
-    std::string temp = ""; //Temporary string variable
-    std::ifstream user;
-    user.open(get_file_name(df_user));
-
-    while (temp != uid && !user.eof()) { //Search the entire file until you find uid
-	std::getline(user, temp, ';'); //Extract the first entry (username)
-	user.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //Go to the beginning of the next line
-    }
-
-    user.clear();
-
-    if (temp != uid) {
-	user.close(); //Calling method (setCurrentUser) will check whether or not it's open 
-    }
-
-    return (user);
-}
-
-bool Executive::setCurrentUser(std::string uid) {
-    std::ifstream user = searchUserFile(uid); //Get the user.txt ifstream from searchUserFile
-    User* temp = nullptr;
-
-    if (user.is_open()) {  //In other words, did not close; found uid; gather data
-	std::string pnm = ""; //Real name 
-	std::string attending_events_string = ""; //String holding attending events list
-	std::list<int> attending_events; //Attending events
-	std::getline(user, pnm, ';'); //Store real name from file into pnm (stream should be over real name at this point)
-	std::getline(user, attending_events_string, '\n'); //Put the attending evetns into a string
-//	storeIntsFromString(attending_events, attending_events_string); //TODO: implement method that stores integers into a container from a string csv
-
-	temp = new User(uid, pnm, attending_events); //Initialize the pointer
-	current_user = temp; //Should be no risk for dangling pointer since temp is deleted on scope-exit
-	user.close();
-	return (true); //Indicate that the was found
-    }
-    else {
-	temp = new User;
-	current_user = temp;
-	return (false);
-    }
-}
-
-
