@@ -8,11 +8,13 @@ Record::Record()
 Record::Record(std::string t)
 {
     time = t;
+	userList = new std::list<std::string>;
 }
 
 Record::~Record()
 {
     //Remove all users.
+	userList -> clear();
 	delete userList;
 }
 
