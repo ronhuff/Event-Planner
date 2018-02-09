@@ -5,7 +5,7 @@ CLI::CLI(){
 }
 
 /*Logs a user into the application*/
-CLI::login(){
+void CLI::login(){
 
     while(!loggedin){
         std::string identifier;
@@ -21,7 +21,11 @@ CLI::login(){
     }
 }
 
-CLI::newAccount(){
+void logout(){
+
+}
+
+void CLI::newAccount(){
     std::string name;
     std::string username;
     bool validIdentifier = false;
@@ -35,7 +39,7 @@ CLI::newAccount(){
     }
 }
 
-CLI::listEvents(EventSet set, int first){
+void CLI::listEvents(EventSet set, int first){
     switch(set){
         case attending:
 
