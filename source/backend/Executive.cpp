@@ -203,6 +203,7 @@ bool Executive::setCurrentUser(std::string uid) {
 
 }
 
+<<<<<<< HEAD
 void Executive::storeIntsFromString(std::list<int> &int_list, std::string int_string) {
     std::stringstream ss;
     std::string temp_string = "";
@@ -250,4 +251,162 @@ bool Executive::writeCurrentUser() {
     }
 }
 
+std::list<Record>* Executive::readRecord(int event_id)
+{
+	std::string filename = get_file_name(df_record, std::to_string(event_id));
+	int flag = 0;
+	std::list<Record>* recordList;
+	std::string tempTime, tempString;
+	
+	//open file
+	std::ifstream recordFile("./data/records/" + filename);
+	Record tempRecord;
+	
+	//throw if the file does not exist
+	if(!recordFile.is_open())
+	{
+		throw std::logic_error("Record file does not exist.");
+	}
+	
+	//read through the file
+	while(!recordFile.eof())
+	{
+		recordFile >> flag;
+		if(flag == 0)
+		{
+			recordFile >> tempTime;
+			tempRecord = Record(tempTime);
+		}
+		recordFile >> flag;
+		while(flag != 0)
+		{
+			recordFile >> tempString;
+			tempRecord.add_user(tempString);
+			recordFile >> flag;
+		}
+		recordList->push_front(tempRecord);
+	}
+	
+	recordFile.close();
+	
+	return recordList;
+}
 
+
+void  Executive::writeRecord(int eid, std::list<Record>* List)
+{
+	std::string filename = get_file_name(df_record, std::to_string(eid));
+	std::list<std::string>* tempUserlist;
+	std::string tempTime;
+	
+	//if the previous file exists, delete it
+	if(does_file_exist(df_record, std::to_string(eid)))
+	{
+		boost::filesystem::remove(filename);
+	}
+	
+	//start write a new file with the same filename
+	std::ofstream outF ("./Data/records/" + filename);
+	for(auto&& it = List->begin(); it != List->end(); it++)
+	{
+		//write the time block
+		tempTime = it->getTime();
+		outF << 0 << " " << tempTime << std::endl;
+		tempUserlist = it->getUserList();
+		
+		for(auto it2 = tempUserlist->begin(); it2 != tempUserlist->end(); it2++)
+		{
+			//write the users
+			outF << 1 << " " << *it2 <<std::endl;
+		}
+	}
+	
+}
+
+bool Executive::removeRecord(int eid)
+{
+	//get filename
+	std::string filename = get_file_name(df_record, std::to_string(eid));
+	
+	//if the file exists, delete it, if the file does not exist, do nothing
+	if(does_file_exist(df_record, std::to_string(eid)))
+	{
+		boost::filesystem::remove("./Data/records/" + filename);
+	}
+	
+	return true;
+}
+
+bool Executive::is_attending(int eid)
+{
+	bool isAttending = false;
+	std::list<Record>* List = readRecord(eid); //get the list.
+	std::list<string>* tempUserList;
+	std::string username = current_user -> getUserName(); //get username
+	
+	//check the user is attending
+	for(auto&& it = List -> begin(); it != List -> end(); it++)
+	{
+		tempUserList = it->getUserList()
+		for(auto&& it2 = tempUserList -> begin(); it2 != tempUserList -> end(); it2++)
+		{
+			if(*it2 == username)
+			{
+				isAttending = true; //the current user is attending the event
+			}
+		}
+	}
+	
+	delete List; //delete the List
+	
+	
+	return isAttending;
+}
+
+bool Executive::addUserTo(std::string time, std::list<Record>* List)
+{
+	bool added = false;
+	
+	for(auto&& it = List -> begin(); it != List -> end(); it++)
+	{
+		if(it -> getTime() == time) //if the time exist, add the user to that Record
+		{
+			it -> add_user(current_user -> getUserName());
+			added = true;
+		}
+	}
+	
+	return added;
+	
+}
+
+bool Executive::removeUserFrom(std::string time, std::list<Record>* List)
+{
+	bool removed = false;
+	
+	for(auto&& it = List -> begin(); it != List -> end(); it++)
+	{
+		if(it -> getTime() == time) //if the time exist, remove the user from that Record
+		{
+			it -> remove_user(current_user -> getUserName());
+			removed = true;
+		}
+	}
+	
+	return removed;
+}
+
+std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
+{
+	std::list<Record>* List = new std::list<Record>; //create a new pointer to a list
+	
+	for(auto&& it = timeList -> begin(); it != List -> end(); it++)
+	{
+		Record tempRecord(*it); // create Record object
+		List -> push_front(tempRecord); // push to the list
+	}
+	
+	delete timeList; // delete the timeList
+	
+	return List;
+}

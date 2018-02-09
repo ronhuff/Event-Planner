@@ -71,6 +71,7 @@ class Executive{
 		 * @post: current_user is set with appropiate parameters if file is found; is set to empty otherwise
 		 * @return: bool -- TRUE if user_<uid> is found, FALSE otherwise
 		 */
+<<<<<<< HEAD
 		bool setCurrentUser(std::string uid); 
 
 		/**
@@ -91,6 +92,37 @@ class Executive{
 		User* getCurrentUser();
 
 		
+=======
+		bool setCurrentUser(std::string uid);
+	
+		/**
+		 * This method will add current user to a certain time block
+		 * @param the time block
+		 * @param the pointer to the record list
+		 * @pre the record list must valid
+		 * @return: bool -- TRUE if the user have be added to the record
+		 */
+		bool addUserTo(std::string time, std::list<Record>* List);
+	
+		/**
+		 * This method will remove current user from a certain time block
+		 * @param the time block
+		 * @param the pointer to the record list
+		 * @pre the record list must valid
+		 * @return: bool -- TRUE if the user have be removed from the record
+		 */
+		bool removeUserFrom(std::string time, std::list<Record>* List);
+	
+		/**
+		 * This method should be called when creating a new event
+		 * @param a list of time blocks
+		 * @post timeList will be deleted
+		 * @return a list of Record objects
+		 */
+		std::list<Record>* createRecordList(std::list<std::string>* timeList);
+	
+	
+>>>>>>> e188b7d36e2d946cd8c4234ea0253b20dd6af812
 			
 	private:
 		/**
@@ -159,6 +191,38 @@ class Executive{
 		 * This contains all Events that are available.
 		 */
 		std::vector<Event>* event_list;
+	
+		/**
+		 *This method read through a existing record file and create a list pointer of record.
+		 *@praram the event id
+		 *@pre the record file should exist.
+		 *@post none
+		 *@return a list of Record
+		 */
+		std::list<Record>* readRecord(int event_id);
+	
+		/**
+		 *This method will write a Record file of a given list of Record
+		 *@param the event id
+		 *@param the list of Record
+		 *@post none
+		 */
+		void writeRecord(int eid, std::list<Record>* List);
+	
+		/**
+		 *This method will remove a Record file
+		 * @param teh event id
+		 * @pre the file should exist
+		 * @post remove the file
+		 */
+		bool removeRecord(int eid);
+	
+		/**
+		 * This method will check if current user is attending a event
+		 * @param the event id
+		 * @post none
+		 */
+		bool is_attending(int eid);
 
 };
 
