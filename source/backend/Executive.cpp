@@ -208,11 +208,15 @@ void Executive::storeIntsFromString(std::list<int> &int_list, std::string int_st
     std::string temp_string = "";
     int temp_int = 0;
     ss.str(int_string);
+    
+    std::getline(ss, temp_string, ',');
 
-    while (!ss.eof()) {
-	std::getline(ss, temp_string, ',');
-	temp_int = std::stoi(temp_string);
-	int_list.push_back(temp_int);
+    if (temp_string != "") {
+	do {
+	    temp_int = std::stoi(temp_string);
+	    int_list.push_back(temp_int);
+	    std::getline(ss, temp_string, ',');
+	}while (!ss.eof());
     }
 }
 
@@ -237,10 +241,7 @@ bool Executive::writeCurrentUser() {
 	user_file << pnm << '\n';
 
 	for (std::list<int>::iterator it = att_ev -> begin(); it != att_ev -> end(); ++it) {
-	    if (it == att_ev -> begin())
-		user_file << *it;
-	    else
-		user_file << ',' << *it;
+		user_file << *it << ',';
 	}
 	user_file << '\n';
 
