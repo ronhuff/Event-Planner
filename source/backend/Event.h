@@ -32,7 +32,7 @@ class Event{
 		 * @param input_id_number The id number associated with the event.
 		 * @throw std::logic_error This error occurs whenever an event is put into a holiday.
 		 */
-		Event(std::string input_name, std::string input_date, User input_creator, int input_id_number);
+		Event(std::string inputName, std::string inputDate, User inputCreator, int inputIDNum);
 		/**
 		 * The destructor.
 		 * @pre Event exists.
@@ -46,35 +46,35 @@ class Event{
 		 * @post N/A.
 		 * @return the date as a string.
 		 */
-		std::string get_date();
+		std::string getDate();
 		/**
 		 * A getter method for the event's name.
 		 * @pre Event exists.
 		 * @post N/A.
 		 * @return the event's name as a string.
 		 */
-		std::string get_name();
+		std::string getName();
 		/**
 		 * A getter method for the creator's real name.
 		 * @pre Event exists.
 		 * @post N/A.
 		 * @return the creator's real name as a string.
 		 */
-		std::string get_creator_real_name();
+		std::string getCreatorRealName();
 		/**
 		 * A getter method for the creator's user name.
 		 * @pre Event exists.
 		 * @post N/A.
 		 * @return the creator's user name as a string.
 		 */
-		std::string get_creator_user_name();
+		std::string getCreatorUserName();
 		/**
 		 * A getter method for the id number.
 		 * @pre Event exists.
 		 * @post N/A.
 		 * @return the id number as an integer.
 		 */
-		int get_id_number();
+		int getIDNumber();
 		/**
 		 * An operator that compares this event's date with another's date.
 		 * @pre Event exists and rhs exists.
@@ -122,17 +122,17 @@ class Event{
 		 * A variable representing the username of the creator.
 		 * This is the name of the creator.
 		 */
-		std::string creator_user_name;
+		std::string creatorUserName;
 		/**
 		 * A variable representing the realname of the creator.
 		 * This is the name of the creator.
 		 */
-		std::string creator_real_name;
+		std::string creatorRealName;
 		/**
 		 * An integer variable.
 		 * This is the identifer number assigned to an event.
 		 */
-		int id_number;
+		int idNum;
 };
 
 #endif

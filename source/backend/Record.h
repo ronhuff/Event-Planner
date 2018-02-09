@@ -9,8 +9,8 @@ class Record{
 		Record();
 		Record(std::string t);
 		~Record();
-		void add_user(std::string uid);
-		void remove_user(std::string uid);
+		void addUser(std::string uid);
+		void removeUser(std::string uid);
 		std::list<std::string>* getUserList();
 		std::string getTime();
 
