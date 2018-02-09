@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['user',['User',['../classUser.html',1,'User'],['../classUser.html#a4a0137053e591fbb79d9057dd7d2283d',1,'User::User()'],['../classUser.html#af7ad8135c0c766d006eadedf51e34013',1,'User::User(std::string uid, std::string pnm)']]],
-  ['user_5fname',['user_name',['../classUser.html#a373cc4fbdf1954ac3147c7f4b500bcb1',1,'User']]]
+  ['searchuserfile',['searchUserFile',['../classExecutive.html#abb447d442817c59830b23f3efcd56dc4',1,'Executive']]],
+  ['setcurrentuser',['setCurrentUser',['../classExecutive.html#a8010517a6dd4bbe81ce4a03a91886931',1,'Executive']]],
+  ['sort_5fevent_5flist',['sort_event_list',['../classExecutive.html#a91bdd11232f50f3dec68a666774fcd9c',1,'Executive']]]
 ];

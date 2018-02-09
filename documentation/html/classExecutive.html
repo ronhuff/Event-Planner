@@ -86,9 +86,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adbeb9dd09b42900ec0e303291b178bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a541cf8c386f9acc7bd90a43334fe8006"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classEvent.html">Event</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#a541cf8c386f9acc7bd90a43334fe8006">get_event_list</a> ()</td></tr>
 <tr class="separator:a541cf8c386f9acc7bd90a43334fe8006"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af37fbff0f48788efa277a8a8ed0e9d7a"><td class="memItemLeft" align="right" valign="top"><a id="af37fbff0f48788efa277a8a8ed0e9d7a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>write_user</b> (std::string user_name)</td></tr>
-<tr class="separator:af37fbff0f48788efa277a8a8ed0e9d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8010517a6dd4bbe81ce4a03a91886931"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#a8010517a6dd4bbe81ce4a03a91886931">setCurrentUser</a> (std::string uid)</td></tr>
+<tr class="separator:a8010517a6dd4bbe81ce4a03a91886931"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
 Private Types</h2></td></tr>
@@ -107,14 +106,16 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a84eaf2e6e3a0585c5c6466900441f14a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8695be36f02d64c80aa44354d73860a8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#a8695be36f02d64c80aa44354d73860a8">get_file_name</a> (<a class="el" href="classExecutive.html#a5dc7161642dd045c88679fd0d1a7a9c3">DataFile</a> type, std::string identifer=&quot;&quot;)</td></tr>
 <tr class="separator:a8695be36f02d64c80aa44354d73860a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91bdd11232f50f3dec68a666774fcd9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#a91bdd11232f50f3dec68a666774fcd9c">sort_event_list</a> ()</td></tr>
+<tr class="separator:a91bdd11232f50f3dec68a666774fcd9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb447d442817c59830b23f3efcd56dc4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#abb447d442817c59830b23f3efcd56dc4">searchUserFile</a> (std::string uid)</td></tr>
+<tr class="separator:abb447d442817c59830b23f3efcd56dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:ac8b6e1be160130c79ecb80c024884a7d"><td class="memItemLeft" align="right" valign="top"><a id="ac8b6e1be160130c79ecb80c024884a7d"></a>
-<a class="el" href="classUser.html">User</a>&#160;</td><td class="memItemRight" valign="bottom"><b>current_user</b></td></tr>
-<tr class="separator:ac8b6e1be160130c79ecb80c024884a7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abff9f99d93574bbcfab8d452afb15ed2"><td class="memItemLeft" align="right" valign="top"><a id="abff9f99d93574bbcfab8d452afb15ed2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>event_num</b> = 0</td></tr>
+<tr class="memitem:ab0c819de4e02cc54fbe9a2722bae834b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classUser.html">User</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#ab0c819de4e02cc54fbe9a2722bae834b">current_user</a></td></tr>
+<tr class="separator:ab0c819de4e02cc54fbe9a2722bae834b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abff9f99d93574bbcfab8d452afb15ed2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#abff9f99d93574bbcfab8d452afb15ed2">event_num</a> = 0</td></tr>
 <tr class="separator:abff9f99d93574bbcfab8d452afb15ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98fe35e0158f9718b89a248797058395"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classEvent.html">Event</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#a98fe35e0158f9718b89a248797058395">event_list</a></td></tr>
 <tr class="separator:a98fe35e0158f9718b89a248797058395"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -422,7 +423,125 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>event_num</b> = 0</td>
 
 </div>
 </div>
+<a id="abb447d442817c59830b23f3efcd56dc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb447d442817c59830b23f3efcd56dc4">&#9670;&nbsp;</a></span>searchUserFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Executive::searchUserFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>uid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Searches the user file for uid </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">std::string</td><td>uid &ndash; username to search for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>: uid is a valid string; the user file exists </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>: none </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>: Returns TRUE if uid is found; false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a8010517a6dd4bbe81ce4a03a91886931"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8010517a6dd4bbe81ce4a03a91886931">&#9670;&nbsp;</a></span>setCurrentUser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Executive::setCurrentUser </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>uid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Method which sets the current_user variable based on uid If a matching user_name is in the file user.txt, then current_user will point to a user with the respective information otherwise, will point to a default <a class="el" href="classUser.html">User</a> (see <a class="el" href="classUser.html#a4a0137053e591fbb79d9057dd7d2283d">User::User()</a>) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">std::string</td><td>&ndash; uid: The username to be searched for </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>: uid is a valid string; user.txt exists in the appropiate location </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>: current_user = *(returned) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>: bool &ndash; TRUE if uid is found in user.txt, FALSE otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a91bdd11232f50f3dec68a666774fcd9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91bdd11232f50f3dec68a666774fcd9c">&#9670;&nbsp;</a></span>sort_event_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Executive::sort_event_list </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This helper method sorts the event list by dates. </p><dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="classExecutive.html">Executive</a> exists </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>N/A, No changes occur. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>The file name of the event information text file. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab0c819de4e02cc54fbe9a2722bae834b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0c819de4e02cc54fbe9a2722bae834b">&#9670;&nbsp;</a></span>current_user</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classUser.html">User</a>* Executive::current_user</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><a class="el" href="classUser.html">User</a> pointer which points to information about the <a class="el" href="classUser.html">User</a> object of the current session </p>
+
+</div>
+</div>
 <a id="a98fe35e0158f9718b89a248797058395"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a98fe35e0158f9718b89a248797058395">&#9670;&nbsp;</a></span>event_list</h2>
 
@@ -443,6 +562,29 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>event_num</b> = 0</td>
 </table>
 </div><div class="memdoc">
 <p>This is a vector of Events. This contains all Events that are available. </p>
+
+</div>
+</div>
+<a id="abff9f99d93574bbcfab8d452afb15ed2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abff9f99d93574bbcfab8d452afb15ed2">&#9670;&nbsp;</a></span>event_num</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Executive::event_num = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Internal running tally of event identifiers; should make provisions so that no two events get assigned the same event identifier </p>
 
 </div>
 </div>

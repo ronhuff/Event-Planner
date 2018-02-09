@@ -88,6 +88,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adb358a622ce829054bdf49aaceded2c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52cac94c83225a54eabc3377ab24cd01"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvent.html#a52cac94c83225a54eabc3377ab24cd01">get_id_number</a> ()</td></tr>
 <tr class="separator:a52cac94c83225a54eabc3377ab24cd01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44f9197c76b0bee4aa9fd8b383165474"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvent.html#a44f9197c76b0bee4aa9fd8b383165474">operator&gt;=</a> (<a class="el" href="classEvent.html">Event</a> rhs)</td></tr>
+<tr class="separator:a44f9197c76b0bee4aa9fd8b383165474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4904fea0b4f4f5bd57ba4858414f32ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvent.html#a4904fea0b4f4f5bd57ba4858414f32ed">operator&lt;=</a> (<a class="el" href="classEvent.html">Event</a> rhs)</td></tr>
+<tr class="separator:a4904fea0b4f4f5bd57ba4858414f32ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceb2fbaf2cb83f5d7e14787db516cd34"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvent.html#aceb2fbaf2cb83f5d7e14787db516cd34">operator&gt;</a> (<a class="el" href="classEvent.html">Event</a> rhs)</td></tr>
+<tr class="separator:aceb2fbaf2cb83f5d7e14787db516cd34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8246f658d031aac8fb87cf9ab25d6047"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEvent.html#a8246f658d031aac8fb87cf9ab25d6047">operator&lt;</a> (<a class="el" href="classEvent.html">Event</a> rhs)</td></tr>
+<tr class="separator:a8246f658d031aac8fb87cf9ab25d6047"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -281,6 +289,114 @@ Private Attributes</h2></td></tr>
 <p>A getter method for the event's name. </p><dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="classEvent.html">Event</a> exists. </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>N/A. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>the event's name as a string. </dd></dl>
+
+</div>
+</div>
+<a id="a8246f658d031aac8fb87cf9ab25d6047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8246f658d031aac8fb87cf9ab25d6047">&#9670;&nbsp;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Event::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEvent.html">Event</a>&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>An operator that compares this event's date with another's date. </p><dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="classEvent.html">Event</a> exists and rhs exists. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>N/A. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>The value to be compared with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the event happens before rhs. </dd></dl>
+
+</div>
+</div>
+<a id="a4904fea0b4f4f5bd57ba4858414f32ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4904fea0b4f4f5bd57ba4858414f32ed">&#9670;&nbsp;</a></span>operator&lt;=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Event::operator&lt;= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEvent.html">Event</a>&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>An operator that compares this event's date with another's date. </p><dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="classEvent.html">Event</a> exists and rhs exists. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>N/A. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>The value to be compared with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the event happens before or on the same day as rhs. </dd></dl>
+
+</div>
+</div>
+<a id="aceb2fbaf2cb83f5d7e14787db516cd34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aceb2fbaf2cb83f5d7e14787db516cd34">&#9670;&nbsp;</a></span>operator&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Event::operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEvent.html">Event</a>&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>An operator that compares this event's date with another's date. </p><dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="classEvent.html">Event</a> exists and rhs exists. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>N/A. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>The value to be compared with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the event happens after rhs. </dd></dl>
+
+</div>
+</div>
+<a id="a44f9197c76b0bee4aa9fd8b383165474"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f9197c76b0bee4aa9fd8b383165474">&#9670;&nbsp;</a></span>operator&gt;=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Event::operator&gt;= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEvent.html">Event</a>&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>An operator that compares this event's date with another's date. </p><dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="classEvent.html">Event</a> exists and rhs exists. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>N/A. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>The value to be compared with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the event happens after or on the same day as rhs. </dd></dl>
 
 </div>
 </div>

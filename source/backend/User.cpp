@@ -36,7 +36,7 @@ User::User(std::string uid, std::string pnm) : user_name(uid), real_name(pnm), a
  * @post: real_name == pnm
  * @post: attending_events has all elemets from atev
  */
-User::User(std::string uid, std::string pnm, std::list<int> atev) : user_name(uid), real_name(pnm) attending_events(new std::list<int>(atev)) {}
+User::User(std::string uid, std::string pnm, std::list<int> atev) : user_name(uid), real_name(pnm), attending_events(new std::list<int>(atev)) {}
 
 /**
  * Retriever method for user_name member.

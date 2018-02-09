@@ -2,28 +2,13 @@
 #include <iostream>
 
 int main(int argc, char* argv[]){
-	Executive e;
-	if(argc >= 2){
-		switch(argv[1][0]){
-			case 'a':
-				if(argc == 4){
-					std::cout << e.generate_event(argv[2],argv[3]) << '\n';
-				}
-			break;
-			case 'r':
-				if(argc == 3){
-					std::cout << e.delete_event(std::stoi(argv[2])) << '\n';
-				}
-			break;
-			case 'd':
-				std::vector<Event> l = e.get_event_list();
-				for(auto&& x = l.begin(); x != l.end(); x++){
-					//Iterate over every element in the vector.
-					std::cout << x->get_id_number() << '\n';
-				}
-			break;
-		}
-	}
+    Executive e;
+
+    e.searchUserFile("dnewman") ? std::cout << "Found \"dnewman\"\n" : std::cout << "Method failed\n";
+    e.searchUserFile("schoi") ? std::cout << "Found \"schoi\"\n" : std::cout << "Method failed\n";
+    e.searchUserFile("wgraham") ? std::cout << "Found \"wgraham\"\n" : std::cout << "Method failed\n";
+    e.searchUserFile("dnewman") ? std::cout << "Found \"dnewman\"\n" : std::cout << "Method failed\n";
+    return (0);
 }
 
 /*
