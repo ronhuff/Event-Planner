@@ -76,6 +76,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4a0137053e591fbb79d9057dd7d2283d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7ad8135c0c766d006eadedf51e34013"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#af7ad8135c0c766d006eadedf51e34013">User</a> (std::string uid, std::string pnm)</td></tr>
 <tr class="separator:af7ad8135c0c766d006eadedf51e34013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac00b72ad64eb4149f7b21b9f5468c2b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#ac00b72ad64eb4149f7b21b9f5468c2b2">~User</a> ()</td></tr>
+<tr class="separator:ac00b72ad64eb4149f7b21b9f5468c2b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf30fe432e25c1d0c1ad60a50604bc92"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#abf30fe432e25c1d0c1ad60a50604bc92">User</a> (std::string uid, std::string pnm, std::list&lt; int &gt; atev)</td></tr>
+<tr class="separator:abf30fe432e25c1d0c1ad60a50604bc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eff012d6182f6829329620d8e21b124"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#a7eff012d6182f6829329620d8e21b124">getUserName</a> () const</td></tr>
 <tr class="separator:a7eff012d6182f6829329620d8e21b124"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a708784a199b60567f59b51d5401167d3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUser.html#a708784a199b60567f59b51d5401167d3">getRealName</a> () const</td></tr>
@@ -96,7 +100,7 @@ Private Attributes</h2></td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4a0137053e591fbb79d9057dd7d2283d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a0137053e591fbb79d9057dd7d2283d">&#9670;&nbsp;</a></span>User() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a0137053e591fbb79d9057dd7d2283d">&#9670;&nbsp;</a></span>User() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -119,7 +123,7 @@ attending_events == new std::list&lt;int&gt; {-1} </dd></dl>
 </div>
 </div>
 <a id="af7ad8135c0c766d006eadedf51e34013"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7ad8135c0c766d006eadedf51e34013">&#9670;&nbsp;</a></span>User() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af7ad8135c0c766d006eadedf51e34013">&#9670;&nbsp;</a></span>User() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,6 +160,75 @@ attending_events == new std::list&lt;int&gt; {-1} </dd></dl>
 : real_name == pnm </dd>
 <dd>
 : attending_events == new std::list&lt;int&gt; {-1} </dd></dl>
+
+</div>
+</div>
+<a id="ac00b72ad64eb4149f7b21b9f5468c2b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac00b72ad64eb4149f7b21b9f5468c2b2">&#9670;&nbsp;</a></span>~User()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">User::~User </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="classUser.html">User</a> destructor; deallocates the data pointed to by std::list&lt;int&gt; attending_events </p><dl class="section pre"><dt>Precondition</dt><dd>none </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>data pointed to by attending_events is deleted </dd></dl>
+
+</div>
+</div>
+<a id="abf30fe432e25c1d0c1ad60a50604bc92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf30fe432e25c1d0c1ad60a50604bc92">&#9670;&nbsp;</a></span>User() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">User::User </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>uid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>pnm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::list&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>atev</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Non-empty contructor. Initializes user_name, real_name, and attending_events </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">std::string</td><td>uid &ndash; String that user_name gets initialized to </td></tr>
+    <tr><td class="paramname">std::string</td><td>pnm &ndash; String that real_name gets initialized to </td></tr>
+    <tr><td class="paramname">std::list&lt;int&gt;</td><td>atev &ndash; Integer list that attending_events gets initialized to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>uid and pnm are valid strings </dd>
+<dd>
+atev is a valid integer list container </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>: user_name == uid </dd>
+<dd>
+: real_name == pnm </dd>
+<dd>
+: attending_events has all elemets from atev </dd></dl>
 
 </div>
 </div>

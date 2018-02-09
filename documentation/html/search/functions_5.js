@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['searchuserfile',['searchUserFile',['../classExecutive.html#abb447d442817c59830b23f3efcd56dc4',1,'Executive']]],
-  ['setcurrentuser',['setCurrentUser',['../classExecutive.html#a8010517a6dd4bbe81ce4a03a91886931',1,'Executive']]],
-  ['sort_5fevent_5flist',['sort_event_list',['../classExecutive.html#a91bdd11232f50f3dec68a666774fcd9c',1,'Executive']]]
+  ['readrecord',['readRecord',['../classExecutive.html#a30383784ac05bd5fd7fd40ff0277a88d',1,'Executive']]],
+  ['rebuild_5fevent',['rebuild_event',['../classExecutive.html#a84eaf2e6e3a0585c5c6466900441f14a',1,'Executive']]],
+  ['removerecord',['removeRecord',['../classExecutive.html#a3f464b27db4195c975283ce20cf3c3f9',1,'Executive']]]
 ];

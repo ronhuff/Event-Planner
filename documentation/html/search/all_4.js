@@ -1,7 +1,8 @@
 var searchData=
 [
   ['generate_5fevent',['generate_event',['../classExecutive.html#a2d9be6c8913700cd3dda123eaf170b06',1,'Executive']]],
-  ['get_5fcreator',['get_creator',['../classEvent.html#adb358a622ce829054bdf49aaceded2c7',1,'Event']]],
+  ['get_5fcreator_5freal_5fname',['get_creator_real_name',['../classEvent.html#a83e377feda21698f181b14c004cf7d1a',1,'Event']]],
+  ['get_5fcreator_5fuser_5fname',['get_creator_user_name',['../classEvent.html#ac70390b6abd43741cdf1bc403db2d246',1,'Event']]],
   ['get_5fdate',['get_date',['../classEvent.html#af676c8df25ffeead967dc23a2176075a',1,'Event']]],
   ['get_5fevent_5flist',['get_event_list',['../classExecutive.html#a541cf8c386f9acc7bd90a43334fe8006',1,'Executive']]],
   ['get_5fevent_5fnum',['get_event_num',['../classExecutive.html#a37b564bd20dc452e814d9b262450fb88',1,'Executive']]],
