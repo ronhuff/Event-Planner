@@ -1,12 +1,13 @@
 backend = ./backend/
+interface = ./interface
 lib = ./lib/
 include = ./include/
 
-Event_Planner: main.o Event.o User.o Record.o Executive.o
-	g++ -L$(lib) -l boost_system -l boost_date_time -l boost_filesystem -g -Wall -std=c++11 main.o Event.o User.o Record.o Executive.o -o Event_Planner
+Event_Planner: main.o Event.o User.o Record.o Executive.o CLI.o
+	g++ -L$(lib) -l boost_system -l boost_date_time -l boost_filesystem -g -Wall -std=c++11 main.o Event.o User.o Record.o Executive.o CLI.o -o Event_Planner
 	
-main.o: $(backend)main.cpp
-	g++ -I$(include) -L$(lib) -g -Wall -std=c++11 -c $(backend)main.cpp
+main.o: main.cpp
+	g++ -I$(include) -L$(lib) -g -Wall -std=c++11 -c main.cpp
 	
 Event.o: $(backend)Event.cpp
 	g++ -I$(include) -L$(lib) -g -Wall -std=c++11 -c $(backend)Event.cpp
@@ -19,6 +20,9 @@ Record.o: $(backend)Record.cpp
 
 Executive.o: $(backend)Executive.cpp
 	g++ -I$(include) -L$(lib) -g -Wall -std=c++11 -c $(backend)Executive.cpp
+	
+CLI.o: $(interface)CLI.cpp
+	g++ -I$(include) -L$(lib) -g -Wall -std=c++11 -c $(interface)CLI.cpp
 
 clean:
 	rm -r *.o Event_Planner ./data
