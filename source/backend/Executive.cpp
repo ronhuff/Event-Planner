@@ -203,7 +203,6 @@ bool Executive::setCurrentUser(std::string uid) {
 
 }
 
-<<<<<<< HEAD
 void Executive::storeIntsFromString(std::list<int> &int_list, std::string int_string) {
     std::stringstream ss;
     std::string temp_string = "";
@@ -341,13 +340,13 @@ bool Executive::is_attending(int eid)
 {
 	bool isAttending = false;
 	std::list<Record>* List = readRecord(eid); //get the list.
-	std::list<string>* tempUserList;
+	std::list<std::string>* tempUserList;
 	std::string username = current_user -> getUserName(); //get username
 	
 	//check the user is attending
 	for(auto&& it = List -> begin(); it != List -> end(); it++)
 	{
-		tempUserList = it->getUserList()
+		tempUserList = it->getUserList();
 		for(auto&& it2 = tempUserList -> begin(); it2 != tempUserList -> end(); it2++)
 		{
 			if(*it2 == username)
@@ -400,7 +399,7 @@ std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
 {
 	std::list<Record>* List = new std::list<Record>; //create a new pointer to a list
 	
-	for(auto&& it = timeList -> begin(); it != List -> end(); it++)
+	for(auto&& it = timeList -> begin(); it != timeList -> end(); it++)
 	{
 		Record tempRecord(*it); // create Record object
 		List -> push_front(tempRecord); // push to the list
