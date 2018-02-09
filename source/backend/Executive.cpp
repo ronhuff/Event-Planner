@@ -179,22 +179,22 @@ bool Executive::setCurrentUser(std::string uid) {
     User* temp = nullptr;
 
     if (user.is_open()) {  //In other words, did not close; found uid; gather data
-	std::string pnm = ""; //Real name 
-	std::string attending_events_string = ""; //String holding attending events list
-	std::list<int> attending_events; //Attending events
-	std::getline(user, pnm, ';'); //Store real name from file into pnm (stream should be over real name at this point)
-	std::getline(user, attending_events_string, '\n'); //Put the attending evetns into a string
-//	storeIntsFromString(attending_events, attending_events_string); //TODO: implement method that stores integers into a container from a string csv
+		std::string pnm = ""; //Real name 
+		std::string attending_events_string = ""; //String holding attending events list
+		std::list<int> attending_events; //Attending events
+		std::getline(user, pnm, ';'); //Store real name from file into pnm (stream should be over real name at this point)
+		std::getline(user, attending_events_string, '\n'); //Put the attending evetns into a string
+		//storeIntsFromString(attending_events, attending_events_string); //TODO: implement method that stores integers into a container from a string csv
 
-	temp = new User(uid, pnm, attending_events); //Initialize the pointer
-	current_user = temp; //Should be no risk for dangling pointer since temp is deleted on scope-exit
-	user.close();
-	return (true); //Indicate that the was found
+		temp = new User(uid, pnm, attending_events); //Initialize the pointer
+		current_user = temp; //Should be no risk for dangling pointer since temp is deleted on scope-exit
+		user.close();
+		return (true); //Indicate that the was found
     }
     else {
-	temp = new User;
-	current_user = temp;
-	return (false);
+		temp = new User;
+		current_user = temp;
+		return (false);
     }
 }
 
