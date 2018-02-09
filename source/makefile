@@ -1,5 +1,5 @@
 backend = ./backend/
-interface = ./interface
+interface = ./interface/
 lib = ./lib/
 include = ./include/
 
