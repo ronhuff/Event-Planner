@@ -128,6 +128,16 @@ class Executive{
 		 * @return A list of events created by the user parameter
 		 */
 		std::list<Event>* getEventByCreator(User u);
+		
+		
+		/**
+		 * This method will return an event via the event id.
+		 * @param eid The event id of the event in question.
+		 * @pre the event in question exists in file data.
+		 * @return the Event in question.
+		 * @throw std::logic_error if the event does not exist
+		 */
+		Event getEventByID(int eid);
 	private:
 		/**
 		 * An enum representing the various information types that are saved. 

@@ -445,3 +445,25 @@ std::list<Event>* Executive::getEventByCreator(User u){
 	
 	return list;
 }
+Event Executive::getEventByID(int eid){
+	if(doesFileExist(df_event,std::to_string(eid))){
+		//We read in everything regarding the event in question.
+		std::ifstream text_file(getFileName(df_event,std::to_string(eid)));
+		
+		int num;
+		std::string name,date,creator_user_name,creator_real_name,temp;
+		
+		//Put the information in various lines into these variables.
+		std::getline(text_file,name);
+		std::getline(text_file,date);
+		std::getline(text_file,creator_user_name);
+		std::getline(text_file,creator_real_name);
+		//temp stores the int as a string, it will be converted.
+		std::getline(text_file,temp);
+		num = std::stoi(temp);
+		//Generate the event.
+		return Event(name,date,User(creator_user_name,creator_user_name),num);
+	}else{
+		throw std::logic_error("Event with that id does not exist");
+	}
+}
