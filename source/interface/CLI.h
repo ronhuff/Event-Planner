@@ -12,6 +12,7 @@ class CLI{
         CLIInput input;
         enum EventSet{all, attending, created};
         bool loggedin;
+        bool quit;
     public:
         void run();
     private:

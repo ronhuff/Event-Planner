@@ -2,6 +2,17 @@
 
 CLI::CLI(){
     loggedin = false;
+    quit = false;
+}
+
+void CLI::run(){
+    login()
+
+    while(!quit){
+        menu();
+    }
+
+    logout();
 }
 
 /*Logs a user into the application*/
