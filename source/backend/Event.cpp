@@ -26,7 +26,12 @@ Event::~Event(){
 
 }
 std::string Event::getDate(){
-	return boost::gregorian::to_simple_string(date);
+	//Get the date as a string.
+	std::string s = boost::gregorian::to_iso_extended_string(date);
+	for(int x = s.length()-1; x >= 0; x--){
+		s.at(x) = '/';
+	}
+	return ;
 }
 std::string Event::getName(){
 	return name;

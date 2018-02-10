@@ -292,11 +292,11 @@ std::list<Record>* Executive::readRecord(int event_id)
 	return recordList;
 }
 
-std::list<string>* Executive::getAttending(int eid)
+std::list<std::string>* Executive::getAttending(int eid)
 {
-	std::string filename = getFileName(df_record, std::to_string(event_id));
+	std::string filename = getFileName(df_record, std::to_string(eid));
 	std::list<Record>* List = readRecord(eid);
-	std::list<string>* UserList, tempUserList = nullptr;
+	std::list<std::string>* UserList, tempUserList = nullptr;
 	
 	for(auto&& it = List -> begin(); it != List -> end(); it++)
 	{
@@ -428,14 +428,14 @@ std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
 	
 	return List;
 }
-std::list<Event> Executive::getEventByCreator(User u){
-	std::list<Event> list;
+std::list<Event>* Executive::getEventByCreator(User u){
+	std::list<Event>* list = new std::list<Event>();
 	
 	for(auto&& x = eventList->begin(); x != eventList->end(); x++){
 		//Iterate over every element in the vector.
 		if(x->getCreatorUserName() == u.getUserName()){
 			//This element is the one to be removed.
-			list.push_back(*x);
+			list->push_back(*x);
 			break;
 		}
 	}
