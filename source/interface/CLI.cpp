@@ -1,7 +1,6 @@
 #include "CLI.h"
 
 CLI::CLI(){
-    exec = new Executive();
     loggedin = false;
 }
 
@@ -48,11 +47,31 @@ void CLI::listEvents(EventSet set, int first){
         case attending:
 
             break;
-        case created:
+        //case created:
 
-            break;
+        //    break;
         default:
 
             break;
     }
+}
+
+void CLI::newEvent(){
+    int year = 0, month = 0, day = 0;
+    std::string date = "";
+    std::cout << "You are creating a new event.\nTo get started with, we need an event title.\n";
+    std::string name = input.getString("Enter event name: ");
+
+    std::cout << "Next there needs to be a date for the event.\n";
+    do{
+        if( month != 0 && day != 0){
+            std::cout << "An invalid date was entered.\n";
+        }
+
+        year = input.getInteger("Enter the year: ");
+        month = input.getInteger("Enter the month: ", 12, 1);
+        day = input.getInteger("Enter the day: ", 28, 1);
+
+        date = std::toString(year) + "/" + std::toString(month) + "/" + std::toString(day);
+    }while(!exec.generateEvent(name, date));
 }
