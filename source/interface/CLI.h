@@ -4,11 +4,14 @@
 #include <iostream>
 #include <string>
 #include "../backend/Executive.h"
+#include "CLIInput.h"
 
 class CLI{
     private:
         Executive exec;
+        CLIInput input;
         enum EventSet{all, attending, created};
+        bool loggedin;
     public:
         void run();
     private:

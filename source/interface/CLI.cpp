@@ -1,11 +1,11 @@
 #include "CLI.h"
 
 CLI::CLI(){
-    exec = new Executive();
+    loggedin = false;
 }
 
 /*Logs a user into the application*/
-CLI::login(){
+void CLI::login(){
 
     while(!loggedin){
         std::string identifier;
@@ -14,14 +14,19 @@ CLI::login(){
 
         if(identifier == "CreateAccount"){
             newAccount();
+        }else if(exec->setCurrentUser(identifier)){
+            loggedin = true;
         }else{
-            //Attempt Login
-            if()
+            std::cout << "No valid username input.\n";
         }
     }
 }
 
-CLI::newAccount(){
+void logout(){
+    loggedin = false;
+}
+
+void CLI::newAccount(){
     std::string name;
     std::string username;
     bool validIdentifier = false;
@@ -32,19 +37,41 @@ CLI::newAccount(){
 
         std::cout << "Enter your prefered username: ";
         std::cin >> username;
+
+
     }
 }
 
-CLI::listEvents(EventSet set, int first){
+void CLI::listEvents(EventSet set, int first){
     switch(set){
         case attending:
 
             break;
-        case created:
+        //case created:
 
-            break;
+        //    break;
         default:
 
             break;
     }
+}
+
+void CLI::newEvent(){
+    int year = 0, month = 0, day = 0;
+    std::string date = "";
+    std::cout << "You are creating a new event.\nTo get started with, we need an event title.\n";
+    std::string name = input.getString("Enter event name: ");
+
+    std::cout << "Next there needs to be a date for the event.\n";
+    do{
+        if( month != 0 && day != 0){
+            std::cout << "An invalid date was entered.\n";
+        }
+
+        year = input.getInteger("Enter the year: ");
+        month = input.getInteger("Enter the month: ", 12, 1);
+        day = input.getInteger("Enter the day: ", 28, 1);
+
+        date = std::toString(year) + "/" + std::toString(month) + "/" + std::toString(day);
+    }while(!exec.generateEvent(name, date));
 }
