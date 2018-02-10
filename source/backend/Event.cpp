@@ -31,7 +31,7 @@ std::string Event::getDate(){
 	for(int x = s.length()-1; x >= 0; x--){
 		s.at(x) = '/';
 	}
-	return ;
+	return s;
 }
 std::string Event::getName(){
 	return name;

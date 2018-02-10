@@ -91,6 +91,9 @@ bool Executive::generateEvent(std::string name, std::string date){
 	}catch(std::logic_error m){
 		//The event was a holiday was it? Return false.
 		return false;
+	}catch(std::exception m){
+		//If something caused an error, the creation is probably wrong.
+		return false;
 	}
 }
 bool Executive::doesFileExist(DataFile type, std::string identifer){
