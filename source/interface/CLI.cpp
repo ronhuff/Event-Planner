@@ -75,3 +75,14 @@ void CLI::newEvent(){
         date = std::toString(year) + "/" + std::toString(month) + "/" + std::toString(day);
     }while(!exec.generateEvent(name, date));
 }
+
+void viewEvent(int i){
+    try{
+        Event e = getEventByID(i);
+    }catch(Excption e){
+        std::cout << "Invalid event number.\n";
+    }
+
+    std::cout << "Title:\t" << e.getName() <<
+                 "Creator: " << e.getCreator().getName();
+}
