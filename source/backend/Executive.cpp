@@ -435,7 +435,7 @@ std::list<Event>* Executive::getEventByCreator(User u){
 		//Iterate over every element in the vector.
 		if(x->getCreatorUserName() == u.getUserName()){
 			//This element is the one to be removed.
-			list.push_back(*x);
+			list->push_back(*x);
 			break;
 		}
 	}
