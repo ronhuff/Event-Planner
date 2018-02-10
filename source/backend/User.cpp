@@ -11,7 +11,7 @@
  * @post user_name == ""
  * @post attending_events == new std::list<int> {-1}
  */
-User::User() : user_name(""), real_name(""), attending_events(new std::list<int> {-1}) {}
+User::User() : user_name(""), real_name(""), attending_events(new std::list<int>()) {}
 
 /**
  * Non-empty constructor. Initializes user_name and real_name to nonempty strings.
@@ -21,9 +21,9 @@ User::User() : user_name(""), real_name(""), attending_events(new std::list<int>
  * @pre: uid and pnm are valid strings
  * @post: user_name == uid
  * @post: real_name == pnm
- * @post: attending_events == new std::list<int> {-1}
+ * @post: attending_events == new std::list<int>()
  */
-User::User(std::string uid, std::string pnm) : user_name(uid), real_name(pnm), attending_events(new std::list<int> {-1}) {}
+User::User(std::string uid, std::string pnm) : user_name(uid), real_name(pnm), attending_events(new std::list<int>()) {}
 
 /**
  * Non-empty contructor. Initializes user_name, real_name, and attending_events
@@ -90,3 +90,26 @@ bool User::operator==(User rhs) const {
 std::list<int>* User::getAttendingEvents() {
 	return (attending_events);
 }
+
+/**
+ * Method for adding an event to attending_events
+ * @param int event_id -- event_id to add to attending_events
+ * @pre event_id is valid; that is, it references an actual event
+ * @post event_id is added to attending_events
+ */
+void User::addEvent(int event_id) {
+    attending_events -> push_back(event_id);
+}
+
+
+/**
+ * Method for removing an event from attending_events
+ * @param int event_id -- event_id to remove from attending events
+ * @pre event_id exists within attending_events
+ * @post event_id is removed from attending_events
+ */
+void User::removeEvent(int event_id) {
+    attending_events -> remove(event_id);
+}
+
+

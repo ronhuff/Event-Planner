@@ -16,7 +16,7 @@ class User {
 	     * @pre none
 	     * @post user_name == ""
 	     * @post user_name == ""
-	     * @post attending_events == new std::list<int> {-1}
+	     * @post attending_events == new std::list<int>()
 	     */
 		User();
 
@@ -28,7 +28,7 @@ class User {
 	     * @pre: uid and pnm are valid strings
 	     * @post: user_name == uid
 	     * @post: real_name == pnm
-	     * @post: attending_events == new std::list<int> {-1}
+	     * @post: attending_events == new std::list<int>()
 	     */
 		User(std::string uid, std::string pnm);
 
@@ -85,6 +85,22 @@ class User {
 	     */
 		std::list<int>* getAttendingEvents();
 
+	    /**
+	     * Method for adding an event to attending_events
+	     * @param int event_id -- event_id to add to attending_events
+	     * @pre event_id is valid; that is, it references an actual event
+	     * @post event_id is added to attending_events
+	     */
+		void addEvent(int event_id);
+
+	    /**
+	     * Method for removing an event from attending_events
+	     * @param int event_id -- event_id to remove from attending events
+	     * @pre event_id exists within attending_events
+	     * @post event_id is removed from attending_events
+	     */
+		void removeEvent(int event_id);
+	
 		//void change_user_name(); //Optional Feature
 	private:
 		std::string user_name; /**<String variable which holds the unique identifier of the User */

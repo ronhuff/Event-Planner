@@ -208,11 +208,15 @@ void Executive::storeIntsFromString(std::list<int> &int_list, std::string int_st
     std::string temp_string = "";
     int temp_int = 0;
     ss.str(int_string);
+    
+    std::getline(ss, temp_string, ',');
 
-    while (!ss.eof()) {
-	std::getline(ss, temp_string, ',');
-	temp_int = std::stoi(temp_string);
-	int_list.push_back(temp_int);
+    if (temp_string != "") {
+	do {
+	    temp_int = std::stoi(temp_string);
+	    int_list.push_back(temp_int);
+	    std::getline(ss, temp_string, ',');
+	}while (!ss.eof());
     }
 }
 
@@ -237,10 +241,7 @@ bool Executive::writeCurrentUser() {
 	user_file << pnm << '\n';
 
 	for (std::list<int>::iterator it = att_ev -> begin(); it != att_ev -> end(); ++it) {
-	    if (it == att_ev -> begin())
-		user_file << *it;
-	    else
-		user_file << ',' << *it;
+		user_file << *it << ',';
 	}
 	user_file << '\n';
 
@@ -291,6 +292,24 @@ std::list<Record>* Executive::readRecord(int event_id)
 	return recordList;
 }
 
+std::list<string>* Executive::getAttending(int eid)
+{
+	std::string filename = getFileName(df_record, std::to_string(event_id));
+	std::list<Record>* List = readRecord(eid);
+	std::list<string>* UserList, tempUserList = nullptr;
+	
+	for(auto&& it = List -> begin(); it != List -> end(); it++)
+	{
+		tempUserList = it -> getUserList();
+		UserList -> merge(tempUserList);
+	}
+	
+	UserList -> unique();
+	delete List;
+	delete tempUserList;
+	
+	return UserList;
+}
 
 void  Executive::writeRecord(int eid, std::list<Record>* List)
 {
@@ -408,4 +427,18 @@ std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
 	delete timeList; // delete the timeList
 	
 	return List;
+}
+std::list<Event> Executive::getEventByCreator(User u){
+	std::list<Event> list;
+	
+	for(auto&& x = eventList->begin(); x != eventList->end(); x++){
+		//Iterate over every element in the vector.
+		if(x->getCreatorUserName() == u.getUserName()){
+			//This element is the one to be removed.
+			list.push_back(*x);
+			break;
+		}
+	}
+	
+	return list;
 }
