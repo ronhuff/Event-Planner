@@ -11,8 +11,31 @@ void CLI::run(){
     while(!quit){
         menu();
     }
-
+    std::cout << "Have a wonderful day.\n";
     logout();
+}
+
+void CLI::menu(){
+    std::cout << "You have a choice to make. Choose one of the following actions by typing in the command.\n";
+                 "" <<
+                 "Do Something:\t\t\"\"" <<
+                 "Manage Settings:\t\"options\"\n" <<
+                 "Logout of Account:\t\"logout\"\n" <<
+                 "Exit Application:\t\"exit\"\n"; <<
+    std::string action = input.getString("What would you like to do?: ");
+
+    if(action == ""){
+
+    }else if(action == "options"){
+        options();
+    }else if(action == "logout"){
+        logout();
+        login();
+    }else if(action == "exit"){
+        quit = true;
+    }else{
+        std::cout << "Invalid command entered.\n";
+    }
 }
 
 /*Logs a user into the application*/
