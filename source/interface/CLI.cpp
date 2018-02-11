@@ -7,7 +7,7 @@ CLI::CLI(){
 }
 
 void CLI::run(){
-    login()
+    login();
 
     while(!quit){
         menu();
@@ -17,7 +17,7 @@ void CLI::run(){
 }
 
 void CLI::menu(){
-    std::cout << "You have a choice to make. Choose one of the following actions by typing in the command.\n";
+    std::cout << "You have a choice to make. Choose one of the following actions by typing in the command.\n" << 
                  "" <<
                  "View Events List:\t\"events\"\n" <<
                  "Create New Event:\t\"create\"\n"
@@ -43,11 +43,11 @@ void CLI::menu(){
 }
 
 void CLI::options(){
-    std::string = choice;
+    std::string choice;
     std::cout << "Here you may change the settings. To toggle a setting simply enter its name, to go to the main menu enter menu.\n";
     while(choice != "menu"){
         if(longtime){
-            std::cout << "clock: 24 Hour Clock\n"
+            std::cout << "clock: 24 Hour Clock\n";
         }else{
             std::cout << "clock: 12 Hour Clock\n";
         }
@@ -72,7 +72,7 @@ void CLI::login(){
         }else if(identifier == "Quit"){
             quit = true;
             return;
-        }else if(exec->setCurrentUser(identifier)){
+        }else if(exec.setCurrentUser(identifier)){
             loggedin = true;
         }else{
             std::cout << "No valid username input.\n";
@@ -80,7 +80,7 @@ void CLI::login(){
     }
 }
 
-void logout(){
+void CLI::logout(){
     loggedin = false;
 }
 
@@ -130,16 +130,16 @@ void CLI::newEvent(){
         month = input.getInteger("Enter the month: ", 12, 1);
         day = input.getInteger("Enter the day: ", 31, 1);
 
-        date = std::toString(year) + "/" + std::toString(month) + "/" + std::toString(day);
+        date = std::to_string(year) + "/" + std::to_string(month) + "/" + std::to_string(day);
     }while(!exec.generateEvent(name, date));
 }
 
-void viewEvent(int i){
+void CLI::viewEvent(int i){
     try{
-        Event e = getEventByID(i);
-        std::cout << "Title:\t" << e.getName() <<
-                     "Creator:\t" << e.getCreator().getName();
-    }catch(Exception e){
+        Event* e = exec.getEventByID(i);
+        std::cout << "Title:\t" << e -> getName() <<
+                     "Creator:\t" << e -> getCreatorRealName();
+    }catch(std::exception& e){
         std::cout << "Invalid event number.\n";
     }
 }

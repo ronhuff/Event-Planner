@@ -22,7 +22,7 @@ string CLIInput::getLine(string message){
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout << "The previous input is invalid."
+    cout << "The previous input is invalid.";
     cout << message;
     getline(cin, stringIn, '\n');
   }
@@ -83,7 +83,7 @@ int CLIInput::getInteger(string message){
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    cout << "The integer you entered is not valid.\n"
+    cout << "The integer you entered is not valid.\n";
     cout << message;
     cin >> integerIn;
   }
@@ -95,7 +95,7 @@ int CLIInput::getInteger(string message, int max, int min){
   cout << message;
   cin >> integerIn;
 
-  while(cin.fail() && integerIn < min || integerIn > max){
+  while(cin.fail() && (integerIn < min || integerIn > max)){
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
