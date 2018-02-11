@@ -138,6 +138,18 @@ class Executive{
 		 * @throw std::logic_error if the event does not exist
 		 */
 		Event getEventByID(int eid);
+
+		/**
+		 * This method will return a pointer to a User whose information
+		 * will be extracted from a user file with identifier uid. Throws
+		 * an error if such a file does not exist.
+		 * @pre uid is a valid string; ./data/users/user_<uid>.txt exists
+		 * @post none
+		 * @return A pointer to a user with information contained in user_<uid>.txt
+		 * @throw Error if user_<uid>.txt does not exist
+		 */
+		User* getUser(std::string uid) throw(std::logic_error);
+
 	private:
 		/**
 		 * An enum representing the various information types that are saved. 
