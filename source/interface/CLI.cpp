@@ -1,6 +1,7 @@
 #include "CLI.h"
 
 CLI::CLI(){
+    longtime = true;
     loggedin = false;
     quit = false;
 }
@@ -35,6 +36,24 @@ void CLI::menu(){
         quit = true;
     }else{
         std::cout << "Invalid command entered.\n";
+    }
+}
+
+void CLI::options(){
+    std::string = choice;
+    std::cout << "Here you may change the settings. To toggle a setting simply enter its name, to go to the main menu enter menu.\n";
+    while(choice != "menu"){
+        if(longtime){
+            std::cout << "clock: 24 Hour Clock\n"
+        }else{
+            std::cout << "clock: 12 Hour Clock\n";
+        }
+
+        input.getString("Make a choice: ");
+
+        if(choice == "clock"){
+            longtime = false;
+        }
     }
 }
 
