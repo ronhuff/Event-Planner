@@ -51,7 +51,7 @@ class Record{
 
 	private:
 		std::string time;
-		std::list<std::string>* userList;
+        std::list<std::string>* userList = new std::list<std::string>;
 };
 
 #endif
