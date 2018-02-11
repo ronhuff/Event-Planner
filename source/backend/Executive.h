@@ -11,6 +11,9 @@
 #include <algorithm>
 #include <boost/filesystem.hpp>
 
+/**
+ * The Executive class. This deals with file IO and class interactions in the backend.
+ */
 class Executive{
 	public:
 		/**
@@ -66,7 +69,7 @@ class Executive{
 		 * Method which sets the current_user variable based on uid
 		 * If a matching file "user_<uid>.txt" is found, then the information
 		 * contained in that file is written to the *(current_user)
-		 * @param std::string -- uid: The username to be searched for
+		 * @param uid The username to be searched for
 		 * @pre: uid is a valid string 
 		 * @post: current_user is set with appropiate parameters if file is found; is set to empty otherwise
 		 * @return: bool -- TRUE if user_<uid> is found, FALSE otherwise
@@ -92,8 +95,8 @@ class Executive{
 
 		/**
 		 * This method will add current user to a certain time block
-		 * @param the time block
-		 * @param the pointer to the record list
+		 * @param time the time block
+		 * @param List the pointer to the record list
 		 * @pre the record list must valid
 		 * @return: bool -- TRUE if the user have be added to the record
 		 */
@@ -101,8 +104,8 @@ class Executive{
 	
 		/**
 		 * This method will remove current user from a certain time block
-		 * @param the time block
-		 * @param the pointer to the record list
+		 * @param time the time block
+		 * @param List the pointer to the record list
 		 * @pre the record list must valid
 		 * @return: bool -- TRUE if the user have be removed from the record
 		 */
@@ -110,14 +113,14 @@ class Executive{
 	
 		/**
 		 * This method should be called when creating a new event
-		 * @param a list of time blocks
+		 * @param timeList a list of time blocks
 		 * @post timeList will be deleted
 		 * @return a list of Record objects
 		 */
 		std::list<Record>* createRecordList(std::list<std::string>* timeList);
 		/**
 		 * This method will return a list of username which are all users attending the given event.
-		 * @param a event id
+		 * @param eid a event id
 		 * @return a list of username
 		 */
 		std::list<std::string>* getAttending(int eid);
@@ -128,32 +131,29 @@ class Executive{
 		 * @return A list of events created by the user parameter
 		 */
 		std::list<Event>* getEventByCreator(User u);
-		
-		
-		/**
-		 * This method will return an event via the event id.
-		 * @param eid The event id of the event in question.
-		 * @pre the event in question exists in file data.
-		 * @return a pointer to the Event in question.
-		 * @throw std::logic_error if the event does not exist
-		 */
 
 		/**
 		 * This method will return a pointer to a User whose information
-		 * will be extracted from a user file with identifier uid. Throws
-		 * an error if such a file does not exist.
-		 * @pre uid is a valid string; ./data/users/user_<uid>.txt exists
+		 * will be extracted from a user file with identifier uid.
+		 * @pre uid is a valid string; ./data/users/user_"uid".txt exists
 		 * @post none
-		 * @return A pointer to a user with information contained in user_<uid>.txt
-		 * @throw Error if user_<uid>.txt does not exist
+		 * @param uid The username of the user you want.
+		 * @return A pointer to a user with information contained in the user_uid text file.
+		 * @throw std::logic_error if the user in question does not exist in files.
 		 */
 		User* getUser(std::string uid) throw(std::logic_error);
-
+		/**
+		 * This method returns a pointer to an event based on eid.
+		 * @pre eid is an int; ./data/users/info_\<eid\>.txt exists
+		 * @post none
+		 * @return A pointer to an event with information contained in info_<eid>.txt
+		 * @throw Error if info_<eid>.txt does not exist
+		 */
 		Event* getEventByID(int eid) throw(std::logic_error);
     
         /**
          * This method read through a existing record file and create a list pointer of record.
-         * @praram the event id
+         * @param event_id the event id
          * @pre the record file should exist.
          * @post none
          * @return a list of Record
@@ -161,16 +161,16 @@ class Executive{
         std::list<Record>* readRecord(int event_id);
     
         /**
-         * This method will write a Record file of a given list of Record
-         * @param the event id
-         * @param the list of Record
+         * This method will write a Record file of a given list of Record.
+         * @param eid the event id
+         * @param List the list of Record
          * @post the parameter will be deleted
          */
         void writeRecord(int eid, std::list<Record>* List);
     
         /**
-         * This method will remove a Record file
-         * @param teh event id
+         * This method will remove a Record file.
+         * @param eid the event id
          * @pre the file should exist
          * @post remove the file
          */
@@ -178,17 +178,17 @@ class Executive{
 
 	/**
 	 * This method creates a user and writes basic information
-	 * back out to a file
-	 * @param std::string uid -- user_name for the new user
-	 * @param std::string pnm -- real_name for the new user
+	 * back out to a file.
+	 * @param uid user_name for the new user
+	 * @param pnm real_name for the new user
 	 * @pre user_<uid>.txt does not exist in the data/user directory
 	 * @post user_<uid>.txt is created in the data/user directory
 	 * @return TRUE if the file user_<uid> does not already exist, FALSE otherwise
 	 */
 	bool createUser(std::string uid, std::string pnm);
 		/**
-		 * This method will check if current user is attending a event
-		 * @param the event id
+		 * This method will check if current user is attending a event.
+		 * @param eid The event id.
 		 * @post none
 		 */
 		bool isAttending(int eid);
@@ -223,21 +223,23 @@ class Executive{
 		 * This helper method should get the file name of data file given its parameters.
 		 * @pre Executive exists
 		 * @post N/A, No changes occur.
-		 * @param filename The file name of the event information text file.
+		 * @param type A value from the DataFile enum
+		 * @param identifer The part of the name of the file that is unique to a specific file
+		 * such as the number in info_\<event num\> or the username in user_\<username\>.
+		 * @return filename The file name of the event information text file.
 		 */
 		std::string getFileName(DataFile type, std::string identifer = "");
 		/**
 		 * This helper method sorts the event list by dates.
 		 * @pre Executive exists
 		 * @post N/A, No changes occur.
-		 * @param filename The file name of the event information text file.
 		 */
 		void sortEventList();
 
 		/**
 		 * Converts a csv string of integer values to an integer list
-		 * @param std::list<int> int_list -- List to store the values to
-		 * @param std::string int_string -- csv string of integer values
+		 * @param int_list  List to store the values to
+		 * @param int_string  csv string of integer values
 		 * @pre: int_string is a csv list of integer values
 		 * @post: int_list contains integer converted values contained in int_string
 		 * @return: none

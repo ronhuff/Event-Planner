@@ -4,6 +4,10 @@
 #include <string>
 #include <list>
 
+/**
+ * The Record class. This file structure stores information regarding a timeslot's attendees.
+ */
+
 class Record{
 	public:
 	
@@ -14,7 +18,7 @@ class Record{
 	
 		/**
 		 * Class Constructor
-		 * @param time block string
+		 * @param t time block string
 		 */
 		Record(std::string t);
 	
@@ -25,14 +29,14 @@ class Record{
 	
 		/**
 		 * This method will add a user id into the class member userlist.
-		 * @param username string
+		 * @param uid username string
 		 * @post add user to class member userlist.
          */
 		void addUser(std::string uid);
     
     	/**
          * This method will remove a certain user from the class member userlist.
-         * @param username string
+         * @param uid username string
          * @post remove user from class member userlist
          */
 		void removeUser(std::string uid);
@@ -49,8 +53,10 @@ class Record{
          */
 		std::string getTime();
 	private:
-		std::string time;
-        std::list<std::string> userList;
+		/**This string stores the time at this timeslot.*/
+		std::string time; 
+		/**This list of strings stores the users at this time slot.*/
+        std::list<std::string> userList; 
 };
 
 #endif

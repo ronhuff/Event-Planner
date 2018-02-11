@@ -4,8 +4,8 @@
 #include <string>
 #include <list>
 
-/*
- * TO BE IMPLEMENTED BY: DOUG
+/**
+ * The User class. This stores information regarding an user.
  */
 
 class User {
@@ -23,8 +23,8 @@ class User {
 	    /**
 	     * Non-empty constructor. Initializes user_name and real_name to nonempty strings.
 	     * attending_events points to a list containing -1
-	     * @param std::string uid -- String that user_name gets initialized to
-	     * @param std::string pnm -- String that real_name gets initialized to
+	     * @param uid String that user_name gets initialized to
+	     * @param pnm -- String that real_name gets initialized to
 	     * @pre: uid and pnm are valid strings
 	     * @post: user_name == uid
 	     * @post: real_name == pnm
@@ -41,9 +41,9 @@ class User {
 
 	    /**
 	     * Non-empty contructor. Initializes user_name, real_name, and attending_events
-	     * @param std::string uid -- String that user_name gets initialized to
-	     * @param std::string pnm -- String that real_name gets initialized to
-	     * @param std::list<int> atev -- Integer list that attending_events gets initialized to
+	     * @param uid String that user_name gets initialized to
+	     * @param pnm  String that real_name gets initialized to
+	     * @param atev  Integer list that attending_events gets initialized to
 	     * @pre uid and pnm are valid strings
 	     * @pre atev is a valid integer list container
 	     * @post: user_name == uid
@@ -70,7 +70,7 @@ class User {
 		
 	    /**
 	     * Overloaded == operator for User objects; compares user_name members.
-	     * @param User rhs -- Some User object
+	     * @param rhs  Some User object
 	     * @pre: rhs is a valid user object
 	     * @post: none
 	     * @return: (user_name == rhs.user_name)
@@ -87,7 +87,7 @@ class User {
 
 	    /**
 	     * Method for adding an event to attending_events
-	     * @param int event_id -- event_id to add to attending_events
+	     * @param event_id  event_id to add to attending_events
 	     * @pre event_id is valid; that is, it references an actual event
 	     * @post event_id is added to attending_events
 	     */
@@ -95,7 +95,7 @@ class User {
 
 	    /**
 	     * Method for removing an event from attending_events
-	     * @param int event_id -- event_id to remove from attending events
+	     * @param event_id  event_id to remove from attending events
 	     * @pre event_id exists within attending_events
 	     * @post event_id is removed from attending_events
 	     */
