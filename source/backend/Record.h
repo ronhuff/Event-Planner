@@ -13,7 +13,6 @@ class Record{
 		void removeUser(std::string uid);
 		std::list<std::string>* getUserList();
 		std::string getTime();
-
 	private:
 		std::string time;
 		std::list<std::string>* userList;
