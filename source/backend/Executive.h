@@ -164,7 +164,7 @@ class Executive{
          * This method will write a Record file of a given list of Record
          * @param the event id
          * @param the list of Record
-         * @post none
+         * @post the parameter will be deleted
          */
         void writeRecord(int eid, std::list<Record>* List);
     
