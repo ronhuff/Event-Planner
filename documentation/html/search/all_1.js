@@ -1,7 +1,8 @@
 var searchData=
 [
   ['createrecordlist',['createRecordList',['../classExecutive.html#a513c12461670a2a2c6b5f69a387fa43c',1,'Executive']]],
-  ['creator_5freal_5fname',['creator_real_name',['../classEvent.html#aad41686d59917950810440ea67c00bba',1,'Event']]],
-  ['creator_5fuser_5fname',['creator_user_name',['../classEvent.html#a4fd11bd9b7d1bb29401da8cbc2554a46',1,'Event']]],
-  ['current_5fuser',['current_user',['../classExecutive.html#ab0c819de4e02cc54fbe9a2722bae834b',1,'Executive']]]
+  ['createuser',['createUser',['../classExecutive.html#aaf4e73a2e3e6515a1e15569d50ed7017',1,'Executive']]],
+  ['creatorrealname',['creatorRealName',['../classEvent.html#a57ce2faad69f0bda43973547b4b092a3',1,'Event']]],
+  ['creatorusername',['creatorUserName',['../classEvent.html#a259e640218454c4c4ed5c943e8bf5ea1',1,'Event']]],
+  ['currentuser',['currentUser',['../classExecutive.html#a93dbc2862be2dca67d6022c9ed806f57',1,'Executive']]]
 ];
