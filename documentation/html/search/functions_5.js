@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['is_5fattending',['is_attending',['../classExecutive.html#a36823f28cb1240178395003eed6dfbce',1,'Executive']]]
+  ['isattending',['isAttending',['../classExecutive.html#a65588e97784c7062ba999b141b683bd0',1,'Executive']]]
 ];

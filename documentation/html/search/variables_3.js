@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['event_5flist',['event_list',['../classExecutive.html#a98fe35e0158f9718b89a248797058395',1,'Executive']]],
-  ['event_5fnum',['event_num',['../classExecutive.html#abff9f99d93574bbcfab8d452afb15ed2',1,'Executive']]]
+  ['eventlist',['eventList',['../classExecutive.html#a0cd543a1992a9ae7f7bec5e9ca240107',1,'Executive']]],
+  ['eventnum',['eventNum',['../classExecutive.html#ab285c21199444e024f7b0df423f51827',1,'Executive']]]
 ];

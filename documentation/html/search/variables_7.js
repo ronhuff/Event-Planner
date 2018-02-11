@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['user_5fname',['user_name',['../classUser.html#a373cc4fbdf1954ac3147c7f4b500bcb1',1,'User']]]
+  ['time',['time',['../classRecord.html#a2f4c8459802744b071a6ff479513140a',1,'Record']]]
 ];
