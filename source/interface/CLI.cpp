@@ -124,7 +124,7 @@ void CLI::newEvent(){
         }
 
         year = input.getInteger("Enter the year: ", 9999, 1400);
-        month = input.getInteger("Enter the month: ", 12, 1);
+        month = input.getInteger("Enter the month integer: ", 12, 1);
         day = input.getInteger("Enter the day: ", 31, 1);
 
         date = std::to_string(year) + "/" + std::to_string(month) + "/" + std::to_string(day);
