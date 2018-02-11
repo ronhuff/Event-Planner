@@ -137,7 +137,45 @@ class Executive{
 		 * @return a pointer to the Event in question.
 		 * @throw std::logic_error if the event does not exist
 		 */
+
+		/**
+		 * This method will return a pointer to a User whose information
+		 * will be extracted from a user file with identifier uid. Throws
+		 * an error if such a file does not exist.
+		 * @pre uid is a valid string; ./data/users/user_<uid>.txt exists
+		 * @post none
+		 * @return A pointer to a user with information contained in user_<uid>.txt
+		 * @throw Error if user_<uid>.txt does not exist
+		 */
+		User* getUser(std::string uid) throw(std::logic_error);
+
 		Event* getEventByID(int eid) throw(std::logic_error);
+    
+        /**
+         * This method read through a existing record file and create a list pointer of record.
+         * @praram the event id
+         * @pre the record file should exist.
+         * @post none
+         * @return a list of Record
+         */
+        std::list<Record>* readRecord(int event_id);
+    
+        /**
+         * This method will write a Record file of a given list of Record
+         * @param the event id
+         * @param the list of Record
+         * @post none
+         */
+        void writeRecord(int eid, std::list<Record>* List);
+    
+        /**
+         * This method will remove a Record file
+         * @param teh event id
+         * @pre the file should exist
+         * @post remove the file
+         */
+        bool removeRecord(int eid);
+
 	private:
 		/**
 		 * An enum representing the various information types that are saved. 
@@ -206,30 +244,7 @@ class Executive{
 		 */
 		std::vector<Event>* eventList;
 	
-		/**
-		 *This method read through a existing record file and create a list pointer of record.
-		 *@praram the event id
-		 *@pre the record file should exist.
-		 *@post none
-		 *@return a list of Record
-		 */
-		std::list<Record>* readRecord(int event_id);
-	
-		/**
-		 *This method will write a Record file of a given list of Record
-		 *@param the event id
-		 *@param the list of Record
-		 *@post none
-		 */
-		void writeRecord(int eid, std::list<Record>* List);
-	
-		/**
-		 *This method will remove a Record file
-		 * @param teh event id
-		 * @pre the file should exist
-		 * @post remove the file
-		 */
-		bool removeRecord(int eid);
+		
 	
 		/**
 		 * This method will check if current user is attending a event

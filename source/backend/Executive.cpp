@@ -289,7 +289,7 @@ std::list<Record>* Executive::readRecord(int event_id)
 			tempRecord.addUser(tempString);
 			recordFile >> flag;
 		}
-		recordList->push_front(tempRecord);
+		recordList->push_back(tempRecord);
 	}
 	
 	recordFile.close();
@@ -349,6 +349,9 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 			outF << 1 << " " << *it2 <<std::endl;
 		}
 	}
+    
+    //delete List
+    delete List;
 	
 }
 
@@ -474,4 +477,30 @@ Event* Executive::getEventByID(int eid) throw(std::logic_error){
 	}else{
 		throw std::logic_error("Event with that id does not exist");
 	}
+}
+
+User* Executive::getUser(std::string uid) throw(std::logic_error) {
+    if (!doesFileExist(df_user, uid)) {
+	throw std::logic_error("File \"./data/users/user_" + uid + ".txt\" not found\n");
+    }
+    else {
+	std::ifstream user_file;
+	user_file.open(getFileName(df_user, uid));
+
+	std::string user_name = "";
+	std::string real_name = "";
+	std::list<int> attending_list;
+	std::string attending_string = "";
+
+	user_name = uid;
+	std::getline(user_file, real_name, '\n');
+	std::getline(user_file, attending_string, '\n');
+	storeIntsFromString(attending_list, attending_string);
+
+	User* u = new User(user_name, real_name, attending_list);
+
+	user_file.close();
+
+	return(u);
+    }
 }

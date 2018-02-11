@@ -19,14 +19,17 @@ void CLI::run(){
 void CLI::menu(){
     std::cout << "You have a choice to make. Choose one of the following actions by typing in the command.\n";
                  "" <<
-                 "Do Something:\t\t\"\"" <<
+                 "View Events List:\t\"events\"\n" <<
+                 "Create New Event:\t\"create\"\n"
                  "Manage Settings:\t\"options\"\n" <<
                  "Logout of Account:\t\"logout\"\n" <<
-                 "Exit Application:\t\"exit\"\n"; <<
+                 "Exit Application:\t\"exit\"\n";
     std::string action = input.getString("What would you like to do?: ");
 
-    if(action == ""){
-
+    if(action == "events"){
+        listEvents(all, 0);
+    }else if(action == "create"){
+        newEvent();
     }else if(action == "options"){
         options();
     }else if(action == "logout"){
@@ -52,7 +55,7 @@ void CLI::options(){
         input.getString("Make a choice: ");
 
         if(choice == "clock"){
-            longtime = false;
+            (longtime) ? longtime = false : longtime = true;
         }
     }
 }
@@ -61,11 +64,14 @@ void CLI::login(){
 
     while(!loggedin){
         std::string identifier;
-        std::cout << "You need to login to continue. If you do not have an account enter \"CreateAccount\".\nEnter your username: ";
+        std::cout << "You need to login to continue.\nIf you do not have an account enter \"CreateAccount\".\nTo exit enter \"Quit\".\nEnter your username: ";
         std::cin >> identifier;
 
         if(identifier == "CreateAccount"){
             newAccount();
+        }else if(identifier == "Quit"){
+            quit = true;
+            return;
         }else if(exec->setCurrentUser(identifier)){
             loggedin = true;
         }else{
@@ -131,10 +137,17 @@ void CLI::newEvent(){
 void viewEvent(int i){
     try{
         Event e = getEventByID(i);
-    }catch(Excption e){
+        std::cout << "Title:\t" << e.getName() <<
+                     "Creator:\t" << e.getCreator().getName();
+    }catch(Exception e){
         std::cout << "Invalid event number.\n";
     }
+}
 
-    std::cout << "Title:\t" << e.getName() <<
-                 "Creator: " << e.getCreator().getName();
+void setAvailability(){
+
+}
+
+void viewAvailability(){
+
 }

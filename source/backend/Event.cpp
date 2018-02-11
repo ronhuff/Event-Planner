@@ -29,7 +29,9 @@ std::string Event::getDate(){
 	//Get the date as a string.
 	std::string s = boost::gregorian::to_iso_extended_string(date);
 	for(int x = s.length()-1; x >= 0; x--){
-		s.at(x) = '/';
+		if(s.at(x) == '-'){
+			s.at(x) = '/';
+		}
 	}
 	return s;
 }
