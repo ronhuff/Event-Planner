@@ -64,7 +64,7 @@ void CLI::login(){
 
     while(!loggedin){
         std::string identifier;
-        std::cout << "You need to login to continue. If you do not have an account enter \"CreateAccount\".\nEnter your username: ";
+        std::cout << "You need to login to continue.\nIf you do not have an account enter \"CreateAccount\".\nTo exit enter \"Quit\".\nEnter your username: ";
         std::cin >> identifier;
 
         if(identifier == "CreateAccount"){
