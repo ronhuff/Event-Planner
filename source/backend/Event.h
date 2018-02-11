@@ -29,10 +29,11 @@ class Event{
 		 * @param inputName The name of the event. 
 		 * @param inputDate The date of the event.
 		 * @param inputCreatorUsername The creator's user name of the event.
+		 * @param inputCreatorRealName The creator's user name of the event.
 		 * @param inputIDNum The id number associated with the event.
 		 * @throw std::logic_error This error occurs whenever an event is put into a holiday.
 		 */
-		Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, int inputIDNum);
+		Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum);
 		/**
 		 * The destructor.
 		 * @pre Event exists.
