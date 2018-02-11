@@ -97,17 +97,36 @@ void CLI::newAccount(){
     }
 }
 
-void CLI::listEvents(EventSet set, int first){
-    switch(set){
-        case attending:
+void CLI::listEvents( int first){
+    std::vector<Event> list = exec.getEventList();
+    for(int i = first; i < (first + 26) && i < list.size(); i += 1){
+        try{
+            Event e = list.at(i);
+            std::cout << std::to_string(e.getIDNumber()) << "\t" << e.getName() << "\t\t" << e.getDate() << "\t\t" <<e.getCreatorRealName() << "\n";
+        }catch(std::exception& e){
+            return;
+        }
+    }
 
-            break;
-        //case created:
+    std::string choice;
+    //Options
+    std::cout << "Your choices are:\n\t\"view\" to view an event\n";
+    if(first > 0 ){
+        std::cout << "\t\"previous\" to go back in the list\n";
+    }
+    if(first + 25 < list.size()){
+        std::cout << "\t\"next\" to go forward in the list\n";
+    }
+    std::cout << "\t\"menu\" to go to the menu\n";
 
-        //    break;
-        default:
-
-            break;
+    //Make Choice
+    choice = input.getString("Now make a choice: ");
+    if(choice == "view"){
+        viewEvent(input.getInteger("Enter the number of the event you want to view: "));
+    }else if(choice == "next"){
+        listEvents(start + 25);
+    }else if(choice == "previous"){
+        listEvents(start - 25);
     }
 }
 
@@ -155,7 +174,7 @@ void CLI::newEvent(){
             }
         }
     }
-    exec.writeRecord(exec.createRecordList(times));
+    exec.writeRecord(0, exec.createRecordList(times));
     delete times;
 }
 

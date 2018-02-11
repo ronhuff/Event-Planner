@@ -90,18 +90,20 @@ class CLI{
         void viewEvent(int);
         /**
 	     * Allows user to set availability for the event
+         * @param int - the unique identifier of the event
 	     * @pre: user is not the creator
 	     * @post: availability set
 	     * @return: none
 	     */
-        void setAvailability();
+        void setAvailability(int);
         /**
 	     * Allows users to view availabilities for an event
+         * @param int - the unique identifier of the event
 	     * @pre: none
 	     * @post: none
 	     * @return: none
 	     */
-        void viewAvailability();
+        void viewAvailability(int);
 };
 
 #endif
