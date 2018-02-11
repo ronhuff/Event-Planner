@@ -98,10 +98,10 @@ void CLI::newAccount(){
 }
 
 void CLI::listEvents( int first){
-    std::vector<Event> list = exec.getEventList();
+    std::vector<Event>* list = exec.getEventList();
     for(int i = first; i < (first + 26) && i < list.size(); i += 1){
         try{
-            Event e = list.at(i);
+            Event e = list->at(i);
             std::cout << std::to_string(e.getIDNumber()) << "\t" << e.getName() << "\t\t" << e.getDate() << "\t\t" <<e.getCreatorRealName() << "\n";
         }catch(std::exception& e){
             return;
@@ -181,8 +181,8 @@ void CLI::newEvent(){
 void CLI::viewEvent(int i){
     try{
         Event* e = exec.getEventByID(i);
-        std::cout << "Title:\t" << e -> getName() << "\n" <<
-                     "Creator:\t" << e -> getCreatorRealName() << "\n" <<
+        std::cout << "Title:\t" << e->getName() << "\n" <<
+                     "Creator:\t" << e->getCreatorRealName() << "\n" <<
                      "Date:\t" << e->getDate() << "\n";
 
         std::string choice;
