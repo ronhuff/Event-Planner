@@ -20,6 +20,8 @@ void Record::addUser(std::string uid)
 {
     //add user to the list.
     userList.push_back (uid);
+    userList.sort();
+    userList.unique();
 }
 
 void Record::removeUser(std::string uid)

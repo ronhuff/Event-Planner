@@ -326,18 +326,11 @@ std::list<std::string>* Executive::getAttending(int eid)
 	//Iterate over the record's time slots.
 	for(auto&& it1 = List->begin(); it1 != List -> end(); it1++)
 	{
-		//Iterate over the attending people of the time slot.
-		for(auto&& it2 = it1->getUserList().begin(); it2 != it1->getUserList().end(); it2++)
-		{
-			//Saves all the people attending all time slots.
-			UserList->push_back(*it2);
-		}
+		UserList->merge(it1->getUserList());
 	}
-	
-	//Removes duplicate people.
-	UserList -> unique();
 	delete List;
-	
+	UserList->sort();
+	UserList -> unique();
 	return UserList;
 }
 
@@ -346,7 +339,6 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 	std::string filename = getFileName(df_record, std::to_string(eid));
 	std::list<std::string> tempUserlist;
 	std::string tempTime;
-
 	
 	//start write a new file with the same filename
 	std::ofstream outF (filename);
