@@ -287,7 +287,7 @@ std::list<Record>* Executive::readRecord(int event_id)
 			tempRecord.addUser(tempString);
 			recordFile >> flag;
 		}
-		recordList->push_front(tempRecord);
+		recordList->push_back(tempRecord);
 	}
 	
 	recordFile.close();

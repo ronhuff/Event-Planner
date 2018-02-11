@@ -8,7 +8,6 @@ Record::Record()
 Record::Record(std::string t)
 {
     time = t;
-	userList = new std::list<std::string>;
 }
 
 Record::~Record()
@@ -21,7 +20,7 @@ Record::~Record()
 void Record::addUser(std::string uid)
 {
     //add user to the list.
-    userList->push_front (uid);
+    userList->push_back (uid);
 }
 
 void Record::removeUser(std::string uid)
