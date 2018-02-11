@@ -297,19 +297,25 @@ std::list<Record>* Executive::readRecord(int event_id)
 
 std::list<std::string>* Executive::getAttending(int eid)
 {
+	//Read in the file and initializes local variables.
 	std::string filename = getFileName(df_record, std::to_string(eid));
 	std::list<Record>* List = readRecord(eid);
-	std::list<std::string>* UserList, tempUserList = nullptr;
+	std::list<std::string>* UserList = new std::list<std::string>();
 	
-	for(auto&& it = List -> begin(); it != List -> end(); it++)
+	//Iterate over the record's time slots.
+	for(auto&& it1 = List -> begin(); it1 != List -> end(); it1++)
 	{
-		tempUserList = it -> getUserList();
-		UserList -> merge(tempUserList);
+		//Iterate over the attending people of the time slot.
+		for(auto&& it2 = it1->getUserList()->begin(); it2 != it1->getUserList()->end(); it2++)
+		{
+			//Saves all the people attending all time slots.
+			UserList->push_back(*it2);
+		}
 	}
 	
+	//Removes duplicate people.
 	UserList -> unique();
 	delete List;
-	delete tempUserList;
 	
 	return UserList;
 }
@@ -341,6 +347,9 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 			outF << 1 << " " << *it2 <<std::endl;
 		}
 	}
+    
+    //delete List
+    delete List;
 	
 }
 
@@ -445,7 +454,7 @@ std::list<Event>* Executive::getEventByCreator(User u){
 	
 	return list;
 }
-Event Executive::getEventByID(int eid){
+Event* Executive::getEventByID(int eid) throw(std::logic_error){
 	if(doesFileExist(df_event,std::to_string(eid))){
 		//We read in everything regarding the event in question.
 		std::ifstream text_file(getFileName(df_event,std::to_string(eid)));
@@ -462,8 +471,34 @@ Event Executive::getEventByID(int eid){
 		std::getline(text_file,temp);
 		num = std::stoi(temp);
 		//Generate the event.
-		return Event(name,date,User(creator_user_name,creator_user_name),num);
+		return new Event(name,date,User(creator_user_name,creator_user_name),num);
 	}else{
 		throw std::logic_error("Event with that id does not exist");
 	}
+}
+
+User* Executive::getUser(std::string uid) throw(std::logic_error) {
+    if (!doesFileExist(df_user, uid)) {
+	throw std::logic_error("File \"./data/users/user_" + uid + ".txt\" not found\n");
+    }
+    else {
+	std::ifstream user_file;
+	user_file.open(getFileName(df_user, uid));
+
+	std::string user_name = "";
+	std::string real_name = "";
+	std::list<int> attending_list;
+	std::string attending_string = "";
+
+	user_name = uid;
+	std::getline(user_file, real_name, '\n');
+	std::getline(user_file, attending_string, '\n');
+	storeIntsFromString(attending_list, attending_string);
+
+	User* u = new User(user_name, real_name, attending_list);
+
+	user_file.close();
+
+	return(u);
+    }
 }
