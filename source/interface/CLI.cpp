@@ -155,7 +155,7 @@ void CLI::newEvent(){
             }
         }
     }
-    exec.createRecordList(times);
+    exec.writeRecordList(exec.createRecordList(times));
     delete times;
 }
 
