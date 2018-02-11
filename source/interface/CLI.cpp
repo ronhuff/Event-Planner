@@ -38,7 +38,6 @@ void CLI::menu(){
     }
 }
 
-/*Logs a user into the application*/
 void CLI::login(){
 
     while(!loggedin){
