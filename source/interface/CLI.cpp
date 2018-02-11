@@ -55,7 +55,7 @@ void CLI::options(){
         input.getString("Make a choice: ");
 
         if(choice == "clock"){
-            longtime = false;
+            (longtime) ? longtime = false : longtime = true;
         }
     }
 }
@@ -142,4 +142,12 @@ void viewEvent(int i){
     }catch(Exception e){
         std::cout << "Invalid event number.\n";
     }
+}
+
+void setAvailability(){
+
+}
+
+void viewAvailability(){
+
 }
