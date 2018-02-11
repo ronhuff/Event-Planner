@@ -129,6 +129,34 @@ void CLI::newEvent(){
 
         date = std::to_string(year) + "/" + std::to_string(month) + "/" + std::to_string(day);
     }while(!exec.generateEvent(name, date));
+
+    std::cout << "Finally there needs to be some times for the event. In the next section, simply enter 'y' or 'n' after each time.\n";
+
+    std::list<std::string>* times = new std::list<std::string>();
+    for(int i = 5; i < 12; i += 1){
+        for(int j = 0; j < 59; j += 20){
+            std::string slot = std::to_string(i) + ":" + std::to_string(j);
+
+            //Is a time acceptable
+            std::string accept;
+            if(!longtime){
+                if(i < 12){
+                    accept = input.getString(slot + "AM - ");
+                }else{
+                    accept = input.getString(std::to_string(i - 12) + ":" + std::to_string(j) + "PM - ");
+                }
+            }else{
+                accept = input.getString(slot + " - ");
+            }
+
+
+            if(accept == "y"){
+                times->push_back(slot);
+            }
+        }
+    }
+    exec.createRecordList(times);
+    delete times;
 }
 
 void CLI::viewEvent(int i){
