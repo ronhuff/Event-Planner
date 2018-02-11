@@ -262,17 +262,15 @@ bool Executive::writeCurrentUser() {
 	return (true);
     }
 }
-
+#include <iostream>
 std::list<Record>* Executive::readRecord(int event_id)
 {
 	std::string filename = getFileName(df_record, std::to_string(event_id));
-	int flag = 0;
 	std::list<Record>* recordList = new std::list<Record>;
 	std::string tempTime, tempString;
 	
 	//open file
-	std::ifstream recordFile("./data/records/" + filename);
-	Record tempRecord;
+	std::ifstream recordFile(filename);
 	
 	//throw if the file does not exist
 	if(!recordFile.is_open())
@@ -283,18 +281,32 @@ std::list<Record>* Executive::readRecord(int event_id)
 	//read through the file
 	while(!recordFile.eof())
 	{
-		recordFile >> flag;
-		if(flag == 0)
-		{
-			recordFile >> tempTime;
-			tempRecord = Record(tempTime);
+		std::string temp;
+		//temp will be the time string
+		getline(recordFile,temp);
+		
+		if(temp == ""){
+			//In this case, there is no more.
+			break;
 		}
-		recordFile >> flag;
-		while(flag != 0)
-		{
-			recordFile >> tempString;
-			tempRecord.addUser(tempString);
-			recordFile >> flag;
+		
+		temp = temp.substr(2);
+		
+		//Next, we put users back in.
+		Record tempRecord (temp);
+		
+		//This line represents the user list.
+		getline(recordFile,temp);
+		if(temp.size() > 1){
+			//There are attendees here.
+			std::stringstream ss = std::stringstream(temp.substr(2));
+			while(!ss.eof()){
+				std::string username;
+				ss >> username;
+				tempRecord.addUser(username);
+			}
+		}else{
+			//Do nothing, there is no attendees here.
 		}
 		recordList->push_back(tempRecord);
 	}
@@ -345,11 +357,13 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 		outF << 0 << " " << tempTime << std::endl;
 		tempUserlist = it->getUserList();
 		
+		outF << 1;
 		for(auto it2 = tempUserlist.begin(); it2 != tempUserlist.end(); it2++)
 		{
 			//write the users
-			outF << 1 << " " << *it2 <<std::endl;
+			outF << " " << *it2;
 		}
+		outF << std::endl;
 	}
     outF.close();
 }
