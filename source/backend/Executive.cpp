@@ -331,7 +331,6 @@ std::list<std::string>* Executive::getAttending(int eid)
 
 void  Executive::writeRecord(int eid, std::list<Record>* List)
 {
-<<<<<<< HEAD
 	std::string filename = getFileName(df_record, std::to_string(eid));
 	std::list<std::string> tempUserlist;
 	std::string tempTime;
@@ -353,38 +352,6 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 		}
 	}
     outF.close();
-    
-	
-=======
-    std::string filename = getFileName(df_record, std::to_string(eid));
-    std::list<std::string>* tempUserlist = new std::list<std::string>;
-    
-    //if the previous file exists, delete it
-    boost::filesystem::remove(filename);
-    
-    //start write a new file with the same filename
-    std::ofstream outF (getFileName(df_record, std::to_string(eid)));
-    
-    for(auto&& it = List->begin(); it != List->end(); it++)
-    {
-        //write the time block
-        outF << 0 << " " << it->getTime() << std::endl;
-        tempUserlist = it->getUserList();
-        tempUserlist -> unique();
-        
-        for(auto&& it2 = tempUserlist->begin(); it2 != tempUserlist->end(); it2++)
-        {
-            //write the users
-            outF << 1 << " " << *it2 <<std::endl;
-        }
-    }
-    
-    outF.close();
-    
-    //delete List
-    List -> clear();
-    delete List;
->>>>>>> 8c006ec68e0fd1e12d897ece3792954a6b7949f0
 }
 
 bool Executive::removeRecord(int eid)
@@ -405,7 +372,7 @@ bool Executive::isAttending(int eid)
 {
 	bool isAttending = false;
 	std::list<Record>* List = readRecord(eid); //get the list.
-	std::list<std::string> tempUserList;git 
+	std::list<std::string> tempUserList; 
 	std::string username = currentUser -> getUserName(); //get username
 	
 	//check the user is attending
@@ -462,7 +429,6 @@ bool Executive::removeUserFrom(std::string time, std::list<Record>* List)
 
 std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
 {
-<<<<<<< HEAD
 	std::list<Record>* List = new std::list<Record>; //create a new pointer to a list
 	
 	for(auto&& it = timeList -> begin(); it != timeList -> end(); it++)
@@ -471,19 +437,6 @@ std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
 	}
 	
 	return List;
-=======
-    std::list<Record>* List = new std::list<Record>; //create a new pointer to a list
-    
-    for(auto&& it = timeList -> begin(); it != List -> end(); it++)
-    {
-        Record tempRecord(*it); // create Record object
-        List -> push_front(tempRecord); // push to the list
-    }
-    
-    delete timeList; // delete the timeList
-    
-    return List;
->>>>>>> 8c006ec68e0fd1e12d897ece3792954a6b7949f0
 }
 std::list<Event>* Executive::getEventByCreator(User u){
 	std::list<Event>* list = new std::list<Event>();
