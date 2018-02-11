@@ -155,24 +155,44 @@ void CLI::newEvent(){
             }
         }
     }
-    exec.writeRecordList(exec.createRecordList(times));
+    exec.writeRecord(exec.createRecordList(times));
     delete times;
 }
 
 void CLI::viewEvent(int i){
     try{
         Event* e = exec.getEventByID(i);
-        std::cout << "Title:\t" << e -> getName() <<
-                     "Creator:\t" << e -> getCreatorRealName();
+        std::cout << "Title:\t" << e -> getName() << "\n" <<
+                     "Creator:\t" << e -> getCreatorRealName() << "\n" <<
+                     "Date:\t" << e->getDate() << "\n";
+
+        std::string choice;
+        while(choice != menu){
+            if(exec.getCurrentUser()->getUserName() != e->getCreatorRealName()){
+                std::cout << "You may set your availability buy entering \"set\".\n";
+            }
+            std::cout << "You may view users availability by entering \"view\"\n" <<
+                         "Return to menu by entering \"menu\"\n";
+            choice = input.getString("Enter your choice: ");
+
+            if(choice == "set" && exec.getCurrentUser()->getUserName() != e->getCreatorRealName()){
+                setAvailability(i);
+            }else if(choice == "view"){
+                viewAvailability(i);
+            }else{
+                std::cout << "No valid input.\n";
+            }
+        }
+
     }catch(std::exception& e){
         std::cout << "Invalid event number.\n";
     }
 }
 
-void setAvailability(){
+void setAvailability(int eid){
 
 }
 
-void viewAvailability(){
+void viewAvailability(int eid){
 
 }
