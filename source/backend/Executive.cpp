@@ -348,9 +348,6 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 		}
 	}
 	
-	//delete List
-	delete List;
-	
 }
 
 bool Executive::removeRecord(int eid)
