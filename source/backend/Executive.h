@@ -137,7 +137,7 @@ class Executive{
 		 * @return the Event in question.
 		 * @throw std::logic_error if the event does not exist
 		 */
-		Event getEventByID(int eid);
+		Event getEventByID(int eid) throw(std::logic_error);
 	private:
 		/**
 		 * An enum representing the various information types that are saved. 
