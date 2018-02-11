@@ -48,7 +48,6 @@ class Record{
          * @return time block string
          */
 		std::string getTime();
-
 	private:
 		std::string time;
         std::list<std::string>* userList = new std::list<std::string>;

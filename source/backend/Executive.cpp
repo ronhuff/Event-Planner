@@ -52,7 +52,9 @@ Executive::Executive(){
 	sortEventList();
 }
 Executive::~Executive(){
-	delete eventList;
+	if(eventList != nullptr){
+		delete eventList;
+	}
 	if (currentUser != nullptr) {
 	    delete currentUser;
 	}
@@ -178,29 +180,29 @@ void Executive::sortEventList(){
 bool Executive::setCurrentUser(std::string uid) {
     if(doesFileExist(df_user, uid)) {
 
-	std::string pnm = "";
-	std::string attending_string = "";
-	std::list<int> attending_list;
+        std::string pnm = "";
+        std::string attending_string = "";
+        std::list<int> attending_list;
 
-	std::ifstream user_file;
-	user_file.open(getFileName(df_user, uid));
+        std::ifstream user_file;
+        user_file.open(getFileName(df_user, uid));
 
-	std::getline(user_file, pnm, '\n'); //Store the proper name
-	std::getline(user_file, attending_string, '\n'); //Get string of attending events
+        std::getline(user_file, pnm, '\n'); //Store the proper name
+        std::getline(user_file, attending_string, '\n'); //Get string of attending events
 
-	storeIntsFromString(attending_list, attending_string); //Store the attending event list
+        storeIntsFromString(attending_list, attending_string); //Store the attending event list
 
-	currentUser = new User(uid, pnm, attending_list);
+        currentUser = new User(uid, pnm, attending_list);
+        
+        user_file.close();
 
-	user_file.close();
-
-	return (true);
+        return (true);
 
     }
     else { //File does not exist; return false
 
-	currentUser = new User();
-	return (false);
+        currentUser = new User();
+        return (false);
 
     }
 
@@ -287,7 +289,7 @@ std::list<Record>* Executive::readRecord(int event_id)
 			tempRecord.addUser(tempString);
 			recordFile >> flag;
 		}
-		recordList->push_front(tempRecord);
+		recordList->push_back(tempRecord);
 	}
 	
 	recordFile.close();
