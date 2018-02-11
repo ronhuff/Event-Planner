@@ -186,6 +186,12 @@ class Executive{
 	 * @return TRUE if the file user_<uid> does not already exist, FALSE otherwise
 	 */
 	bool createUser(std::string uid, std::string pnm);
+		/**
+		 * This method will check if current user is attending a event
+		 * @param the event id
+		 * @post none
+		 */
+		bool isAttending(int eid);
 
 	private:
 		/**
@@ -257,13 +263,7 @@ class Executive{
 	
 		
 	
-		/**
-		 * This method will check if current user is attending a event
-		 * @param the event id
-		 * @post none
-		 */
-		bool isAttending(int eid);
-
+		
 };
 
 #endif
