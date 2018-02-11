@@ -102,9 +102,9 @@ void CLI::newEvent(){
             std::cout << "An invalid date was entered.\n";
         }
 
-        year = input.getInteger("Enter the year: ");
+        year = input.getInteger("Enter the year: ", 9999, 1400);
         month = input.getInteger("Enter the month: ", 12, 1);
-        day = input.getInteger("Enter the day: ", 28, 1);
+        day = input.getInteger("Enter the day: ", 31, 1);
 
         date = std::toString(year) + "/" + std::toString(month) + "/" + std::toString(day);
     }while(!exec.generateEvent(name, date));
