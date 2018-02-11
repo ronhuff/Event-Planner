@@ -299,7 +299,7 @@ std::list<std::string>* Executive::getAttending(int eid)
 {
 	std::string filename = getFileName(df_record, std::to_string(eid));
 	std::list<Record>* List = readRecord(eid);
-	std::list<std::string>* UserList, tempUserList;
+	std::list<std::string>* UserList, tempUserList = nullptr;
 	
 	for(auto&& it = List -> begin(); it != List -> end(); it++)
 	{
@@ -341,9 +341,6 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 			outF << 1 << " " << *it2 <<std::endl;
 		}
 	}
-	
-	//delete List
-	delete List;
 	
 }
 
