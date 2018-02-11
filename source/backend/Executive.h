@@ -63,7 +63,7 @@ class Executive{
 		 * @post No changes occur.
 		 * @return a reference to the event list.
 		 */
-		std::vector<Event>& getEventList();
+		std::vector<Event>* getEventList();
 		
 		/**
 		 * Method which sets the current_user variable based on uid
