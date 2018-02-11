@@ -16,6 +16,7 @@ CLIInput::CLIInput(){
 
 string CLIInput::getLine(string message){
   cout << message;
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
   getline(cin, stringIn, '\n');
 
   while(cin.fail()){
