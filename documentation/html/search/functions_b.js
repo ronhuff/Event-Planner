@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['_7eevent',['~Event',['../classEvent.html#a7704ec01ce91e673885792054214b3d2',1,'Event']]],
-  ['_7eexecutive',['~Executive',['../classExecutive.html#a4ce80c499f7640b1770ade77cf56d965',1,'Executive']]],
-  ['_7erecord',['~Record',['../classRecord.html#ad2ce1a99d866834ab53dedd788cb1ea6',1,'Record']]],
-  ['_7euser',['~User',['../classUser.html#ac00b72ad64eb4149f7b21b9f5468c2b2',1,'User']]]
+  ['setavailability',['setAvailability',['../classCLI.html#ae0cf3aed8de15dd64716b91760608a43',1,'CLI']]],
+  ['setcurrentuser',['setCurrentUser',['../classExecutive.html#a8010517a6dd4bbe81ce4a03a91886931',1,'Executive']]],
+  ['sorteventlist',['sortEventList',['../classExecutive.html#a63e7fcccc1e3992eaef93630ecc2a160',1,'Executive']]],
+  ['storeintsfromstring',['storeIntsFromString',['../classExecutive.html#a71b1545d70bafaee9d59ef90c6af97cf',1,'Executive']]]
 ];

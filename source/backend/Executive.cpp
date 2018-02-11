@@ -170,8 +170,8 @@ void Executive::rebuildEvent(std::string filename){
 	//Generate the event.
 	eventList->push_back(Event(name,date,creator_user_name,creator_real_name,num));
 }
-std::vector<Event>& Executive::getEventList(){
-	return (*eventList);
+std::vector<Event>* Executive::getEventList(){
+	return eventList;
 }
 void Executive::sortEventList(){
 	std::sort(eventList->begin(),eventList->end());
