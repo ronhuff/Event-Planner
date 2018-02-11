@@ -17,7 +17,7 @@ Event::Event(std::string inputName, std::string inputDate, User inputCreator, in
 		throw std::logic_error("cannot assign event to holiday");
 	}
 	
-	name = inputDate;
+	name = inputName;
 	creatorRealName = inputCreator.getRealName();
 	creatorUserName = inputCreator.getUserName();
 	idNum = inputIDNum;
