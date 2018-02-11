@@ -312,10 +312,10 @@ std::list<std::string>* Executive::getAttending(int eid)
 	std::list<std::string>* UserList = new std::list<std::string>();
 	
 	//Iterate over the record's time slots.
-	for(auto&& it1 = List -> begin(); it1 != List -> end(); it1++)
+	for(auto&& it1 = List->begin(); it1 != List -> end(); it1++)
 	{
 		//Iterate over the attending people of the time slot.
-		for(auto&& it2 = it1->getUserList()->begin(); it2 != it1->getUserList()->end(); it2++)
+		for(auto&& it2 = it1->getUserList().begin(); it2 != it1->getUserList().end(); it2++)
 		{
 			//Saves all the people attending all time slots.
 			UserList->push_back(*it2);
@@ -332,17 +332,12 @@ std::list<std::string>* Executive::getAttending(int eid)
 void  Executive::writeRecord(int eid, std::list<Record>* List)
 {
 	std::string filename = getFileName(df_record, std::to_string(eid));
-	std::list<std::string>* tempUserlist;
+	std::list<std::string> tempUserlist;
 	std::string tempTime;
-	
-	//if the previous file exists, delete it
-	if(doesFileExist(df_record, std::to_string(eid)))
-	{
-		boost::filesystem::remove(filename);
-	}
+
 	
 	//start write a new file with the same filename
-	std::ofstream outF ("./Data/records/" + filename);
+	std::ofstream outF (filename);
 	for(auto&& it = List->begin(); it != List->end(); it++)
 	{
 		//write the time block
@@ -350,15 +345,14 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 		outF << 0 << " " << tempTime << std::endl;
 		tempUserlist = it->getUserList();
 		
-		for(auto it2 = tempUserlist->begin(); it2 != tempUserlist->end(); it2++)
+		for(auto it2 = tempUserlist.begin(); it2 != tempUserlist.end(); it2++)
 		{
 			//write the users
 			outF << 1 << " " << *it2 <<std::endl;
 		}
 	}
+    outF.close();
     
-    //delete List
-    delete List;
 	
 }
 
@@ -380,14 +374,14 @@ bool Executive::isAttending(int eid)
 {
 	bool isAttending = false;
 	std::list<Record>* List = readRecord(eid); //get the list.
-	std::list<std::string>* tempUserList;
+	std::list<std::string> tempUserList;
 	std::string username = currentUser -> getUserName(); //get username
 	
 	//check the user is attending
 	for(auto&& it = List -> begin(); it != List -> end(); it++)
 	{
 		tempUserList = it->getUserList();
-		for(auto&& it2 = tempUserList -> begin(); it2 != tempUserList -> end(); it2++)
+		for(auto&& it2 = tempUserList. begin(); it2 != tempUserList. end(); it2++)
 		{
 			if(*it2 == username)
 			{
@@ -441,11 +435,8 @@ std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
 	
 	for(auto&& it = timeList -> begin(); it != timeList -> end(); it++)
 	{
-		Record tempRecord(*it); // create Record object
-		List -> push_front(tempRecord); // push to the list
+		List -> push_front(Record(*it)); // push to the list
 	}
-	
-	delete timeList; // delete the timeList
 	
 	return List;
 }

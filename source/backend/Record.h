@@ -41,7 +41,7 @@ class Record{
          * This method will return class member userlist when it been called.
          * @return userlist list.
          */
-		std::list<std::string>* getUserList();
+		std::list<std::string> getUserList();
     
     	/**
          * This method will return calss member time.
@@ -50,7 +50,7 @@ class Record{
 		std::string getTime();
 	private:
 		std::string time;
-        std::list<std::string>* userList = new std::list<std::string>;
+        std::list<std::string> userList;
 };
 
 #endif
