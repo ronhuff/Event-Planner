@@ -52,7 +52,7 @@ void CLI::options(){
             std::cout << "clock: 12 Hour Clock\n";
         }
 
-        input.getString("Make a choice: ");
+        choice = input.getString("Make a choice: ");
 
         if(choice == "clock"){
             (longtime) ? longtime = false : longtime = true;
