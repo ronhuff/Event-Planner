@@ -405,7 +405,7 @@ bool Executive::isAttending(int eid)
 {
 	bool isAttending = false;
 	std::list<Record>* List = readRecord(eid); //get the list.
-	std::list<std::string> tempUserList;
+	std::list<std::string> tempUserList;git 
 	std::string username = currentUser -> getUserName(); //get username
 	
 	//check the user is attending
