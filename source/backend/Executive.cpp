@@ -71,11 +71,11 @@ int Executive::getEventNum(){
 }
 bool Executive::generateEvent(std::string name, std::string date){
 	try{		
-		//Create the event at the back of the vector.
-		eventList->push_back(Event(name,date,*currentUser,getEventNum()));
+		//This is the event we want to input data for.
+		Event new_event = Event(name,date,currentUser->getUserName(),getEventNum());
 		
-		//This is a reference to the event we want to input data for.
-		Event &new_event = eventList->back();
+		//Create the event at the back of the vector.
+		eventList->push_back(new_event);
 		
 		//Using the event at the back of the list (that we just created), we create the info and record files that correspond to it.
 		std::ofstream file_info_writer(getFileName(df_event,std::to_string((new_event.getIDNumber()))));
@@ -168,7 +168,7 @@ void Executive::rebuildEvent(std::string filename){
 	std::getline(text_file,temp);
 	num = std::stoi(temp);
 	//Generate the event.
-	eventList->push_back(Event(name,date,User(creator_user_name,creator_user_name),num));
+	eventList->push_back(Event(name,date,creator_user_name,num));
 }
 std::vector<Event>& Executive::getEventList(){
 	return (*eventList);
@@ -480,7 +480,7 @@ Event* Executive::getEventByID(int eid) throw(std::logic_error){
 		std::getline(text_file,temp);
 		num = std::stoi(temp);
 		//Generate the event.
-		return new Event(name,date,User(creator_user_name,creator_user_name),num);
+		return new Event(name,date,creator_user_name,num);
 	}else{
 		throw std::logic_error("Event with that id does not exist");
 	}
