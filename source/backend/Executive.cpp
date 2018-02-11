@@ -190,7 +190,9 @@ bool Executive::setCurrentUser(std::string uid) {
         std::getline(user_file, pnm, '\n'); //Store the proper name
         std::getline(user_file, attending_string, '\n'); //Get string of attending events
 
-        storeIntsFromString(attending_list, attending_string); //Store the attending event list
+	if (attending_string != "-1,") {
+	    storeIntsFromString(attending_list, attending_string); //Store the attending event list
+	}
 
         currentUser = new User(uid, pnm, attending_list);
         
@@ -245,8 +247,13 @@ bool Executive::writeCurrentUser() {
 
 	user_file << pnm << '\n';
 
-	for (std::list<int>::iterator it = att_ev -> begin(); it != att_ev -> end(); ++it) {
-		user_file << *it << ',';
+	if (currentUser -> getAttendingEvents() -> empty()) {
+	    user_file << "-1,";
+	}
+	else {
+	    for (std::list<int>::iterator it = att_ev -> begin(); it != att_ev -> end(); ++it) {
+		   user_file << *it << ',';
+	    }
 	}
 	user_file << '\n';
 
@@ -502,5 +509,22 @@ User* Executive::getUser(std::string uid) throw(std::logic_error) {
 	user_file.close();
 
 	return(u);
+    }
+}
+
+bool Executive::createUser(std::string uid, std::string pnm) {
+    if (doesFileExist(df_user, uid)) {
+	return (false);
+    }
+    else {
+	std::ofstream user_file;
+	user_file.open(getFileName(df_user, uid));
+
+	user_file << pnm << '\n';
+	user_file << "-1,\n";
+
+	user_file.close();
+
+	return (true);
     }
 }

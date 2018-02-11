@@ -176,6 +176,17 @@ class Executive{
          */
         bool removeRecord(int eid);
 
+	/**
+	 * This method creates a user and writes basic information
+	 * back out to a file
+	 * @param std::string uid -- user_name for the new user
+	 * @param std::string pnm -- real_name for the new user
+	 * @pre user_<uid>.txt does not exist in the data/user directory
+	 * @post user_<uid>.txt is created in the data/user directory
+	 * @return TRUE if the file user_<uid> does not already exist, FALSE otherwise
+	 */
+	bool createUser(std::string uid, std::string pnm);
+
 	private:
 		/**
 		 * An enum representing the various information types that are saved. 
