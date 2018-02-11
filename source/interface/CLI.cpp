@@ -69,6 +69,9 @@ void CLI::login(){
 
         if(identifier == "CreateAccount"){
             newAccount();
+        }else if(identifier == "Quit"){
+            quit = true;
+            return;
         }else if(exec->setCurrentUser(identifier)){
             loggedin = true;
         }else{
