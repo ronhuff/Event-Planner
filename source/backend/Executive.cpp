@@ -451,7 +451,7 @@ std::list<Event>* Executive::getEventByCreator(User u){
 	
 	return list;
 }
-Event Executive::getEventByID(int eid) throw(std::logic_error){
+Event* Executive::getEventByID(int eid) throw(std::logic_error){
 	if(doesFileExist(df_event,std::to_string(eid))){
 		//We read in everything regarding the event in question.
 		std::ifstream text_file(getFileName(df_event,std::to_string(eid)));
@@ -468,7 +468,7 @@ Event Executive::getEventByID(int eid) throw(std::logic_error){
 		std::getline(text_file,temp);
 		num = std::stoi(temp);
 		//Generate the event.
-		return Event(name,date,User(creator_user_name,creator_user_name),num);
+		return new Event(name,date,User(creator_user_name,creator_user_name),num);
 	}else{
 		throw std::logic_error("Event with that id does not exist");
 	}
