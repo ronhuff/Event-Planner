@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['_7eevent',['~Event',['../classEvent.html#a7704ec01ce91e673885792054214b3d2',1,'Event']]],
-  ['_7eexecutive',['~Executive',['../classExecutive.html#a4ce80c499f7640b1770ade77cf56d965',1,'Executive']]],
-  ['_7erecord',['~Record',['../classRecord.html#ad2ce1a99d866834ab53dedd788cb1ea6',1,'Record']]],
-  ['_7euser',['~User',['../classUser.html#ac00b72ad64eb4149f7b21b9f5468c2b2',1,'User']]]
+  ['user',['User',['../classUser.html',1,'User'],['../classUser.html#a4a0137053e591fbb79d9057dd7d2283d',1,'User::User()'],['../classUser.html#af7ad8135c0c766d006eadedf51e34013',1,'User::User(std::string uid, std::string pnm)'],['../classUser.html#abf30fe432e25c1d0c1ad60a50604bc92',1,'User::User(std::string uid, std::string pnm, std::list&lt; int &gt; atev)']]],
+  ['user_5fname',['user_name',['../classUser.html#a373cc4fbdf1954ac3147c7f4b500bcb1',1,'User']]],
+  ['userlist',['userList',['../classRecord.html#abe521a1020906603fb73e06f57633300',1,'Record']]]
 ];
