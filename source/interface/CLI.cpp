@@ -115,7 +115,7 @@ void CLI::newEvent(){
     int year = 0, month = 0, day = 0;
     std::string date = "";
     std::cout << "You are creating a new event.\nTo get started with, we need an event title.\n";
-    std::string name = input.getString("Enter event name: ");
+    std::string name = input.getLine("Enter event name: ");
 
     std::cout << "Next there needs to be a date for the event.\n";
     do{
