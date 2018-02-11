@@ -19,14 +19,17 @@ void CLI::run(){
 void CLI::menu(){
     std::cout << "You have a choice to make. Choose one of the following actions by typing in the command.\n";
                  "" <<
-                 "Do Something:\t\t\"\"" <<
+                 "View Events List:\t\"events\"\n" <<
+                 "Create New Event:\t\"create\"\n"
                  "Manage Settings:\t\"options\"\n" <<
                  "Logout of Account:\t\"logout\"\n" <<
-                 "Exit Application:\t\"exit\"\n"; <<
+                 "Exit Application:\t\"exit\"\n";
     std::string action = input.getString("What would you like to do?: ");
 
-    if(action == ""){
-
+    if(action == "events"){
+        listEvents(all, 0);
+    }else if(action == "create"){
+        newEvent();
     }else if(action == "options"){
         options();
     }else if(action == "logout"){
@@ -131,10 +134,9 @@ void CLI::newEvent(){
 void viewEvent(int i){
     try{
         Event e = getEventByID(i);
-    }catch(Excption e){
+        std::cout << "Title:\t" << e.getName() <<
+                     "Creator:\t" << e.getCreator().getName();
+    }catch(Exception e){
         std::cout << "Invalid event number.\n";
     }
-
-    std::cout << "Title:\t" << e.getName() <<
-                 "Creator: " << e.getCreator().getName();
 }
