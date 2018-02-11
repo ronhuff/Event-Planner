@@ -295,26 +295,30 @@ std::list<Record>* Executive::readRecord(int event_id)
 	return recordList;
 }
 
-/*
 std::list<std::string>* Executive::getAttending(int eid)
 {
+	//Read in the file and initializes local variables.
 	std::string filename = getFileName(df_record, std::to_string(eid));
 	std::list<Record>* List = readRecord(eid);
-	std::list<std::string>* UserList, tempUserList = nullptr;
+	std::list<std::string>* UserList = new std::list<std::string>();
 	
-	for(auto&& it = List -> begin(); it != List -> end(); it++)
+	//Iterate over the record's time slots.
+	for(auto&& it1 = List -> begin(); it1 != List -> end(); it1++)
 	{
-		tempUserList = it -> getUserList();
-		UserList -> merge(tempUserList);
+		//Iterate over the attending people of the time slot.
+		for(auto&& it2 = it1->getUserList()->begin(); it2 != it1->getUserList()->end(); it2++)
+		{
+			//Saves all the people attending all time slots.
+			UserList->push_back(*it2);
+		}
 	}
 	
+	//Removes duplicate people.
 	UserList -> unique();
 	delete List;
-	delete tempUserList;
 	
 	return UserList;
 }
-*/
 
 void  Executive::writeRecord(int eid, std::list<Record>* List)
 {
@@ -447,7 +451,7 @@ std::list<Event>* Executive::getEventByCreator(User u){
 	
 	return list;
 }
-Event Executive::getEventByID(int eid){
+Event* Executive::getEventByID(int eid) throw(std::logic_error){
 	if(doesFileExist(df_event,std::to_string(eid))){
 		//We read in everything regarding the event in question.
 		std::ifstream text_file(getFileName(df_event,std::to_string(eid)));
@@ -464,7 +468,7 @@ Event Executive::getEventByID(int eid){
 		std::getline(text_file,temp);
 		num = std::stoi(temp);
 		//Generate the event.
-		return Event(name,date,User(creator_user_name,creator_user_name),num);
+		return new Event(name,date,User(creator_user_name,creator_user_name),num);
 	}else{
 		throw std::logic_error("Event with that id does not exist");
 	}

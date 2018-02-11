@@ -134,10 +134,9 @@ class Executive{
 		 * This method will return an event via the event id.
 		 * @param eid The event id of the event in question.
 		 * @pre the event in question exists in file data.
-		 * @return the Event in question.
+		 * @return a pointer to the Event in question.
 		 * @throw std::logic_error if the event does not exist
 		 */
-		Event getEventByID(int eid);
 
 		/**
 		 * This method will return a pointer to a User whose information
@@ -149,6 +148,8 @@ class Executive{
 		 * @throw Error if user_<uid>.txt does not exist
 		 */
 		User* getUser(std::string uid) throw(std::logic_error);
+
+		Event* getEventByID(int eid) throw(std::logic_error);
 
 	private:
 		/**
