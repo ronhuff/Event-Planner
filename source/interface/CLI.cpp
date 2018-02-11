@@ -17,7 +17,7 @@ void CLI::run(){
 }
 
 void CLI::menu(){
-    std::cout << "You have a choice to make. Choose one of the following actions by typing in the command.\n" << 
+    std::cout << "You have a choice to make. Choose one of the following actions by typing in the command.\n" <<
                  "" <<
                  "View Events List:\t\"events\"\n" <<
                  "Create New Event:\t\"create\"\n"
@@ -90,13 +90,10 @@ void CLI::newAccount(){
     bool validIdentifier = false;
 
     while(!validIdentifier){
-        std::cout << "Enter your full name: ";
-        std::cin >> name;
+        name = input.getLine("Enter your full name: ");
+        username = input.getString("Enter your prefered username: ");
 
-        std::cout << "Enter your prefered username: ";
-        std::cin >> username;
-
-
+        validIdentifier = exec.createUser(username, name);
     }
 }
 
