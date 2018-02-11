@@ -55,7 +55,7 @@ void CLI::options(){
         choice = input.getString("Make a choice: ");
 
         if(choice == "clock"){
-            (longtime) ? longtime = false : longtime = true;
+            longtime = (longtime) ? false : true;
         }
     }
 }
