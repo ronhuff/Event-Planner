@@ -24,15 +24,16 @@ class Event{
 		/**
 		 * The constructor that takes 4 arguments. 
 		 * This builds an event with information based on its input.
-		 * @param input_name The name of the event. 
 		 * @pre None.
 		 * @post Creates an empty event using parameters
-		 * @param input_date The date of the event.
-		 * @param input_create The creator of the event.
-		 * @param input_id_number The id number associated with the event.
+		 * @param inputName The name of the event. 
+		 * @param inputDate The date of the event.
+		 * @param inputCreatorUsername The creator's user name of the event.
+		 * @param inputCreatorRealName The creator's user name of the event.
+		 * @param inputIDNum The id number associated with the event.
 		 * @throw std::logic_error This error occurs whenever an event is put into a holiday.
 		 */
-		Event(std::string inputName, std::string inputDate, User inputCreator, int inputIDNum);
+		Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum);
 		/**
 		 * The destructor.
 		 * @pre Event exists.

@@ -71,11 +71,11 @@ int Executive::getEventNum(){
 }
 bool Executive::generateEvent(std::string name, std::string date){
 	try{		
-		//Create the event at the back of the vector.
-		eventList->push_back(Event(name,date,*currentUser,getEventNum()));
+		//This is the event we want to input data for.
+		Event new_event = Event(name,date,currentUser->getUserName(),currentUser->getRealName(),getEventNum());
 		
-		//This is a reference to the event we want to input data for.
-		Event &new_event = eventList->back();
+		//Create the event at the back of the vector.
+		eventList->push_back(new_event);
 		
 		//Using the event at the back of the list (that we just created), we create the info and record files that correspond to it.
 		std::ofstream file_info_writer(getFileName(df_event,std::to_string((new_event.getIDNumber()))));
@@ -168,7 +168,7 @@ void Executive::rebuildEvent(std::string filename){
 	std::getline(text_file,temp);
 	num = std::stoi(temp);
 	//Generate the event.
-	eventList->push_back(Event(name,date,User(creator_user_name,creator_user_name),num));
+	eventList->push_back(Event(name,date,creator_user_name,creator_real_name,num));
 }
 std::vector<Event>& Executive::getEventList(){
 	return (*eventList);
@@ -262,17 +262,15 @@ bool Executive::writeCurrentUser() {
 	return (true);
     }
 }
-
+#include <iostream>
 std::list<Record>* Executive::readRecord(int event_id)
 {
 	std::string filename = getFileName(df_record, std::to_string(event_id));
-	int flag = 0;
 	std::list<Record>* recordList = new std::list<Record>;
 	std::string tempTime, tempString;
 	
 	//open file
-	std::ifstream recordFile("./data/records/" + filename);
-	Record tempRecord;
+	std::ifstream recordFile(filename);
 	
 	//throw if the file does not exist
 	if(!recordFile.is_open())
@@ -283,18 +281,32 @@ std::list<Record>* Executive::readRecord(int event_id)
 	//read through the file
 	while(!recordFile.eof())
 	{
-		recordFile >> flag;
-		if(flag == 0)
-		{
-			recordFile >> tempTime;
-			tempRecord = Record(tempTime);
+		std::string temp;
+		//temp will be the time string
+		getline(recordFile,temp);
+		
+		if(temp == ""){
+			//In this case, there is no more.
+			break;
 		}
-		recordFile >> flag;
-		while(flag != 0)
-		{
-			recordFile >> tempString;
-			tempRecord.addUser(tempString);
-			recordFile >> flag;
+		
+		temp = temp.substr(2);
+		
+		//Next, we put users back in.
+		Record tempRecord (temp);
+		
+		//This line represents the user list.
+		getline(recordFile,temp);
+		if(temp.size() > 1){
+			//There are attendees here.
+			std::stringstream ss = std::stringstream(temp.substr(2));
+			while(!ss.eof()){
+				std::string username;
+				ss >> username;
+				tempRecord.addUser(username);
+			}
+		}else{
+			//Do nothing, there is no attendees here.
 		}
 		recordList->push_back(tempRecord);
 	}
@@ -312,10 +324,10 @@ std::list<std::string>* Executive::getAttending(int eid)
 	std::list<std::string>* UserList = new std::list<std::string>();
 	
 	//Iterate over the record's time slots.
-	for(auto&& it1 = List -> begin(); it1 != List -> end(); it1++)
+	for(auto&& it1 = List->begin(); it1 != List -> end(); it1++)
 	{
 		//Iterate over the attending people of the time slot.
-		for(auto&& it2 = it1->getUserList()->begin(); it2 != it1->getUserList()->end(); it2++)
+		for(auto&& it2 = it1->getUserList().begin(); it2 != it1->getUserList().end(); it2++)
 		{
 			//Saves all the people attending all time slots.
 			UserList->push_back(*it2);
@@ -332,17 +344,12 @@ std::list<std::string>* Executive::getAttending(int eid)
 void  Executive::writeRecord(int eid, std::list<Record>* List)
 {
 	std::string filename = getFileName(df_record, std::to_string(eid));
-	std::list<std::string>* tempUserlist;
+	std::list<std::string> tempUserlist;
 	std::string tempTime;
-	
-	//if the previous file exists, delete it
-	if(doesFileExist(df_record, std::to_string(eid)))
-	{
-		boost::filesystem::remove(filename);
-	}
+
 	
 	//start write a new file with the same filename
-	std::ofstream outF ("./Data/records/" + filename);
+	std::ofstream outF (filename);
 	for(auto&& it = List->begin(); it != List->end(); it++)
 	{
 		//write the time block
@@ -350,44 +357,43 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 		outF << 0 << " " << tempTime << std::endl;
 		tempUserlist = it->getUserList();
 		
-		for(auto it2 = tempUserlist->begin(); it2 != tempUserlist->end(); it2++)
+		outF << 1;
+		for(auto it2 = tempUserlist.begin(); it2 != tempUserlist.end(); it2++)
 		{
 			//write the users
-			outF << 1 << " " << *it2 <<std::endl;
+			outF << " " << *it2;
 		}
+		outF << std::endl;
 	}
-    
-    //delete List
-    delete List;
-	
+    outF.close();
 }
 
 bool Executive::removeRecord(int eid)
 {
-	//get filename
-	std::string filename = getFileName(df_record, std::to_string(eid));
-	
-	//if the file exists, delete it, if the file does not exist, do nothing
-	if(doesFileExist(df_record, std::to_string(eid)))
-	{
-		boost::filesystem::remove("./Data/records/" + filename);
-	}
-	
-	return true;
+    //get filename
+    std::string filename = getFileName(df_record, std::to_string(eid));
+    
+    //if the file exists, delete it, if the file does not exist, do nothing
+    if(doesFileExist(df_record, std::to_string(eid)))
+    {
+        boost::filesystem::remove(filename);
+    }
+    
+    return true;
 }
 
 bool Executive::isAttending(int eid)
 {
 	bool isAttending = false;
 	std::list<Record>* List = readRecord(eid); //get the list.
-	std::list<std::string>* tempUserList;
+	std::list<std::string> tempUserList; 
 	std::string username = currentUser -> getUserName(); //get username
 	
 	//check the user is attending
 	for(auto&& it = List -> begin(); it != List -> end(); it++)
 	{
 		tempUserList = it->getUserList();
-		for(auto&& it2 = tempUserList -> begin(); it2 != tempUserList -> end(); it2++)
+		for(auto&& it2 = tempUserList. begin(); it2 != tempUserList. end(); it2++)
 		{
 			if(*it2 == username)
 			{
@@ -441,11 +447,8 @@ std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
 	
 	for(auto&& it = timeList -> begin(); it != timeList -> end(); it++)
 	{
-		Record tempRecord(*it); // create Record object
-		List -> push_front(tempRecord); // push to the list
+		List -> push_front(Record(*it)); // push to the list
 	}
-	
-	delete timeList; // delete the timeList
 	
 	return List;
 }
@@ -480,7 +483,7 @@ Event* Executive::getEventByID(int eid) throw(std::logic_error){
 		std::getline(text_file,temp);
 		num = std::stoi(temp);
 		//Generate the event.
-		return new Event(name,date,User(creator_user_name,creator_user_name),num);
+		return new Event(name,date,creator_user_name,creator_real_name,num);
 	}else{
 		throw std::logic_error("Event with that id does not exist");
 	}
