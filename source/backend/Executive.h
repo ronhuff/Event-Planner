@@ -176,22 +176,29 @@ class Executive{
          */
         bool removeRecord(int eid);
 
-	/**
-	 * This method creates a user and writes basic information
-	 * back out to a file.
-	 * @param uid user_name for the new user
-	 * @param pnm real_name for the new user
-	 * @pre user_<uid>.txt does not exist in the data/user directory
-	 * @post user_<uid>.txt is created in the data/user directory
-	 * @return TRUE if the file user_<uid> does not already exist, FALSE otherwise
-	 */
-	bool createUser(std::string uid, std::string pnm);
+		/**
+		 * This method creates a user and writes basic information
+		 * back out to a file.
+		 * @param uid user_name for the new user
+		 * @param pnm real_name for the new user
+		 * @pre user_<uid>.txt does not exist in the data/user directory
+		 * @post user_<uid>.txt is created in the data/user directory
+		 * @return TRUE if the file user_<uid> does not already exist, FALSE otherwise
+		 */
+		bool createUser(std::string uid, std::string pnm);
 		/**
 		 * This method will check if current user is attending a event.
 		 * @param eid The event id.
 		 * @post none
 		 */
 		bool isAttending(int eid);
+		
+		/**
+		 * This helper method sorts the event list by dates.
+		 * @pre Executive exists
+		 * @post N/A, No changes occur.
+		 */
+		void sortEventList();
 
 	private:
 		/**
@@ -229,12 +236,6 @@ class Executive{
 		 * @return filename The file name of the event information text file.
 		 */
 		std::string getFileName(DataFile type, std::string identifer = "");
-		/**
-		 * This helper method sorts the event list by dates.
-		 * @pre Executive exists
-		 * @post N/A, No changes occur.
-		 */
-		void sortEventList();
 
 		/**
 		 * Converts a csv string of integer values to an integer list

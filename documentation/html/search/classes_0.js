@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['event',['Event',['../classEvent.html',1,'']]],
-  ['executive',['Executive',['../classExecutive.html',1,'']]]
+  ['cli',['CLI',['../classCLI.html',1,'']]],
+  ['cliinput',['CLIInput',['../classCLIInput.html',1,'']]]
 ];

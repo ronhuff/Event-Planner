@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['createrecordlist',['createRecordList',['../classExecutive.html#a513c12461670a2a2c6b5f69a387fa43c',1,'Executive']]],
-  ['createuser',['createUser',['../classExecutive.html#aaf4e73a2e3e6515a1e15569d50ed7017',1,'Executive']]]
+  ['listevents',['listEvents',['../classCLI.html#a04e1cfe22614e0843c61bfedb1d04133',1,'CLI']]],
+  ['login',['login',['../classCLI.html#a4036374bc8e006272b17d762a2be8396',1,'CLI']]],
+  ['logout',['logout',['../classCLI.html#af508b0d2a9ce27e0a2247c1b02ff9059',1,'CLI']]]
 ];

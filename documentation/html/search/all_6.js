@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name',['name',['../classEvent.html#ae116bf76fb01a92e000579a5a0d6f35c',1,'Event']]]
+  ['setavailability',['setAvailability',['../classCLI.html#ae0cf3aed8de15dd64716b91760608a43',1,'CLI']]]
 ];
