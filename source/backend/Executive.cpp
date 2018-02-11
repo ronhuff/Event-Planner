@@ -347,6 +347,9 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 			outF << 1 << " " << *it2 <<std::endl;
 		}
 	}
+    
+    //delete List
+    delete List;
 	
 }
 
