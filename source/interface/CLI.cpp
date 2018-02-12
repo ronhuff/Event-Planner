@@ -230,8 +230,9 @@ void CLI::setAvailability(int eid){
             exec.addUserTo(i.getTime(), eventRecords);
         }
     }
-    
+
     exec.writeRecord(eid, eventRecords);
+    delet eventRecords;
 }
 
 void CLI::viewAvailability(int eid){
