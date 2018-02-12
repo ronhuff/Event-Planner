@@ -79,8 +79,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4ce80c499f7640b1770ade77cf56d965"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd540db75256c14b7fe16d59c0e00d48"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#abd540db75256c14b7fe16d59c0e00d48">getEventNum</a> ()</td></tr>
 <tr class="separator:abd540db75256c14b7fe16d59c0e00d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b1e894fc41ed42482896aff46a7a520"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#a0b1e894fc41ed42482896aff46a7a520">generateEvent</a> (std::string name, std::string date)</td></tr>
-<tr class="separator:a0b1e894fc41ed42482896aff46a7a520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3492f02fb587730a9e02f73ad52155e5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#a3492f02fb587730a9e02f73ad52155e5">generateEvent</a> (std::string name, std::string date)  throw (std::logic_error)</td></tr>
+<tr class="separator:a3492f02fb587730a9e02f73ad52155e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14c76414b43a4149728afc38613b8cee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#a14c76414b43a4149728afc38613b8cee">deleteEvent</a> (int event_id)</td></tr>
 <tr class="separator:a14c76414b43a4149728afc38613b8cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8fa8f11ea8794947da209d295c7e8fd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classEvent.html">Event</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExecutive.html#ab8fa8f11ea8794947da209d295c7e8fd">getEventList</a> ()</td></tr>
@@ -397,14 +397,14 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0b1e894fc41ed42482896aff46a7a520"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b1e894fc41ed42482896aff46a7a520">&#9670;&nbsp;</a></span>generateEvent()</h2>
+<a id="a3492f02fb587730a9e02f73ad52155e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3492f02fb587730a9e02f73ad52155e5">&#9670;&nbsp;</a></span>generateEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Executive::generateEvent </td>
+          <td class="memname">int Executive::generateEvent </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>name</em>, </td>
@@ -420,6 +420,12 @@ Private Attributes</h2></td></tr>
           <td>)</td>
           <td></td><td></td>
         </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2">std::logic_error</td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
+        </tr>
       </table>
 </div><div class="memdoc">
 <p>This method creates an event and generates files representing it. </p><dl class="params"><dt>Parameters</dt><dd>
@@ -431,7 +437,13 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="classExecutive.html">Executive</a> exists. </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>A new event is created in text files and in memory. </dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the event was created, false otherwise. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the id of the newly created event. </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::logic_error</td><td>if the event is invalid </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -854,7 +866,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This method sorts the event list by dates. </p><dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="classExecutive.html">Executive</a> exists </dd></dl>
+<p>This helper method sorts the event list by dates. </p><dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="classExecutive.html">Executive</a> exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>N/A, No changes occur. </dd></dl>
 
 </div>
