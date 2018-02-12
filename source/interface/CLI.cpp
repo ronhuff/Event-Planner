@@ -93,7 +93,9 @@ void CLI::newAccount(){
         name = input.getLine("Enter your full name: ");
         username = input.getString("Enter your prefered username: ");
 
-        validIdentifier = exec.createUser(username, name);
+        if(username != "CreateAccount" && username != "Quit"){
+            validIdentifier = exec.createUser(username, name);
+        }
     }
 }
 
