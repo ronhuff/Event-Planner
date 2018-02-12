@@ -69,34 +69,26 @@ int Executive::getEventNum(){
 	
 	return eventNum;
 }
-bool Executive::generateEvent(std::string name, std::string date){
-	try{		
-		//This is the event we want to input data for.
-		Event new_event = Event(name,date,currentUser->getUserName(),currentUser->getRealName(),getEventNum());
+int Executive::generateEvent(std::string name, std::string date) throw(std::logic_error){
+	//This is the event we want to input data for.
+	Event new_event = Event(name,date,currentUser->getUserName(),currentUser->getRealName(),getEventNum());
+	
+	//Create the event at the back of the vector.
+	eventList->push_back(new_event);
+	
+	//Using the event at the back of the list (that we just created), we create the info and record files that correspond to it.
+	std::ofstream file_info_writer(getFileName(df_event,std::to_string((new_event.getIDNumber()))));
+	std::ofstream file_record_writer(getFileName(df_record,std::to_string((new_event.getIDNumber()))));
 		
-		//Create the event at the back of the vector.
-		eventList->push_back(new_event);
-		
-		//Using the event at the back of the list (that we just created), we create the info and record files that correspond to it.
-		std::ofstream file_info_writer(getFileName(df_event,std::to_string((new_event.getIDNumber()))));
-		std::ofstream file_record_writer(getFileName(df_record,std::to_string((new_event.getIDNumber()))));
-			
-		//Now, we write the basic information of the event to the file in question.
-		file_info_writer << new_event.getName() << '\n' << new_event.getDate() << '\n' << new_event.getCreatorUserName() << '\n' << new_event.getCreatorRealName() << '\n' << new_event.getIDNumber();
-		
-		//Close the files.
-		file_info_writer.close();
-		file_record_writer.close();
-		
-		//Event created.
-		return true;
-	}catch(std::logic_error m){
-		//The event was a holiday was it? Return false.
-		return false;
-	}catch(std::exception m){
-		//If something caused an error, the creation is probably wrong.
-		return false;
-	}
+	//Now, we write the basic information of the event to the file in question.
+	file_info_writer << new_event.getName() << '\n' << new_event.getDate() << '\n' << new_event.getCreatorUserName() << '\n' << new_event.getCreatorRealName() << '\n' << new_event.getIDNumber();
+	
+	//Close the files.
+	file_info_writer.close();
+	file_record_writer.close();
+	
+	//Event created.
+	return new_event.getIDNumber();
 }
 bool Executive::doesFileExist(DataFile type, std::string identifer){
 	//Returns whether a file exists or not.
