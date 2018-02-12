@@ -46,9 +46,10 @@ class Executive{
 		 * @param date The date of the event.
 		 * @pre Executive exists.
 		 * @post A new event is created in text files and in memory. 
-		 * @return true if the event was created, false otherwise.
+		 * @return the id of the newly created event.
+		 * @throw std::logic_error if the event is invalid
 		 */
-		bool generateEvent(std::string name, std::string date);
+		int generateEvent(std::string name, std::string date) throw(std::logic_error);
 		/**
 		 * This method removes an event. 
 		 * @param event_id The id of the event to be deleted.
