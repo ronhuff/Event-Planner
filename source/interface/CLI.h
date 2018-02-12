@@ -104,6 +104,14 @@ class CLI{
 	     * @return: none
 	     */
         void viewAvailability(int);
+        /**
+	     * Converts 24 hour formatting to 12 hour formatting.
+         * @param std::string - the unique identifier of the event
+	     * @pre: none
+	     * @post: none
+	     * @return: A 12 hour format version of the input string.
+	     */
+        std::string to12Hour(std::string);
 };
 
 #endif

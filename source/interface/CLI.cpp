@@ -260,3 +260,17 @@ void CLI::viewAvailability(int eid){
     delete event;
     delete eventRecords;
 }
+std::string CLI::to12Hour(std::string input){
+	std::size_t delimiter = input.find_first_of(":");
+	int hour = std::stoi(input.substr(0,delimiter));
+	if(hour == 12){
+		return (input + " PM");
+	}else if(hour > 12){
+		hour -= 12;
+		return (std::to_string(hour) + std::string(input.substr(delimiter)) + " PM");
+	}else{
+		return (input + " AM");
+	}
+	
+	
+}
