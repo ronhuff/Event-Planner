@@ -259,7 +259,6 @@ bool Executive::writeCurrentUser() {
 	return (true);
     }
 }
-#include <iostream>
 std::list<Record>* Executive::readRecord(int event_id)
 {
 	std::string filename = getFileName(df_record, std::to_string(event_id));
