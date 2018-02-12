@@ -224,7 +224,7 @@ void CLI::setAvailability(int eid){
     std::cout << "For each of the following times enter 'y' or 'n' to confirm or deny availablity.\n";
 
     for(auto i : *(eventRecords)){
-	std::string slot = i.getTime();
+	    std::string slot = i.getTime();
 
         if(input.getCharacter(i.getTime() + " - ") == 'y'){
             exec.addUserTo(i.getTime(), eventRecords);
@@ -236,5 +236,19 @@ void CLI::setAvailability(int eid){
 }
 
 void CLI::viewAvailability(int eid){
+    std::list<Record>* eventRecords = exec.readRecord(eid);
 
+    for(auto i : *(eventRecords)){
+	    std::string slot = i.getTime();
+
+        std::cout << "Time: " << slot << "\nAtendees: ";
+
+        std::list<std::string> users = i.getUserList();
+        for(auto i : users){
+            std::cout << i.getRealName(); << ", ";
+        }
+        std::cout << std::endl;
+    }
+
+    delet eventRecords;
 }
