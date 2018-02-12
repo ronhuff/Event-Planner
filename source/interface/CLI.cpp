@@ -223,8 +223,8 @@ void CLI::setAvailability(int eid){
     std::list<Record>* eventRecords = exec.readRecord(eid);
     std::cout << "For each of the following times enter 'y' or 'n' to confirm or deny availablity.\n";
 
-    for(auto const& i : eventsRecords){
-        std::string slot = i.getTime();
+    for(auto i : *(eventRecords)){
+	std::string slot = i.getTime();
 
         if(input.getCharacter(i.getTime() + " - ") == 'y'){
             exec.addUserTo(i.getTime(), eventRecords);
