@@ -178,6 +178,11 @@ void Executive::sortEventList(){
 }
 
 bool Executive::setCurrentUser(std::string uid) {
+	if(currentUser != nullptr){
+		delete currentUser;
+	}
+	
+	
     if(doesFileExist(df_user, uid)) {
 
         std::string pnm = "";
