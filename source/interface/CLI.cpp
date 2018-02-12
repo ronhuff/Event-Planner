@@ -246,7 +246,7 @@ void CLI::viewAvailability(int eid){
 
         //Shows all attending users
         std::list<std::string> users = i.getUserList();
-        std::cout << event->getCreatorUserName();
+        std::cout << event->getCreatorRealName();
         for(auto i : users){
             try{
                 User* temp = exec.getUser(i);
