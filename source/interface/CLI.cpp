@@ -209,6 +209,7 @@ void CLI::viewEvent(int i){
             }
         }
 
+        delete e;
     }catch(std::exception& e){
         std::cout << "Invalid event number.\n";
     }
