@@ -98,7 +98,7 @@ void CLI::newAccount(){
         }
 
         if(!validIdentifier){
-            std::cout << "You may not use that username.\n"
+            std::cout << "You may not use that username.\n";
         }
     }
 }
