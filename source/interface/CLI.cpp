@@ -135,22 +135,26 @@ void CLI::listEvents(int first){
 
 void CLI::newEvent(){
     int year = 0, month = 0, day = 0;
+    int eventID;
     std::string date = "";
     std::cout << "You are creating a new event.\nTo get started with, we need an event title.\n";
     std::string name = input.getLine("Enter event name: ");
 
     std::cout << "Next there needs to be a date for the event.\n";
-    do{
-        if( month != 0 && day != 0){
-            std::cout << "An invalid date was entered.\n";
-        }
-
+    bool validDate = false;
+    while(!validDate){
         year = input.getInteger("Enter the year: ", 9999, 1400);
         month = input.getInteger("Enter the month integer: ", 12, 1);
         day = input.getInteger("Enter the day: ", 31, 1);
 
         date = std::to_string(year) + "/" + std::to_string(month) + "/" + std::to_string(day);
-    }while(!exec.generateEvent(name, date));
+        try{
+            eventID = exec.generateEvent(name, date);
+            validDate = true;
+        }catch(std::exception& e){
+            std::cout << "The date you have entered is invalid.\n";
+        }
+    }
 
     std::cout << "Finally there needs to be some times for the event. In the next section, simply enter 'y' or 'n' after each time.\n";
 
@@ -180,7 +184,7 @@ void CLI::newEvent(){
             i += 1;
         }
     }
-    exec.writeRecord(0, exec.createRecordList(times));
+    exec.writeRecord(eventID, exec.createRecordList(times));
     delete times;
 }
 
