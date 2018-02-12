@@ -197,14 +197,14 @@ void CLI::viewEvent(int i){
 
         std::string choice;
         while(choice != "menu"){
-            if(exec.getCurrentUser()->getUserName() != e.getCreatorRealName()){
+            if(exec.getCurrentUser()->getUserName() != e -> getCreatorRealName()){
                 std::cout << "You may set your availability buy entering \"set\".\n";
             }
             std::cout << "You may view users availability by entering \"view\"\n" <<
                          "Return to menu by entering \"menu\"\n";
             choice = input.getString("Enter your choice: ");
 
-            if(choice == "set" && exec.getCurrentUser()->getUserName() != e.getCreatorRealName()){
+            if(choice == "set" && exec.getCurrentUser()->getUserName() != e -> getCreatorRealName()){
                 setAvailability(i);
             }else if(choice == "view"){
                 viewAvailability(i);
@@ -251,7 +251,7 @@ void CLI::viewAvailability(int eid){
         std::list<std::string> users = i.getUserList();
         for(auto i : users){
             try{
-                User* temp = exec.getUserByID(i);
+                User* temp = exec.getUser(i);
                 std::cout << temp->getRealName() << ", ";
                 delete temp;
             }catch(std::exception& e){}
