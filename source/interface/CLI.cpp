@@ -197,14 +197,22 @@ void CLI::viewEvent(int i){
 
         std::string choice;
         while(choice != "menu"){
+<<<<<<< HEAD
             if(exec.getCurrentUser()->getUserName() != e->getCreatorUserName()){
+=======
+            if(exec.getCurrentUser()->getUserName() != e -> getCreatorRealName()){
+>>>>>>> 2ee29c1b7e78874387fbb446b15daf75172e1fe6
                 std::cout << "You may set your availability buy entering \"set\".\n";
             }
             std::cout << "You may view users availability by entering \"view\"\n" <<
                          "Return to menu by entering \"menu\"\n";
             choice = input.getString("Enter your choice: ");
 
+<<<<<<< HEAD
             if(choice == "set" && exec.getCurrentUser()->getUserName() != e->getCreatorUserName()){
+=======
+            if(choice == "set" && exec.getCurrentUser()->getUserName() != e -> getCreatorRealName()){
+>>>>>>> 2ee29c1b7e78874387fbb446b15daf75172e1fe6
                 setAvailability(i);
             }else if(choice == "view"){
                 viewAvailability(i);
@@ -250,7 +258,11 @@ void CLI::viewAvailability(int eid){
         for(auto i : users){
             try{
                 User* temp = exec.getUser(i);
+<<<<<<< HEAD
                 std::cout << ", " << temp->getRealName();
+=======
+                std::cout << temp->getRealName() << ", ";
+>>>>>>> 2ee29c1b7e78874387fbb446b15daf75172e1fe6
                 delete temp;
             }catch(std::exception& e){}
         }
