@@ -192,7 +192,7 @@ void CLI::viewEvent(int i){
     try{
         Event* e = exec.getEventByID(i);
         std::cout << "Title:\t\t" << e->getName() << "\n" <<
-                     "Creator:" << e->getCreatorRealName() << "\n" <<
+                     "Creator:\t" << e->getCreatorRealName() << "\n" <<
                      "Date:\t\t" << e->getDate() << "\n";
 
         std::string choice;
@@ -220,7 +220,16 @@ void CLI::viewEvent(int i){
 }
 
 void CLI::setAvailability(int eid){
+    std::list<Record>* eventRecords = exec.readRecord(eid);
+    std::cout << "For each of the following times enter 'y' or 'n' to confirm or deny availablity.\n";
 
+    for(auto const& i : eventsRecords){
+        std::string slot = i.getTime();
+
+        if(input.getCharacter(i.getTime() + " - ") == 'y'){
+            exec.addUserTo(i.getTime(), eventRecords);
+        }
+    }
 }
 
 void CLI::viewAvailability(int eid){
