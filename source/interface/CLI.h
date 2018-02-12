@@ -72,7 +72,7 @@ class CLI{
 	     * @post: none
 	     * @return: none
 	     */
-        void listEvents(EventSet, int);
+        void listEvents(int);
         /**
 	     * Allows for the creation of a new event by the user
 	     * @pre: none

@@ -27,7 +27,7 @@ void CLI::menu(){
     std::string action = input.getString("What would you like to do?: ");
 
     if(action == "events"){
-        listEvents(all, 0);
+        listEvents(0);
     }else if(action == "create"){
         newEvent();
     }else if(action == "options"){
@@ -97,9 +97,10 @@ void CLI::newAccount(){
     }
 }
 
-void CLI::listEvents( int first){
+void CLI::listEvents(int first){
     std::vector<Event>* list = exec.getEventList();
-    for(int i = first; i < (first + 26) && i < list.size(); i += 1){
+    int size = list->size();
+    for(int i = first; i < (first + 26) && i < size; i += 1){
         try{
             Event e = list->at(i);
             std::cout << std::to_string(e.getIDNumber()) << "\t" << e.getName() << "\t\t" << e.getDate() << "\t\t" <<e.getCreatorRealName() << "\n";
@@ -114,7 +115,7 @@ void CLI::listEvents( int first){
     if(first > 0 ){
         std::cout << "\t\"previous\" to go back in the list\n";
     }
-    if(first + 25 < list.size()){
+    if(first + 25 < size){
         std::cout << "\t\"next\" to go forward in the list\n";
     }
     std::cout << "\t\"menu\" to go to the menu\n";
@@ -124,9 +125,9 @@ void CLI::listEvents( int first){
     if(choice == "view"){
         viewEvent(input.getInteger("Enter the number of the event you want to view: "));
     }else if(choice == "next"){
-        listEvents(start + 25);
-    }else if(choice == "previous"){
-        listEvents(start - 25);
+        listEvents(first + 25 && first < size);
+    }else if(choice == "previous" && first > 0){
+        listEvents(first - 25);
     }
 }
 
@@ -152,7 +153,7 @@ void CLI::newEvent(){
     std::cout << "Finally there needs to be some times for the event. In the next section, simply enter 'y' or 'n' after each time.\n";
 
     std::list<std::string>* times = new std::list<std::string>();
-    for(int i = 5; i < 12; i += 1){
+    for(int i = 5; i < 24; i += 1){
         for(int j = 0; j < 59; j += 20){
             std::string slot = std::to_string(i) + ":" + std::to_string(j);
 
@@ -173,6 +174,9 @@ void CLI::newEvent(){
                 times->push_back(slot);
             }
         }
+        if(i == 11){
+            i += 1;
+        }
     }
     exec.writeRecord(0, exec.createRecordList(times));
     delete times;
@@ -186,7 +190,7 @@ void CLI::viewEvent(int i){
                      "Date:\t" << e->getDate() << "\n";
 
         std::string choice;
-        while(choice != menu){
+        while(choice != "menu"){
             if(exec.getCurrentUser()->getUserName() != e->getCreatorRealName()){
                 std::cout << "You may set your availability buy entering \"set\".\n";
             }
@@ -208,10 +212,10 @@ void CLI::viewEvent(int i){
     }
 }
 
-void setAvailability(int eid){
+void CLI::setAvailability(int eid){
 
 }
 
-void viewAvailability(int eid){
+void CLI::viewAvailability(int eid){
 
 }
