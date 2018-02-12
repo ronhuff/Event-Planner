@@ -86,7 +86,7 @@ void CLI::logout(){
 
 void CLI::newAccount(){
     std::string name;
-    std::string username;
+    std::string username = "";
     bool validIdentifier = false;
 
     while(!validIdentifier){
@@ -95,6 +95,10 @@ void CLI::newAccount(){
 
         if(username != "CreateAccount" && username != "Quit"){
             validIdentifier = exec.createUser(username, name);
+        }
+
+        if(!validIdentifier){
+            std::cout << "You may not use that username.\n"
         }
     }
 }
@@ -261,7 +265,7 @@ void CLI::viewAvailability(int eid){
         for(auto i : users){
             try{
                 User* temp = exec.getUser(i);
-                std::cout << temp->getRealName() << ", ";
+                std::cout << ", " << temp->getRealName();
                 delete temp;
             }catch(std::exception& e){}
         }
