@@ -245,7 +245,11 @@ void CLI::viewAvailability(int eid){
 
         std::list<std::string> users = i.getUserList();
         for(auto i : users){
-            std::cout << i.getRealName() << ", ";
+            try{
+                User* temp = exec.getUserByID(i);
+                std::cout << temp->getRealName() << ", ";
+                delete temp;
+            }catch(std::exception& e){}
         }
         std::cout << std::endl;
     }
