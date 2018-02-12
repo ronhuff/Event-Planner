@@ -197,14 +197,14 @@ void CLI::viewEvent(int i){
 
         std::string choice;
         while(choice != "menu"){
-            if(exec.getCurrentUser()->getUserName() != e->getCreatorRealName()){
+            if(exec.getCurrentUser()->getUserName() != e.getCreatorRealName()){
                 std::cout << "You may set your availability buy entering \"set\".\n";
             }
             std::cout << "You may view users availability by entering \"view\"\n" <<
                          "Return to menu by entering \"menu\"\n";
             choice = input.getString("Enter your choice: ");
 
-            if(choice == "set" && exec.getCurrentUser()->getUserName() != e->getCreatorRealName()){
+            if(choice == "set" && exec.getCurrentUser()->getUserName() != e.getCreatorRealName()){
                 setAvailability(i);
             }else if(choice == "view"){
                 viewAvailability(i);
@@ -220,6 +220,12 @@ void CLI::viewEvent(int i){
 }
 
 void CLI::setAvailability(int eid){
+    User* current = exec.getCurrentUser();
+    Event* cevent = exec.getEventByID(eid);
+    if(current->getUserName() == current->getUserName()){
+
+    }
+
     std::list<Record>* eventRecords = exec.readRecord(eid);
     std::cout << "For each of the following times enter 'y' or 'n' to confirm or deny availablity.\n";
 
@@ -232,7 +238,6 @@ void CLI::setAvailability(int eid){
     }
 
     exec.writeRecord(eid, eventRecords);
-    delete eventRecords;
 }
 
 void CLI::viewAvailability(int eid){
