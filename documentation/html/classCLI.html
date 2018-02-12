@@ -106,6 +106,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a0546e36efd50af1c80eee2ed47ac4f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaacd336786c8f895b349889866cf610"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCLI.html#aaaacd336786c8f895b349889866cf610">viewAvailability</a> (int)</td></tr>
 <tr class="separator:aaaacd336786c8f895b349889866cf610"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6622010128f1170365f1e533721107e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCLI.html#ae6622010128f1170365f1e533721107e">to12Hour</a> (std::string)</td></tr>
+<tr class="separator:ae6622010128f1170365f1e533721107e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -402,6 +404,41 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>quit</b></td></tr>
 <dl class="section pre"><dt>Precondition</dt><dd>: user is not the creator </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>: availability set </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>: none </dd></dl>
+
+</div>
+</div>
+<a id="ae6622010128f1170365f1e533721107e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6622010128f1170365f1e533721107e">&#9670;&nbsp;</a></span>to12Hour()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string CLI::to12Hour </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Converts 24 hour formatting to 12 hour formatting. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">std::string</td><td>- the unique identifier of the event </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>: none </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>: none </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>: A 12 hour format version of the input string. </dd></dl>
 
 </div>
 </div>

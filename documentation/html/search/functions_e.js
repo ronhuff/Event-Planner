@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['writecurrentuser',['writeCurrentUser',['../classExecutive.html#a5879f0c70a947b199113f1d707c53610',1,'Executive']]],
-  ['writerecord',['writeRecord',['../classExecutive.html#a32e7d63d1978cef1db5bd55f085aa137',1,'Executive']]]
+  ['viewavailability',['viewAvailability',['../classCLI.html#aaaacd336786c8f895b349889866cf610',1,'CLI']]],
+  ['viewevent',['viewEvent',['../classCLI.html#ad8e11f03fc813b829ecb1a9ab717b7d7',1,'CLI']]]
 ];

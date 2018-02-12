@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['viewavailability',['viewAvailability',['../classCLI.html#aaaacd336786c8f895b349889866cf610',1,'CLI']]],
-  ['viewevent',['viewEvent',['../classCLI.html#ad8e11f03fc813b829ecb1a9ab717b7d7',1,'CLI']]]
+  ['user',['User',['../classUser.html#a4a0137053e591fbb79d9057dd7d2283d',1,'User::User()'],['../classUser.html#af7ad8135c0c766d006eadedf51e34013',1,'User::User(std::string uid, std::string pnm)'],['../classUser.html#abf30fe432e25c1d0c1ad60a50604bc92',1,'User::User(std::string uid, std::string pnm, std::list&lt; int &gt; atev)']]]
 ];
