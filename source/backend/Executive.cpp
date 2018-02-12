@@ -363,6 +363,7 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 		outF << std::endl;
 	}
     outF.close();
+    delete List;
 }
 
 bool Executive::removeRecord(int eid)
