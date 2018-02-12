@@ -1,4 +1,4 @@
-This application is to help people schedule events.
+This application is used to help people schedule events.
 
 This program was build for and tested on Linux systems.
 
