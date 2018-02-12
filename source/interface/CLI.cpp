@@ -224,9 +224,14 @@ void CLI::setAvailability(int eid){
     std::cout << "For each of the following times enter 'y' or 'n' to confirm or deny availablity.\n";
 
     for(auto i : *(eventRecords)){
-	    std::string slot = i.getTime();
+	    if(longtime){
+            std::string slot = i.getTime();
+        }else{
+            std::string slot = to12Hour(i.getTime());
+        }
 
-        if(input.getCharacter(i.getTime() + " - ") == 'y'){
+
+        if(input.getCharacter(slot + " - ") == 'y'){
             exec.addUserTo(i.getTime(), eventRecords);
         }
     }
@@ -240,8 +245,12 @@ void CLI::viewAvailability(int eid){
 
     //Runs for each time slot
     for(auto i : *(eventRecords)){
-	    std::string slot = i.getTime();
-
+        if(longtime){
+            std::string slot = i.getTime();
+        }else{
+            std::string slot = to12Hour(i.getTime());
+        }
+        
         std::cout << "Time: " << slot << "\nAtendees: ";
 
         //Shows all attending users
@@ -271,6 +280,4 @@ std::string CLI::to12Hour(std::string input){
 	}else{
 		return (input + " AM");
 	}
-	
-	
 }
