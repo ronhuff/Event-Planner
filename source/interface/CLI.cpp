@@ -232,7 +232,7 @@ void CLI::setAvailability(int eid){
     }
 
     exec.writeRecord(eid, eventRecords);
-    delet eventRecords;
+    delete eventRecords;
 }
 
 void CLI::viewAvailability(int eid){
@@ -245,10 +245,10 @@ void CLI::viewAvailability(int eid){
 
         std::list<std::string> users = i.getUserList();
         for(auto i : users){
-            std::cout << i.getRealName(); << ", ";
+            std::cout << i.getRealName() << ", ";
         }
         std::cout << std::endl;
     }
 
-    delet eventRecords;
+    delete eventRecords;
 }
