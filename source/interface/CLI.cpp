@@ -44,7 +44,7 @@ void CLI::menu(){
 
 void CLI::options(){
     std::string choice;
-    std::cout << "Here you may change the settings. To toggle a setting simply enter its name, to go to the main menu enter menu.\n";
+    std::cout << "Here you may change the settings. To toggle a setting simply enter its name, to go to the main menu enter \"menu.\"\n";
     while(choice != "menu"){
         if(longtime){
             std::cout << "clock: 24 Hour Clock\n";
@@ -126,9 +126,9 @@ void CLI::listEvents(int first){
     choice = input.getString("Now make a choice: ");
     if(choice == "view"){
         viewEvent(input.getInteger("Enter the number of the event you want to view: "));
-    }else if(choice == "next"){
-        listEvents(first + 25 && first < size);
-    }else if(choice == "previous" && first > 0){
+    }else if(choice == "next" && first < size){
+        listEvents(first + 25 );
+    }else if(choice == "previous" && first >= 0){
         listEvents(first - 25);
     }
 }
@@ -187,9 +187,9 @@ void CLI::newEvent(){
 void CLI::viewEvent(int i){
     try{
         Event* e = exec.getEventByID(i);
-        std::cout << "Title:\t" << e->getName() << "\n" <<
-                     "Creator:\t" << e->getCreatorRealName() << "\n" <<
-                     "Date:\t" << e->getDate() << "\n";
+        std::cout << "Title:\t\t" << e->getName() << "\n" <<
+                     "Creator:" << e->getCreatorRealName() << "\n" <<
+                     "Date:\t\t" << e->getDate() << "\n";
 
         std::string choice;
         while(choice != "menu"){
