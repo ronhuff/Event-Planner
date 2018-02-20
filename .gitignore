@@ -1,8 +1,6 @@
 # Most of this list comes from the octocat .gitignore repository on git.#
 
 # Libraries for Project Use #
-include/
-lib/
 
 ################################################################################
 
