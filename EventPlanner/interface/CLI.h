@@ -21,7 +21,7 @@ class CLI{
 		 * @post: none
 		 * @return: bool true if no time violations, else false.
 		 */
-		bool checkTime(std::string stime, std::string etime) {
+		bool checkTime(std::string stime, std::string etime);
     public:
         /**
 	     * Default constructor

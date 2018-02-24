@@ -166,35 +166,35 @@ void CLI::newEvent(){
 	std::string etime = "";
 	std::cout << "Enter start time in format HH:MM\n";
 	std::cin >> stime;
-	while(!cin)
+	if (!cin)
 	{
 		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 		std::cin >> stime;
 	}
 	std::cout << "Enter end time in format HH:MM\n";
 	std::cin >> etime;
-	while (!cin)
+	if (!cin)
 	{
 		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
-		std::cin >> stime;
+		std::cin >> etime;
 	}
 	while (!checkTime(stime, etime)) {
 		std::cout << "Enter start time in format HH:MM\n";
 		std::cin >> stime;
-		while (!cin)
+		if (!cin)
 		{
 			std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 			std::cin >> stime;
 		}
 		std::cout << "Enter end time in format HH:MM\n";
 		std::cin >> etime;
-		while (!cin)
+		if (!cin)
 		{
 			std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
-			std::cin >> stime;
+			std::cin >> etime;
 		}
 	}
-
+	
 		//MY CODE HERE
 
 	// END MY CODE
@@ -322,4 +322,58 @@ std::string CLI::to12Hour(std::string input){
 	}else{
 		return (input + " AM");
 	}
+}
+
+bool CLI::checkTime(std::string stime, std::string etime){
+//HH:MM
+//Convert these values to Numbers to make math easier.
+std::string startHr = stime.substr(0, 2);
+int startMin = stoi(stime.substr(3, 2));
+std::string endHr = etime.substr(0, 2);
+int endMin = stoi(etime.substr(3, 2));
+
+if (((startMin % 20 == 0) && (endMin % 20 == 0)) == false){
+	std::cout << "startMin || endMin not on timeslot  *DBG\n";
+	std::cout << "Meeting must begin and end on the hour or 20 minute increments thereof.\n";
+	return(false);
+}
+
+//Check for overnight
+if ((startHr >= "00" && startHr < "05") || (endHr > "00" && endHr <= "05")){
+	std::cout << "Error: Meeting Start || End overnight. *DBG \n";
+	std::cout << "Meetings may not occur between 12:00am - 5:00am\n";
+	return(false);
+}
+//Check for lunch.
+else if ((startHr >= "12" && startHr < "13") || ((endHr >= "12" && endMin > 0) && endHr <= "13")){
+	std::cout << "Error: Meeting Start || End lunch. *DBG \n";
+	std::cout << "Meetings may not occur between 12:00pm - 1:00pm\n";
+	return(false);
+}
+
+//Check if meeting would span the restricted overnight period.
+//NOTE: Even though they can choose only one day, a user could attempt to schedule
+//      an end time in the AM even though their begin time is PM. This will account for that.
+//      Also, we can use >= 13 because we already checked for meetings that span lunch.
+else if (startHr >= "13" && endHr < "13"){
+	std::cout << "Meetings must begin and end on the same calendar day.\n";
+	return(false);
+}
+
+//Check if meeting would span the restricted lunch period.
+else if ((startHr >= "05" && startHr < "12") && endHr > "13"){
+	std::cout << "Hour values indicate that the meeting would go through lunch.\n";
+	std::cout << "Meetings may not extend through lunch.\n";
+	return(false);
+}
+
+//Check to assure that meeting will start and end on the same calendar day.
+//Perhaps redundant now but it's not broke so we won't fix it yet.
+if (etime < stime){
+	std::cout << "Meeting may not extend into next calendar day.\n";
+	std::cout << "User attempted to set end time for calendar day that is not same as start time calendar day.\n";
+	return (false);
+}
+std::cout << "Time does not appear to conflict with time constraints.\n";
+return (true);
 }
