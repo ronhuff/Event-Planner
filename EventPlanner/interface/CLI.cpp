@@ -198,6 +198,18 @@ void CLI::newEvent(){
 		//MY CODE HERE
 
 	// END MY CODE
+	std::string startHr = stime.substr(0, 2);
+	int startMin = stoi(stime.substr(3, 2));
+	std::string endHr = etime.substr(0, 2);
+	int endMin = stoi(etime.substr(3, 2));
+	int TOTAL_MINS = ((stoi(endHr) - stoi(startHr)) * 60 + endMin - startMin);
+	std::cout << "Total Minutes: ";
+	std::cout << TOTAL_MINS;
+	std::cout << "Timeslots: ";
+	int timeslots = TOTAL_MINS / 20;
+	std::cout << timeslots << "\n";
+	std::cout << "Further implentation to follow! *DBG\n\n";
+	//std::cout << "Total Minutes: " + TOTAL_MINS + " timeslots: " + (TOTAL_MINS / 20) << "\n";
     std::list<std::string>* times = new std::list<std::string>();
     for(int i = 5; i < 24; i += 1){
         for(int j = 0; j < 59; j += 20){
