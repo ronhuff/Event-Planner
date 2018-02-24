@@ -167,7 +167,7 @@ void CLI::newEvent(){
 	std::string etime = "";
 	std::cout << "Enter start time in format HH:MM\n";
 	std::cin >> stime;
-	if (!cin)
+	if (!cin)//This will still allow for bad input for now but at least it forces it to be a string for testing.
 	{
 		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 		std::cin >> stime;
@@ -211,17 +211,30 @@ void CLI::newEvent(){
 	
 	
 	std::list<std::string>* times = new std::list<std::string>();
-	for (int i = 0; i < timeslots; i++)
+	
+	//the first slot.
+	std::string slot = startHr + ":" + std::to_string(endMin);
+	endMin += 20;
+	times->push_back(slot);
+	for (int i = 1; i < timeslots; i++)
 	{
-		if (endMin == 0) {
-			startHr = std::to_string((stoi(startHr)) + 1);
+		std::string slot = "";
+		//etime.substr(3, 2) this returns the endmin string
+		if (endMin >= 60) {
+			endMin = 0;
+			int hourInt = std::stoi(startHr);
+			hourInt++;
+			startHr = std::to_string(hourInt);
+			slot = startHr + ":" + "00";
+			endMin += 20;
 		}
-		std::string slot = startHr + ":" + std::to_string(endMin);
-		if (endMin == 0)
+		else
 		{
-			slot += "0";
+			slot = startHr + ":" + std::to_string(endMin);
+			endMin += 20;
 		}
-		endMin += 20;
+		
+		
 		times->push_back(slot);
 	}
 	exec.writeRecord(eventID, exec.createRecordList(times));
@@ -312,13 +325,23 @@ void CLI::viewAvailability(int eid){
     delete eventRecords;
 }
 std::string CLI::to12Hour(std::string input){
-	std::size_t delimiter = input.find_first_of(":");
-	int hour = std::stoi(input.substr(0,delimiter));
-	if(hour == 12){
+
+	int hour = std::stoi(input.substr(0, 2));
+	if(hour <= 12){
 		return (input + " PM");
 	}else if(hour > 12){
 		hour -= 12;
-		return (std::to_string(hour) + std::string(input.substr(delimiter)) + " PM");
+		std::string hrStr = std::to_string(hour);
+		if (hrStr.length() == 1){//It seems to me that we should append a '0' on these times (e.g.) 01:20 PM
+			input[0] = '0';					  //Just for now until we know if there would be errors from other code expecting this format.
+			input[1] = hrStr[0];
+			return(input + " AM");
+		}
+		else{
+			input[0], input[1] = hrStr[0], hrStr[1];
+			return(input + " PM");
+		}
+		//return (std::to_string(hour) + std::string(input.substr(delimiter)) + " PM");
 	}else{
 		return (input + " AM");
 	}
