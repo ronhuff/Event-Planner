@@ -161,7 +161,43 @@ void CLI::newEvent(){
     }
 
     std::cout << "Finally there needs to be some times for the event. In the next section, simply enter 'y' or 'n' after each time.\n";
+	std::cout << "Please enter a beginning time for your meeting.";
+	std::string stime = "";
+	std::string etime = "";
+	std::cout << "Enter start time in format HH:MM\n";
+	std::cin >> stime;
+	while(!cin)
+	{
+		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
+		std::cin >> stime;
+	}
+	std::cout << "Enter end time in format HH:MM\n";
+	std::cin >> etime;
+	while (!cin)
+	{
+		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
+		std::cin >> stime;
+	}
+	while (!checkTime(stime, etime)) {
+		std::cout << "Enter start time in format HH:MM\n";
+		std::cin >> stime;
+		while (!cin)
+		{
+			std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
+			std::cin >> stime;
+		}
+		std::cout << "Enter end time in format HH:MM\n";
+		std::cin >> etime;
+		while (!cin)
+		{
+			std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
+			std::cin >> stime;
+		}
+	}
 
+		//MY CODE HERE
+
+	// END MY CODE
     std::list<std::string>* times = new std::list<std::string>();
     for(int i = 5; i < 24; i += 1){
         for(int j = 0; j < 59; j += 20){
