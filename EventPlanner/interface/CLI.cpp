@@ -162,6 +162,7 @@ void CLI::newEvent(){
 
     std::cout << "Finally there needs to be some times for the event. In the next section, simply enter 'y' or 'n' after each time.\n";
 	std::cout << "Please enter a beginning time for your meeting.";
+	//BEGIN NEW CODE
 	std::string stime = "";
 	std::string etime = "";
 	std::cout << "Enter start time in format HH:MM\n";
@@ -194,10 +195,7 @@ void CLI::newEvent(){
 			std::cin >> etime;
 		}
 	}
-	
-		//MY CODE HERE
 
-	// END MY CODE
 	std::string startHr = stime.substr(0, 2);
 	int startMin = stoi(stime.substr(3, 2));
 	std::string endHr = etime.substr(0, 2);
@@ -210,36 +208,26 @@ void CLI::newEvent(){
 	std::cout << timeslots << "\n";
 	std::cout << "Further implentation to follow! *DBG\n\n";
 	//std::cout << "Total Minutes: " + TOTAL_MINS + " timeslots: " + (TOTAL_MINS / 20) << "\n";
-    std::list<std::string>* times = new std::list<std::string>();
-    for(int i = 5; i < 24; i += 1){
-        for(int j = 0; j < 59; j += 20){
-            std::string slot = std::to_string(i) + ":" + std::to_string(j);
-
-            //Is a time acceptable
-            std::string accept;
-            if(!longtime){
-                if(i < 12){
-                    accept = input.getString(slot + "AM - ");
-                }else{
-                    accept = input.getString(std::to_string(i - 12) + ":" + std::to_string(j) + "PM - ");
-                }
-            }else{
-                accept = input.getString(slot + " - ");
-            }
-
-
-            if(accept == "y"){
-                times->push_back(slot);
-            }
-        }
-        if(i == 11){
-            i += 1;
-        }
-    }
-    exec.writeRecord(eventID, exec.createRecordList(times));
-    delete times;
+	
+	
+	std::list<std::string>* times = new std::list<std::string>();
+	for (int i = 0; i < timeslots; i++)
+	{
+		if (endMin == 0) {
+			startHr = std::to_string((stoi(startHr)) + 1);
+		}
+		std::string slot = startHr + ":" + std::to_string(endMin);
+		if (endMin == 0)
+		{
+			slot += "0";
+		}
+		endMin += 20;
+		times->push_back(slot);
+	}
+	exec.writeRecord(eventID, exec.createRecordList(times));
+	delete times;   
 }
-
+//END NEW CODE
 void CLI::viewEvent(int i){
     try{
         Event* e = exec.getEventByID(i);
