@@ -146,12 +146,21 @@ void CLI::newEvent(){
 
     std::cout << "Next there needs to be a date for the event.\n";
     bool validDate = false;
-    while(!validDate){
-        year = input.getInteger("Enter the year: ", 9999, 1400);
-        month = input.getInteger("Enter the month integer: ", 12, 1);
-        day = input.getInteger("Enter the day: ", 31, 1);
+	while (!validDate) {
+		std::cout << "Please enter a date in the format MM/DD/YYYY.\n";
 
-        date = std::to_string(year) + "/" + std::to_string(month) + "/" + std::to_string(day);
+		std::string date = "";
+		std::cin >> date;
+
+		while (!cin || date.length() != 10 || (date[2] != '/' || date[5] != '/')) {
+			std::cout << "ERROR: Please enter a date in the format MM/DD/YYYY.\n";
+			std::cin >> date;
+		}
+		std::string year = date.substr(6, 4);
+		std::string day = date.substr(3, 2);
+		std::string month = date.substr(0, 2);
+
+        date = year + "/" + month + "/" + day;
         try{
             eventID = exec.generateEvent(name, date);
             validDate = true;

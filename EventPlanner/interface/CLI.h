@@ -1,5 +1,4 @@
-#ifndef CLI_H
-#define CLI_H
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -121,5 +120,3 @@ class CLI{
 	     */
         std::string to12Hour(std::string);
 };
-
-#endif
