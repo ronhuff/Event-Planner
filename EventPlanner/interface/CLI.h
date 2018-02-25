@@ -14,6 +14,14 @@ class CLI{
         bool longtime;
         bool loggedin;
         bool quit;
+
+	    /**
+		 * Helper method for checking time constraints.
+		 * @pre: a call is made to CLI::newEvent()
+		 * @post: none
+		 * @return: bool true if no time violations, else false.
+		 */
+		bool checkTime(std::string stime, std::string etime);
     public:
         /**
 	     * Default constructor
