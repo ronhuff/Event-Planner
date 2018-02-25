@@ -17,30 +17,39 @@ void CLI::run(){
 }
 
 void CLI::menu(){
-    std::cout << "You have a choice to make. Choose one of the following actions by typing in the command.\n" <<
-                 "" <<
-                 "View Events List:\t\"events\"\n" <<
-                 "Create New Event:\t\"create\"\n"
-                 "Manage Settings:\t\"options\"\n" <<
-                 "Logout of Account:\t\"logout\"\n" <<
-                 "Exit Application:\t\"exit\"\n";
-    std::string action = input.getString("What would you like to do?: ");
+    std::cout << "\nPlease choose from the following options:\n\n" <<
+                 "1) View Events List:\n" <<
+				 "2) Create New Event:\n"
+                 "3) Manage Settings:\n" <<
+                 "4) Logout of Account:\n" <<
+                 "5) Exit Application:\n";
+	std::cout << "Selection: ";
+	int action;
+	std::cin >> action;
+	while (!cin) {
+		
+		if (!cin) {
+			std::cout << "Please simply choose one of the options (1-5) and press enter/return.\n";
+		}
+		std::cout << "\nSelection: ";
+		std::cin >> action;
+	}
 
-    if(action == "events"){
+    if(action == 1){
         listEvents(0);
-    }else if(action == "create"){
+    }else if(action == 2){
 		try {
 			newEvent();
 		}
 		catch (std::exception& e) {
 			std::cout << e.what();
 		}
-    }else if(action == "options"){
+    }else if(action == 3){
         options();
-    }else if(action == "logout"){
+    }else if(action == 4){
         logout();
         login();
-    }else if(action == "exit"){
+    }else if(action == 5){
         quit = true;
     }else{
         std::cout << "Invalid command entered.\n";
