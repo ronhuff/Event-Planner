@@ -59,3 +59,11 @@ bool Event::operator>(Event rhs){
 bool Event::operator<(Event rhs){
 	return date < rhs.date;
 }
+
+std::string Event::dateFormatFixer(std::string date)
+{
+	std::string year = date.substr(0, 4);
+	std::string month = date.substr(6, 2);
+	std::string day = date.substr(9, 2);
+	return (month + "/" + day + "/" + year);
+}

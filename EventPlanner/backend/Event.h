@@ -135,5 +135,12 @@ class Event{
 		 * This is the identifer number assigned to an event.
 		 */
 		int idNum;
+
+		/**
+		 *
+		 *
+		 *
+		 */
+		std::string dateFormatFixer(std::string date);
 };
 #endif
