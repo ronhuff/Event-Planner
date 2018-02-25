@@ -29,7 +29,12 @@ void CLI::menu(){
     if(action == "events"){
         listEvents(0);
     }else if(action == "create"){
-        newEvent();
+		try {
+			newEvent();
+		}
+		catch (std::exception& e) {
+			std::cout << e.what();
+		}
     }else if(action == "options"){
         options();
     }else if(action == "logout"){
@@ -137,7 +142,7 @@ void CLI::listEvents(int first){
     }
 }
 
-void CLI::newEvent(){
+void CLI::newEvent() throw(std::exception) {
     int year = 0, month = 0, day = 0;
     int eventID;
     std::string date = "";
@@ -159,18 +164,30 @@ void CLI::newEvent(){
 		std::string year = date.substr(6, 4);
 		std::string day = date.substr(3, 2);
 		std::string month = date.substr(0, 2);
-
-        date = year + "/" + month + "/" + day;
-        try{
-            eventID = exec.generateEvent(name, date);
-            validDate = true;
-        }catch(std::exception& e){
-            std::cout << "The date you have entered is invalid.\n";
-        }
+		if (stoi(year) < 2018) {
+			throw std::logic_error("No meetings permitted to be scheduled in the past.\n");
+		}
+		//New Year's Day.
+		if (month == "01" && day == "01"){
+			throw std::logic_error("No meetings permitted to be scheduled on New Year's Day.\n");
+		}
+		//Independence Day
+		else if (month == "07" && day == "04"){
+			throw std::logic_error("No meetings permitted to be scheduled on Independence Day.\n");
+		}
+		//Christmas Day
+		else if (month == "12" && day == "25"){
+			throw std::logic_error("No meetings permitted to be scheduled on Christmas Day.\n");
+		}
+		else {
+			validDate = true;
+		}
+		date = year + "/" + month + "/" + day;
+			eventID = exec.generateEvent(name, date);
+			validDate = true;
     }
-
-    std::cout << "Finally there needs to be some times for the event. In the next section, simply enter 'y' or 'n' after each time.\n";
-	std::cout << "Please enter a beginning time for your meeting.";
+	
+	std::cout << "Please enter a beginning time for your meeting. ";
 	//BEGIN NEW CODE
 	std::string stime = "";
 	std::string etime = "";
@@ -210,12 +227,9 @@ void CLI::newEvent(){
 	std::string endHr = etime.substr(0, 2);
 	int endMin = stoi(etime.substr(3, 2));
 	int TOTAL_MINS = ((stoi(endHr) - stoi(startHr)) * 60 + endMin - startMin);
-	std::cout << "Total Minutes: ";
-	std::cout << TOTAL_MINS;
-	std::cout << "Timeslots: ";
+	
 	int timeslots = TOTAL_MINS / 20;
-	std::cout << timeslots << "\n";
-	std::cout << "Further implentation to follow! *DBG\n\n";
+	
 	//std::cout << "Total Minutes: " + TOTAL_MINS + " timeslots: " + (TOTAL_MINS / 20) << "\n";
 	
 	

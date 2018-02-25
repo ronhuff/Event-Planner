@@ -5,17 +5,17 @@ Event::Event(){
 Event::Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum){
 	date = boost::gregorian::from_string(inputDate);
 	
-	//We cannot schedule on these days
-	if(date.month() == 12 && date.day() == 25){
-		//Christmas
-		throw std::logic_error("cannot assign event to holiday");
-	}else if(date.month() == 1 && date.day() == 1){
-		//New Years
-		throw std::logic_error("cannot assign event to holiday");
-	}else if(date.month() == 7 && date.day() == 4){
-		//July 4
-		throw std::logic_error("cannot assign event to holiday");
-	}
+	////We cannot schedule on these days
+	//if(date.month() == 12 && date.day() == 25){
+	//	//Christmas
+	//	throw std::logic_error("cannot assign event to holiday");
+	//}else if(date.month() == 1 && date.day() == 1){
+	//	//New Years
+	//	throw std::logic_error("cannot assign event to holiday");
+	//}else if(date.month() == 7 && date.day() == 4){
+	//	//July 4
+	//	throw std::logic_error("cannot assign event to holiday");
+	//}
 	
 	name = inputName;
 	creatorRealName = inputCreatorRealName;

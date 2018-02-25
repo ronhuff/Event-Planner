@@ -86,7 +86,7 @@ class CLI{
 	     * @post: new event is created
 	     * @return: none
 	     */
-        void newEvent();
+        void newEvent() throw(std::exception);
         /**
 	     * Allows a user to view a specific event
          * @param int - the unique identifier of the event
