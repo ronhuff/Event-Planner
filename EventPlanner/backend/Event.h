@@ -46,9 +46,10 @@ class Event{
 		 * A getter method for the date.
 		 * @pre Event exists.
 		 * @post N/A.
+		 * @param bool True if called during file I/O else, false.
 		 * @return the date as a string.
 		 */
-		std::string getDate();
+		std::string getDate(bool ifIO);
 		/**
 		 * A getter method for the event's name.
 		 * @pre Event exists.
@@ -137,9 +138,10 @@ class Event{
 		int idNum;
 
 		/**
-		 *
-		 *
-		 *
+		 * A helper method to alter the displayed date to be more user friendly.
+		 * @pre - A call has been made to display a date value.
+		 * @post - none.
+		 * @return - std::string If format change was simple, returns in format MM/DD/YYYY, else returns in original format YYYY/MM/DD
 		 */
 		std::string dateFormatFixer(std::string date);
 };
