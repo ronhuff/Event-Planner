@@ -15,3 +15,6 @@ application satisfy all Project 1 requirements on or before Sunday, 2-20-18.
 correct dependencies, paths and libraries set.
 
 #### Following these steps _should_ generate a project that will compile.
+
+
+##### `boost` libraries used under [License](https://github.com/ronhuff/Event-Planner/tree/Project-Setup/documentation/BoostLicense.txt).
