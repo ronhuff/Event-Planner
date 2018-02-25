@@ -193,30 +193,26 @@ void CLI::newEvent() throw(std::exception) {
 	std::string etime = "";
 	std::cout << "Enter start time in format HH:MM\n";
 	std::cin >> stime;
-	if (!cin)//This will still allow for bad input for now but at least it forces it to be a string for testing.
-	{
+	if (!cin) {//This will still allow for bad input for now but at least it forces it to be a string for testing.
 		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 		std::cin >> stime;
 	}
 	std::cout << "Enter end time in format HH:MM\n";
 	std::cin >> etime;
-	if (!cin)
-	{
+	if (!cin) {
 		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 		std::cin >> etime;
 	}
 	while (!checkTime(stime, etime)) {
 		std::cout << "Enter start time in format HH:MM\n";
 		std::cin >> stime;
-		if (!cin)
-		{
+		if (!cin) {
 			std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 			std::cin >> stime;
 		}
 		std::cout << "Enter end time in format HH:MM\n";
 		std::cin >> etime;
-		if (!cin)
-		{
+		if (!cin) {
 			std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 			std::cin >> etime;
 		}
@@ -251,8 +247,7 @@ void CLI::newEvent() throw(std::exception) {
 			slot = startHr + ":" + "00";
 			endMin += 20;
 		}
-		else
-		{
+		else {
 			slot = startHr + ":" + std::to_string(endMin);
 			endMin += 20;
 		}

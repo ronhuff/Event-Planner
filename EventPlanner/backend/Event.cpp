@@ -21,7 +21,6 @@ std::string Event::getDate(bool ifIO){
 			s.at(x) = '/';
 		}
 	}
-	std::cout << s + "* DBG Event.cpp:24\n";
 	if (ifIO) return(s);
 	return dateFormatFixer(s);
 }
