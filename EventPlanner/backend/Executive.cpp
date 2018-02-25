@@ -81,7 +81,7 @@ int Executive::generateEvent(std::string name, std::string date) throw(std::logi
 	std::ofstream file_record_writer(getFileName(df_record,std::to_string((new_event.getIDNumber()))));
 		
 	//Now, we write the basic information of the event to the file in question.
-	file_info_writer << new_event.getName() << '\n' << new_event.getDate() << '\n' << new_event.getCreatorUserName() << '\n' << new_event.getCreatorRealName() << '\n' << new_event.getIDNumber();
+	file_info_writer << new_event.getName() << '\n' << new_event.getDate(true) << '\n' << new_event.getCreatorUserName() << '\n' << new_event.getCreatorRealName() << '\n' << new_event.getIDNumber();
 	
 	//Close the files.
 	file_info_writer.close();

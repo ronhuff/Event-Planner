@@ -114,7 +114,7 @@ void CLI::listEvents(int first){
     for(int i = first; i < (first + 26) && i < size; i += 1){
         try{
             Event e = list->at(i);
-            std::cout << std::to_string(e.getIDNumber()) << "\t" << e.getName() << "\t\t" << e.getDate() << "\t\t" <<e.getCreatorRealName() << "\n";
+            std::cout << std::to_string(e.getIDNumber()) << "\t" << e.getName() << "\t\t" << e.getDate(false) << "\t\t" <<e.getCreatorRealName() << "\n";
         }catch(std::exception& e){
             return;
         }
@@ -269,7 +269,7 @@ void CLI::viewEvent(int i){
         Event* e = exec.getEventByID(i);
         std::cout << "Title:\t\t" << e->getName() << "\n" <<
                      "Creator:\t" << e->getCreatorRealName() << "\n" <<
-                     "Date:\t\t" << e->getDate() << "\n";
+                     "Date:\t\t" << e->getDate(false) << "\n";
 
         std::string choice;
         while(choice != "menu"){
