@@ -29,7 +29,12 @@ void CLI::menu(){
     if(action == "events"){
         listEvents(0);
     }else if(action == "create"){
-        newEvent();
+		try {
+			newEvent();
+		}
+		catch (std::exception& e) {
+			std::cout << e.what();
+		}
     }else if(action == "options"){
         options();
     }else if(action == "logout"){
@@ -109,7 +114,7 @@ void CLI::listEvents(int first){
     for(int i = first; i < (first + 26) && i < size; i += 1){
         try{
             Event e = list->at(i);
-            std::cout << std::to_string(e.getIDNumber()) << "\t" << e.getName() << "\t\t" << e.getDate() << "\t\t" <<e.getCreatorRealName() << "\n";
+            std::cout << std::to_string(e.getIDNumber()) << "\t" << e.getName() << "\t\t" << e.getDate(false) << "\t\t" <<e.getCreatorRealName() << "\n";
         }catch(std::exception& e){
             return;
         }
@@ -137,7 +142,7 @@ void CLI::listEvents(int first){
     }
 }
 
-void CLI::newEvent(){
+void CLI::newEvent() throw(std::exception) {
     int year = 0, month = 0, day = 0;
     int eventID;
     std::string date = "";
@@ -146,51 +151,68 @@ void CLI::newEvent(){
 
     std::cout << "Next there needs to be a date for the event.\n";
     bool validDate = false;
-    while(!validDate){
-        year = input.getInteger("Enter the year: ", 9999, 1400);
-        month = input.getInteger("Enter the month integer: ", 12, 1);
-        day = input.getInteger("Enter the day: ", 31, 1);
+	while (!validDate) {
+		std::cout << "Please enter a date in the format MM/DD/YYYY.\n";
 
-        date = std::to_string(year) + "/" + std::to_string(month) + "/" + std::to_string(day);
-        try{
-            eventID = exec.generateEvent(name, date);
-            validDate = true;
-        }catch(std::exception& e){
-            std::cout << "The date you have entered is invalid.\n";
-        }
+		std::string date = "";
+		std::cin >> date;
+
+		while (!cin || date.length() != 10 || (date[2] != '/' || date[5] != '/')) {
+			std::cout << "ERROR: Please enter a date in the format MM/DD/YYYY.\n";
+			std::cin >> date;
+		}
+		std::string year = date.substr(6, 4);
+		std::string day = date.substr(3, 2);
+		std::string month = date.substr(0, 2);
+		if (stoi(year) < 2018) {
+			throw std::logic_error("No meetings permitted to be scheduled in the past.\n");
+		}
+		//New Year's Day.
+		if (month == "01" && day == "01"){
+			throw std::logic_error("No meetings permitted to be scheduled on New Year's Day.\n");
+		}
+		//Independence Day
+		else if (month == "07" && day == "04"){
+			throw std::logic_error("No meetings permitted to be scheduled on Independence Day.\n");
+		}
+		//Christmas Day
+		else if (month == "12" && day == "25"){
+			throw std::logic_error("No meetings permitted to be scheduled on Christmas Day.\n");
+		}
+		else {
+			validDate = true;
+		}
+		date = year + "/" + month + "/" + day;
+			eventID = exec.generateEvent(name, date);
+			validDate = true;
     }
-
-    std::cout << "Finally there needs to be some times for the event. In the next section, simply enter 'y' or 'n' after each time.\n";
-	std::cout << "Please enter a beginning time for your meeting.";
+	
+	std::cout << "Please enter a beginning time for your meeting. ";
 	//BEGIN NEW CODE
 	std::string stime = "";
 	std::string etime = "";
 	std::cout << "Enter start time in format HH:MM\n";
 	std::cin >> stime;
-	if (!cin)//This will still allow for bad input for now but at least it forces it to be a string for testing.
-	{
+	if (!cin) {//This will still allow for bad input for now but at least it forces it to be a string for testing.
 		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 		std::cin >> stime;
 	}
 	std::cout << "Enter end time in format HH:MM\n";
 	std::cin >> etime;
-	if (!cin)
-	{
+	if (!cin) {
 		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 		std::cin >> etime;
 	}
 	while (!checkTime(stime, etime)) {
 		std::cout << "Enter start time in format HH:MM\n";
 		std::cin >> stime;
-		if (!cin)
-		{
+		if (!cin) {
 			std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 			std::cin >> stime;
 		}
 		std::cout << "Enter end time in format HH:MM\n";
 		std::cin >> etime;
-		if (!cin)
-		{
+		if (!cin) {
 			std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
 			std::cin >> etime;
 		}
@@ -201,12 +223,9 @@ void CLI::newEvent(){
 	std::string endHr = etime.substr(0, 2);
 	int endMin = stoi(etime.substr(3, 2));
 	int TOTAL_MINS = ((stoi(endHr) - stoi(startHr)) * 60 + endMin - startMin);
-	std::cout << "Total Minutes: ";
-	std::cout << TOTAL_MINS;
-	std::cout << "Timeslots: ";
+	
 	int timeslots = TOTAL_MINS / 20;
-	std::cout << timeslots << "\n";
-	std::cout << "Further implentation to follow! *DBG\n\n";
+	
 	//std::cout << "Total Minutes: " + TOTAL_MINS + " timeslots: " + (TOTAL_MINS / 20) << "\n";
 	
 	
@@ -228,8 +247,7 @@ void CLI::newEvent(){
 			slot = startHr + ":" + "00";
 			endMin += 20;
 		}
-		else
-		{
+		else {
 			slot = startHr + ":" + std::to_string(endMin);
 			endMin += 20;
 		}
@@ -246,7 +264,7 @@ void CLI::viewEvent(int i){
         Event* e = exec.getEventByID(i);
         std::cout << "Title:\t\t" << e->getName() << "\n" <<
                      "Creator:\t" << e->getCreatorRealName() << "\n" <<
-                     "Date:\t\t" << e->getDate() << "\n";
+                     "Date:\t\t" << e->getDate(false) << "\n";
 
         std::string choice;
         while(choice != "menu"){

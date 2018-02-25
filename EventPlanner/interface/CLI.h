@@ -1,5 +1,4 @@
-#ifndef CLI_H
-#define CLI_H
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -87,7 +86,7 @@ class CLI{
 	     * @post: new event is created
 	     * @return: none
 	     */
-        void newEvent();
+        void newEvent() throw(std::exception);
         /**
 	     * Allows a user to view a specific event
          * @param int - the unique identifier of the event
@@ -121,5 +120,3 @@ class CLI{
 	     */
         std::string to12Hour(std::string);
 };
-
-#endif

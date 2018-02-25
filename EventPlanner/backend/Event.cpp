@@ -5,18 +5,6 @@ Event::Event(){
 Event::Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum){
 	date = boost::gregorian::from_string(inputDate);
 	
-	//We cannot schedule on these days
-	if(date.month() == 12 && date.day() == 25){
-		//Christmas
-		throw std::logic_error("cannot assign event to holiday");
-	}else if(date.month() == 1 && date.day() == 1){
-		//New Years
-		throw std::logic_error("cannot assign event to holiday");
-	}else if(date.month() == 7 && date.day() == 4){
-		//July 4
-		throw std::logic_error("cannot assign event to holiday");
-	}
-	
 	name = inputName;
 	creatorRealName = inputCreatorRealName;
 	creatorUserName = inputCreatorUsername;
@@ -25,7 +13,7 @@ Event::Event(std::string inputName, std::string inputDate, std::string inputCrea
 Event::~Event(){
 
 }
-std::string Event::getDate(){
+std::string Event::getDate(bool ifIO){
 	//Get the date as a string.
 	std::string s = boost::gregorian::to_iso_extended_string(date);
 	for(int x = s.length()-1; x >= 0; x--){
@@ -33,8 +21,10 @@ std::string Event::getDate(){
 			s.at(x) = '/';
 		}
 	}
-	return s;
+	if (ifIO) return(s);
+	return dateFormatFixer(s);
 }
+
 std::string Event::getName(){
 	return name;
 }
@@ -58,4 +48,19 @@ bool Event::operator>(Event rhs){
 }
 bool Event::operator<(Event rhs){
 	return date < rhs.date;
+}
+
+std::string Event::dateFormatFixer(std::string date)
+{
+	if (date.length() == 10 && date[4] == '/' && date[7] == '/')
+	{
+		std::string year = date.substr(0, 4);
+		std::string month = date.substr(5, 2);
+		std::string day = date.substr(8, 2);
+		return (month + "/" + day + "/" + year);
+	}
+	else//if problems, it will just display the original format.
+	{
+		return(date);
+	}
 }
