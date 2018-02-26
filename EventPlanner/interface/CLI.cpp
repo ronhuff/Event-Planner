@@ -18,19 +18,19 @@ void CLI::run(){
 
 void CLI::menu(){
     std::cout << "\nPlease choose from the following options:\n\n" <<
-                 "1) View Events List:\n" <<
-				 "2) Create New Event:\n"
-                 "3) Manage Settings:\n" <<
-                 "4) Logout of Account:\n" <<
-                 "5) Exit Application:\n";
+                 "1) View Events List\n" <<
+				 "2) Create New Event\n"
+                 "3) Manage Settings\n" <<
+                 "4) Logout of Account\n" <<
+                 "5) Exit Application\n";
 	std::cout << "Selection: ";
 	int action;
 	std::cin >> action;
-	while (!cin) {
+	while (action != 1 && action != 2 && action != 3 && action != 4 && action != 5) {
 		
-		if (!cin) {
-			std::cout << "Please simply choose one of the options (1-5) and press enter/return.\n";
-		}
+		std::cin.clear(); // unset failbit
+		std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+		std::cout << "Please simply choose one of the options (1-5) and press enter/return.\n";
 		std::cout << "\nSelection: ";
 		std::cin >> action;
 	}
