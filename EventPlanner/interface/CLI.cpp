@@ -328,7 +328,9 @@ void CLI::viewAvailability(int eid){
     for(auto i : *(eventRecords)){
         std::string slot;
         if(longtime){
-            slot = i.getTime();
+            slot = zeroAppender(i.getTime());//here zeroAppender is taking the std::string parameter returned by i.getTime());
+
+			//add zeroappend
         }else{
             slot = to12Hour(i.getTime());
         }
@@ -426,4 +428,38 @@ if (etime < stime){
 }
 std::cout << "Time does not appear to conflict with time constraints.\n";
 return (true);
+}
+
+
+std::string CLI::zeroAppender(std::string time) throw(std::logic_error)
+{
+	//in this case, the time must be in format "HH:MM" + "XYZ, etc." so disregard for this method.
+	//Or the time is in format "HH:" where for some reason the time is completely invalid.}
+	/*std::cout << "time param = " + time + " time.length() = " << time.length() << "\n";*/
+	if (time.length() == 4 && time[1] == ':')
+	{
+		/*std::cout << "Entered First If Block.\n";*/
+		//This will ensure that format read in as H:MM will not be reformatted...
+		/*std::cout << "Entered next If time[time.length() - 1] = " + time[time.length() - 1] + '\n';
+		std::cout << "time[time.length() - 2] = " + time[time.length() - 2] << '\n';
+		std::cout << (time[3] == '0');*/
+		return (time.substr(0, 3) + "0");
+	}
+	if (time.length() > 5 || time.length() < 4) {
+		if (time.length() < 4) {
+			//throw std::logic_error("Unable to format the time, timeslot somehow given with length < 4 must debug.");
+			return(time);
+		}
+		return(time);
+	}
+	else if (time.length() == 4)
+	{
+		return (time + "0");
+	}
+	else
+	{
+		//std::cout << "time param = " + time + " time.length() = " << time.length() << "\n";
+		//std::cout << "ERROR, zeroAppender took no action and returned.\n";
+		return(time);
+	}
 }
