@@ -330,7 +330,7 @@ void CLI::viewEvent(int i){
 		std::cout << "Title:\t\t" << e->getName() << "\n" <<
 			"Creator:\t" << e->getCreatorRealName() << "\n" <<
 			"Date:\t\t" << e->getDate(false) << "\n" <<
-			"Start: " << /*starttime*/ "\tEnd: " << /*endtime*/ "";
+			"Start: " << /*starttime*/ "\tEnd: " << /*endtime*/ "\n\n";
 
         std::string choice;
 		bool creator = false;
@@ -359,7 +359,7 @@ void CLI::viewEvent(int i){
 
 				std::cout << "Selection: ";//NOTE: returning from this function may not actually cause the user to "go back"
 				std::getline(std::cin, inString);
-				if (inString.empty()) {
+				if (stoi(inString) == 3) {
 					choice = "quit";
 					break;
 
