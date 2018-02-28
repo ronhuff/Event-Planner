@@ -151,16 +151,7 @@ void CLI::listEvents(int first){
     std::vector<Event>* list = exec.getEventList();
     int size = list->size();
 	std::cout << "\n\tCurrently Scheduled Events:\n\n";
-    for(int i = first; i < (first + 26) && i < size; i += 1){
-        try{
-            Event e = list->at(i);
-            std::cout << std::to_string(e.getIDNumber()) + ")" << "\t" << e.getName() << "\t\t" << e.getDate(false) << "\t\t" <<e.getCreatorRealName() << "\n";
-        }catch(std::exception& e){
-            return;
-        }
-    }
-
-    int choice;
+    
     //Options
     
 	//I have removed this functionality below. We can uncomment this if we wish later. We will likely need to change the "next"/"previous
@@ -177,15 +168,30 @@ void CLI::listEvents(int first){
     //Make Choice
 	//std::cout << "Please select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	int choice;
 	std::string inString;
+	//The template for the below while loop was borrowed from https://stackoverflow.com/a/10553849 and modified to our needs.
 	while (1){
+		for (int i = first; i < (first + 26) && i < size; i += 1) {
+			try {
+				Event e = list->at(i);
+				std::cout << std::to_string(e.getIDNumber()) + ")" << "\t" << e.getName() << "\t\t" << e.getDate(false) << "\t\t" << e.getCreatorRealName() << "\n";
+			}
+			catch (std::exception& e) {
+				return;
+			}
+		}
 		std::cout << "Please select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
+		std::cout << "Selection: ";
+
 		getline (std::cin, inString);
 		if (inString.empty()){
 			break;
 		}
 		else if (std::stoi(inString) <= exec.whatIsEventNum() && std::stoi(inString) > 0) {
 				viewEvent(std::stoi(inString));
+				std::cout << "\n";
 			}
 		else {
 			std::cout << "Error: Invalid meeting number.\n";
@@ -322,26 +328,62 @@ void CLI::viewEvent(int i){
         Event* e = exec.getEventByID(i);
         std::cout << "Title:\t\t" << e->getName() << "\n" <<
                      "Creator:\t" << e->getCreatorRealName() << "\n" <<
-                     "Date:\t\t" << e->getDate(false) << "\n";
+                     "Date:\t\t" << e->getDate(false) << "\n\n";
 
         std::string choice;
-        while(choice != "menu"){
+		bool creator = false;
+        while(choice != "quit"){//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
             if(exec.getCurrentUser()->getUserName() != e->getCreatorUserName()){
-                std::cout << "You may set your availability buy entering \"set\".\n";
+				
             }
-            std::cout << "You may view users availability by entering \"view\"\n" <<
-                         "Return to menu by entering \"menu\"\n";
-            choice = input.getString("Enter your choice: ");
+			else
+			{
+				creator = true;
+			}
+			
+			while (1) {
+				std::string inString = "";
+				if (creator)
+				{
+					std::cout << "1) Redisplay meeting time slots.\n";
+					std::cout << "2) Return to menu.\n";
+				}
+				else {
+					std::cout << "If you are interested in joining this event:\n";
+					std::cout << "1) Indicate your availability.\n"; //WE WILL ADD OTHER OPTIONS TO THIS MENU SO FULL MENU IMPLENTATION AT THIS POINT IS WORTH.
+					std::cout << "2) Redisplay meeting time slots.\n"; //We can make these menus way more user friendly if we start making this feel more like an actual application
+					std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
+				}
 
-            if(choice == "set" && exec.getCurrentUser()->getUserName() != e->getCreatorUserName()){
-                setAvailability(i);
-            }else if(choice == "view"){
-                viewAvailability(i);
-            }else{
-                std::cout << "No valid input.\n";
-            }
+				std::cout << "Selection: \n";//NOTE: returning from this function may not actually cause the user to "go back"
+				std::getline(std::cin, inString);
+				if (inString.empty()) {
+					choice = "quit";
+					break;
+
+				}
+				else if (std::stoi(inString) == 1 && exec.getCurrentUser()->getUserName() != e->getCreatorUserName()) {
+					creator = false;
+					setAvailability(i);//unknown if/how this works at this point, but am attempting to keep things integrated with Team 8 code.
+					std::cout << "\n";
+				}
+				else if (std::stoi(inString) == 1 && creator)
+				{
+					viewAvailability(i);
+				}
+				else if (std::stoi(inString) == 2 && !creator) {
+					viewAvailability(i);
+				}
+				else if (std::stoi(inString) == 2 && creator)
+				{
+					choice = "quit";
+					break;
+				}
+				else {
+					std::cout << "Error: Invalid meeting number.\n";
+				}
+			}
         }
-
         delete e;
     }catch(std::exception& e){
         std::cout << "Invalid event number.\n";
