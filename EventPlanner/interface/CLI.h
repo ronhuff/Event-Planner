@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <limits>
 #include "../backend/Executive.h"
 #include "CLIInput.h"
 
@@ -119,4 +120,13 @@ class CLI{
 	     * @return: A 12 hour format version of the input string.
 	     */
         std::string to12Hour(std::string);
+
+		/**
+		* Appends a zero to the end of a time string if it needs it(e.g. 13:00 instead of 13:0)
+		* @param std::string - The string containing the time to be evaluated.
+		* @pre: A time parameter is in local scope and we know it's length <5 (this function does NOT correct strings with greater length but will disregard them.)
+		* @post: If necessary, a single zero is appended to the time. If other errors, no action taken.
+		* @return: std::string - The time either with a zero appended or in it's original state when passed in.
+		*/
+		std::string zeroAppender(std::string time) throw(std::logic_error);
 };
