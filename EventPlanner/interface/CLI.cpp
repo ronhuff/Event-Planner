@@ -12,7 +12,7 @@ void CLI::run(){
     while(!quit){
         menu();
     }
-    std::cout << "Have a wonderful day.\n";
+    std::cout << "Have a wonderful day.\n\n";
     logout();
 }
 
