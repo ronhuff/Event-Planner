@@ -57,23 +57,54 @@ void CLI::menu(){
 }
 
 void CLI::options(){
-    std::string choice;
-    std::cout << "Here you may change the settings. To toggle a setting simply enter its name, to go to the main menu enter \"menu.\"\n";
-    while(choice != "menu"){
-        if(longtime){
-            std::cout << "clock: 24 Hour Clock\n";
-        }else{
-            std::cout << "clock: 12 Hour Clock\n";
-        }
+    int choice;
+    std::cout << "Please select from the following options:\n";//We can add more here if necessary for Project 2 requirements.
+    
+	if (longtime) {
+		std::cout << "1) Switch to 12 hour display.\n";
+		std::cout << "2) Close options.\n";//perhaps could have better wording here.
+		std::cout << "\nSelection: ";
+		std::cin >> choice;
+	}
+	else {
+		std::cout << "1) Switch to 24 hour display.\n";
+		std::cout << "2) Close options.\n";
+		std::cout << "\nSelection: ";
+		std::cin >> choice;
+	}
 
-        choice = input.getString("Make a choice: ");
+	while (!(choice > 0) && !(choice < 3) && choice != 2) {
+		std::cin >> choice;
+		if (!cin) {
+			std::cin.clear(); // unset failbit
+			std::cout << "Please simply choose one of the options (1-2) and press enter/return.\n";
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+		}
+		if (longtime) {
+			std::cout << "1) Switch to 12 hour display.\n";
+			std::cout << "2) Close options.\n";//perhaps could have better wording here.
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		else {
+			std::cout << "1) Switch to 24 hour display.\n";
+			std::cout << "2) Close options.\n";
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		std::cin >> choice;
+	}
+	
+	if (choice == 1)
+	{
+		longtime = (longtime) ? false : true;
+	}
+	else if (choice == 2)//come back here and check for bad input.
+	{
 
-        if(choice == "clock"){
-            longtime = (longtime) ? false : true;
-        }
-    }
+	}
 }
-
+/////
 void CLI::login() {
 
 	while (!loggedin) {
