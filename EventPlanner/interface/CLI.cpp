@@ -57,42 +57,101 @@ void CLI::menu(){
     }
 }
 
-void CLI::options(){
-    std::string choice;
-    std::cout << "Here you may change the settings. To toggle a setting simply enter its name, to go to the main menu enter \"menu.\"\n";
-    while(choice != "menu"){
-        if(longtime){
-            std::cout << "clock: 24 Hour Clock\n";
-        }else{
-            std::cout << "clock: 12 Hour Clock\n";
-        }
+void CLI::options() {
+	int choice;
+	std::cout << "Please select from the following options:\n";//We can add more here if necessary for Project 2 requirements.
 
-        choice = input.getString("Make a choice: ");
+	if (longtime) {
+		std::cout << "1) Switch to 12 hour display.\n";
+		std::cout << "2) Close options.\n";//perhaps could have better wording here.
+		std::cout << "\nSelection: ";
+		std::cin >> choice;
+	}
+	else {
+		std::cout << "1) Switch to 24 hour display.\n";
+		std::cout << "2) Close options.\n";
+		std::cout << "\nSelection: ";
+		std::cin >> choice;
+	}
 
-        if(choice == "clock"){
-            longtime = (longtime) ? false : true;
-        }
-    }
+	while (!(choice > 0) && !(choice < 3) && choice != 2) {
+		std::cin >> choice;
+		if (!cin) {
+			std::cin.clear(); // unset failbit
+			std::cout << "Please simply choose one of the options (1-2) and press enter/return.\n";
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+		}
+		if (longtime) {
+			std::cout << "1) Switch to 12 hour display.\n";
+			std::cout << "2) Close options.\n";//perhaps could have better wording here.
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		else {
+			std::cout << "1) Switch to 24 hour display.\n";
+			std::cout << "2) Close options.\n";
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		std::cin >> choice;
+	}
+
+	if (choice == 1)
+	{
+		longtime = (longtime) ? false : true;
+	}
+	else if (choice == 2)//come back here and check for bad input.
+	{
+
+	}
 }
+void CLI::login() {
 
-void CLI::login(){
+	while (!loggedin) {
+		int choice;
+		std::cout << "\nWelcome to the event planner!\n";
+		std::cout << "-===========================-\n\n";
+		std::cout << "1) Login.\n";
+		std::cout << "2) Create Account.\n";
+		std::cout << "3) Exit.\n";
+		std::cout << "Selection: ";
 
-    while(!loggedin){
-        std::string identifier;
-        std::cout << "You need to login to continue.\nIf you do not have an account enter \"CreateAccount\".\nTo exit enter \"Quit\".\nEnter your username: ";
-        std::cin >> identifier;
-
-        if(identifier == "CreateAccount"){
-            newAccount();
-        }else if(identifier == "Quit"){
-            quit = true;
-            return;
-        }else if(exec.setCurrentUser(identifier)){
-            loggedin = true;
-        }else{
-            std::cout << "No valid username input.\n";
-        }
+		std::cin >> choice;
+		while (!(choice > 0) && !(choice < 4)) {
+			if (!cin) {
+				std::cin.clear(); // unset failbit
+				std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
+				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+			}
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		if (choice == 2) {
+			newAccount();
+		}
+		else if (choice == 3) {
+			quit = true;
+			return;
+		}
+		else if (choice == 1) {
+			std::string uname = "";
+			std::cout << "Please enter your user name: ";
+			std::cin >> uname;
+			while (cin.fail()){
+					std::cin.clear();
+					std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					std::cout << "Invalid input, please re-enter your user name: ";
+					std::cin >> uname;
+			}
+			if (exec.setCurrentUser(uname)) {
+				std::cout << "\nUser name accepted.\n";
+				loggedin = true;
+			}
+			else {
+				std::cout << "User name unrecognized or invalid.\n";
+			}
     }
+  }
 }
 
 void CLI::logout(){
@@ -132,24 +191,59 @@ void CLI::listEvents(int first){
 
     std::string choice;
     //Options
-    std::cout << "Your choices are:\n\t\"view\" to view an event\n";
+    /*std::cout << "Your choices are:\n\t\"view\" to view an event\n";
     if(first > 0 ){
         std::cout << "\t\"previous\" to go back in the list\n";
     }
     if(first + 25 < size){
         std::cout << "\t\"next\" to go forward in the list\n";
     }
-    std::cout << "\t\"menu\" to go to the menu\n";
+    std::cout << "\t\"menu\" to go to the menu\n";*/
 
     //Make Choice
+	//std::cout << "Please select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	int choice;
+	std::string inString;
+	//The template for the below while loop was borrowed from https://stackoverflow.com/a/10553849 and modified to our needs.
+	while (1){
+		for (int i = first; i < (first + 26) && i < size; i += 1) {
+			try {
+				Event e = list->at(i);
+				std::cout << std::to_string(e.getIDNumber()) + ")" << "\t" << e.getName() << "\t\t" << e.getDate(false) << "\t\t" << e.getCreatorRealName() << "\n";
+			}
+			catch (std::exception& e) {
+				return;
+			}
+		}
+		std::cout << "\nPlease select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
+		std::cout << "Selection: ";
+
+		getline (std::cin, inString);
+		if (inString.empty()){
+			break;
+		}
+		else if (std::stoi(inString) <= exec.whatIsEventNum() && std::stoi(inString) > 0) {
+			std::cout << "\n";
+				viewEvent(std::stoi(inString));
+				std::cout << "\n";
+			}
+		else {
+			std::cout << "Error: Invalid meeting number.\n";
+		}
+	}
+	/*else if(choice == "next" && first < size){
+//this commented out in case we need it later.
     choice = input.getString("Now make a choice: ");
     if(choice == "view"){
         viewEvent(input.getInteger("Enter the number of the event you want to view: "));
     }else if(choice == "next" && first < size){
+
         listEvents(first + 25 );
     }else if(choice == "previous" && first >= 0){
         listEvents(first - 25);
-    }
+    }*/
 }
 
 void CLI::newEvent(){
@@ -210,9 +304,10 @@ void CLI::newEvent(){
 void CLI::viewEvent(int i){
     try{
         Event* e = exec.getEventByID(i);
-        std::cout << "Title:\t\t" << e->getName() << "\n" <<
-                     "Creator:\t" << e->getCreatorRealName() << "\n" <<
-                     "Date:\t\t" << e->getDate() << "\n";
+		std::cout << "Title:\t\t" << e->getName() << "\n" <<
+			"Creator:\t" << e->getCreatorRealName() << "\n" <<
+			"Date:\t\t" << e->getDate(false) << "\n\n" <<
+			"Start: " << /*starttime here*/ "\tEnd: " << /*endtime*/ "\n\n";
 
         std::string choice;
         while(choice != "menu"){
@@ -228,6 +323,54 @@ void CLI::viewEvent(int i){
             }else if(choice == "view"){
                 viewAvailability(i);
             }
+			else
+			{
+				creator = true;
+			}
+			
+			while (1) {
+				std::string inString = "";
+				if (creator)
+				{
+					std::cout << "1) Redisplay meeting time slots.\n";
+					std::cout << "2) Return to menu.\n";
+				}
+				else {
+					std::cout << "If you are interested in joining this event:\n";
+					std::cout << "1) Indicate your availability.\n"; //WE WILL ADD OTHER OPTIONS TO THIS MENU SO FULL MENU IMPLENTATION AT THIS POINT IS WORTH.
+					std::cout << "2) Redisplay meeting time slots.\n"; //We can make these menus way more user friendly if we start making this feel more like an actual application
+					std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
+				}
+
+				std::cout << "Selection:";//NOTE: returning from this function may not actually cause the user to "go back"
+				std::getline(std::cin, inString);
+				if (inString.empty() || stoi(inString) == 3) {
+					choice = "quit";
+					break;
+
+				}
+				else if (std::stoi(inString) == 1 && exec.getCurrentUser()->getUserName() != e->getCreatorUserName()) {
+					creator = false;
+					setAvailability(i);//unknown if/how this works at this point, but am attempting to keep things integrated with Team 8 code.
+					std::cout << "\n";
+				}
+				else if (std::stoi(inString) == 1 && creator)
+				{
+				std:: cout << "\n";
+					viewAvailability(i);
+				}
+				else if (std::stoi(inString) == 2 && !creator) {
+					viewAvailability(i);
+				}
+				else if (std::stoi(inString) == 2 && creator)
+				{
+					choice = "quit";
+					break;
+				}
+				else {
+					std::cout << "Error: Invalid meeting number.\n";
+				}
+			}
         }
 
         delete e;
@@ -261,25 +404,23 @@ void CLI::viewAvailability(int eid){
     std::list<Record>* eventRecords = exec.readRecord(eid);
     Event* event = exec.getEventByID(eid);
 
+
+	//
+    
 	auto list_rbeg = (*eventRecords).rbegin();
 	auto list_rend = (*eventRecords).rend();
-	//Runs for each time slot
-
 	for (auto list_it = list_rbeg; list_it != list_rend; ++list_it)
 	{
 		std::string slot;
 		if (longtime) {
 			slot = zeroAppender((*list_it).getTime());//here zeroAppender is taking the std::string parameter returned by i.getTime());
-
-											 //add zeroappend
 		}
 		else {
 			slot = to12Hour((*list_it).getTime());
 		}
+		std::cout << "Time: " << slot << "\nAttendees: ";
 
-		std::cout << "Time: " << slot << "\nAtendees: ";
-
-		//Shows all attending users
+		//SHows all attending users
 		std::list<std::string> users = (*list_it).getUserList();
 		std::cout << event->getCreatorRealName();
 		for (auto i : users) {
@@ -290,8 +431,12 @@ void CLI::viewAvailability(int eid){
 			}
 			catch (std::exception& e) {}
 		}
-		std::cout << std::endl;
+		std::cout << "\n";
 	}
+
+	//
+
+	std:: cout << "\n";
     delete event;
     delete eventRecords;
 }

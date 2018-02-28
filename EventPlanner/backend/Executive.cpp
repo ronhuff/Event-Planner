@@ -505,18 +505,18 @@ User* Executive::getUser(std::string uid) throw(std::logic_error) {
 }
 
 bool Executive::createUser(std::string uid, std::string pnm) {
-    if (doesFileExist(df_user, uid)) {
-	return (false);
-    }
-    else {
-	std::ofstream user_file;
-	user_file.open(getFileName(df_user, uid));
+	if (doesFileExist(df_user, uid)) {
+		return (false);
+	}
+	else {
+		std::ofstream user_file;
+		user_file.open(getFileName(df_user, uid));
 
-	user_file << pnm << '\n';
-	user_file << "-1,\n";
+		user_file << pnm << '\n';
+		user_file << "-1,\n";
 
-	user_file.close();
+		user_file.close();
 
-	return (true);
-    }
+		return (true);
+	}
 }
