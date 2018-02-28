@@ -69,11 +69,6 @@ int Executive::getEventNum(){
 	
 	return eventNum;
 }
-int Executive::whatIsEventNum()
-{
-	return eventNum;
-}
-
 int Executive::generateEvent(std::string name, std::string date) throw(std::logic_error){
 	//This is the event we want to input data for.
 	Event new_event = Event(name,date,currentUser->getUserName(),currentUser->getRealName(),getEventNum());
