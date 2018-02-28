@@ -74,24 +74,54 @@ void CLI::options(){
     }
 }
 
-void CLI::login(){
+void CLI::login() {
 
-    while(!loggedin){
-        std::string identifier;
-        std::cout << "You need to login to continue.\nIf you do not have an account enter \"CreateAccount\".\nTo exit enter \"Quit\".\nEnter your username: ";
-        std::cin >> identifier;
+	while (!loggedin) {
+		int choice;
+		std::cout << "\nWelcome to the event planner!\n";
+		std::cout << "-===========================-\n\n";
+		std::cout << "1) Login.\n";
+		std::cout << "2) Create Account.\n";
+		std::cout << "3) Exit.\n";
+		std::cout << "Selection: ";
 
-        if(identifier == "CreateAccount"){
-            newAccount();
-        }else if(identifier == "Quit"){
-            quit = true;
-            return;
-        }else if(exec.setCurrentUser(identifier)){
-            loggedin = true;
-        }else{
-            std::cout << "No valid username input.\n";
-        }
-    }
+		std::cin >> choice;
+		while (!(choice > 0) && !(choice < 4)) {
+			if (!cin) {
+				std::cin.clear(); // unset failbit
+				std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
+				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+			}
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		if (choice == 2) {
+			newAccount();
+		}
+		else if (choice == 3) {
+			quit = true;
+			return;
+		}
+		else if (choice == 1) {
+			std::string uname = "";
+			std::cout << "Please enter your user name: ";
+			std::cin >> uname;
+			while (cin.fail()){
+					std::cin.clear();
+					std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					std::cout << "Invalid input, please re-enter your user name: ";
+					std::cin >> uname;
+			}
+			if (exec.setCurrentUser(uname)) {
+				std::cout << "\nUser name accepted.\n";
+				loggedin = true;
+			}
+			else {
+				std::cout << "User name unrecognized or invalid.\n";
+			}
+
+		}
+	}
 }
 
 void CLI::logout(){
