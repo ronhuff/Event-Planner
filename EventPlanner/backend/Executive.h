@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <boost/filesystem.hpp>
 
+
 /**
  * The Executive class. This deals with file IO and class interactions in the backend.
  */
@@ -49,7 +50,7 @@ class Executive{
 		 * @return the id of the newly created event.
 		 * @throw std::logic_error if the event is invalid
 		 */
-		int generateEvent(std::string name, std::string date) throw(std::logic_error);
+		int generateEvent(std::string name, std::string date);
 		/**
 		 * This method removes an event.
 		 * @param event_id The id of the event to be deleted.
@@ -142,7 +143,7 @@ class Executive{
 		 * @return A pointer to a user with information contained in the user_uid text file.
 		 * @throw std::logic_error if the user in question does not exist in files.
 		 */
-		User* getUser(std::string uid) throw(std::logic_error);
+		User* getUser(std::string uid);
 		/**
 		 * This method returns a pointer to an event based on eid.
 		 * @pre eid is an int; ./data/users/info_\<eid\>.txt exists
@@ -150,7 +151,7 @@ class Executive{
 		 * @return A pointer to an event with information contained in info_<eid>.txt
 		 * @throw Error if info_<eid>.txt does not exist
 		 */
-		Event* getEventByID(int eid) throw(std::logic_error);
+		Event* getEventByID(int eid);
 
         /**
          * This method read through a existing record file and create a list pointer of record.
@@ -200,6 +201,12 @@ class Executive{
 		 * @post N/A, No changes occur.
 		 */
 		void sortEventList();
+
+		/**
+		* This method simply returns eventnum.
+		*
+		*/
+		int whatIsEventNum();
 
 	private:
 		/**
@@ -264,7 +271,6 @@ class Executive{
 		 * This contains all Events that are available.
 		 */
 		std::vector<Event>* eventList;
-
 
 
 
