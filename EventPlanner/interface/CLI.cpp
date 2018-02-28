@@ -324,32 +324,37 @@ void CLI::viewAvailability(int eid){
     std::list<Record>* eventRecords = exec.readRecord(eid);
     Event* event = exec.getEventByID(eid);
 
-    //Runs for each time slot
-    for(auto i : *(eventRecords)){
-        std::string slot;
-        if(longtime){
-            slot = zeroAppender(i.getTime());//here zeroAppender is taking the std::string parameter returned by i.getTime());
+	auto list_rbeg = (*eventRecords).rbegin();
+	auto list_rend = (*eventRecords).rend();
+	//Runs for each time slot
 
-			//add zeroappend
-        }else{
-            slot = to12Hour(i.getTime());
-        }
+	for (auto list_it = list_rbeg; list_it != list_rend; ++list_it)
+	{
+		std::string slot;
+		if (longtime) {
+			slot = zeroAppender((*list_it).getTime());//here zeroAppender is taking the std::string parameter returned by i.getTime());
 
-        std::cout << "Time: " << slot << "\nAtendees: ";
+											 //add zeroappend
+		}
+		else {
+			slot = to12Hour((*list_it).getTime());
+		}
 
-        //Shows all attending users
-        std::list<std::string> users = i.getUserList();
-        std::cout << event->getCreatorRealName();
-        for(auto i : users){
-            try{
-                User* temp = exec.getUser(i);
-                std::cout << ", " << temp->getRealName();
-                delete temp;
-            }catch(std::exception& e){}
-        }
-        std::cout << std::endl;
-    }
+		std::cout << "Time: " << slot << "\nAtendees: ";
 
+		//Shows all attending users
+		std::list<std::string> users = (*list_it).getUserList();
+		std::cout << event->getCreatorRealName();
+		for (auto i : users) {
+			try {
+				User* temp = exec.getUser(i);
+				std::cout << ", " << temp->getRealName();
+				delete temp;
+			}
+			catch (std::exception& e) {}
+		}
+		std::cout << std::endl;
+	}
     delete event;
     delete eventRecords;
 }
