@@ -34,7 +34,7 @@ void CLI::menu(){
 		std::cout << "\nSelection: ";
 		std::cin >> action;
 	}
-
+	std::cout << "\n";
     if(action == 1){
         listEvents(0);
     }else if(action == 2){
@@ -150,36 +150,55 @@ void CLI::newAccount(){
 void CLI::listEvents(int first){
     std::vector<Event>* list = exec.getEventList();
     int size = list->size();
+	std::cout << "\n\tCurrently Scheduled Events:\n\n";
     for(int i = first; i < (first + 26) && i < size; i += 1){
         try{
             Event e = list->at(i);
-            std::cout << std::to_string(e.getIDNumber()) << "\t" << e.getName() << "\t\t" << e.getDate(false) << "\t\t" <<e.getCreatorRealName() << "\n";
+            std::cout << std::to_string(e.getIDNumber()) + ")" << "\t" << e.getName() << "\t\t" << e.getDate(false) << "\t\t" <<e.getCreatorRealName() << "\n";
         }catch(std::exception& e){
             return;
         }
     }
 
-    std::string choice;
+    int choice;
     //Options
-    std::cout << "Your choices are:\n\t\"view\" to view an event\n";
-    if(first > 0 ){
-        std::cout << "\t\"previous\" to go back in the list\n";
-    }
-    if(first + 25 < size){
-        std::cout << "\t\"next\" to go forward in the list\n";
-    }
-    std::cout << "\t\"menu\" to go to the menu\n";
+    
+	//I have removed this functionality below. We can uncomment this if we wish later. We will likely need to change the "next"/"previous
+	//to some sort of integer selection.
+	
+    //if(first > 0 ){//don't remove these two if statements.....they could be implemented in the case where numMeetings > 25 or something.
+    //    std::cout << "\t\"previous\" to go back in the list\n";
+    //}
+    //if(first + 25 < size){
+    //    std::cout << "\t\"next\" to go forward in the list\n";
+    //}
+    //std::cout << "\t\"menu\" to go to the menu\n";
 
     //Make Choice
-    choice = input.getString("Now make a choice: ");
-    if(choice == "view"){
-        viewEvent(input.getInteger("Enter the number of the event you want to view: "));
-    }else if(choice == "next" && first < size){
+	//std::cout << "Please select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::string inString;
+	while (1){
+		std::cout << "Please select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
+		getline (std::cin, inString);
+		if (inString.empty()){
+			break;
+		}
+		else if (std::stoi(inString) <= exec.whatIsEventNum() && std::stoi(inString) > 0) {
+				viewEvent(std::stoi(inString));
+			}
+		else {
+			std::cout << "Error: Invalid meeting number.\n";
+		}
+	}
+	/*else if(choice == "next" && first < size){
         listEvents(first + 25 );
     }else if(choice == "previous" && first >= 0){
         listEvents(first - 25);
-    }
+    }*/
+
 }
+
 
 void CLI::newEvent() throw(std::exception) {
     int year = 0, month = 0, day = 0;

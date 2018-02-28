@@ -201,6 +201,12 @@ class Executive{
 		 */
 		void sortEventList();
 
+		/**
+		* This method simply returns eventnum.
+		*
+		*/
+		int whatIsEventNum();
+
 	private:
 		/**
 		 * An enum representing the various information types that are saved.
@@ -264,7 +270,6 @@ class Executive{
 		 * This contains all Events that are available.
 		 */
 		std::vector<Event>* eventList;
-
 
 
 
