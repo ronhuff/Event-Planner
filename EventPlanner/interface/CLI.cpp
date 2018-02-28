@@ -182,7 +182,7 @@ void CLI::listEvents(int first){
 				return;
 			}
 		}
-		std::cout << "Please select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
+		std::cout << "\nPlease select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
 		std::cout << "Selection: ";
 
 		getline (std::cin, inString);
@@ -190,6 +190,7 @@ void CLI::listEvents(int first){
 			break;
 		}
 		else if (std::stoi(inString) <= exec.whatIsEventNum() && std::stoi(inString) > 0) {
+				std::cout << "\n";
 				viewEvent(std::stoi(inString));
 				std::cout << "\n";
 			}
@@ -326,9 +327,10 @@ void CLI::newEvent() throw(std::exception) {
 void CLI::viewEvent(int i){
     try{
         Event* e = exec.getEventByID(i);
-        std::cout << "Title:\t\t" << e->getName() << "\n" <<
-                     "Creator:\t" << e->getCreatorRealName() << "\n" <<
-                     "Date:\t\t" << e->getDate(false) << "\n\n";
+		std::cout << "Title:\t\t" << e->getName() << "\n" <<
+			"Creator:\t" << e->getCreatorRealName() << "\n" <<
+			"Date:\t\t" << e->getDate(false) << "\n" <<
+			"Start: " << /*starttime*/ "\tEnd: " << /*endtime*/ "";
 
         std::string choice;
 		bool creator = false;
@@ -355,7 +357,7 @@ void CLI::viewEvent(int i){
 					std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
 				}
 
-				std::cout << "Selection: \n";//NOTE: returning from this function may not actually cause the user to "go back"
+				std::cout << "Selection: ";//NOTE: returning from this function may not actually cause the user to "go back"
 				std::getline(std::cin, inString);
 				if (inString.empty()) {
 					choice = "quit";
@@ -438,8 +440,9 @@ void CLI::viewAvailability(int eid){
                 delete temp;
             }catch(std::exception& e){}
         }
-        std::cout << std::endl;
+        std::cout << "\n";
     }
+	std::cout << "\n";
 
     delete event;
     delete eventRecords;
