@@ -56,24 +56,54 @@ void CLI::menu(){
     }
 }
 
-void CLI::options(){
-    std::string choice;
-    std::cout << "Here you may change the settings. To toggle a setting simply enter its name, to go to the main menu enter \"menu.\"\n";
-    while(choice != "menu"){
-        if(longtime){
-            std::cout << "clock: 24 Hour Clock\n";
-        }else{
-            std::cout << "clock: 12 Hour Clock\n";
-        }
+void CLI::options() {
+	int choice;
+	std::cout << "Please select from the following options:\n";//We can add more here if necessary for Project 2 requirements.
 
-        choice = input.getString("Make a choice: ");
+	if (longtime) {
+		std::cout << "1) Switch to 12 hour display.\n";
+		std::cout << "2) Close options.\n";//perhaps could have better wording here.
+		std::cout << "\nSelection: ";
+		std::cin >> choice;
+	}
+	else {
+		std::cout << "1) Switch to 24 hour display.\n";
+		std::cout << "2) Close options.\n";
+		std::cout << "\nSelection: ";
+		std::cin >> choice;
+	}
 
-        if(choice == "clock"){
-            longtime = (longtime) ? false : true;
-        }
-    }
+	while (!(choice > 0) && !(choice < 3) && choice != 2) {
+		std::cin >> choice;
+		if (!cin) {
+			std::cin.clear(); // unset failbit
+			std::cout << "Please simply choose one of the options (1-2) and press enter/return.\n";
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+		}
+		if (longtime) {
+			std::cout << "1) Switch to 12 hour display.\n";
+			std::cout << "2) Close options.\n";//perhaps could have better wording here.
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		else {
+			std::cout << "1) Switch to 24 hour display.\n";
+			std::cout << "2) Close options.\n";
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		std::cin >> choice;
+	}
+
+	if (choice == 1)
+	{
+		longtime = (longtime) ? false : true;
+	}
+	else if (choice == 2)//come back here and check for bad input.
+	{
+
+	}
 }
-
 void CLI::login() {
 
 	while (!loggedin) {
@@ -182,7 +212,7 @@ void CLI::listEvents(int first){
 				return;
 			}
 		}
-		std::cout << "Please select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
+		std::cout << "\nPlease select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
 		std::cout << "Selection: ";
 
 		getline (std::cin, inString);
@@ -190,6 +220,7 @@ void CLI::listEvents(int first){
 			break;
 		}
 		else if (std::stoi(inString) <= exec.whatIsEventNum() && std::stoi(inString) > 0) {
+			std::cout << "\n";
 				viewEvent(std::stoi(inString));
 				std::cout << "\n";
 			}
@@ -326,9 +357,10 @@ void CLI::newEvent() throw(std::exception) {
 void CLI::viewEvent(int i){
     try{
         Event* e = exec.getEventByID(i);
-        std::cout << "Title:\t\t" << e->getName() << "\n" <<
-                     "Creator:\t" << e->getCreatorRealName() << "\n" <<
-                     "Date:\t\t" << e->getDate(false) << "\n\n";
+		std::cout << "Title:\t\t" << e->getName() << "\n" <<
+			"Creator:\t" << e->getCreatorRealName() << "\n" <<
+			"Date:\t\t" << e->getDate(false) << "\n\n" <<
+			"Start: " << /*starttime here*/ "\tEnd: " << /*endtime*/ "\n\n";
 
         std::string choice;
 		bool creator = false;
@@ -355,9 +387,9 @@ void CLI::viewEvent(int i){
 					std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
 				}
 
-				std::cout << "Selection: \n";//NOTE: returning from this function may not actually cause the user to "go back"
+				std::cout << "Selection:";//NOTE: returning from this function may not actually cause the user to "go back"
 				std::getline(std::cin, inString);
-				if (inString.empty()) {
+				if (inString.empty() || stoi(inString) == 3) {
 					choice = "quit";
 					break;
 
@@ -369,6 +401,7 @@ void CLI::viewEvent(int i){
 				}
 				else if (std::stoi(inString) == 1 && creator)
 				{
+				std:: cout << "\n";
 					viewAvailability(i);
 				}
 				else if (std::stoi(inString) == 2 && !creator) {
@@ -415,32 +448,38 @@ void CLI::viewAvailability(int eid){
     std::list<Record>* eventRecords = exec.readRecord(eid);
     Event* event = exec.getEventByID(eid);
 
-    //Runs for each time slot
-    for(auto i : *(eventRecords)){
-        std::string slot;
-        if(longtime){
-            slot = zeroAppender(i.getTime());//here zeroAppender is taking the std::string parameter returned by i.getTime());
+	//
+    
+	auto list_rbeg = (*eventRecords).rbegin();
+	auto list_rend = (*eventRecords).rend();
+	for (auto list_it = list_rbeg; list_it != list_rend; ++list_it)
+	{
+		std::string slot;
+		if (longtime) {
+			slot = zeroAppender((*list_it).getTime());//here zeroAppender is taking the std::string parameter returned by i.getTime());
+		}
+		else {
+			slot = to12Hour((*list_it).getTime());
+		}
+		std::cout << "Time: " << slot << "\nAttendees: ";
 
-			//add zeroappend
-        }else{
-            slot = to12Hour(i.getTime());
-        }
+		//SHows all attending users
+		std::list<std::string> users = (*list_it).getUserList();
+		std::cout << event->getCreatorRealName();
+		for (auto i : users) {
+			try {
+				User* temp = exec.getUser(i);
+				std::cout << ", " << temp->getRealName();
+				delete temp;
+			}
+			catch (std::exception& e) {}
+		}
+		std::cout << "\n";
+	}
 
-        std::cout << "Time: " << slot << "\nAtendees: ";
+	//
 
-        //Shows all attending users
-        std::list<std::string> users = i.getUserList();
-        std::cout << event->getCreatorRealName();
-        for(auto i : users){
-            try{
-                User* temp = exec.getUser(i);
-                std::cout << ", " << temp->getRealName();
-                delete temp;
-            }catch(std::exception& e){}
-        }
-        std::cout << std::endl;
-    }
-
+	std:: cout << "\n";
     delete event;
     delete eventRecords;
 }
