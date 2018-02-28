@@ -3,7 +3,6 @@
 int main(int argc, char* argv[]){
     CLI interface;
     interface.run();
-
-	system("pause");
+    system("pause");
     return (0);
 }
