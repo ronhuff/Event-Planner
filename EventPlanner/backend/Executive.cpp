@@ -59,17 +59,16 @@ Executive::~Executive(){
 	    delete currentUser;
 	}
 }
-int Executive::getEventNum() {
+int Executive::getEventNum(){
 	//Increment eventNum before returning it because this will guarantee unique numbers.
 	eventNum++;
 	//Save the eventNum in this session.
 	std::ofstream eventList(getFileName(df_eventList));
 	eventList << eventNum;
 	eventList.close();
-
+	
 	return eventNum;
 }
-
 int Executive::generateEvent(std::string name, std::string date) throw(std::logic_error){
 	//This is the event we want to input data for.
 	Event new_event = Event(name,date,currentUser->getUserName(),currentUser->getRealName(),getEventNum());
@@ -520,9 +519,4 @@ bool Executive::createUser(std::string uid, std::string pnm) {
 
 	return (true);
     }
-}
-
-int Executive::whatIsEventNum()
-{
-	return(eventNum);
 }
