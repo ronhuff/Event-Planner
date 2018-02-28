@@ -371,6 +371,7 @@ void CLI::viewEvent(int i){
 				}
 				else if (std::stoi(inString) == 1 && creator)
 				{
+					std::cout << "\n";
 					viewAvailability(i);
 				}
 				else if (std::stoi(inString) == 2 && !creator) {
