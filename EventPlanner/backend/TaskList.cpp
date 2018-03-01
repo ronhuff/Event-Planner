@@ -5,7 +5,7 @@
 TaskList::TaskList(){
 	m_numTasks = 0;
 	m_numAvailTasks = 0;
-	tasks = nullptr;
+	m_tasks = nullptr;
 }
 
 
