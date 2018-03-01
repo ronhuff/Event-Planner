@@ -350,6 +350,29 @@ void CLI::newEvent() throw(std::exception) {
 		
 		times->push_back(slot);
 	}
+	std::cout << "\nWe can now include a list of tasks for the meeting!\n";
+	std::cout << "Would you like to add a list now? (you can still add one later.)\n";
+	std::cout << "1) Yes.\n";
+	std::cout << "2) No.\n";
+	int newList;
+	std::cin >> newList;
+
+	while (std::cin.fail())
+	{
+		std::cin.clear();
+		std::cin.ignore();
+		std::cout << "Error: Unrecognized input, please try again.\n";
+		std::cin >> newList;
+	}
+	if (newList == 1)
+	{
+		//code for addint list here. Will require analysis of data structure.
+		/*m_tasks = new TaskList();*/
+	}
+	else
+	{
+
+	}
 	exec.writeRecord(eventID, exec.createRecordList(times));
 	delete times;   
 }

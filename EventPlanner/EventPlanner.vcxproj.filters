@@ -33,6 +33,12 @@
     <ClInclude Include="interface\CLI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TaskList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="backend\Event.cpp">
@@ -54,6 +60,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
