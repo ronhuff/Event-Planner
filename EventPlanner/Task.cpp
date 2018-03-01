@@ -5,7 +5,11 @@
 Task::Task()
 {
 	m_taskUser = nullptr;
+	m_isAssigned = false;
+}
 
+Task::Task(std::string name) {
+	m_name = name;
 }
 
 

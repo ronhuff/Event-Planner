@@ -1,21 +1,25 @@
 #pragma once
 
+#include <iostream>
+#include <string>
+#include <limits>
 #include "Task.h"
 #include <vector>
 
-class TaskList
-{
+
+class TaskList{
 public:
 	TaskList();
 	~TaskList();
 
 	bool addTask(Task*);
-
-private:
+	bool createTask();
 
 	int m_numTasks;
 	int m_numAvailTasks;
+	std::vector<Task*>* m_tasks;
+private:
 
-	std::vector<Task*> m_tasks;
+	
 
 };
