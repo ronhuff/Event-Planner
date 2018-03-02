@@ -49,7 +49,8 @@ void CLI::run(){
 	else {
 		while (!quit)
 		{
-			menu();
+			menu();// Execution should loop through the menu system until the user chooses to quit.
+				   // Then quit should be set true and logout() will be called on line 46
 		}
 	}
 }
@@ -231,6 +232,7 @@ void CLI::newAccount(){
         username = input.getString("Enter your prefered username: ");
 
         if(username != "CreateAccount" && username != "Quit"){
+			std::cout << "\n Account " + username + " has been created.\n";
             validIdentifier = exec.createUser(username, name);
         }
 
@@ -312,7 +314,7 @@ void CLI::newEvent() throw(std::exception) {
 	while (!validDate) {
 		std::cout << "Please enter a date in the format MM/DD/YYYY.\n";
 
-		std::string date = "";
+		
 		std::cin >> date;
 
 		while (!cin || date.length() != 10 || (date[2] != '/' || date[5] != '/')) {
@@ -341,8 +343,7 @@ void CLI::newEvent() throw(std::exception) {
 			validDate = true;
 		}
 		date = year + "/" + month + "/" + day;
-			eventID = exec.generateEvent(name, date);
-			validDate = true;
+		validDate = true;
     }
 	
 	std::cout << "Please enter a beginning time for your meeting. ";
@@ -429,13 +430,14 @@ void CLI::newEvent() throw(std::exception) {
 	}
 	if (newList == 1)
 	{
-		//code for addint list here. Will require analysis of data structure.
+		//code for addint list here. Will require analysis of data structure
 		/*m_tasks = new TaskList();*/
 	}
 	else
 	{
 
 	}
+	eventID = exec.generateEvent(name, date);
 	exec.writeRecord(eventID, exec.createRecordList(times));
 	delete times;   
 }
