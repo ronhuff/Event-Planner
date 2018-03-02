@@ -58,6 +58,12 @@ class CLI{
 	     * @return: none
 	     */
         void login();
+
+		/** REFACTORING BEGINS
+		 *
+		 * @return: true if logged in, false if user name does not exist.
+		 */
+		bool newLogin();
         /**
 	     * Logs the user out of the application
 	     * @pre: none

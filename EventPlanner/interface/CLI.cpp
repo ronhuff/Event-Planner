@@ -104,6 +104,25 @@ void CLI::options() {
 
 	}
 }
+
+bool CLI::newLogin() {
+	std::string uname = "";
+	std::cout << "Please enter your user name: ";
+	std::cin >> uname;
+	while (cin.fail()) {
+		std::cin.clear();
+		std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		std::cout << "Invalid input, please re-enter your user name: ";
+		std::cin >> uname;
+	}
+	if (exec.setCurrentUser(uname)) {
+		std::cout << "\nUser name accepted.\n";
+		loggedin = true;
+	}
+	else {
+		std::cout << "User name unrecognized or invalid.\n";
+	}
+}
 void CLI::login() {
 
 	while (!loggedin) {
