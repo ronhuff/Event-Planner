@@ -25,6 +25,8 @@
     <ClInclude Include="backend\User.h" />
     <ClInclude Include="interface\CLI.h" />
     <ClInclude Include="interface\CLIInput.h" />
+    <ClInclude Include="backend\Task.h" />
+    <ClInclude Include="backend\TaskList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="backend\Event.cpp" />
@@ -34,6 +36,8 @@
     <ClCompile Include="interface\CLI.cpp" />
     <ClCompile Include="interface\CLIInput.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="backend\Task.cpp" />
+    <ClCompile Include="backend\TaskList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="backend\makefile" />

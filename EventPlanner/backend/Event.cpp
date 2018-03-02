@@ -50,6 +50,18 @@ bool Event::operator<(Event rhs){
 	return date < rhs.date;
 }
 
+bool Event::addTaskList(){
+	if (tasks == nullptr) {
+		tasks = new TaskList();
+		return(true);
+	}
+	else {
+		//this should never execute due to it not being shown in event view if task doesn't exist.
+		return(false);
+	}
+	return false;
+}
+
 std::string Event::dateFormatFixer(std::string date)
 {
 	if (date.length() == 10 && date[4] == '/' && date[7] == '/')

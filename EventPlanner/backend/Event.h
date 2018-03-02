@@ -7,6 +7,7 @@
 #include "User.h"
 #include <exception>
 #include <boost/date_time.hpp>
+#include "TaskList.h"
 
 /**
  * Event Class.
@@ -110,6 +111,12 @@ class Event{
 		 * @return true if the event happens before rhs.
 		 */
 		bool operator<(Event rhs);
+
+		// TaskList area here.
+		bool addTaskList();
+
+		TaskList* tasks;
+
 	private:
 		/**
 		 * The date variable.
