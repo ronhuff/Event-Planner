@@ -215,7 +215,8 @@ class Executive{
 			df_event,		/**< Represents Event text files. */
 			df_record,		/**< Represents Event record files. */
 			df_user,		/**< Represents User text files. */
-			df_eventList	/**< Represents the event list text file. */
+			df_eventList,/**< Represents the event list text file. */
+			df_taskList
 		};
 		/**
 		 * This helper method verifies if a file exists.

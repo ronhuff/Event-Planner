@@ -21,6 +21,13 @@ public:
 
 	//ADD VIEW METHODS HERE, e.g. viewTasks(bool isCreator);
 
+	inline friend std::ostream& operator<< (std::ostream& out, TaskList& taskList) {
+		out << taskList.m_numTasks << taskList.m_numAvailTasks;
+	}
+
+	inline friend std::istream& operator>> (std::istream& in, TaskList& taskList) {
+		in >> taskList.m_numTasks >> taskList.m_numAvailTasks;
+	}
 private:
 
 	
