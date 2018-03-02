@@ -7,13 +7,51 @@ CLI::CLI(){
 }
 
 void CLI::run(){
-    login();
+	while (!loggedin) {
+		int choice;
+		std::cout << "\nWelcome to the event planner!\n";
+		std::cout << "-===========================-\n\n";
+		std::cout << "1) Login.\n";
+		std::cout << "2) Create Account.\n";
+		std::cout << "3) Exit.\n";
+		std::cout << "Selection: ";
 
-    while(!quit){
-        menu();
-    }
-    std::cout << "Have a wonderful day.\n";
-    logout();
+		std::cin >> choice;
+		while (!(choice > 0) && !(choice < 4)) {
+			if (!cin) {
+				std::cin.clear(); // unset failbit
+				std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
+				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+			}
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		if (choice == 1) {
+			if (!newLogin()) {
+				loggedin = false;
+			}
+			else {
+				loggedin = true;
+			}
+			if (choice == 2) {
+				newAccount();
+			}
+			else if (choice == 3) {
+				quit = true;
+				return;
+			}
+		}
+	}// user should be logged in if this loop is exited w/o quitting.
+	if (quit) {
+		logout();
+		return;
+	}
+	else {
+		while (!quit)
+		{
+			menu();
+		}
+	}
 }
 
 void CLI::menu(){
@@ -118,11 +156,16 @@ bool CLI::newLogin() {
 	if (exec.setCurrentUser(uname)) {
 		std::cout << "\nUser name accepted.\n";
 		loggedin = true;
+		return(true);
 	}
 	else {
 		std::cout << "User name unrecognized or invalid.\n";
+		loggedin = false;
+		return(false);
 	}
 }
+
+
 void CLI::login() {
 
 	while (!loggedin) {
@@ -174,6 +217,7 @@ void CLI::login() {
 }
 
 void CLI::logout(){
+	std::cout << "Have a pleasant day...\n";
     loggedin = false;
 }
 
