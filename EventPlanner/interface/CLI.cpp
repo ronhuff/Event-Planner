@@ -44,6 +44,7 @@ void CLI::run(){
 	}// user should be logged in if this loop is exited w/o quitting.
 	if (quit) {
 		logout();
+		std::cout << "Have a pleasant day...\n";
 		return;
 	}
 	else {
@@ -87,8 +88,10 @@ void CLI::menu(){
         options();
     }else if(action == 4){
         logout();
-        login();
+		std::cout << "Logout successful.\n\n";
+		newLogin();
     }else if(action == 5){
+		std::cout << "Have a pleasant day...\n";
         quit = true;
     }else{
         std::cout << "Invalid command entered.\n";
@@ -218,7 +221,6 @@ void CLI::login() {
 }
 
 void CLI::logout(){
-	std::cout << "Have a pleasant day...\n";
     loggedin = false;
 }
 
