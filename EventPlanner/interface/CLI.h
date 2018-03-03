@@ -11,8 +11,6 @@ class CLI{
         CLIInput input;
         enum EventSet{all, attending, created};
         bool longtime;
-        bool loggedin;
-        bool quit;
 
 	    /**
 		 * Helper method for checking time constraints.
@@ -58,19 +56,7 @@ class CLI{
 	     * @return: none
 	     */
         void login();
-
-		/** REFACTORING BEGINS
-		 *
-		 * @return: true if logged in, false if user name does not exist.
-		 */
-		bool newLogin();
-        /**
-	     * Logs the user out of the application
-	     * @pre: none
-	     * @post: User is logged out
-	     * @return: none
-	     */
-        void logout();
+        
         /**
 	     * Gives new users the ability to create an account
 	     * @pre: none
