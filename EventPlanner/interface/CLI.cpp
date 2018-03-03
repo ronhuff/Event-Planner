@@ -159,21 +159,29 @@ void CLI::logout(){
 }
 
 void CLI::newAccount(){
-    std::string name;
+    std::string name = "";
     std::string username = "";
     bool validIdentifier = false;
 
+	name = input.getLine("Enter your full name: ");
+	while (name == "" || name.length() < 5 || name.length() > 64) {
+		std::cout << "Hm. Try a name between 5 and 50 characters.\n";
+		name = input.getLine("Enter your full name: ");
+	}
+
     while(!validIdentifier){
-        name = input.getLine("Enter your full name: ");
+
         username = input.getString("Enter your prefered username: ");
 
-        if(username != "CreateAccount" && username != "Quit"){
-            validIdentifier = exec.createUser(username, name);
-        }
+		if (username == "CreateAccount" || username == "Quit" || username == "") {
+			std::cout << "You may not use that username.\n";
+			continue;
+		}
 
-        if(!validIdentifier){
-            std::cout << "You may not use that username.\n";
-        }
+		validIdentifier = exec.createUser(username, name);
+		if (!validIdentifier) {
+			std::cout << "Someone has that username already.\n";
+		}
     }
 }
 
@@ -218,6 +226,9 @@ void CLI::listEvents(int first){
 		getline (std::cin, inString);
 		if (inString.empty()){
 			break;
+		}
+		else if (inString.find_first_not_of("0123456789") != std::string::npos) {
+			std::cout << "Only numbers are accepted...\n\n";
 		}
 		else if (std::stoi(inString) <= exec.whatIsEventNum() && std::stoi(inString) > 0) {
 			std::cout << "\n";
@@ -388,13 +399,14 @@ void CLI::viewEvent(int i){
         std::string choice;
 		bool creator = false;
         while(choice != "quit"){//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
-            if(exec.getCurrentUser()->getUserName() != e->getCreatorUserName()){
+			creator = exec.getCurrentUser()->getUserName() == e->getCreatorUserName();
+			/*if(exec.getcurrentuser()->getusername() != e->getcreatorusername()){
 				
             }
 			else
 			{
 				creator = true;
-			}
+			}*/
 			
 			while (1) {
 				std::string inString = "";
