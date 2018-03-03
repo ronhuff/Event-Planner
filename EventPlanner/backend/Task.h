@@ -1,7 +1,10 @@
 #pragma once
 
-#include <string>
 #include "User.h"
+#include <string>
+#include <memory>
+
+class User;
 
 class Task
 {
@@ -10,15 +13,14 @@ public:
 	Task(std::string name); //creates task and sets m_name = name
 	~Task();
 
-	bool assignTask(User*); //Assigns a user to m_taskUser
+	void assignTask(std::weak_ptr<User>); //Assigns a user to m_taskUser
 	bool m_isAssigned; //True if task is assigned, else false.
 	std::string m_name; //The name of the task, e.g. "Bring Chips."
 
-	User* m_taskUser; //Points to the user that has accepted this task.
+	std::weak_ptr<User> m_assignedUser; //Points to the user that has accepted this task.
 
 
 private:
-	
-	
-};
 
+
+};

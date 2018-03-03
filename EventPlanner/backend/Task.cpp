@@ -1,10 +1,10 @@
+#include "stdafx.h"
 #include "Task.h"
 
 
 
 Task::Task()
 {
-	m_taskUser = nullptr;
 	m_isAssigned = false;
 }
 
@@ -18,8 +18,8 @@ Task::~Task()
 
 }
 
-bool Task::assignTask(User* user)
+void Task::assignTask(std::weak_ptr<User> user)
 {
-	m_taskUser = user;
-	return(m_taskUser == user);
+	m_assignedUser = user;
+	m_isAssigned = true;
 }
