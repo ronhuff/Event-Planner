@@ -2,61 +2,66 @@
 
 CLI::CLI(){
     longtime = true;
-    loggedin = false;
-    quit = false;
 }
 
 void CLI::run(){
-	while (!loggedin) {
-		int choice;
-		std::cout << "\nWelcome to the event planner!\n";
-		std::cout << "-===========================-\n\n";
-		std::cout << "1) Login.\n";
-		std::cout << "2) Create Account.\n";
-		std::cout << "3) Exit.\n";
-		std::cout << "Selection: ";
+	std::cout << "\nWelcome to the event planner!\n";
 
+	//This could feasibly just be placed in a login() function, but I think it would be good practice to place credits
+	//	here, class info, "this is project two and here is our names" etc etc, as this will only need to be done once.
+
+	//Also it just looks good, and having a separate login() function is good for modularity later on.
+
+	std::cout << "=============================\n\n";
+
+	login();
+}
+
+void CLI::login() {
+	int choice;
+	std::cout << "1) Login.\n";
+	std::cout << "2) Create Account.\n";
+	std::cout << "3) Exit.\n";
+	std::cout << "Selection: ";
+
+	std::cin >> choice;
+	while (choice != 1 && choice != 2 && choice != 3) {
+		std::cin.clear(); // unset failbit
+		std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
+		std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+		std::cout << "\nSelection: ";
 		std::cin >> choice;
-		while (!(choice > 0) && !(choice < 4)) {
-			if (!cin) {
-				std::cin.clear(); // unset failbit
-				std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
-				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
-			}
-			std::cout << "\nSelection: ";
-			std::cin >> choice;
+	}
+	if (choice == 1) {
+		std::string uname = "";
+		std::cout << "Please enter your user name: ";
+		std::cin >> uname;
+		while (std::cin.fail() || uname == "") {
+			std::cin.clear();
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			std::cout << "Invalid username... Please re-enter your user name: ";
+			std::cin >> uname;
 		}
-		if (choice == 1) {
-			if (!newLogin()) {
-				loggedin = false;
-			}
-			else {
-				loggedin = true;
-			}
-			if (choice == 2) {
-				newAccount();
-			}
-			else if (choice == 3) {
-				quit = true;
-				return;
-			}
+
+		if (exec.setCurrentUser(uname)) {
+			std::cout << "\nUsername accepted.\n";
+			menu();
 		}
-	}// user should be logged in if this loop is exited w/o quitting.
-	if (quit) {
-		logout();
-		std::cout << "Have a pleasant day...\n";
-		return;
+		else {
+			std::cout << "Username not recognized...\n\n";
+			login();
+		}
+	}
+	else if (choice == 2) {
+		newAccount();
+		login();
 	}
 	else {
-		while (!quit)
-		{
-			menu();// Execution should loop through the menu system until the user chooses to quit.
-				   // Then quit should be set true and logout() will be called on line 46
-		}
+		std::cout << "Have a pleasant day...\n";
 	}
 }
 
-void CLI::menu(){
+void CLI::menu() {
     std::cout << "\nPlease choose from the following options:\n\n" <<
                  "1) View Events List:\n" <<
 				 "2) Create New Event:\n"
@@ -66,165 +71,64 @@ void CLI::menu(){
 	std::cout << "Selection: ";
 	int action;
 	std::cin >> action;
-	while (!cin) {
-		
-		if (!cin) {
-			std::cout << "Please simply choose one of the options (1-5) and press enter/return.\n";
-		}
+	while (action != 1 && action != 2 && action != 3 && action != 4 && action != 5) {	
+		std::cin.clear(); // unset failbit
+		std::cout << "Please simply choose one of the options (1-5) and press enter/return.\n";
+		std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
 		std::cout << "\nSelection: ";
 		std::cin >> action;
 	}
 	std::cout << "\n";
-    if(action == 1){
+    if(action == 1) {
         listEvents(0);
-    }else if(action == 2){
+		menu();
+    }
+	else if(action == 2) {
 		try {
 			newEvent();
 		}
 		catch (std::exception& e) {
 			std::cout << e.what();
 		}
-    }else if(action == 3){
+		menu();
+    }
+	else if(action == 3) {
         options();
-    }else if(action == 4){
-        logout();
+		menu();
+    }
+	else if(action == 4) {
 		std::cout << "Logout successful.\n\n";
-		newLogin();
-    }else if(action == 5){
+		login();
+    }else if(action == 5) {
 		std::cout << "Have a pleasant day...\n";
-        quit = true;
-    }else{
-        std::cout << "Invalid command entered.\n";
+		return;
     }
 }
 
 void CLI::options() {
-	int choice;
+	int choice = 0;
 	std::cout << "Please select from the following options:\n";//We can add more here if necessary for Project 2 requirements.
 
-	if (longtime) {
-		std::cout << "1) Switch to 12 hour display.\n";
-		std::cout << "2) Close options.\n";//perhaps could have better wording here.
-		std::cout << "\nSelection: ";
-		std::cin >> choice;
-	}
-	else {
-		std::cout << "1) Switch to 24 hour display.\n";
-		std::cout << "2) Close options.\n";
-		std::cout << "\nSelection: ";
-		std::cin >> choice;
-	}
+	while (choice != 1 && choice != 2) {
+		if (longtime) std::cout << "1) Switch to 12 hour display.\n";
+		else std::cout <<          "1) Switch to 24 hour display.\n";
 
-	while (!(choice > 0) && !(choice < 3) && choice != 2) {
+		std::cout << "2) Close time-toggle.\n";
+		std::cout << "\nSelection: ";
 		std::cin >> choice;
-		if (!cin) {
+
+		if (choice != 1 && choice != 2) {
 			std::cin.clear(); // unset failbit
-			std::cout << "Please simply choose one of the options (1-2) and press enter/return.\n";
+			std::cout << "Please simply choose one of the options (1 or 2) and press enter/return.\n";
 			std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+			continue;
 		}
-		if (longtime) {
-			std::cout << "1) Switch to 12 hour display.\n";
-			std::cout << "2) Close options.\n";//perhaps could have better wording here.
-			std::cout << "\nSelection: ";
-			std::cin >> choice;
-		}
-		else {
-			std::cout << "1) Switch to 24 hour display.\n";
-			std::cout << "2) Close options.\n";
-			std::cout << "\nSelection: ";
-			std::cin >> choice;
-		}
-		std::cin >> choice;
 	}
 
-	if (choice == 1)
-	{
-		longtime = (longtime) ? false : true;
-	}
-	else if (choice == 2)//come back here and check for bad input.
-	{
-
-	}
+	if (choice == 1) longtime = (longtime) ? false : true;
 }
 
-bool CLI::newLogin() {
-	std::string uname = "";
-	std::cout << "Please enter your user name: ";
-	std::cin >> uname;
-	while (cin.fail()) {
-		std::cin.clear();
-		std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		std::cout << "Invalid input, please re-enter your user name: ";
-		std::cin >> uname;
-	}
-	if (exec.setCurrentUser(uname)) {
-		std::cout << "\nUser name accepted.\n";
-		loggedin = true;
-		return(true);
-	}
-	else {
-		std::cout << "User name unrecognized or invalid.\n";
-		loggedin = false;
-		return(false);
-	}
-}
-
-
-void CLI::login() {
-
-	while (!loggedin) {
-		int choice;
-		std::cout << "\nWelcome to the event planner!\n";
-		std::cout << "-===========================-\n\n";
-		std::cout << "1) Login.\n";
-		std::cout << "2) Create Account.\n";
-		std::cout << "3) Exit.\n";
-		std::cout << "Selection: ";
-
-		std::cin >> choice;
-		while (!(choice > 0) && !(choice < 4)) {
-			if (!cin) {
-				std::cin.clear(); // unset failbit
-				std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
-				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
-			}
-			std::cout << "\nSelection: ";
-			std::cin >> choice;
-		}
-		if (choice == 2) {
-			newAccount();
-		}
-		else if (choice == 3) {
-			quit = true;
-			return;
-		}
-		else if (choice == 1) {
-			std::string uname = "";
-			std::cout << "Please enter your user name: ";
-			std::cin >> uname;
-			while (cin.fail()){
-					std::cin.clear();
-					std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					std::cout << "Invalid input, please re-enter your user name: ";
-					std::cin >> uname;
-			}
-			if (exec.setCurrentUser(uname)) {
-				std::cout << "\nUser name accepted.\n";
-				loggedin = true;
-			}
-			else {
-				std::cout << "User name unrecognized or invalid.\n";
-			}
-
-		}
-	}
-}
-
-void CLI::logout(){
-    loggedin = false;
-}
-
-void CLI::newAccount(){
+void CLI::newAccount() {
     std::string name = "";
     std::string username = "";
     bool validIdentifier = false;
@@ -235,11 +139,10 @@ void CLI::newAccount(){
 		name = input.getLine("Enter your full name: ");
 	}
 
-    while(!validIdentifier){
-
-        username = input.getString("Enter your prefered username: ");
-
-		if (username == "CreateAccount" || username == "Quit" || username == "") {
+    while(!validIdentifier) {
+        username = input.getString("Enter your preferred username (no spaces): ");
+		cout << username;
+		if (username == "CreateAccount" || username == "Quit" || username == "" || username.find("\n ") != std::string::npos) {
 			std::cout << "You may not use that username.\n";
 			continue;
 		}
@@ -247,9 +150,10 @@ void CLI::newAccount(){
 		validIdentifier = exec.createUser(username, name);
 		if (!validIdentifier) {
 			std::cout << "Someone has that username already.\n";
+			username = "";
 			continue;
 		}
-		std::cout << "\n Account " + username + " has been created.\n";
+		std::cout << "\nAccount " + username + " has been created.\n";
     }
 }
 
@@ -307,12 +211,6 @@ void CLI::listEvents(int first){
 			std::cout << "Error: Invalid meeting number.\n";
 		}
 	}
-	/*else if(choice == "next" && first < size){
-        listEvents(first + 25 );
-    }else if(choice == "previous" && first >= 0){
-        listEvents(first - 25);
-    }*/
-
 }
 
 
