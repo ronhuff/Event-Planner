@@ -7,13 +7,53 @@ CLI::CLI(){
 }
 
 void CLI::run(){
-    login();
+	while (!loggedin) {
+		int choice;
+		std::cout << "\nWelcome to the event planner!\n";
+		std::cout << "-===========================-\n\n";
+		std::cout << "1) Login.\n";
+		std::cout << "2) Create Account.\n";
+		std::cout << "3) Exit.\n";
+		std::cout << "Selection: ";
 
-    while(!quit){
-        menu();
-    }
-    std::cout << "Have a wonderful day.\n";
-    logout();
+		std::cin >> choice;
+		while (!(choice > 0) && !(choice < 4)) {
+			if (!cin) {
+				std::cin.clear(); // unset failbit
+				std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
+				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+			}
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		if (choice == 1) {
+			if (!newLogin()) {
+				loggedin = false;
+			}
+			else {
+				loggedin = true;
+			}
+			if (choice == 2) {
+				newAccount();
+			}
+			else if (choice == 3) {
+				quit = true;
+				return;
+			}
+		}
+	}// user should be logged in if this loop is exited w/o quitting.
+	if (quit) {
+		logout();
+		std::cout << "Have a pleasant day...\n";
+		return;
+	}
+	else {
+		while (!quit)
+		{
+			menu();// Execution should loop through the menu system until the user chooses to quit.
+				   // Then quit should be set true and logout() will be called on line 46
+		}
+	}
 }
 
 void CLI::menu(){
@@ -48,8 +88,10 @@ void CLI::menu(){
         options();
     }else if(action == 4){
         logout();
-        login();
+		std::cout << "Logout successful.\n\n";
+		newLogin();
     }else if(action == 5){
+		std::cout << "Have a pleasant day...\n";
         quit = true;
     }else{
         std::cout << "Invalid command entered.\n";
@@ -104,6 +146,30 @@ void CLI::options() {
 
 	}
 }
+
+bool CLI::newLogin() {
+	std::string uname = "";
+	std::cout << "Please enter your user name: ";
+	std::cin >> uname;
+	while (cin.fail()) {
+		std::cin.clear();
+		std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		std::cout << "Invalid input, please re-enter your user name: ";
+		std::cin >> uname;
+	}
+	if (exec.setCurrentUser(uname)) {
+		std::cout << "\nUser name accepted.\n";
+		loggedin = true;
+		return(true);
+	}
+	else {
+		std::cout << "User name unrecognized or invalid.\n";
+		loggedin = false;
+		return(false);
+	}
+}
+
+
 void CLI::login() {
 
 	while (!loggedin) {
@@ -181,7 +247,9 @@ void CLI::newAccount(){
 		validIdentifier = exec.createUser(username, name);
 		if (!validIdentifier) {
 			std::cout << "Someone has that username already.\n";
+			continue;
 		}
+		std::cout << "\n Account " + username + " has been created.\n";
     }
 }
 
@@ -260,7 +328,7 @@ void CLI::newEvent() throw(std::exception) {
 	while (!validDate) {
 		std::cout << "Please enter a date in the format MM/DD/YYYY.\n";
 
-		std::string date = "";
+		
 		std::cin >> date;
 
 		while (!cin || date.length() != 10 || (date[2] != '/' || date[5] != '/')) {
@@ -289,8 +357,7 @@ void CLI::newEvent() throw(std::exception) {
 			validDate = true;
 		}
 		date = year + "/" + month + "/" + day;
-			eventID = exec.generateEvent(name, date);
-			validDate = true;
+		validDate = true;
     }
 	
 	std::cout << "Please enter a beginning time for your meeting. ";
@@ -377,13 +444,14 @@ void CLI::newEvent() throw(std::exception) {
 	}
 	if (newList == 1)
 	{
-		//code for addint list here. Will require analysis of data structure.
+		//code for addint list here. Will require analysis of data structure
 		/*m_tasks = new TaskList();*/
 	}
 	else
 	{
 
 	}
+	eventID = exec.generateEvent(name, date);
 	exec.writeRecord(eventID, exec.createRecordList(times));
 	delete times;   
 }
