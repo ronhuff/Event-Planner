@@ -1,48 +1,39 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Date.h"
 
 Date::Date() {
 
 }
 
-Date::Date(std::string inputDate, std::string startTime, std::string endTime, std::shared_ptr<User> creator) {
+Date::Date(std::string inputDate, std::string startTime, int numTimeslots, std::shared_ptr<User> creator) {
 
 	//code for determining time and creating timeslots here.
-	std::string startHr = startTime.substr(0, 2);
-	int startMin = std::stoi(startTime.substr(3, 2));
-	std::string endHr = endTime.substr(0, 2);
-	int endMin = stoi(endTime.substr(3, 2));
-	int TOTAL_MINS = ((stoi(endHr) - stoi(startHr)) * 60 + endMin - startMin);
 	
-	std::shared_ptr<TimeSlot> temp = std::make_shared<TimeSlot>(startHr + ":" + std::to_string(endMin));
+	std::shared_ptr<TimeSlot> temp = std::make_shared<TimeSlot>(startTime);
 	temp->m_attendees.push_back(creator);
+	int endMin = stoi(startTime.substr(3, 2));
 	endMin += 20;
-	m_TimeSlots.push_back(temp);
-
-	int numTimeSlots = TOTAL_MINS / 20;
-
-	for (int i = 0; i < numTimeSlots; i++)
+	m_timeSlots.push_back(temp);
+	std::string startHr = startTime.substr(0, 2);
+	for (int i = 0; i < numTimeslots; i++)
 	{		
-		for (int i = 1; i < numTimeSlots; i++)
-		{
-			std::string slot = "";
-			//etime.substr(3, 2) this returns the endmin string
-			if (endMin >= 60) {
-				endMin = 0;
-				int hourInt = std::stoi(startHr);
-				hourInt++;
-				startHr = std::to_string(hourInt);
-				slot = startHr + ":" + "00";
-				endMin += 20;
-			}
-			else {
-				slot = startHr + ":" + std::to_string(endMin);
-				endMin += 20;
-			}
-			std::shared_ptr<TimeSlot> temp = std::make_shared<TimeSlot>(startHr + ":" + std::to_string(endMin));
-			temp->m_attendees.push_back(creator);//adds creator as attendee of each timeslot.
-			m_TimeSlots.push_back(temp);
+		std::string slot = "";
+		//etime.substr(3, 2) this returns the endmin string
+		if (endMin >= 60) {
+			endMin = 0;
+			int hourInt = std::stoi(startHr);
+			hourInt++;
+			startHr = std::to_string(hourInt);
+			slot = startHr + ":" + "00";
+			endMin += 20;
 		}
+		else {
+			slot = startHr + ":" + std::to_string(endMin);
+			endMin += 20;
+		}
+		std::shared_ptr<TimeSlot> temp = std::make_shared<TimeSlot>(startHr + ":" + std::to_string(endMin));
+		temp->m_attendees.push_back(creator);//adds creator as attendee of each timeslot.
+		m_timeSlots.push_back(temp);
 	}
 	m_date = inputDate;
 }

@@ -2,12 +2,22 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <memory>
 #include "../backend/Executive.h"
 #include "CLIInput.h"
+#include "../backend/TaskList.h"
+#include "../backend/Task.h"
+#include "../backend/User.h"
+#include "../backend/Event.h"
+#include "../backend/Date.h"
+#include "../backend/Executive.h"
+
+class Executive;
 
 class CLI{
     private:
-        Executive exec;
+        //Executive exec;
         CLIInput input;
         enum EventSet{all, attending, created};
         bool longtime;
@@ -22,6 +32,11 @@ class CLI{
 		 */
 		bool checkTime(std::string stime, std::string etime);
     public:
+
+		std::shared_ptr<Executive> m_execObj;
+
+		CLI(std::shared_ptr<Executive>);
+
         /**
 	     * Default constructor
 	     * @pre: none
@@ -79,7 +94,7 @@ class CLI{
 	     * @post: none
 	     * @return: none
 	     */
-        void listEvents(int);
+        void listEvents();
         /**
 	     * Allows for the creation of a new event by the user
 	     * @pre: none
@@ -94,7 +109,7 @@ class CLI{
 	     * @post: none
 	     * @return: none
 	     */
-        void viewEvent(int);
+        //void viewEvent(int);
         /**
 	     * Allows user to set availability for the event
          * @param int - the unique identifier of the event
@@ -102,7 +117,7 @@ class CLI{
 	     * @post: availability set
 	     * @return: none
 	     */
-        void setAvailability(int);
+        //void setAvailability(int);
         /**
 	     * Allows users to view availabilities for an event
          * @param int - the unique identifier of the event
@@ -110,7 +125,7 @@ class CLI{
 	     * @post: none
 	     * @return: none
 	     */
-        void viewAvailability(int);
+        //void viewAvailability(int);
         /**
 	     * Converts 24 hour formatting to 12 hour formatting.
          * @param std::string - the unique identifier of the event

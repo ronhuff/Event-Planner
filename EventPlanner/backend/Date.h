@@ -15,7 +15,7 @@ class TimeSlot;
 class Date {
 public:
 	Date();
-	Date(std::string inputDate, std::string startTime, std::string endTime, std::shared_ptr<User> creator);
+	Date(std::string inputDate, std::string startTime, int numTimeslots, std::shared_ptr<User> creator);
 	~Date();
 	
 
@@ -23,7 +23,7 @@ public:
 
 
 	std::string m_date;
-	std::vector<std::shared_ptr<TimeSlot>> m_TimeSlots;
+	std::vector<std::shared_ptr<TimeSlot>> m_timeSlots;
 	/*boost::gregorian::date date;*/
 	std::string dateFormatFixer(std::string date);
 

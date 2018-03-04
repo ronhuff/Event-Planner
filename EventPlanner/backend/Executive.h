@@ -7,6 +7,10 @@
 #include <limits>
 #include <iostream>
 #include <exception>
+#include "../interface/CLI.h"
+
+class Date;
+class CLI;
 
 class Executive
 {
@@ -14,10 +18,10 @@ public:
 	Executive();
 	~Executive();
 
-	void run();
+	void run(std::shared_ptr<Executive>);
 	int menu();
 	void menuChoice(int);
-	void addEvent();
+	void addEvent(std::string eventName);
 
 	std::vector<std::shared_ptr<Event>> m_eventList;
 	std::vector<std::shared_ptr<User>> m_knownUsers; //if user exists here then they can login, else they must create account.
@@ -32,11 +36,11 @@ public:
 
 	bool login();
 
-private:
+	std::shared_ptr<CLI> cli;
 
 	//helper
 
-	bool verifyUserName() throw(std::exception);
+	bool verifyUserName(std::string uname) throw(std::exception);
 
 	std::string stringInput(std::string);
 	bool createAccount();

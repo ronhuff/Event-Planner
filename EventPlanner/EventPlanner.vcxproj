@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="backend\Date.h" />
     <ClInclude Include="backend\Event.h" />
     <ClInclude Include="backend\Executive.h" />
     <ClInclude Include="backend\Record.h" />
+    <ClInclude Include="backend\TimeSlot.h" />
     <ClInclude Include="backend\User.h" />
     <ClInclude Include="interface\CLI.h" />
     <ClInclude Include="interface\CLIInput.h" />
@@ -29,9 +31,11 @@
     <ClInclude Include="backend\TaskList.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="backend\Date.cpp" />
     <ClCompile Include="backend\Event.cpp" />
     <ClCompile Include="backend\Executive.cpp" />
     <ClCompile Include="backend\Record.cpp" />
+    <ClCompile Include="backend\TimeSlot.cpp" />
     <ClCompile Include="backend\User.cpp" />
     <ClCompile Include="interface\CLI.cpp" />
     <ClCompile Include="interface\CLIInput.cpp" />

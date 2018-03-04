@@ -18,13 +18,12 @@ public:
 
 	std::string m_name;
 
-	std::vector<std::shared_ptr<Date>> m_dates;
 	std::weak_ptr<User> m_creator;
 
 	std::vector<std::weak_ptr<User>> m_attendees;
 	std::shared_ptr<TaskList> m_tasks;
 
-	std::vector<std::weak_ptr<Date>> m_meetDates;
+	std::vector<std::shared_ptr<Date>> m_meetDates;
 
 };
 
