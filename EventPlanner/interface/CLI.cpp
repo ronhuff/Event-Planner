@@ -332,7 +332,7 @@ void CLI::newEvent() throw(std::exception) {
 	std::cout << "2) No.\n";
 	int newList;
 	std::cin >> newList;
-
+	std::shared_ptr<TaskList> taskList;
 	while (std::cin.fail())
 	{
 		std::cin.clear();
@@ -342,6 +342,10 @@ void CLI::newEvent() throw(std::exception) {
 	}
 	if (newList == 1)
 	{
+		std::shared_ptr<TaskList> temp = std::make_shared<TaskList>();
+		temp->createTask();
+		temp->createTask();
+		taskList = temp;
 		//code for addint list here. Will require analysis of data structure
 		/*m_tasks = new TaskList();*/
 	}
@@ -349,9 +353,10 @@ void CLI::newEvent() throw(std::exception) {
 	{
 
 	}
+
 	eventID = exec.generateEvent(name, date);
 	exec.writeRecord(eventID, exec.createRecordList(times));
-	exec.writeTaskList(eventID, )
+	exec.writeTaskList(eventID, taskList);
 	delete times;   
 }
 //END NEW CODE

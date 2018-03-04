@@ -74,6 +74,36 @@ int Executive::whatIsEventNum()
 	return eventNum;
 }
 
+
+void  Executive::writeRecord(int eid, std::list<Record>* List)
+{
+	std::string filename = getFileName(df_record, std::to_string(eid));
+	std::list<std::string> tempUserlist;
+	std::string tempTime;
+
+	//start write a new file with the same filename
+	std::ofstream outF(filename);
+	for (auto&& it = List->begin(); it != List->end(); it++)
+	{
+		//write the time block
+		tempTime = it->getTime();
+		outF << 0 << " " << tempTime << std::endl;
+		tempUserlist = it->getUserList();
+
+		outF << 1;
+		for (auto it2 = tempUserlist.begin(); it2 != tempUserlist.end(); it2++)
+		{
+			//write the users
+			outF << " " << *it2;
+		}
+		outF << std::endl;
+	}
+	outF.close();
+	delete List;
+}
+
+
+
 int Executive::generateEvent(std::string name, std::string date) throw(std::logic_error){
 	//This is the event we want to input data for.
 	Event new_event = Event(name,date,currentUser->getUserName(),currentUser->getRealName(),getEventNum());
@@ -343,28 +373,55 @@ bool Executive::writeTaskList(int eid, std::shared_ptr<TaskList> tl) {
 
 	std::string filename = getFileName(df_taskList, std::to_string(eid));
 	
-	std::vector<std::shared_ptr<TaskList>> outTasks = m_tasks;
+	std::vector<std::shared_ptr<TaskList>> outTasks = m_taskLists;
 
 	//start write a new file with the same filename
 	std::ofstream outF(filename);
 
-	for (std::vector<std::shared_ptr<TaskList>>::iterator it = m_tasks.begin(); it != m_tasks.end(); ++it)
+	for (std::vector<std::shared_ptr<TaskList>>::iterator it = m_taskLists.begin(); it != m_taskLists.end(); ++it)// loops through tasklists.
 	{
-		//write the time block
-		tempTime = it->getTime();
-		outF << 0 << " " << tempTime << std::endl;
-		tempUserlist = it->getUserList();
+		outF << *it;//this should outfile the tasklist which should outfile the tasks.
 
-		outF << 1;
-		for (auto it2 = tempUserlist.begin(); it2 != tempUserlist.end(); it2++)
-		{
-			//write the users
-			outF << " " << *it2;
-		}
-		outF << std::endl;
 	}
+
 	outF.close();
-	delete List;
+	return(true);
+}
+
+bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
+{
+	bool makeNew = true;
+	for (std::vector<std::shared_ptr<TaskList>>::iterator tlit = m_taskLists.begin(); tlit != m_taskLists.end(); ++tlit)
+	{
+		if ((*tlit)->m_eventId == eid)
+		{
+			for (std::vector<std::string>::iterator it = taskVector.begin(); it != taskVector.end(); ++it)
+			{
+				std::shared_ptr<Task> temp = std::make_shared<Task>(*it);
+				(*tlit)->addTask(temp);
+				(*tlit)->m_eventId = eid;
+				(*tlit)->m_numTasks = taskVector.size();
+				return(true);
+			}
+		}
+
+	}
+	if (makeNew)
+	{
+		std::shared_ptr<TaskList> tempTL = std::make_shared <TaskList>();
+		for (std::vector<std::string>::iterator it = taskVector.begin(); it != taskVector.end(); ++it)
+		{
+			std::shared_ptr<Task> temp = std::make_shared<Task>(*it);
+			tempTL->addTask(temp);
+		}
+		tempTL->m_eventId = eid;
+		tempTL->m_numTasks = taskVector.size();
+		return(true);
+	}
+	
+
+	
+	return false;
 }
 
 bool Executive::removeRecord(int eid)

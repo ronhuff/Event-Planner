@@ -14,6 +14,7 @@ TaskList::~TaskList() {}
 bool TaskList::addTask(std::shared_ptr<Task> newTask) {
 	int size = m_tasks.size();
 	m_tasks.push_back(newTask);
+	m_numTasks++;
 	return((size + 1) == m_tasks.size());
 }
 
@@ -49,8 +50,9 @@ std::istream & operator>>(std::istream & in, TaskList & tList)
 	in >> tList.m_eventId >> tList.m_numTasks >> tList.m_numAvailTasks;
 	for (int i = 1; i <= tList.m_numTasks; i++)
 	{
-		std::shared_ptr<Task> temp;
-		in >> temp;
+		std::shared_ptr<Task> temp = std::make_shared<Task>();
+		in >> *temp;
+		tList.m_tasks.push_back(temp);
 	}
 	return(in);
 	// TODO: insert return statement here

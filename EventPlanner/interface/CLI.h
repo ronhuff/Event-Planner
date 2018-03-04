@@ -3,7 +3,12 @@
 #include <iostream>
 #include <string>
 #include "../backend/Executive.h"
+#include "../backend/Record.h"
 #include "CLIInput.h"
+
+class Executive;
+class Record;
+
 
 class CLI{
     private:
@@ -34,7 +39,6 @@ class CLI{
 	     * @return: none
 	     */
         void run();
-    private:
         /**
 	     * The menu that the user sees after they have logged in.
 	     * @pre: User is logged in

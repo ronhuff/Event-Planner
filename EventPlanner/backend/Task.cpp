@@ -4,7 +4,6 @@
 
 Task::Task()
 {
-	m_taskUser = nullptr;
 	m_isAssigned = false;
 }
 
@@ -18,10 +17,10 @@ Task::~Task()
 
 }
 
-bool Task::assignTask(User* user)
+bool Task::assignTask(std::string user)
 {
-	m_taskUser = user;
-	return(m_taskUser == user);
+	m_assignName = user;
+	return(m_assignName == user);
 }
 
 std::ostream& operator<<(std::ostream& out, Task& task)

@@ -210,7 +210,9 @@ class Executive{
 
 		bool writeTaskList(int eid, std::shared_ptr<TaskList> tl);
 
-		std::vector<std::shared_ptr<TaskList>> m_tasks;
+		bool createTaskList(std::vector<std::string>, int);
+
+		std::vector<std::shared_ptr<TaskList>> m_taskLists;
 	private:
 		/**
 		 * An enum representing the various information types that are saved.
