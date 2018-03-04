@@ -230,7 +230,9 @@ void CLI::newEvent() throw(std::exception) {
 			std::cin >> date;
 
 			while (!cin || date.length() != 10 || (date[2] != '/' || date[5] != '/')) {
+				std::cin.clear(); // unset failbit
 				std::cout << "ERROR: Please enter a date in the format MM/DD/YYYY.\n";
+				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
 				std::cin >> date;
 			}
 			std::string year = date.substr(6, 4);
@@ -258,27 +260,28 @@ void CLI::newEvent() throw(std::exception) {
 
 			validDate = true;
 		}
+		std::cout << "Automatically declare the same times for this date or define new times?\n";
+		std::cout << "1) Apply the same times.\n";
+		std::cout << "2) Define new times.\n";
+		int choice;
+		std::cin >> choice;
+		while (!(choice > 0) && !(choice < 3)) {
+			if (!cin) {
+				std::cin.clear(); // unset failbit
+				std::cout << "Please simply choose one of the options (1-2) and press enter/return.\n";
+				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+			}
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
 		if (meetDates > 1)
 		{
-			std::cout << "Automatically declare the same times for this date or define new times?\n";
-			std::cout << "1) Apply the same times.\n";
-			std::cout << "2) Define new times.\n";
-			int choice;
-			std::cin >> choice;
-			while (!(choice > 0) && !(choice < 3)) {
-				if (!cin) {
-					std::cin.clear(); // unset failbit
-					std::cout << "Please simply choose one of the options (1-2) and press enter/return.\n";
-					std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
-				}
-				std::cout << "\nSelection: ";
-				std::cin >> choice;
-			}
+			
 			if (choice == 1)
 			{
-				std::shared_ptr<Date> temp = ((*m_execObj).m_eventList.back()->m_meetDates.back()); //Date constructor should create timeslots and assign creator as attendee for each.
-				temp->m_date = date;
-				(*m_execObj).m_eventList.back()->m_meetDates.push_back(temp);
+				std::shared_ptr<Date> temp1 = ((*m_execObj).m_eventList.back()->m_meetDates.back()); //Date constructor should create timeslots and assign creator as attendee for each.
+				temp1->m_date = date;
+				(*m_execObj).m_eventList.back()->m_meetDates.push_back(temp1);
 			}
 		}
 		else
@@ -326,31 +329,31 @@ void CLI::newEvent() throw(std::exception) {
 			m_execObj->m_eventList.back()->m_id = m_execObj->m_numMeetings;
 			m_execObj->m_eventList.back()->m_creator = m_execObj->m_currentUser;
 
-			std::shared_ptr<Date> temp = std::make_shared<Date>(date, stime, timeslots, m_execObj->m_currentUser);//Date constructor should create timeslots and assign creator as attendee for each.
+			/*std::shared_ptr<Date> temp = */;//Date constructor should create timeslots and assign creator as attendee for each.
 																												  //the first slot.
-			m_execObj->m_eventList.back()->m_meetDates.push_back(temp);
+			m_execObj->m_eventList.back()->m_meetDates.push_back(std::make_shared<Date>(date, stime, timeslots, m_execObj->m_currentUser));
 		}
 
 		std::cout << "Would you like to add another date for this meeting?\n";
 		std::cout << "1) Yes.\n";
 		std::cout << "2) No.\n";
 		std::cout << "Selection: ";
-		int choice;
-		std::cin >> choice;
-		while (!(choice > 0) && !(choice < 3)) {
+		int select;
+		std::cin >> select;
+		while (!(select > 0) && !(select < 3)) {
 			if (!cin) {
 				std::cin.clear(); // unset failbit
 				std::cout << "Please simply choose one of the options (1-2) and press enter/return.\n";
 				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
 			}
 			std::cout << "\nSelection: ";
-			std::cin >> choice;
+			std::cin >> select;
 		}
-		if (choice == 1) {
+		if (select == 1) {
 			validDate = false;// user must validate the new date for the meeting.
 			meetDates++;
 		}
-		else if (choice == 2){
+		else if (select == 2){
 			createDays = false;
 		}
 	}
