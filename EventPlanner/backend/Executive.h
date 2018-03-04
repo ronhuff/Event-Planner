@@ -26,6 +26,9 @@ public:
 	std::vector<std::shared_ptr<Event>> m_eventList;
 	std::vector<std::shared_ptr<User>> m_knownUsers; //if user exists here then they can login, else they must create account.
 
+	int m_numMeetings;
+	std::vector<int> meetingIDs;
+
 
 
 

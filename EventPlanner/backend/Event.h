@@ -25,5 +25,7 @@ public:
 
 	std::vector<std::shared_ptr<Date>> m_meetDates;
 
+	int m_id;
+
 };
 

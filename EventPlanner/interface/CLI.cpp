@@ -44,7 +44,8 @@ void CLI::menu(){
 	}
 	std::cout << "\n";
     if(action == 1){
-		m_execObj->viewMeetingList();
+		listEvents();
+
     }else if(action == 2){
 		try {
 			newEvent();
@@ -176,61 +177,7 @@ void CLI::newAccount(){
 
 void CLI::listEvents(){
    /* std::vector<Event>* list = exec.getEventList();*/
-    int size = m_execObj->m_eventList.size();
-	std::cout << "\n\tCurrently Scheduled Events:\n\n";
 	m_execObj->viewMeetingList();
-    //Options
-    
-	//I have removed this functionality below. We can uncomment this if we wish later. We will likely need to change the "next"/"previous
-	//to some sort of integer selection.
-	
-    //if(first > 0 ){//don't remove these two if statements.....they could be implemented in the case where numMeetings > 25 or something.
-    //    std::cout << "\t\"previous\" to go back in the list\n";
-    //}
-    //if(first + 25 < size){
-    //    std::cout << "\t\"next\" to go forward in the list\n";
-    //}
-    //std::cout << "\t\"menu\" to go to the menu\n";
-
-    //Make Choice
-	//std::cout << "Please select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
-	/*cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-	int choice;
-	std::string inString;*/
-	//The template for the below while loop was borrowed from https://stackoverflow.com/a/10553849 and modified to our needs.
-	//while (1){
-	//	for (int i = first; i < (first + 26) && i < size; i += 1) {
-	//		try {
-	//			Event e = list->at(i);
-	//			std::cout << std::to_string(e.getIDNumber()) + ")" << "\t" << e.getName() << "\t\t" << e.getDate(false) << "\t\t" << e.getCreatorRealName() << "\n";
-	//		}
-	//		catch (std::exception& e) {
-	//			return;
-	//		}
-	//	}
-	//	std::cout << "\nPlease select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
-	//	std::cout << "Selection: ";
-
-	//	getline (std::cin, inString);
-	//	if (inString.empty()){
-	//		break;
-	//	}
-	//	else if (std::stoi(inString) <= exec.whatIsEventNum() && std::stoi(inString) > 0) {
-	//		std::cout << "\n";
-	//			viewEvent(std::stoi(inString));
-	//			std::cout << "\n";
-	//		}
-	//	else {
-	//		std::cout << "Error: Invalid meeting number.\n";
-	//	}
-	//}
-	/*else if(choice == "next" && first < size){
-        listEvents(first + 25 );
-    }else if(choice == "previous" && first >= 0){
-        listEvents(first - 25);
-    }*/
-
 }
 
 
@@ -352,6 +299,8 @@ void CLI::newEvent() throw(std::exception) {
 			int timeslots = TOTAL_MINS / 20;
 
 			m_execObj->addEvent(name);
+			m_execObj->m_numMeetings++;
+			m_execObj->m_eventList.back()->m_id = m_execObj->m_numMeetings;
 
 			std::shared_ptr<Date> temp = std::make_shared<Date>(date, stime, timeslots, m_execObj->m_currentUser);//Date constructor should create timeslots and assign creator as attendee for each.
 																												  //the first slot.

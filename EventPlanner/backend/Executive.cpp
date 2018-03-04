@@ -8,6 +8,7 @@ Executive::Executive()
 {
 	m_quit = false;
 	m_loggedIn = false;
+	m_numMeetings = 0;
 }
 
 
@@ -188,7 +189,7 @@ void Executive::viewMeetingList()
 {
 	// loop through all meetings.
 	for (std::vector<std::shared_ptr<Event>>::iterator it = m_eventList.begin(); it != m_eventList.end(); ++it) {
-		std::cout << "\nMeeting Name: " + (*it)->m_name + ".\n";
+		std::cout << "\nMeeting ID: " + std::to_string((*it)->m_id) + " Name: " + (*it)->m_name + ".\n";
 
 		//loop through dates in meeting.
 		for (std::vector<std::shared_ptr<Date>>::iterator it1 = (*it)->m_meetDates.begin(); it1 != (*it)->m_meetDates.end(); ++it1)
