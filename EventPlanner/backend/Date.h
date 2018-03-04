@@ -21,6 +21,8 @@ public:
 
 	
 
+	std::string m_startTime;
+	std::string m_endTime;
 
 	std::string m_date;
 	std::vector<std::shared_ptr<TimeSlot>> m_timeSlots;

@@ -197,6 +197,12 @@ void Executive::viewMeetingList()
 
 	}
 }
+
+std::shared_ptr<Event> Executive::getEventByID(int id)
+{
+	return(m_eventList.at(id - 1));
+}
+
 std::string Executive::stringInput(std::string message) {
 	std::string input;
 	std::cout << message;

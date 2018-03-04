@@ -18,9 +18,9 @@ public:
 
 	std::string m_name;
 
-	std::weak_ptr<User> m_creator;
+	std::shared_ptr<User> m_creator;
 
-	std::vector<std::weak_ptr<User>> m_attendees;
+	std::vector<std::shared_ptr<User>> m_attendees;
 	std::shared_ptr<TaskList> m_tasks;
 
 	std::vector<std::shared_ptr<Date>> m_meetDates;

@@ -13,6 +13,7 @@
 #include "../backend/Date.h"
 #include "../backend/Executive.h"
 
+class Event;
 class Executive;
 
 class CLI{
@@ -109,7 +110,7 @@ class CLI{
 	     * @post: none
 	     * @return: none
 	     */
-        //void viewEvent(int);
+        void viewEvent(int);
         /**
 	     * Allows user to set availability for the event
          * @param int - the unique identifier of the event
@@ -117,7 +118,7 @@ class CLI{
 	     * @post: availability set
 	     * @return: none
 	     */
-        //void setAvailability(int);
+        void setAvailability(int);
         /**
 	     * Allows users to view availabilities for an event
          * @param int - the unique identifier of the event
@@ -125,7 +126,7 @@ class CLI{
 	     * @post: none
 	     * @return: none
 	     */
-        //void viewAvailability(int);
+        void viewAvailability(int);
         /**
 	     * Converts 24 hour formatting to 12 hour formatting.
          * @param std::string - the unique identifier of the event

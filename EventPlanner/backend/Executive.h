@@ -48,5 +48,7 @@ public:
 	std::string stringInput(std::string);
 	bool createAccount();
 	void viewMeetingList();
+
+	std::shared_ptr<Event> getEventByID(int id);
 };
 

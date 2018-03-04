@@ -25,6 +25,7 @@ void CLI::run(){
 }
 
 void CLI::menu(){
+	std::cin.clear();
     std::cout << "\nPlease choose from the following options:\n\n" <<
                  "1) View Events List:\n" <<
 				 "2) Create New Event:\n"
@@ -43,10 +44,32 @@ void CLI::menu(){
 		std::cin >> action;
 	}
 	std::cout << "\n";
-    if(action == 1){
+	if (action == 1) {
 		listEvents();
+		std::cout << "Please select the menu ID to view or press enter to return to the main menu.\n";
+		std::cout << "Meeting ID: ";
 
-    }else if(action == 2){
+		std::string choice;
+
+		std::cin >> choice;
+		while ((!(std::stoi(choice) > 0) && !(std::stoi(choice) < 4)) || choice == "") {
+			if (choice == "")
+			{
+
+			}
+			else if (!cin) {
+				std::cin.clear(); // unset failbit
+				std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
+				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+				std::cout << "\nSelection: ";
+				std::cin >> choice;
+			}
+
+		}
+
+		viewEvent(std::stoi(choice));
+	}
+	else if(action == 2){
 		try {
 			newEvent();
 		}
@@ -148,7 +171,7 @@ void CLI::login() {
 			while (cin.fail()){
 					std::cin.clear();
 					std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					std::cout << "Invalid input, please re-enter your user name: ";
+					std::cout << "\nInvalid input, please re-enter your user name: ";
 					std::cin >> uname;
 			}
 			try {
@@ -157,7 +180,7 @@ void CLI::login() {
 					loggedin = true;
 				}
 				else {
-					std::cout << "User name unrecognized or invalid.\n";
+					std::cout << "\nUser name unrecognized or invalid.\n";
 				}
 			}
 			catch (std::exception& e) {
@@ -301,6 +324,7 @@ void CLI::newEvent() throw(std::exception) {
 			m_execObj->addEvent(name);
 			m_execObj->m_numMeetings++;
 			m_execObj->m_eventList.back()->m_id = m_execObj->m_numMeetings;
+			m_execObj->m_eventList.back()->m_creator = m_execObj->m_currentUser;
 
 			std::shared_ptr<Date> temp = std::make_shared<Date>(date, stime, timeslots, m_execObj->m_currentUser);//Date constructor should create timeslots and assign creator as attendee for each.
 																												  //the first slot.
@@ -393,135 +417,136 @@ void CLI::newEvent() throw(std::exception) {
 }
 
 //END NEW CODE
-//void CLI::viewEvent(int i){
-//    try{
-//        Event* e = exec.getEventByID(i);
-//		std::cout << "Title:\t\t" << e->getName() << "\n" <<
-//			"Creator:\t" << e->getCreatorRealName() << "\n" <<
-//			"Date:\t\t" << e->getDate(false) << "\n\n" <<
-//			"Start: " << /*starttime here*/ "\tEnd: " << /*endtime*/ "\n\n";
-//
-//        std::string choice;
-//		bool creator = false;
-//        while(choice != "quit"){//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
-//            if(exec.getCurrentUser()->getUserName() != e->getCreatorUserName()){
-//				
-//            }
-//			else
-//			{
-//				creator = true;
-//			}
-//			
-//			while (1) {
-//				std::string inString = "";
-//				if (creator)
-//				{
-//					std::cout << "1) Redisplay meeting time slots.\n";
-//					std::cout << "2) Return to menu.\n";
-//				}
-//				else {
-//					std::cout << "If you are interested in joining this event:\n";
-//					std::cout << "1) Indicate your availability.\n"; //WE WILL ADD OTHER OPTIONS TO THIS MENU SO FULL MENU IMPLENTATION AT THIS POINT IS WORTH.
-//					std::cout << "2) Redisplay meeting time slots.\n"; //We can make these menus way more user friendly if we start making this feel more like an actual application
-//					std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
-//				}
-//
-//				std::cout << "Selection:";//NOTE: returning from this function may not actually cause the user to "go back"
-//				std::getline(std::cin, inString);
-//				if (inString.empty() || stoi(inString) == 3) {
-//					choice = "quit";
-//					break;
-//
-//				}
-//				else if (std::stoi(inString) == 1 && exec.getCurrentUser()->getUserName() != e->getCreatorUserName()) {
-//					creator = false;
-//					setAvailability(i);//unknown if/how this works at this point, but am attempting to keep things integrated with Team 8 code.
-//					std::cout << "\n";
-//				}
-//				else if (std::stoi(inString) == 1 && creator)
-//				{
-//				std:: cout << "\n";
-//					viewAvailability(i);
-//				}
-//				else if (std::stoi(inString) == 2 && !creator) {
-//					viewAvailability(i);
-//				}
-//				else if (std::stoi(inString) == 2 && creator)
-//				{
-//					choice = "quit";
-//					break;
-//				}
-//				else {
-//					std::cout << "Error: Invalid meeting number.\n";
-//				}
-//			}
-//        }
-//        delete e;
-//    }catch(std::exception& e){
-//        std::cout << "Invalid event number.\n";
-//    }
-//}
+void CLI::viewEvent(int i){
+    try{
 
-//void CLI::setAvailability(int eid){
-//    std::list<Record>* eventRecords = exec.readRecord(eid);
-//    std::cout << "For each of the following times enter 'y' or 'n' to confirm or deny availablity.\n";
-//
-//    for(auto i : *(eventRecords)){
-//        std::string slot;
-//        if(longtime){
-//            slot = i.getTime();
-//        }else{
-//            slot = to12Hour(i.getTime());
-//        }
-//
-//
-//        if(input.getCharacter(slot + " - ") == 'y'){
-//            exec.addUserTo(i.getTime(), eventRecords);
-//        }
-//    }
-//
-//    exec.writeRecord(eid, eventRecords);
-//}
 
-//void CLI::viewAvailability(int eid){
-//    std::list<Record>* eventRecords = exec.readRecord(eid);
-//    Event* event = exec.getEventByID(eid);
-//
-//	//
-//    
-//	auto list_rbeg = (*eventRecords).rbegin();
-//	auto list_rend = (*eventRecords).rend();
-//	for (auto list_it = list_rbeg; list_it != list_rend; ++list_it)
-//	{
-//		std::string slot;
-//		if (longtime) {
-//			slot = zeroAppender((*list_it).getTime());//here zeroAppender is taking the std::string parameter returned by i.getTime());
-//		}
-//		else {
-//			slot = to12Hour((*list_it).getTime());
-//		}
-//		std::cout << "Time: " << slot << "\nAttendees: ";
-//
-//		//SHows all attending users
-//		std::list<std::string> users = (*list_it).getUserList();
-//		std::cout << event->getCreatorRealName();
-//		for (auto i : users) {
-//			try {
-//				User* temp = exec.getUser(i);
-//				std::cout << ", " << temp->getRealName();
-//				delete temp;
-//			}
-//			catch (std::exception& e) {}
-//		}
-//		std::cout << "\n";
-//	}
-//
-//	//
-//
-//	std:: cout << "\n";
-//    delete event;
-//    delete eventRecords;
-//}
+        std::shared_ptr<Event> e = m_execObj->getEventByID(i);
+		std::cout << "Title:\t\t" + e->m_name + "\nCreator:\t" + e->m_creator->m_realName + "\n";
+
+		for (std::vector<std::shared_ptr<Date>>::iterator it = e->m_meetDates.begin(); it != e->m_meetDates.end(); ++it)
+			std::cout << "Date(s):\t" + (*it)->m_date + "\n" +
+			"Start: " + (*it)->m_startTime + "\tEnd: " + (*it)->m_endTime + "\n\n";
+
+        std::string choice;
+		bool creator = false;
+        while(choice != "quit"){//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
+            if(m_execObj->m_currentUser->m_realName != e->m_creator->m_realName){
+				
+            }
+			else
+			{
+				creator = true;
+			}
+			
+			while (1) {
+				std::string inString = "x";
+				if (creator)
+				{
+					std::cout << "1) Redisplay meeting time slots.\n";
+					std::cout << "2) Return to menu.\n";
+				}
+				else {
+					std::cout << "If you are interested in joining this event:\n";
+					std::cout << "1) Indicate your availability.\n"; //WE WILL ADD OTHER OPTIONS TO THIS MENU SO FULL MENU IMPLENTATION AT THIS POINT IS WORTH.
+					std::cout << "2) Redisplay meeting time slots.\n"; //We can make these menus way more user friendly if we start making this feel more like an actual application
+					std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
+				}
+
+				std::cout << "Selection:";//NOTE: returning from this function may not actually cause the user to "go back"
+				std::getline(std::cin, inString);
+				if (inString.empty() || stoi(inString) == 3) {
+					choice = "quit";
+					break;
+
+				}
+				else if (std::stoi(inString) == 1 && m_execObj->m_currentUser->m_realName != e->m_creator->m_realName) {
+					creator = false;
+					setAvailability(i);//unknown if/how this works at this point, but am attempting to keep things integrated with Team 8 code.
+					std::cout << "\n";
+				}
+				else if (std::stoi(inString) == 1 && creator)
+				{
+				std:: cout << "\n";
+					viewAvailability(i);
+				}
+				else if (std::stoi(inString) == 2 && !creator) {
+					viewAvailability(i);
+				}
+				else if (std::stoi(inString) == 2 && creator)
+				{
+					choice = "quit";
+					break;
+				}
+				else {
+					std::cout << "Error: Invalid meeting number.\n";
+				}
+			}
+        }
+    }catch(std::exception& e){
+        std::cout << "Invalid event number.\n";
+    }
+}
+
+void CLI::setAvailability(int eid){
+	
+	std::shared_ptr<Event> thisEvent = m_execObj->m_eventList.at(eid - 1);
+
+    std::cout << "For each of the following times enter 'y' or 'n' to confirm or deny availablity.\n";
+
+	for (std::vector<shared_ptr<Date>>::iterator it = thisEvent->m_meetDates.begin(); it != thisEvent->m_meetDates.end(); ++it) {
+		std::cout << "Date(s):\t" << (*it)->m_date + "\n" <<
+			"Start: " << (*it)->m_startTime + "\tEnd: " + (*it)->m_endTime + /*endtime*/ "\n\n";
+
+		for (auto i : (*it)->m_timeSlots) {
+			std::string slot;
+			if (longtime) {
+				slot = i->m_startTime;
+			}
+			else {
+				slot = to12Hour(i->m_startTime);
+			}
+
+			if (input.getCharacter(slot + " - ") == 'y') {
+				i->m_attendees.push_back(m_execObj->m_currentUser);
+				
+			}
+		}
+	}
+}
+
+void CLI::viewAvailability(int eid){
+
+	std::shared_ptr<Event> thisEvent = m_execObj->m_eventList.at(eid - 1);
+
+	for (std::vector<std::shared_ptr<Date>>::iterator date = thisEvent->m_meetDates.begin(); date != thisEvent->m_meetDates.end(); ++date)
+	{
+		for (auto time = (*date)->m_timeSlots.begin(); time != (*date)->m_timeSlots.end(); ++time)
+		{
+			std::string slot;
+			if (longtime) {
+				slot = zeroAppender((*time)->m_startTime);//here zeroAppender is taking the std::string parameter returned by i.getTime());
+			}
+			else {
+				slot = to12Hour((*time)->m_startTime);
+			}
+			std::cout << "Time: " << slot << "\nAttendees: ";
+
+			//SHows all attending users
+			std::cout << thisEvent->m_creator;
+
+			for (auto i : (*date)->m_timeSlots) {
+				for (auto j : (i)->m_attendees)
+				{
+					std::cout << (j)->m_realName;
+				}
+			}
+			std::cout << "\n";
+		}
+	}
+	std:: cout << "\n";
+}
+
 std::string CLI::to12Hour(std::string input){
 
 	int hour = std::stoi(input.substr(0, 2));
