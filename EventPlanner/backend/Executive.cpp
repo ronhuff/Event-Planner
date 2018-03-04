@@ -75,10 +75,11 @@ void Executive::run()
 				m_quit = true;
 				return;
 			}
-		}
-		int menuChoiceNum = menu();
+		}//exit while(!m_loggedIn)
+		int menuChoiceNum = menu();// as long as m_quit is not set true, and the user has not logged out(setting m_loggedIn to false), menu() will keep being called.
+
 		menuChoice(menuChoiceNum);
-	}
+	}// exit while(!m_quit) user must have chosen to quit, program will exit.
 	
 }
 
@@ -127,44 +128,6 @@ bool Executive::createAccount()
 	return(true);
 }
 
-//bool Executive::login()
-//{
-//	std::cin >> choice;
-//	while (choice != 1 && choice != 2 && choice != 3) {
-//		std::cin.clear(); // unset failbit
-//		std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
-//		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // skip bad input
-//		std::cout << "\nSelection: ";
-//		std::cin >> choice;
-//	}
-//	if (choice == 1) {
-//		std::string uname = "";
-//		std::cout << "Please enter your user name: ";
-//		std::cin >> uname;
-//		while (std::cin.fail() || uname == "") {
-//			std::cin.clear();
-//			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-//			std::cout << "Invalid username... Please re-enter your user name: ";
-//			std::cin >> uname;
-//		}
-//
-//		if (exec.setCurrentUser(uname)) {
-//			std::cout << "\nUsername accepted.\n";
-//			menu();
-//		}
-//		else {
-//			std::cout << "Username not recognized...\n\n";
-//			login();
-//		}
-//	}
-//	else if (choice == 2) {
-//		newAccount();
-//		login();
-//	}
-//	else {
-//		std::cout << "Have a pleasant day...\n";
-//	}
-//}
 
 
 int Executive::menu()
@@ -187,7 +150,7 @@ int Executive::menu()
 		std::cin >> choice;
 	}
 	std::cin.get();//this fixes an output issue.
-	return(choice);
+	return(choice);// choice is passed on to menuChoice()
 }
 
 void Executive::menuChoice(int choice)
@@ -219,8 +182,8 @@ void Executive::addEvent()
 	std::cin.get();
 	eventName = stringInput("\nChoose a name for your event.\n");
 
-	std::shared_ptr<Event> newEvent = std::make_shared<Event>();
-	newEvent->m_name = eventName;
+	std::shared_ptr<Event> newEvent = std::make_shared<Event>();//allocates the Event object on the heap;
+	newEvent->m_name = eventName;// sets the event name.
 	bool creating = true;
 	int meetDays = 1;
 	while (creating) {
@@ -239,13 +202,15 @@ void Executive::addEvent()
 		//GET TIMES
 		std::string startTime = stringInput("Please enter a start time in the format HH:MM\n");
 		std::string endTime = stringInput("Please enter an end time in the format HH:MM\n");
-		std::shared_ptr<Date> temp = std::make_shared<Date>(date, startTime, endTime, m_currentUser);//Date constructor should create timeslots and assign creator.
+
+		std::shared_ptr<Date> temp = std::make_shared<Date>(date, startTime, endTime, m_currentUser);//Date constructor should create timeslots and assign creator as attendee for each.
 		newEvent->m_meetDates.push_back(temp);//adding Date object to this event's vector of Date pointers.
 		std::cout << "Do you wish to add more days to this meeting?\n";
 		std::cout << "1) Yes.\n";
 		std::cout << "2) No.\n";
 		std::cout << "Selection: ";
 		int choice;
+
 		std::cin >> choice;
 		while (choice != 1 && choice != 2) {
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // skip bad input
@@ -261,12 +226,24 @@ void Executive::addEvent()
 		}
 		else if (choice == 2)
 		{
-			creating = false;
+			creating = false;// users does not wish to add anymore days.
 		}
 	}
 	m_eventList.push_back(newEvent);
 }
 
+void Executive::viewMeetingList()
+{
+	// loop through all meetings.
+	for (std::vector<std::shared_ptr<Event>>::iterator it = m_eventList.begin(); it != m_eventList.end(); ++it) {
+		std::cout << "\nMeeting Name: " + (*it)->m_name + ".\n";
+
+		//loop through dates in meeting.
+		for (std::vector<std::shared_ptr<Date>>::iterator it1 = (*it)->m_dates.begin(); it1 != (*it)->m_dates.end(); ++it1)
+			std::cout << "Date(s):\t" << (*it1)->m_date + "\n";
+
+	}
+}
 std::string Executive::stringInput(std::string message) {
 	std::string input;
 	std::cout << message;
@@ -282,41 +259,3 @@ std::string Executive::stringInput(std::string message) {
 	return(input);
 }
 
-
-//int Executive::menu()
-//{
-//	std::cout << "Testing area!!!\n";
-//	std::cout << "-=============-\n\n";
-//	std::cout << "1) Create User.\n";
-//	std::cout << "2) Create Meeting.\n";
-//	std::cout << "3) View Users.\n";
-//	std::cout << "4) View Meetings.\n";
-//	std::cout << "5) Exit.\n";
-//	int choice;
-//	std::cout << "Selection: ";
-//	std::cin >> choice;
-//
-//	while (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5) {
-//		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // skip bad input
-//		std::cin.clear(); // unset failbit
-//		std::cout << "Please simply choose one of the options (1-5) and press enter/return.\n";
-//		std::cout << "\nSelection: ";
-//		std::cin >> choice;
-//	}
-//	std::cin.get();//this fixes an output issue.
-//	return(choice);
-//}
-//
-//void Executive::menuChoice(int choice)
-//{
-//	std::cout << "\nYou chose option " << choice << "\n";
-//	if (choice == 2)
-//	{
-//		addEvent();
-//	}
-//	if (choice == 5)
-//	{
-//		m_quit = true;
-//		return;
-//	}
-//}

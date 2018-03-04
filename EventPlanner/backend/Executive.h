@@ -40,12 +40,6 @@ private:
 
 	std::string stringInput(std::string);
 	bool createAccount();
+	void viewMeetingList();
 };
 
-//std::shared_ptr<Entity> sharedEntity = std::make_shared<Entity>();
-//std::shared_ptr<Entity> sharedEntity = std::make_shared<Entity>();
-//
-//std::shared_ptr<Entity> e0 = sharedEntity;
-//{
-//	std::shared_ptr<Entity> e1 = e0;
-//}
