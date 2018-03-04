@@ -117,6 +117,9 @@ std::string Executive::getFileName(DataFile type, std::string identifer){
 		case df_record:
 			file_name+="records/record_";
 		break;
+		case df_taskList:
+			file_name += "records/taskList_";
+			break;
 	}
 	
 	//Finally, add the identifer and .txt extension to the file.
@@ -335,31 +338,33 @@ std::list<std::string>* Executive::getAttending(int eid)
 	return UserList;
 }
 
-void  Executive::writeRecord(int eid, std::list<Record>* List)
-{
-	std::string filename = getFileName(df_record, std::to_string(eid));
-	std::list<std::string> tempUserlist;
-	std::string tempTime;
+// write TaskList here.
+bool Executive::writeTaskList(int eid, std::shared_ptr<TaskList> tl) {
+
+	std::string filename = getFileName(df_taskList, std::to_string(eid));
 	
+	std::vector<std::shared_ptr<TaskList>> outTasks = m_tasks;
+
 	//start write a new file with the same filename
-	std::ofstream outF (filename);
-	for(auto&& it = List->begin(); it != List->end(); it++)
+	std::ofstream outF(filename);
+
+	for (std::vector<std::shared_ptr<TaskList>>::iterator it = m_tasks.begin(); it != m_tasks.end(); ++it)
 	{
 		//write the time block
 		tempTime = it->getTime();
 		outF << 0 << " " << tempTime << std::endl;
 		tempUserlist = it->getUserList();
-		
+
 		outF << 1;
-		for(auto it2 = tempUserlist.begin(); it2 != tempUserlist.end(); it2++)
+		for (auto it2 = tempUserlist.begin(); it2 != tempUserlist.end(); it2++)
 		{
 			//write the users
 			outF << " " << *it2;
 		}
 		outF << std::endl;
 	}
-    outF.close();
-    delete List;
+	outF.close();
+	delete List;
 }
 
 bool Executive::removeRecord(int eid)

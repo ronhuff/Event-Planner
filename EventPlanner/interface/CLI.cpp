@@ -351,6 +351,7 @@ void CLI::newEvent() throw(std::exception) {
 	}
 	eventID = exec.generateEvent(name, date);
 	exec.writeRecord(eventID, exec.createRecordList(times));
+	exec.writeTaskList(eventID, )
 	delete times;   
 }
 //END NEW CODE
