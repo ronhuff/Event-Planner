@@ -419,24 +419,33 @@ void CLI::newEvent() throw(std::exception) {
 //END NEW CODE
 void CLI::viewEvent(int i){
     try{
-
-
-        std::shared_ptr<Event> e = m_execObj->getEventByID(i);
-		std::cout << "Title:\t\t" + e->m_name + "\nCreator:\t" + e->m_creator->m_realName + "\n";
-
-		for (std::vector<std::shared_ptr<Date>>::iterator it = e->m_meetDates.begin(); it != e->m_meetDates.end(); ++it)
-			std::cout << "Date(s):\t" + (*it)->m_date + "\n" +
-			"Start: " + (*it)->m_startTime + "\tEnd: " + (*it)->m_endTime + "\n\n";
-
-        std::string choice;
 		bool creator = false;
-        while(choice != "quit"){//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
-            if(m_execObj->m_currentUser->m_realName != e->m_creator->m_realName){
-				
+		bool viewing = true;
+		while (viewing) {//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
+			std::shared_ptr<Event> e = m_execObj->getEventByID(i);
+			std::cout << "Title:\t\t" + e->m_name + "\nCreator:\t" + e->m_creator->m_realName + "\n";
+
+			for (std::vector<std::shared_ptr<Date>>::iterator it = e->m_meetDates.begin(); it != e->m_meetDates.end(); ++it) {
+				std::cout << "Date(s):\t" + (*it)->m_date + "\n" +
+					"Start: " + (*it)->m_startTime + "\tEnd: " + (*it)->m_endTime + "\n\n";
+				for (std::vector<std::shared_ptr<TimeSlot>>::iterator ts = (*it)->m_timeSlots.begin(); ts != (*it)->m_timeSlots.end(); ++ts) {
+					std::cout << (*ts)->m_startTime;
+					for (std::vector<std::shared_ptr<User>>::iterator att = (*ts)->m_attendees.begin(); att != (*ts)->m_attendees.end(); ++att)
+					{
+						std::cout << " " + (*att)->m_realName + "\n";
+					}
+				}
+			}
+			std::string choice = "";
+			
+        
+			std::string currName = m_execObj->m_currentUser->m_realName;
+			std::string creatorName = e->m_creator->m_realName;
+            if(currName == creatorName){
+				creator = true;
             }
 			else
 			{
-				creator = true;
 			}
 			
 			while (1) {
@@ -454,28 +463,35 @@ void CLI::viewEvent(int i){
 				}
 
 				std::cout << "Selection:";//NOTE: returning from this function may not actually cause the user to "go back"
-				std::getline(std::cin, inString);
-				if (inString.empty() || stoi(inString) == 3) {
-					choice = "quit";
-					break;
 
+				int choice;
+				std::cin >> choice;
+				while (choice != 1 && choice != 2 && choice != 3)
+				{
+					if (!cin) {
+						std::cin.clear(); // unset failbit
+						std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
+						std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+					}
+					std::cout << "\nSelection: ";
+					std::cin >> choice;
 				}
-				else if (std::stoi(inString) == 1 && m_execObj->m_currentUser->m_realName != e->m_creator->m_realName) {
+				if(choice == 1 && m_execObj->m_currentUser->m_realName != e->m_creator->m_realName) {
 					creator = false;
 					setAvailability(i);//unknown if/how this works at this point, but am attempting to keep things integrated with Team 8 code.
 					std::cout << "\n";
 				}
-				else if (std::stoi(inString) == 1 && creator)
+				else if (choice == 1 && creator)
 				{
-				std:: cout << "\n";
+					std:: cout << "\n";
 					viewAvailability(i);
 				}
-				else if (std::stoi(inString) == 2 && !creator) {
+				else if (choice == 2 && !creator) {
 					viewAvailability(i);
 				}
-				else if (std::stoi(inString) == 2 && creator)
+				else if (choice == 2 && creator)
 				{
-					choice = "quit";
+					viewing = false;
 					break;
 				}
 				else {
@@ -521,7 +537,8 @@ void CLI::viewAvailability(int eid){
 
 	for (std::vector<std::shared_ptr<Date>>::iterator date = thisEvent->m_meetDates.begin(); date != thisEvent->m_meetDates.end(); ++date)
 	{
-		for (auto time = (*date)->m_timeSlots.begin(); time != (*date)->m_timeSlots.end(); ++time)
+		/*std::cout << thisEvent->m_creator->m_realName;*/
+		for (std::vector<shared_ptr<TimeSlot>>::iterator time = (*date)->m_timeSlots.begin(); time != (*date)->m_timeSlots.end(); ++time)
 		{
 			std::string slot;
 			if (longtime) {
@@ -533,15 +550,11 @@ void CLI::viewAvailability(int eid){
 			std::cout << "Time: " << slot << "\nAttendees: ";
 
 			//SHows all attending users
-			std::cout << thisEvent->m_creator;
-
-			for (auto i : (*date)->m_timeSlots) {
-				for (auto j : (i)->m_attendees)
-				{
-					std::cout << (j)->m_realName;
-				}
+			
+			for (std::vector<shared_ptr<User>>::iterator att = (*time)->m_attendees.begin(); att != (*time)->m_attendees.end(); ++att)
+			{
+				std::cout << (*att)->m_realName << "\n\t";
 			}
-			std::cout << "\n";
 		}
 	}
 	std:: cout << "\n";
