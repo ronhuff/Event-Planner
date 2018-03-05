@@ -1,56 +1,51 @@
 #include "Event.h"
-Event::Event(){
+Event::Event() {
 	//This should never be called. This is here to applease the compiler.
 }
-Event::Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum){	
+Event::Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum) {
+	listOfDates.push_back(inputDate);
 	name = inputName;
 	creatorRealName = inputCreatorRealName;
 	creatorUserName = inputCreatorUsername;
 	idNum = inputIDNum;
-	Date newDate(inputDate);
-	listOfDates.push_back(newDate);
 }
-Event::~Event(){
+Event::~Event() {
 
 }
-std::string Event::getDate(bool ifIO){
-	//Get the date as a string.
-	std::string s = boost::gregorian::to_iso_extended_string(date);
-	for(int x = s.length()-1; x >= 0; x--){
-		if(s.at(x) == '-'){
-			s.at(x) = '/';
+std::string Event::getDate(std::string date) {
+	for (int i = 0; i < listOfDates.size(); i++) {
+		if (listOfDates.at(i) == date) {
+			return(listOfDates.at(i));
 		}
 	}
-	if (ifIO) return(s);
-	return dateFormatFixer(s);
 }
 
-std::string Event::getName(){
+std::string Event::getName() {
 	return name;
 }
-std::string Event::getCreatorUserName(){
+std::string Event::getCreatorUserName() {
 	return creatorUserName;
 }
-std::string Event::getCreatorRealName(){
+std::string Event::getCreatorRealName() {
 	return creatorRealName;
 }
-int Event::getIDNumber(){
+int Event::getIDNumber() {
 	return idNum;
 }
-bool Event::operator>=(Event rhs){
-	return date >= rhs.date;
+/*bool Event::operator>=(Event rhs){
+return date >= rhs.date;
 }
 bool Event::operator<=(Event rhs){
-	return date <= rhs.date;
+return date <= rhs.date;
 }
 bool Event::operator>(Event rhs){
-	return date > rhs.date;
+return date > rhs.date;
 }
 bool Event::operator<(Event rhs){
-	return date < rhs.date;
-}
+return date < rhs.date;
+}*/
 
-bool Event::addTaskList(){
+bool Event::addTaskList() {
 	if (tasks == nullptr) {
 		tasks = new TaskList();
 		return(true);
@@ -75,4 +70,7 @@ std::string Event::dateFormatFixer(std::string date)
 	{
 		return(date);
 	}
+}
+void Event::addTimeSlot(std::list<std::string>* list) {
+	listOfTimeSlots.push_back(list);
 }
