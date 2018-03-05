@@ -50,7 +50,6 @@ Executive::Executive(){
 	}
 	//Sort the events by date.
 	sortEventList();
-	m_currTL = std::make_shared<TaskList>();
 }
 Executive::~Executive(){
 	if(eventList != nullptr){
@@ -382,7 +381,10 @@ bool Executive::readinTaskList(int eid)
 	{
 		throw std::logic_error("TaskList file does not exist.");
 	}
-	inF >> *m_currTL;
+	std::shared_ptr<TaskList> temp = std::make_shared<TaskList>();
+	std::shared_ptr<TaskList> temp2 = temp;
+	inF >> *temp2;
+	m_currTL.push_back(temp2);
 	inF.close();
 	
 	return(true);
@@ -439,7 +441,7 @@ bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
 			}
 			(*tlit)->m_eventId = eid;
 			(*tlit)->m_numTasks = taskVector.size();
-			m_currTL = (*tlit);
+			m_currTL.at(1) = (*tlit);
 			return(true);
 		}
 

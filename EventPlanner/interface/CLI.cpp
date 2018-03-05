@@ -427,7 +427,7 @@ void CLI::newEvent() throw(std::exception) {
 		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
 		//exec.writeRecord(eventID, exec.createRecordList(times), populateTaskList());
 		exec.createTaskList(tasks, eventID);
-		exec.writeTaskList(eventID, exec.m_currTL);
+		exec.writeTaskList(eventID, exec.m_currTL.at(1));
 		exec.writeRecord(eventID, exec.createRecordList(times));
 		//Switch the two above functions 
 		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
@@ -620,7 +620,7 @@ void CLI::viewEvent(int i){
 				}
 				
 				/*exec.displayTasks();*/
-				std::cout << exec.m_currTL;
+				std::cout << *exec.m_currTL.at(0);
 			}
 			else {
 				std::cout << "Error: Invalid meeting number.\n";

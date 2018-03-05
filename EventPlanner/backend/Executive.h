@@ -216,7 +216,7 @@ class Executive{
 		std::vector<std::shared_ptr<TaskList>> m_taskLists;
 
 		/*void displayTasks();*/
-		std::shared_ptr<TaskList> m_currTL;
+		std::vector<std::shared_ptr<TaskList>> m_currTL;
 	private:
 		/**
 		 * An enum representing the various information types that are saved.
