@@ -2,6 +2,8 @@
 #define DATE_H
 
 #include "Executive.h"
+#include "Record.h"
+#include "boost\date_time.hpp"
 
 class Date{
   public:
