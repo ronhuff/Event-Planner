@@ -12,12 +12,8 @@ Event::Event(std::string inputName, std::vector<std::string> inputDate, std::str
 Event::~Event() {
 
 }
-std::string Event::getDate(std::string date) {
-	for (int i = 0; i < listOfDates.size(); i++) {
-		if (listOfDates.at(i) == date) {
-			return(listOfDates.at(i));
-		}
-	}
+std::string Event::getDate(int position) {
+			return(listOfDates.at(position));
 }
 
 std::string Event::getName() {
@@ -73,4 +69,7 @@ std::string Event::dateFormatFixer(std::string date)
 }
 void Event::addTimeSlot(std::list<std::string>* list) {
 	listOfTimeSlots.push_back(list);
+}
+int Event::getSizeOfDateVector() {
+	return(listOfDates.size());
 }

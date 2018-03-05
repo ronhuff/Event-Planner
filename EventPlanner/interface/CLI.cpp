@@ -237,7 +237,12 @@ void CLI::listEvents(){
 
 				for (int i = 0; i < tabs; i++) strngTabs += "\t";
 
-				std::cout << std::to_string(e.getIDNumber()) + ")" << "\t" << e.getName() << strngTabs << e.getDate(false) << "\t\t" << e.getCreatorRealName() << "\n";
+				std::cout << std::to_string(e.getIDNumber()) + ")" << "\t" << e.getName() << strngTabs;
+				for (int i = 0; i < e.getSizeOfDateVector(); i++)
+				{
+					std::cout << e.getDate(i) << "\t\t";
+				}
+				std::cout << e.getCreatorRealName() << "\n";
 			}
 			catch (std::exception& e) {
 				std::cout << "Failed to load an event... :(\n";
@@ -332,19 +337,15 @@ void CLI::newEvent() throw(std::exception) {
 			validDate = true;
 		}
     }
-<<<<<<< HEAD
 	std::vector<std::string> dList;
 	dList.push_back(date);
 
 	std::vector<std::list<std::string>*> tList;
 	std::cout << "\nPlease enter a beginning time for your meeting.\n";
 	std::cout << "Your time will be rounded down to the nearest 20-minite interval.\n";
-=======
-	eventID = exec.generateEvent(name, date);
 	
 	std::cout << "\nPlease enter a beginning and end time for your meeting.\n";
 	std::cout << "Your time must be on a 20-minite interval.\n";
->>>>>>> b6cf944659c71782b4e37f88b24ec24aa385544d
 	//BEGIN NEW CODE
 	std::string stime = "";
 	std::string etime = "";
@@ -655,7 +656,7 @@ void CLI::newEvent() throw(std::exception) {
 
 		//std::vector<std::string> taskList(0); //Creates an empty task list vector
 		//exec.writeRecord(eventID, exec.createRecordList(times), taskList);
-		exec.writeTaskList(eventID, false);
+		//exec.writeTaskList(eventID, false);
 		exec.writeRecord(eventID, exec.createRecordList(tList,dList));
 		delete times;
 	}
@@ -764,8 +765,13 @@ void CLI::viewEvent(int i){
     try{
         Event* e = exec.getEventByID(i);
 		std::cout << "Title:\t\t" << e->getName() << "\n" <<
-			"Creator:\t" << e->getCreatorRealName() << "\n" <<
-			"Date:\t\t" << e->getDate(false) << "\n\n";
+			"Creator:\t" << e->getCreatorRealName() << "\n";
+		std::cout << "Date:\t\t";
+		
+		for (int i = 0; i < e->getSizeOfDateVector(); i++) {
+			std::cout << e->getDate(i) << "\t\t";
+		}
+		std::cout << "\n\n";
 		std::cout << "Tasks: ";
 
 		//"Start: " << /*starttime here*/ "\tEnd: " << /*endtime*/ "\n\n" << 

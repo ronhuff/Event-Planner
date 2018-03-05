@@ -50,7 +50,7 @@ public:
 	* @param bool True if called during file I/O else, false.
 	* @return the date as a string.
 	*/
-	std::string getDate(std::string date);
+	std::string getDate(int position);
 	/**
 	* A getter method for the event's name.
 	* @pre Event exists.
@@ -117,6 +117,7 @@ public:
 
 	TaskList* tasks;
 	void addTimeSlot(std::list<std::string>* list);
+	int getSizeOfDateVector();
 
 private:
 	/**

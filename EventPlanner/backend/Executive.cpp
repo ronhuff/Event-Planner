@@ -125,7 +125,7 @@ int Executive::generateEvent(std::string name, std::vector<std::string> date, st
 	//Now, we write the basic information of the event to the file in question.
 	file_info_writer << new_event.getName() << '\n';
 	for(int i = 0; i < date.size(); i++) {
-		file_info_writer << new_event.getDate(date.at(i)) << '\n';
+		file_info_writer << new_event.getDate(i) << '\n';
 	}
 	file_info_writer<< new_event.getCreatorUserName() << '\n' << new_event.getCreatorRealName() << '\n' << new_event.getIDNumber();
 
@@ -208,8 +208,7 @@ void Executive::rebuildEvent(std::string filename) {
 		std::getline(text_file, date);
 		dateList.push_back(date);
 	} while (isdigit(date[0]));
-	std::getline(text_file, date);
-	std::getline(text_file, creator_user_name);
+	creator_user_name = date;
 	std::getline(text_file, creator_real_name);
 	//temp stores the int as a string, it will be converted.
 	std::getline(text_file, temp);
