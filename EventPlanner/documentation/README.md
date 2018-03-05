@@ -19,5 +19,11 @@ systems.
 `EventPlanner.sln` will generate a Visual Studio project with all of the  
 correct dependencies, paths and libraries set. The dependencies are listed in the dependencies folder. 
 
+Once you are in Visual Studio, open the .sln file as its own project and hti CTRL-SHIFT-B to build the program. Building 
+the program will also create an executable. After a successful build, you should be able to run the debugger to actually run
+the program. 
+
 
 ##### `boost` libraries used under [License](https://github.com/ronhuff/Event-Planner/tree/Project-Setup/documentation/BoostLicense.txt).
+
+
