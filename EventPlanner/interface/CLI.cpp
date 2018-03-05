@@ -6,12 +6,12 @@ CLI::CLI(){
 
 void CLI::run(){
 	std::cout   << "\n*=========Welcome to Group 1's Project 2 Event Planner!==========*\n"
-				<< "*\tCredits:                                        \t*\n"
-				<< "*\t\tDiego Garcia                           \t\t*\n"
-				<< "*\t\tKyle Berkley                           \t\t*\n"
-				<< "*\t\tRon Huff                               \t\t*\n"
-				<< "*\t\tSurabhi Khachar                        \t\t*\n"
-				<< "*\t\tWeiting Wei                            \t\t*\n"
+				<< "*\tCredits:                                        \t *\n"
+				<< "*\t\tDiego Garcia                           \t\t *\n"
+				<< "*\t\tKyle Berkley                           \t\t *\n"
+				<< "*\t\tRon Huff                               \t\t *\n"
+				<< "*\t\tSurabhi Khachar                        \t\t *\n"
+				<< "*\t\tWeiting Wei                            \t\t *\n"
 				<< "*================================================================*\n\n";
 
 	struct tm newtime;
@@ -25,7 +25,9 @@ void CLI::run(){
 
 void CLI::login() {
 	int choice;
-	std::cout << "\n========================== LOGIN MENU ===========================\n";
+	std::cout << "\n=================================================================\n";
+	std::cout << "========================== LOGIN MENU ===========================\n";
+	std::cout << "=================================================================\n";
 	std::cout << "\t1) Login.\n";
 	std::cout << "\t2) Create Account.\n";
 	std::cout << "\t3) Exit.\n";
@@ -76,7 +78,9 @@ void CLI::login() {
 }
 
 void CLI::menu() {
-    std::cout << "\n\n=========================== MAIN MENU ===========================\n" <<
+	std::cout << "\n\n=================================================================\n";
+	std::cout << "=========================== MAIN MENU ===========================\n";
+	std::cout << "=================================================================\n" <<
 				 "\nPlease choose from the following options:\n\n" <<
                  "1) View Events List:\n" <<
 				 "2) Create New Event:\n"
@@ -127,6 +131,10 @@ void CLI::menu() {
 }
 
 void CLI::options() {
+	std::cout << "\n=================================================================\n";
+	std::cout << "========================== DISPLAY MENU =========================\n";
+	std::cout << "=================================================================\n\n";
+
 	int choice = 0;
 	std::cout << "Please select from the following options:\n";//We can add more here if necessary for Project 2 requirements.
 
@@ -147,11 +155,14 @@ void CLI::options() {
 	}
 
 	if (choice == 1) longtime = (longtime) ? false : true;
-	if (longtime) std::cout << "You've switched to 24 hour display mode.\n";
-	else		  std::cout << "You've switched to 12 hour display mode.\n";
+	if (longtime) std::cout << "\nYou've switched to 24 hour display mode.";
+	else		  std::cout << "\nYou've switched to 12 hour display mode.";
 }
 
 void CLI::newAccount() {
+	std::cout << "\n=================================================================\n";
+	std::cout << "======================= EVENT ACCOUNT MENU ======================\n";
+	std::cout << "=================================================================\n";
     std::string name = "";
     std::string username = "";
     bool validIdentifier = false;
@@ -204,6 +215,9 @@ void CLI::newAccount() {
 }
 
 void CLI::listEvents(){
+	std::cout << "\n=================================================================\n";
+	std::cout << "========================== EVENTS MENU ==========================\n";
+	std::cout << "=================================================================\n";
     std::vector<Event>* list = exec.getEventList();
     int size = list->size();
 	std::cout << "\n\tCurrently Scheduled Events:\n\n";
@@ -260,13 +274,15 @@ void CLI::listEvents(){
 	}
 }
 
-
 void CLI::newEvent() throw(std::exception) {
+	std::cout << "\n=================================================================\n";
+	std::cout << "========================= NEW EVENT MENU ========================\n";
+	std::cout << "=================================================================\n";
     int year = 0, month = 0, day = 0;
     int eventID;
     std::string date = "";
-    std::cout << "You are creating a new event.\n";
-    std::string name = input.getLine("First, provide an event title: ");
+    std::cout << "\nYou are creating a new event.\n";
+    std::string name = input.getLine("\nFirst, provide an event title: ");
 
 
     std::cout << "\nTo create event \"" << name << "\", there needs to be a date.\n";
@@ -355,10 +371,17 @@ void CLI::newEvent() throw(std::exception) {
 			continue;
 		}
 		try {
-			stoi(std::string() + stime.at(0) + stime.at(1));
+			int tempHr = stoi(std::string() + stime.at(0) + stime.at(1));
 			startMin = stoi(std::string() + stime.at(3) + stime.at(4));
 			if (stime.at(2) != ':') continue;
-
+			else if (tempHr < 5 || tempHr > 23 || tempHr == 12) {
+				std::cout << "Starting hour is not on acceptbale range...\n";
+				continue;
+			}
+			else if (startMin != 20 && startMin != 40 && startMin != 0) {
+				std::cout << "Starting minute must be a valid 20 minute interval.\n";
+				continue;
+			}
 		}
 		catch (std::exception& e) {
 			std::cout << "Your input must be valid.\n";
@@ -386,6 +409,14 @@ void CLI::newEvent() throw(std::exception) {
 		}
 		if (myendhr < 5 || myendhr > 24) {
 			std::cout << "Can not end event at that time.\n";
+			continue;
+		}
+		else if (myendhr < 5 || myendhr > 24) {
+			std::cout << "Ending hour is not on acceptbale range...\n";
+			continue;
+		}
+		else if (endMin != 20 && endMin != 40 && endMin != 0) {
+			std::cout << "Ending minute must be a valid 20 minute interval.\n";
 			continue;
 		}
 		if (checkTime(stime, etime)) break;
@@ -442,13 +473,11 @@ void CLI::newEvent() throw(std::exception) {
 	if (newList == 1) {
 		std::vector<std::string> tasks = populateTaskList();
 		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
-		//exec.writeRecord(eventID, exec.createRecordList(times), populateTaskList());
 		exec.createTaskList(tasks, eventID);
 		exec.writeTaskList(eventID, exec.m_currTL);
 		exec.writeRecord(eventID, exec.createRecordList(times));
 		//Switch the two above functions 
-		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
-		delete times;
+		std::cout << "\n\t~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
 
 		//std::shared_ptr<TaskList> temp = std::make_shared<TaskList>();
 		//temp->createTask();
@@ -458,20 +487,14 @@ void CLI::newEvent() throw(std::exception) {
 		/*m_tasks = new TaskList();*/
 	}
 	else {
-		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
+		std::cout << "\n\t~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
 		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
 
 		//std::vector<std::string> taskList(0); //Creates an empty task list vector
-		//exec.writeRecord(eventID, exec.createRecordList(times), taskList);
 		exec.writeTaskList(eventID, false);
 		exec.writeRecord(eventID, exec.createRecordList(times));
-		delete times;
 	}
-
-	//eventID = exec.generateEvent(name, date);
-	//exec.writeRecord(eventID, exec.createRecordList(times));
-	//exec.writeTaskList(eventID, taskList);
-	//delete times;   
+	delete times;
 }
 
 std::vector<std::string> CLI::populateTaskList() {
@@ -481,7 +504,9 @@ std::vector<std::string> CLI::populateTaskList() {
 	int choice;
 
 	while (1) {
-		std::cout << "\n=========================== TASK MENU ===========================\n\n" <<
+		std::cout << "\n=================================================================\n";
+		std::cout << "=========================== TASK MENU ===========================\n";
+		std::cout << "=================================================================\n" <<
 			"1) View current task list\n" <<
 			"2) Add another task\n"
 			"3) Remove a task\n" <<
@@ -569,87 +594,65 @@ std::vector<std::string> CLI::populateTaskList() {
 }
 
 void CLI::viewEvent(int i){
-    Event* e = exec.getEventByID(i);
-	std::cout << "Title:\t\t" << e->getName() << "\n" <<
-		"Creator:\t" << e->getCreatorRealName() << "\n" <<
-		"Date:\t\t" << e->getDate(false) << "\n\n" <<
-		"Start: " << /*starttime here*/ "\tEnd: " << /*endtime*/ "\n\n";
+    try{
+        Event* e = exec.getEventByID(i);
+		std::cout << "Title:\t\t" << e->getName() << "\n" <<
+			"Creator:\t" << e->getCreatorRealName() << "\n" <<
+			"Date:\t\t" << e->getDate(false) << "\n\n";
+		//std::cout << "Tasks: ";
+		try {
+			exec.readinTaskList(i);//i is the id parameter passed in originally.
+			std::shared_ptr<TaskList> temp = exec.displayTasks();
+			temp->displayTaskList();// need functionality here for interactiong with the tasklist.
+		}
+		catch (std::exception& e) {
+			std::cout << e.what();
+		}
+		//"Start: " << /*starttime here*/ "\tEnd: " << /*endtime*/ "\n\n" << 
 
-    std::string choice;
-	bool creator = false;
-    while(choice != "quit"){//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
+		bool creator = false;
 		creator = exec.getCurrentUser()->getUserName() == e->getCreatorUserName();
-		/*if(exec.getcurrentuser()->getusername() != e->getcreatorusername()){
-				
-        }
-		else
-		{
-			creator = true;
-		}*/
-			
-		while (1) {
-			std::string inString = "";
-			if (creator)
-			{
-				std::cout << "1) Redisplay meeting time slots.\n";
-				std::cout << "2) Return to menu.\n";
-				std::cout << "3) Interact with TaskList.\n";
-			}
-			else {
-				std::cout << "If you are interested in joining this event:\n";
-				std::cout << "1) Indicate your availability.\n"; //WE WILL ADD OTHER OPTIONS TO THIS MENU SO FULL MENU IMPLENTATION AT THIS POINT IS WORTH.
-				std::cout << "2) Redisplay meeting time slots.\n"; //We can make these menus way more user friendly if we start making this feel more like an actual application
-				std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
-			}
+		if (creator) {
+			std::cout << "\nWelcome, event creator!\n\n";
+			viewAvailability(i);
 
-			std::cout << "Selection:";//NOTE: returning from this function may not actually cause the user to "go back"
-			std::getline(std::cin, inString);
-			if (inString.empty() || (stoi(inString) == 3 && !creator)) {
-				choice = "quit";
-				break;
+			std::string waiter = input.getString("Would you like to add another day (y/n): ");
+			return;
+		}
 
+		while(1) {//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
+			int menuchoice = 0;
+
+			std::cout << "\nWelcome Attendee! Here are your options:\n";
+			std::cout << "1) Indicate your availability.\n"; //WE WILL ADD OTHER OPTIONS TO THIS MENU SO FULL MENU IMPLENTATION AT THIS POINT IS WORTH.
+			std::cout << "2) Sign up for event tasks.\n"; 
+			std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
+			std::cout << "\nSelection: ";
+			std::cin >> menuchoice;
+			while (menuchoice != 1 && menuchoice != 2 && menuchoice != 3) {
+				std::cin.clear(); // unset failbit
+				std::cout << "Please choose one of the options (1-3).\n";
+				std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+				std::cout << "\nSelection: ";
+				std::cin >> menuchoice;
 			}
-			else if (std::stoi(inString) == 1 && exec.getCurrentUser()->getUserName() != e->getCreatorUserName()) {
-				creator = false;
+			if (menuchoice == 1) {
 				setAvailability(i);//unknown if/how this works at this point, but am attempting to keep things integrated with Team 8 code.
 				std::cout << "\n";
 			}
-			else if (std::stoi(inString) == 1 && creator)
-			{
-			std:: cout << "\n";
-				viewAvailability(i);
+			else if (menuchoice == 2) {
+				std::cout << "Choose an unassigned task from above!\n";
 			}
-			else if (std::stoi(inString) == 2 && !creator) {
-				viewAvailability(i);
-			}
-			else if (std::stoi(inString) == 2 && creator)
-			{
-				choice = "quit";
+			else if (menuchoice == 3) {
+				//delete temp;
 				break;
 			}
-			else if (std::stoi(inString) == 3/* && creator*/)
-			{
-				try {
-					exec.readinTaskList(i);//i is the id parameter passed in originally.
-				}
-				catch (std::exception& e) {
-					std::cout << e.what();
-				}
-				
-				std::shared_ptr<TaskList> temp = exec.displayTasks();
-				temp->displayTaskList();// need functionality here for interactiong with the tasklist.
-				
-			}
-			else {
-				std::cout << "Error: Invalid meeting number.\n";
-			}
 		}
+		delete e;
     }
-    delete e;
-
-    /*}catch(std::exception& e){
-        std::cout << "Invalid event number.\n";
-    }*/
+	catch (std::exception& e) {
+		std::cout << e.what();
+	}
 }
 
 void CLI::setAvailability(int eid){
