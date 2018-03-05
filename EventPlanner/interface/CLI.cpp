@@ -5,29 +5,36 @@ CLI::CLI(){
 }
 
 void CLI::run(){
-	std::cout << "\nWelcome to the event planner!\n";
+	std::cout   << "\n*=========Welcome to Group 1's Project 2 Event Planner!=========*\n"
+				<< "*\tCredits:                                        \t*\n"
+				<< "*\t\tDiego Garcia                           \t\t*\n"
+				<< "*\t\tKyle Berkley                           \t\t*\n"
+				<< "*\t\tRon Huff                               \t\t*\n"
+				<< "*\t\tSurabhi Khachar                        \t\t*\n"
+				<< "*\t\tWeiting Wei                            \t\t*\n"
+				<< "*===============================================================*\n\n";
 
-	//This could feasibly just be placed in a login() function, but I think it would be good practice to place credits
-	//	here, class info, "this is project two and here is our names" etc etc, as this will only need to be done once.
+	struct tm newtime;
+	time_t now = time(0);
+	localtime_s(&newtime, &now);
 
-	//Also it just looks good, and having a separate login() function is good for modularity later on.
-
-	std::cout << "=============================\n\n";
+	std::cout << "\t\t~ The current date is " << (newtime.tm_mon+1) << "/" << newtime.tm_mday << "/" << newtime.tm_year+1900 << " ~" <<endl;
 
 	login();
 }
 
 void CLI::login() {
 	int choice;
-	std::cout << "1) Login.\n";
-	std::cout << "2) Create Account.\n";
-	std::cout << "3) Exit.\n";
-	std::cout << "Selection: ";
+	std::cout << "\n======================== Login Menu =======================\n";
+	std::cout << "\t1) Login.\n";
+	std::cout << "\t2) Create Account.\n";
+	std::cout << "\t3) Exit.\n";
+	std::cout << "\nSelection: ";
 
 	std::cin >> choice;
 	while (choice != 1 && choice != 2 && choice != 3) {
 		std::cin.clear(); // unset failbit
-		std::cout << "Please simply choose one of the options (1-3) and press enter/return.\n";
+		std::cout << "Please choose one of the options (1-3).\n";
 		std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
 		std::cout << "\nSelection: ";
 		std::cin >> choice;
@@ -62,7 +69,8 @@ void CLI::login() {
 }
 
 void CLI::menu() {
-    std::cout << "\nPlease choose from the following options:\n\n" <<
+    std::cout << "\n\n=========================== MAIN MENU ===========================\n" <<
+				 "\nPlease choose from the following options:\n\n" <<
                  "1) View Events List:\n" <<
 				 "2) Create New Event:\n"
                  "3) Manage Settings:\n" <<
@@ -106,26 +114,28 @@ void CLI::menu() {
 }
 
 void CLI::options() {
-	int choice = 0;
+	std::string choice = 0;
 	std::cout << "Please select from the following options:\n";//We can add more here if necessary for Project 2 requirements.
 
-	while (choice != 1 && choice != 2) {
+	while (choice != "1" && choice != "2") {
 		if (longtime) std::cout << "1) Switch to 12 hour display.\n";
 		else std::cout <<          "1) Switch to 24 hour display.\n";
 
 		std::cout << "2) Close time-toggle.\n";
-		std::cout << "\nSelection: ";
-		std::cin >> choice;
+		//std::cout << "\nSelection: ";
+		choice = input.getString("\nSelection: ");
 
-		if (choice != 1 && choice != 2) {
-			std::cin.clear(); // unset failbit
+		if (choice != "1" && choice != "2") {
+			//std::cin.clear(); // unset failbit
 			std::cout << "Please simply choose one of the options (1 or 2) and press enter/return.\n";
-			std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+			//std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
 			continue;
 		}
 	}
 
-	if (choice == 1) longtime = (longtime) ? false : true;
+	if (choice == "1") longtime = (longtime) ? false : true;
+	if (longtime) std::cout << "You've switched to 24 hour display mode.\n";
+	else		  std::cout << "You've switched to 12 hour display mode.\n";
 }
 
 void CLI::newAccount() {
@@ -133,27 +143,50 @@ void CLI::newAccount() {
     std::string username = "";
     bool validIdentifier = false;
 
-	name = input.getLine("Enter your full name: ");
-	while (name == "" || name.length() < 5 || name.length() > 64) {
-		std::cout << "Hm. Try a name between 5 and 50 characters.\n";
+	name = input.getLine("\nEnter your full name: ");
+	while (name.length() < 5 || name.length() > 64) {
+		if (name.empty() || name == "quit" || name == "Quit") {
+			std::cout << "Returning to login menu...\n";
+			return;
+		}
+		std::cout << "Hm. Try a name between 5 and 50 characters.\nYou can \"Quit\"to return to the login menu.\n";
+		name = "";
 		name = input.getLine("Enter your full name: ");
 	}
 
+	//std::cout << "You've created full name: \"" << name << "\".\n";
+
     while(!validIdentifier) {
-        username = input.getString("Enter your preferred username (no spaces): ");
-		cout << username;
-		if (username == "CreateAccount" || username == "Quit" || username == "" || username.find("\n ") != std::string::npos) {
+        username = input.getString("\nEnter your preferred username (no spaces): ");
+		if (username.empty() || username == "quit" || username == "Quit") {
+			std::cout << "Returning to login menu...\n";
+			return;
+		}
+		else if (username == "CreateAccount" || username == "Quit") { //username.find(" ") != std::string::npos
 			std::cout << "You may not use that username.\n";
+			std::cout << "\nYou can \"Quit\" to cancel...\n";
 			continue;
 		}
+		else if (username.length() < 5 || username.length() > 32) {
+			std::cout << "Keep your username between 5 and 32 characters please.\n";
+			std::cout << "\nYou can \"Quit\" to cancel...\n";
+			continue;
+		}
+		else if (username.find(' ') != std::string::npos) {
+			cout << "Username cannot have spaces!" << endl;
+			continue;
+		}
+
 
 		validIdentifier = exec.createUser(username, name);
 		if (!validIdentifier) {
 			std::cout << "Someone has that username already.\n";
 			username = "";
+			std::cout << "\nYou can \"Quit\" to cancel...\n";
 			continue;
 		}
-		std::cout << "\nAccount " + username + " has been created.\n";
+		std::cin.clear();
+		std::cout << "\nAccount " + username + " has been created under the name \"" + name + "\".\n";
     }
 }
 
@@ -192,10 +225,10 @@ void CLI::listEvents(int first){
 				return;
 			}
 		}
-		std::cout << "\nPlease select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
-		std::cout << "Selection: ";
-
-		getline (std::cin, inString);
+		//std::cout << "\nPlease select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
+		//std::cout << "Selection: ";
+		inString = input.getString("\nPlease select a meeting to view or press enter to go back.\nSelection: ");
+		//getline(std::cin, inString);
 		if (inString.empty()){
 			break;
 		}
@@ -218,38 +251,67 @@ void CLI::newEvent() throw(std::exception) {
     int year = 0, month = 0, day = 0;
     int eventID;
     std::string date = "";
-    std::cout << "You are creating a new event.\nTo get started with, we need an event title.\n";
-    std::string name = input.getLine("Enter event name: ");
+    std::cout << "You are creating a new event.\n";
+    std::string name = input.getLine("First, provide an event title: ");
 
-    std::cout << "Next there needs to be a date for the event.\n";
-    bool validDate = false;
+
+    std::cout << "\nTo create event \"" << name << "\", there needs to be a date.\n";
+	struct tm newtime;
+	time_t now = time(0);
+	localtime_s(&newtime, &now);
+	 
+    bool validDate = false; //Hahaha like "validate"
 	while (!validDate) {
-		std::cout << "Please enter a date in the format MM/DD/YYYY.\n";
-
-		
+		std::cout << "\nPlease enter a date in the format MM/DD/YYYY.\n";
 		std::cin >> date;
 
-		while (!cin || date.length() != 10 || (date[2] != '/' || date[5] != '/')) {
-			std::cout << "ERROR: Please enter a date in the format MM/DD/YYYY.\n";
+		while (std::cin.fail() || date.length() != 10 || (date[2] != '/' || date[5] != '/')) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			std::cout << "For ease of use, enter a date in the format MM/DD/YYYY.\n";
 			std::cin >> date;
 		}
 		std::string year = date.substr(6, 4);
 		std::string day = date.substr(3, 2);
 		std::string month = date.substr(0, 2);
-		if (stoi(year) < 2018) {
-			throw std::logic_error("No meetings permitted to be scheduled in the past.\n");
+
+		try {
+			stoi(year);
+			stoi(month);
+			stoi(day);
+		}
+		catch (std::exception& e) {
+			std::cout << "Each date value (MM, DD, and YYYY) must be a valid integer.\nTry again.\n";
+			continue;
+		}
+
+		//Checks if date is in the past:
+		if (stoi(year) < newtime.tm_year + 1900) {
+			std::cout << "No meetings permitted to be scheduled in a past year.\n";
+			continue;
+		}
+		else if (stoi(year) == (newtime.tm_year + 1900) && (newtime.tm_mon+1) > stoi(month)) {
+			std::cout << "No meetings permitted to be scheduled in a past month.\n";
+			continue;
+		}
+		else if (stoi(year) == (newtime.tm_year+1900) && (newtime.tm_mon+1) == stoi(month) && stoi(day) < newtime.tm_mday) {
+			std::cout << "No meetings permitted to be scheduled in a past date.\n";
+			continue;
 		}
 		//New Year's Day.
-		if (month == "01" && day == "01"){
-			throw std::logic_error("No meetings permitted to be scheduled on New Year's Day.\n");
+		else if (month == "01" && day == "01"){
+			std::cout << "No meetings permitted to be scheduled on New Year's Day.\n";
+			continue;
 		}
 		//Independence Day
 		else if (month == "07" && day == "04"){
-			throw std::logic_error("No meetings permitted to be scheduled on Independence Day.\n");
+			std::cout << "No meetings permitted to be scheduled on Independence Day.\n";
+			continue;
 		}
 		//Christmas Day
 		else if (month == "12" && day == "25"){
-			throw std::logic_error("No meetings permitted to be scheduled on Christmas Day.\n");
+			std::cout << "No meetings permitted to be scheduled on Christmas Day.\n";
+			continue;
 		}
 		else {
 			validDate = true;
@@ -257,8 +319,13 @@ void CLI::newEvent() throw(std::exception) {
 		date = year + "/" + month + "/" + day;
 		validDate = true;
     }
+
+	//=================
+	eventID = exec.generateEvent(name, date);
+
 	
-	std::cout << "Please enter a beginning time for your meeting. ";
+	std::cout << "\nPlease enter a beginning time for your meeting.\n";
+	std::cout << "Your time will be rounded down to the nearest 20-minite interval.\n";
 	//BEGIN NEW CODE
 	std::string stime = "";
 	std::string etime = "";
@@ -331,29 +398,129 @@ void CLI::newEvent() throw(std::exception) {
 	std::cout << "1) Yes.\n";
 	std::cout << "2) No.\n";
 	int newList;
+	std::cout << "Add tasks? ";
 	std::cin >> newList;
 
-	while (std::cin.fail())
-	{
+	while (newList != 1 && newList != 2) {
 		std::cin.clear();
 		std::cin.ignore();
-		std::cout << "Error: Unrecognized input, please try again.\n";
+		std::cout << "Only an input of 1 or 2 is accepted.\n";
+		std::cout << "Add tasks? ";
 		std::cin >> newList;
 	}
-	if (newList == 1)
-	{
-		//code for addint list here. Will require analysis of data structure
-		/*m_tasks = new TaskList();*/
-	}
-	else
-	{
 
+	if (newList == 1) {
+		populateTaskList();
+		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
+		//exec.writeRecord(eventID, exec.createRecordList(times), populateTaskList());
+		exec.writeRecord(eventID, exec.createRecordList(times));
+		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
 	}
-	eventID = exec.generateEvent(name, date);
-	exec.writeRecord(eventID, exec.createRecordList(times));
-	delete times;   
+	else {
+		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
+		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
+
+		//std::vector<std::string> taskList(0); //Creates an empty task list vector
+		//exec.writeRecord(eventID, exec.createRecordList(times), taskList);
+		exec.writeRecord(eventID, exec.createRecordList(times));
+		delete times;
+	}
 }
-//END NEW CODE
+
+std::vector<std::string> CLI::populateTaskList() {
+	std::vector<std::string> taskList(0);
+	std::string task = "test";
+	std::string rmTask = "test, also";
+	int choice;
+
+	while (1) {
+		std::cout << "\nPlease choose from the following task options:\n\n" <<
+			"1) View current task list\n" <<
+			"2) Add another task\n"
+			"3) Remove a task\n" <<
+			"4) Complete task list\n";
+		std::cout << "Selection: ";
+		std::cin >> choice;
+		while (choice != 1 && choice != 2 && choice != 3 && choice != 4) {
+			std::cin.clear(); // unset failbit
+			std::cout << "Please choose one of the options (1-4) and press enter/return.\n";
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+			std::cout << "\nSelection: ";
+			std::cin >> choice;
+		}
+		
+		if (choice == 1) {
+			if (taskList.size() == 0) std::cout << "\nThere are no tasks right now.\n";
+			else {
+				std::cout << "\n------ Current Task List ------\n";
+				for (int i = 0; i < taskList.size(); i++) {
+					std::cout << (i+1) << ") " << taskList[i] << endl;
+				}
+			}
+		}
+		else if (choice == 2) {
+			while (1) {
+				task = "";
+				task = input.getString("\n"); //dummy getline because the IOStream is my enemy
+				task = input.getString("Provide a task title, or press enter to quit: ");
+				//std::cout << "task is " << task;
+				if (task.empty() || task == "quit" || task == "Quit") {
+					std::cout << "Returning to task menu...\n";
+					break;
+				}
+				else if (task.length() < 6) {
+					std::cout << "Try making a longer task title.\n";
+					continue;
+				}
+				for (int i = 0; i < taskList.size(); i++) {
+					if (task == taskList[i]) {
+						std::cout << "That task already exists. Try again...\n";
+						continue;
+					}
+				}
+				//If this code runs, constraints were passed.
+				taskList.push_back(task);
+				std::cout << "\nTask successfully added!\n";
+				break;
+			}
+		}
+		else if (choice == 3) {
+			if (taskList.size() == 0) std::cout << "\nThere are no tasks to delete.\n";
+			else {
+				std::cout << "\n------ Current Task List ------\n";
+				for (int i = 0; i < taskList.size(); i++) {
+					std::cout << (i + 1) << ") " << taskList[i] << endl;
+				}
+				int rmIndex = 0;
+				rmTask = "";
+				rmTask = input.getString("\n"); //dummy getline because the IOStream is my enemy
+				while (1) {
+					rmTask = input.getString("\nSelect a task to remove, or press enter to exit.: ");
+					if (rmTask.empty() || rmTask == "quit" || rmTask == "Quit") {
+						std::cout << "Returning to task menu...\n";
+						break;
+					}
+					try {
+						rmIndex = stoi(rmTask);
+						if (rmIndex < 1 || rmIndex > taskList.size()) {
+							std::cout << "Make sure to choose one of the indices above.\n";
+							continue;
+						}
+						std::cout << taskList[rmIndex-1] << " was removed!\n";
+						taskList.erase(taskList.begin() + rmIndex-1);
+						break;
+					}
+					catch (std::exception& e) {
+						std::cout << "Invalid index number.\n";
+						continue;
+					}
+				}
+			}
+		}
+		else return taskList;
+	}
+}
+
 void CLI::viewEvent(int i){
     try{
         Event* e = exec.getEventByID(i);
@@ -448,8 +615,6 @@ void CLI::setAvailability(int eid){
 void CLI::viewAvailability(int eid){
     std::list<Record>* eventRecords = exec.readRecord(eid);
     Event* event = exec.getEventByID(eid);
-
-	//
     
 	auto list_rbeg = (*eventRecords).rbegin();
 	auto list_rend = (*eventRecords).rend();
@@ -477,8 +642,6 @@ void CLI::viewAvailability(int eid){
 		}
 		std::cout << "\n";
 	}
-
-	//
 
 	std:: cout << "\n";
     delete event;
@@ -560,7 +723,6 @@ if (etime < stime){
 std::cout << "Time does not appear to conflict with time constraints.\n";
 return (true);
 }
-
 
 std::string CLI::zeroAppender(std::string time) throw(std::logic_error)
 {
