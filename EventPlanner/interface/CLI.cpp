@@ -643,15 +643,17 @@ void CLI::viewEvent(int i){
 			else if (menuchoice == 2) {
 				std::shared_ptr<TaskList> temp = exec.displayTasks();
 				temp->displayTaskList();
-
-				std::string inString = input.getString("\nPlease select a meeting to view or press enter to go back.\nSelection: ");
+				std::string inString = input.getString("\n");
+				inString = input.getString("\nPlease select a task to view or press enter to go back.\nSelection: ");
 				if (inString.empty()) break;
 				else if (inString.find_first_not_of("0123456789") != std::string::npos) std::cout << "Only numbers are accepted...\n\n";
 				else if ((std::stoi(inString) <= temp->m_numTasks) && std::stoi(inString) > 0) {
 					std::cout << "\n";
 					try {
 						temp->assignUser(std::stoi(inString), exec.getCurrentUser()->getUserName());
+						exec.writeTaskList(i, temp);
 						std::cout << "\n";
+						std::cout << "Success!!\n";
 					}
 					catch (std::exception& e) {
 						std::cout << "that task does not exist!";
@@ -660,8 +662,7 @@ void CLI::viewEvent(int i){
 				else {
 					std::cout << "Sorry, invalid task number.\n";
 				}
-				//temp->removeTask()
-				std::cout << "Choose an unassigned task from above!\n";
+
 			}
 			else if (menuchoice == 3) {
 				//delete temp;
