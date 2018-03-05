@@ -27,4 +27,5 @@ around, we also focused on documentation, making sure that we had organized docu
 the project.
 
 This process model worked well for us, better than others we had used previously. In the future, we definitely foresee utilizing some if not all
-aspects of this model again. It works well for our team as we can be more accommodating of each other.
+aspects of this model again. It works well for our team as we can be more accommodating of each other. It also allows for quick development of
+features and solving problems bit by bit as opposed to taking large portions of development at once. 
