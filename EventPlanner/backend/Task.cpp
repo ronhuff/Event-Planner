@@ -40,9 +40,9 @@ std::ostream& operator<<(std::ostream& out, Task& task)
 
 std::istream& operator>>(std::istream& in, Task& task)
 {
-	std::getline(in, task.m_name);
+	std::getline(in, task.m_name, '\n');
 	std::string temp;
-	std::getline(in, temp);
+	std::getline(in, temp, '\n');
 	if (temp == "1 ")
 	{
 		task.m_isAssigned = true;

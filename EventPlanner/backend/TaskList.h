@@ -15,6 +15,7 @@ public:
 	TaskList();
 	~TaskList();
 
+
 	bool addTask(std::shared_ptr<Task> task);
 	bool createTask(); // Gets name of task from user and attempts to call addTask(new Task(name));
 
@@ -23,6 +24,7 @@ public:
 	int m_eventId;
 	std::vector<std::shared_ptr<Task>> m_tasks; // contains all tasks related to this task list.
 
+	void displayTaskList();
 
 	//ADD VIEW METHODS HERE, e.g. viewTasks(bool isCreator);
 	friend std::ostream& operator<<(std::ostream& out, TaskList& tList);

@@ -50,7 +50,7 @@ class Executive{
 		 * @return the id of the newly created event.
 		 * @throw std::logic_error if the event is invalid
 		 */
-		int generateEvent(std::string name, std::string date);
+		bool generateEvent(std::string name, std::string date);
 		/**
 		 * This method removes an event.
 		 * @param event_id The id of the event to be deleted.
@@ -212,8 +212,12 @@ class Executive{
 		bool writeTaskList(int eid, std::shared_ptr<TaskList> tl);
 
 		bool createTaskList(std::vector<std::string>, int);
-
+		int eventNum = 0;
 		std::vector<std::shared_ptr<TaskList>> m_taskLists;
+
+		std::shared_ptr<TaskList> displayTasks();
+		std::shared_ptr<TaskList> m_currTL;
+
 	private:
 		/**
 		 * An enum representing the various information types that are saved.
@@ -271,7 +275,7 @@ class Executive{
 		 * Internal running tally of event identifiers; should make provisions so that no two
 		 * events get assigned the same event identifier
 		 */
-		int eventNum = 0;
+		
 
 		/**
 		 * This is a vector of Events.
