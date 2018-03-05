@@ -6,7 +6,7 @@
 class Date{
   public:
     Date();
-    Date(std::string inputDate, std::list<std::string> slots);
+    Date(std::string inputDate);
     ~Date();
     std::list<std::string> getTimeSlots();
     std::string getDate(bool ifIO);

@@ -8,6 +8,7 @@
 #include <exception>
 #include <boost/date_time.hpp>
 #include "TaskList.h"
+#include "Date.h"
 
 /**
  * Event Class.
@@ -118,11 +119,12 @@ class Event{
 		TaskList* tasks;
 
 	private:
+		std::vector<Date> listOfDates;
 		/**
 		 * The date variable.
 		 * This contains information regarding the YYYY/MM/DD of the event.
 		 */
-		boost::gregorian::date date;
+		//boost::gregorian::date date;
 		/**
 		 * A string variable.
 		 * This is the name of the event.

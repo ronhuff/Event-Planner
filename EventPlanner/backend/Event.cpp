@@ -2,13 +2,13 @@
 Event::Event(){
 	//This should never be called. This is here to applease the compiler.
 }
-Event::Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum){
-	date = boost::gregorian::from_string(inputDate);
-	
+Event::Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum){	
 	name = inputName;
 	creatorRealName = inputCreatorRealName;
 	creatorUserName = inputCreatorUsername;
 	idNum = inputIDNum;
+	Date newDate(inputDate);
+	listOfDates.push_back(newDate);
 }
 Event::~Event(){
 

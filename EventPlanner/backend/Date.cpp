@@ -4,9 +4,9 @@ Date::Date(){
 
 }
 
-Date::Date(std::string inputDate, std::list<std::string> slots){
+Date::Date(std::string inputDate){
   date = boost::gregorian::from_string(inputDate);
-  timeSlots = slots;
+  timeSlots = {};
 }
 Date::~Date(){
 

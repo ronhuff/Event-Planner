@@ -120,4 +120,5 @@ class CLI{
 		* @return: std::string - The time either with a zero appended or in it's original state when passed in.
 		*/
 		std::string zeroAppender(std::string time) throw(std::logic_error);
+		void addingSlotsFromAnotherDate(std::string date);
 };

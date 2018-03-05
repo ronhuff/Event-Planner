@@ -326,6 +326,122 @@ void CLI::newEvent() throw(std::exception) {
 		
 		times->push_back(slot);
 	}
+	int addNewDates;
+	std::cout << "WOuld you like to add more dates to this event:\n";
+	std::cout << "1) Yes\n";
+	std::cout << "2) No\n";
+	std::cout << "Enter Your Choice: ";
+	std::cin >> addNewDates;
+	if (addNewDates == 1) {
+		int nYear = 0;
+		int nMonth = 0;
+		int nDay = 0;
+		std::string nDate;
+		bool valid = false;
+		while (!valid) {
+			std::cout << "Please enter the new date that you would like to add i the format MM/DD/YYYY: ";
+			std::cin >> nDate;
+			while (!cin || nDate.length() != 10 || nDate[2] != '/' || nDate[5] != '/') {
+				std::cout << "ERROR: Date was not enter in the right format. \n";
+				std::cout << "Please enter the new date in the format MM/DD/YYYY: ";
+				std::cin >> nDate;
+			}
+			int test = 0;
+			std::string checkYear = nDate.substr(6, 4);
+			std::string checkDay = nDate.substr(3, 2);
+			std::string checkMonth = nDate.substr(0, 2);
+			if (test == 1 /*check current date with a standard library*/) {
+			}
+			else if (checkMonth == "01" && checkDay == "01") {
+				std::cout << "ERROR: no events are allowed during New Year's Day. \n";
+				std::cout << "Please enter a new date that is in the format MM/DD/YYYY: ";
+				std::cin >> nDate;
+			}
+			else if (checkMonth == "07" && checkDay == "04") {
+				std::cout << "ERROR: no events are allowed during Independence Day. \n";
+				std::cout << "Please enter a new date that is in the format MM/DD/YYYY: ";
+				std::cin >> nDate;
+			}
+			else if (checkMonth == "12" && checkDay == "25") {
+				std::cout << "ERROR: no events are allowed during Christmas Day. \n";
+				std::cout << "Please enter a new date that is in the format MM/DD/YYYY: ";
+				std::cin >> nDate;
+			}
+			else {
+				valid = true;
+			}
+			int choiceForTimeSlots;
+			std::cout << "1) Use the time slots from one of the other dates\n";
+			std::cout << "2) Use new Time slots for this new date\n";
+			std::cout << "Enter Your Choice: ";
+			std::cin >> choiceForTimeSlots;
+			if (choiceForTimeSlots == 1) {
+				std::string lookUpDate = "";
+				std::cout << "Enter the date that you would like to get the time slots from in the format MM/DD/YYYY: ";
+				std::cin >> lookUpDate;
+				addingSlotsFromAnotherDate(lookUpDate);
+			}
+			else if (choiceForTimeSlots == 2) {
+				std::string startingTime = "";
+				std::string endingTime = "";
+				std::cout << "Enter the start time in the format HH:MM: ";
+				std::cin >> startingTime;
+				if (!cin) {
+					std::cout << "ERROR:The start time was enter in the wrong format.\n";
+					std::cout << "Please enter the starting time in the format HH:MM: ";
+					std::cin >> startingTime;
+				}
+				std::cout << "Enter the end time in the format of HH:MM: ";
+				std::cin >> endingTime;
+				if (!cin) {
+					std::cout << "ERROR: The end time was enter in the wrong format.\n";
+					std::cout << "Please enter the end time in the format HH:MM: ";
+					std::cin >> endingTime;
+				}
+				while (!checkTime(startingTime, endingTime)) {
+					std::cout << "Enter the start time in the format HH:MM: ";
+					std::cin >> startingTime;
+					if (!cin) {
+						std::cout << "ERROR:The start time was enter in the wrong format.\n";
+						std::cout << "Please enter the starting time in the format HH:MM: ";
+						std::cin >> startingTime;
+					}
+					std::cout << "Enter the end time in the format of HH:MM: ";
+					std::cin >> endingTime;
+					if (!cin) {
+						std::cout << "ERROR: The end time was enter in the wrong format.\n";
+						std::cout << "Please enter the end time in the format HH:MM: ";
+						std::cin >> endingTime;
+					}
+				}
+				std::string startingHour = startingTime.substr(0, 2);
+				int startingMin = stoi(startingTime.substr(3, 2));
+				std::string endingHour = endingTime.substr(0, 2);
+				int endingMin = stoi(endingTime.substr(3, 2));
+				int totalMinutes = ((stoi(endingHour) - stoi(startingHour)) * 60 + (endingMin - startingMin));
+				int numOfTimeSlots = totalMinutes / 20;
+				std::list<std::string>* newTimes = new std::list<std::string>();
+				std::string nTimeSlots = startingHour + ":" + std::to_string(startingMin);
+				startingMin += 20;
+				newTimes->push_back(nTimeSlots);
+				for (int i = 1; i < numOfTimeSlots; i++) {
+					if (startingMin >= 60) {
+						startingMin = 0;
+						int incHr = std::stoi(startingHour);
+						incHr++;
+						startingHour = std::to_string(incHr);
+						nTimeSlots = startingHour + ":00";
+						startingMin += 20;
+					}
+					else {
+						nTimeSlots = startingHour + ":" + std::to_string(startingMin);
+						startingMin += 20;
+					}
+					newTimes->push_back(nTimeSlots);
+				}
+			}
+		}
+	}
 	std::cout << "\nWe can now include a list of tasks for the meeting!\n";
 	std::cout << "Would you like to add a list now? (you can still add one later.)\n";
 	std::cout << "1) Yes.\n";
@@ -353,6 +469,8 @@ void CLI::newEvent() throw(std::exception) {
 	exec.writeRecord(eventID, exec.createRecordList(times));
 	delete times;   
 }
+void CLI::addingSlotsFromAnotherDate(std::string lookingDate) {}
+
 //END NEW CODE
 void CLI::viewEvent(int i){
     try{
