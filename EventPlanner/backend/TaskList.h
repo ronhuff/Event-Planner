@@ -19,6 +19,11 @@ public:
 	bool addTask(std::shared_ptr<Task> task);
 	bool createTask(); // Gets name of task from user and attempts to call addTask(new Task(name));
 
+	bool removeTask(int taskNum);
+	bool assignUser(int taskNum, std::string user);
+	bool unassignUser(int taskNum);
+
+
 	int m_numTasks;
 	int m_numAvailTasks;
 	int m_eventId;

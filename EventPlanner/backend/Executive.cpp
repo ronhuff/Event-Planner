@@ -370,7 +370,7 @@ std::list<std::string>* Executive::getAttending(int eid)
 
 bool Executive::readinTaskList(int eid)
 {
-
+	m_currTL = nullptr;
 	std::string filename = getFileName(df_taskList, std::to_string(eid));
 
 	//open file
