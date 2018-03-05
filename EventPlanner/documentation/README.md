@@ -1,3 +1,5 @@
+<a name="top"></a>
+# Event Planner, Project 2
 
 Welcome to our Event Planner. This project was created by Ron Huff, Kyle Berkley, Weiting Wei, Diego Garcia, and Surabhi Khachar. 
 This event planner allows users to create events with time slots for attendees to pick from. The functionality for creating 
