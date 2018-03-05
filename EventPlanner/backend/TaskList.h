@@ -23,6 +23,7 @@ public:
 	int m_eventId;
 	std::vector<std::shared_ptr<Task>> m_tasks; // contains all tasks related to this task list.
 
+	void displayTaskList();
 
 	//ADD VIEW METHODS HERE, e.g. viewTasks(bool isCreator);
 	friend std::ostream& operator<<(std::ostream& out, TaskList& tList);

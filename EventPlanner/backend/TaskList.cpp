@@ -35,6 +35,33 @@ bool TaskList::createTask() {
 	return(addTask(std::make_shared<Task>(taskName))); // this creates the shared ptr. for the new task and addTask() will push it to the m_tasks
 }
 
+void TaskList::displayTaskList()
+{
+	std::cout << "Tasklist for meeting number: " + std::to_string(this->m_eventId) << std::endl << std::endl;
+	for (std::vector<std::shared_ptr<Task>>::iterator taskit = m_tasks.begin(); taskit != m_tasks.end(); ++taskit)
+	{
+		std::cout << "Task: ";
+		std::cout << (*taskit)->m_name << "\n";
+		std::cout << "Assignee: ";
+		if ((*taskit)->m_isAssigned == false)
+		{
+			std::cout << "None. Feel free to sign up!\n";
+		}
+		else
+		{
+			if ((*taskit)->m_assignName.length() > 1)
+			{
+				std::cout << (*taskit)->m_assignName + "\n";
+			}
+			else
+			{
+				std::cout << "" << std::endl;
+				//print to log no error appears.
+			}
+		}
+	}
+}
+
 std::ostream & operator<<(std::ostream & out, TaskList & tList)
 {
 	// TODO: insert return statement here

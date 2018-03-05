@@ -619,8 +619,8 @@ void CLI::viewEvent(int i){
 					std::cout << e.what();
 				}
 				
-				/*exec.displayTasks();*/
-				std::cout << *exec.m_currTL.at(0);
+				std::shared_ptr<TaskList> temp = exec.displayTasks();
+				temp->displayTaskList();// need functionality here for interactiong with the tasklist.
 			}
 			else {
 				std::cout << "Error: Invalid meeting number.\n";

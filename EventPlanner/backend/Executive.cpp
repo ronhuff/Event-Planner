@@ -384,18 +384,16 @@ bool Executive::readinTaskList(int eid)
 	std::shared_ptr<TaskList> temp = std::make_shared<TaskList>();
 	std::shared_ptr<TaskList> temp2 = temp;
 	inF >> *temp2;
+	temp->m_eventId = eid;
 	m_currTL.push_back(temp2);
 	inF.close();
 	
 	return(true);
 }
 
-//void Executive::displayTasks() {
-//	for (std::vector<std::shared_ptr<Task>>::iterator tait = m_currTL->m_tasks.begin(); tait != m_currTL->m_tasks.end(); ++tait)
-//	{
-//		std::cout << tait;
-//	}
-//}
+std::shared_ptr<TaskList> Executive::displayTasks() {
+	return(m_currTL.at(0));
+}
 
 bool Executive::writeTaskList(int eid, bool hasList = false)//this is to create a blank tasklist file.
 {
