@@ -401,6 +401,7 @@ bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
 				(*tlit)->addTask(temp);
 				(*tlit)->m_eventId = eid;
 				(*tlit)->m_numTasks = taskVector.size();
+				m_taskLists.push_back(*tlit);
 				return(true);
 			}
 		}
@@ -416,6 +417,7 @@ bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
 		}
 		tempTL->m_eventId = eid;
 		tempTL->m_numTasks = taskVector.size();
+		m_taskLists.push_back(tempTL);
 		return(true);
 	}
 	

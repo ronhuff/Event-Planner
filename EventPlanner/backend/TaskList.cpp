@@ -15,6 +15,7 @@ bool TaskList::addTask(std::shared_ptr<Task> newTask) {
 	int size = m_tasks.size();
 	m_tasks.push_back(newTask);
 	m_numTasks++;
+	m_numAvailTasks++;
 	return((size + 1) == m_tasks.size());
 }
 
