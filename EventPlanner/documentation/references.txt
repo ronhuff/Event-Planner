@@ -9,6 +9,4 @@ Documentation has been generated using Doxygen:
     Available at: http://doxegen.org
 
 Predef, preprocessor, x86, and debug files:
-  Provided by TA (Kurt Slagle) for running Visual Studio
-
-  
+  Provided by TA (Kurt Slagle) for building Visual Studio project
