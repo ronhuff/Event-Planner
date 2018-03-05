@@ -334,7 +334,7 @@ void CLI::newEvent() throw(std::exception) {
     }
 	std::vector<std::string> dList;
 	dList.push_back(date);
-	eventID = exec.generateEvent(name, date);
+
 	std::vector<std::list<std::string>*> tList;
 	std::cout << "\nPlease enter a beginning time for your meeting.\n";
 	std::cout << "Your time will be rounded down to the nearest 20-minite interval.\n";
@@ -413,8 +413,185 @@ void CLI::newEvent() throw(std::exception) {
 	std::cout << "2) No\n";
 	std::cout << "Enter Your Choice: ";
 	std::cin >> addNewDates;
+	int repeat = 1;
+		if (addNewDates == 1) {
+			while(repeat == 1){
+				int nYear = 0;
+				int nMonth = 0;
+				int nDay = 0;
+				std::string nDate;
+				bool valid = false;
+				bool validDate = false; //Hahaha like "validate"
+				while (!validDate) {
+					std::cout << "\nPlease enter a date in the format MM/DD/YYYY.\n";
+					std::cin >> date;
+
+					while (std::cin.fail() || date.length() != 10 || (date[2] != '/' || date[5] != '/')) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						std::cout << "For ease of use, enter a date in the format MM/DD/YYYY.\n";
+						std::cin >> date;
+					}
+					std::string year = date.substr(6, 4);
+					std::string day = date.substr(3, 2);
+					std::string month = date.substr(0, 2);
+
+					try {
+						stoi(year);
+						stoi(month);
+						stoi(day);
+					}
+					catch (std::exception& e) {
+						std::cout << "Each date value (MM, DD, and YYYY) must be a valid integer.\nTry again.\n";
+						continue;
+					}
+
+					//Checks if date is in the past:
+					if (stoi(year) < newtime.tm_year + 1900) {
+						std::cout << "No meetings permitted to be scheduled in a past year.\n";
+						continue;
+					}
+					else if (stoi(year) == (newtime.tm_year + 1900) && (newtime.tm_mon + 1) > stoi(month)) {
+						std::cout << "No meetings permitted to be scheduled in a past month.\n";
+						continue;
+					}
+					else if (stoi(year) == (newtime.tm_year + 1900) && (newtime.tm_mon + 1) == stoi(month) && stoi(day) < newtime.tm_mday) {
+						std::cout << "No meetings permitted to be scheduled in a past date.\n";
+						continue;
+					}
+					//New Year's Day.
+					else if (month == "01" && day == "01") {
+						std::cout << "No meetings permitted to be scheduled on New Year's Day.\n";
+						continue;
+					}
+					//Independence Day
+					else if (month == "07" && day == "04") {
+						std::cout << "No meetings permitted to be scheduled on Independence Day.\n";
+						continue;
+					}
+					//Christmas Day
+					else if (month == "12" && day == "25") {
+						std::cout << "No meetings permitted to be scheduled on Christmas Day.\n";
+						continue;
+					}
+					else {
+						validDate = true;
+					}
+					date = year + "/" + month + "/" + day;
+					validDate = true;
+				}
+				dList.push_back(nDate);
+				int choiceForTimeSlots;
+				std::cout << "1) Use the time slots from the other dates\n";
+				std::cout << "2) Use new time slots for this date\n";
+				std::cout << "Enter your choice: ";
+				std::cin >> choiceForTimeSlots;
+				if (choiceForTimeSlots == 1) {
+					if (dList.size() == 1) {
+						std::list<std::string>* newTimeSlots = tList.at(0);
+						tList.push_back(newTimeSlots);
+					}
+					else {
+						std::string lookUpDate = "";
+						int position;
+						for (int i = 0; i < dList.size(); i++) {
+							std::cout << dList.at(i) + "\n";
+						}
+						std::cout << "Enter one of the dates from above int the same format of MM/DD/YYYY: ";
+						std::cin >> lookUpDate;
+						for (int i = 0; i < dList.size(); i++) {
+							if (dList.at(i) == lookUpDate) {
+								position = i;
+							}
+						}
+						std::list<std::string>* oldTSlots = tList.at(position);
+						tList.push_back(oldTSlots);
+					}
+				}
+				else if (choiceForTimeSlots == 2) {
+					std::string newStart = "";
+					std::string newEnd = "";
+					std::cout << "Enter start time in format HH:MM\n";
+					std::cin >> newStart;
+					if (!cin) {//This will still allow for bad input for now but at least it forces it to be a string for testing.
+						std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
+						std::cin >> newStart;
+					}
+					std::cout << "Enter end time in format HH:MM\n";
+					std::cin >> newEnd;
+					if (!cin) {
+						std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
+						std::cin >> newEnd;
+					}
+					while (!checkTime(newStart, newEnd)) {
+						std::cout << "Enter start time in format HH:MM\n";
+						std::cin >> newStart;
+						if (!cin) {
+							std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
+							std::cin >> newStart;
+						}
+						std::cout << "Enter end time in format HH:MM\n";
+						std::cin >> newEnd;
+						if (!cin) {
+							std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
+							std::cin >> newEnd;
+						}
+					}
+
+					std::string sHr = newStart.substr(0, 2);
+					int sMin = stoi(newStart.substr(3, 2));
+					std::string eHr = newEnd.substr(0, 2);
+					int eMin = stoi(newEnd.substr(3, 2));
+					int TOTAL_MINS = ((stoi(eHr) - stoi(sHr)) * 60 + eMin - sMin);
+
+					int totalSlots = TOTAL_MINS / 20;
+
+					//std::cout << "Total Minutes: " + TOTAL_MINS + " timeslots: " + (TOTAL_MINS / 20) << "\n";
 
 
+					std::list<std::string>* ntimes = new std::list<std::string>();
+
+					//the first slot.
+					std::string nslot = sHr + ":" + std::to_string(eMin);
+					eMin += 20;
+					ntimes->push_back(nslot);
+					for (int i = 1; i < totalSlots; i++)
+					{
+						std::string slot = "";
+						//etime.substr(3, 2) this returns the endmin string
+						if (endMin >= 60) {
+							endMin = 0;
+							int hourInt = std::stoi(startHr);
+							hourInt++;
+							startHr = std::to_string(hourInt);
+							slot = startHr + ":" + "00";
+							endMin += 20;
+						}
+						else {
+							slot = startHr + ":" + std::to_string(endMin);
+							endMin += 20;
+						}
+						ntimes->push_back(slot);
+					}
+					tList.push_back(ntimes);
+				}
+				else {
+					//TODO Error for invalid input
+				}
+				std::cout << "Would you like to add more dates to this event:\n";
+				std::cout << "1) Yes\n";
+				std::cout << "2) No\n";
+				std::cout << "Enter Your Choice: ";
+				std::cin >> repeat;
+			}
+		}
+		else if (addNewDates == 2) {
+
+		}
+		else {
+			//TODO Invalid input
+		}
+		eventID = exec.generateEvent(name, dList, tList);
 	std::cout << "\nWe can now include a list of tasks for the meeting!\n";
 	std::cout << "Would you like to add a list now? (you can still add one later.)\n";
 	std::cout << "1) Yes.\n";

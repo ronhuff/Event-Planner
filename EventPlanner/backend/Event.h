@@ -35,7 +35,7 @@ public:
 	* @param inputIDNum The id number associated with the event.
 	* @throw std::logic_error This error occurs whenever an event is put into a holiday.
 	*/
-	Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum);
+	Event(std::string inputName,std::vector<std::string> inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum);
 	/**
 	* The destructor.
 	* @pre Event exists.
@@ -86,7 +86,7 @@ public:
 	* @param rhs The value to be compared with.
 	* @return true if the event happens after or on the same day as rhs.
 	*/
-	//bool operator>=(Event rhs);
+	bool operator>=(Event rhs);
 	/**
 	* An operator that compares this event's date with another's date.
 	* @pre Event exists and rhs exists.
@@ -94,7 +94,7 @@ public:
 	* @param rhs The value to be compared with.
 	* @return true if the event happens before or on the same day as rhs.
 	*/
-	//bool operator<=(Event rhs);
+	bool operator<=(Event rhs);
 	/**
 	* An operator that compares this event's date with another's date.
 	* @pre Event exists and rhs exists.
@@ -102,7 +102,7 @@ public:
 	* @param rhs The value to be compared with.
 	* @return true if the event happens after rhs.
 	*/
-	//bool operator>(Event rhs);
+	bool operator>(Event rhs);
 	/**
 	* An operator that compares this event's date with another's date.
 	* @pre Event exists and rhs exists.
@@ -110,7 +110,7 @@ public:
 	* @param rhs The value to be compared with.
 	* @return true if the event happens before rhs.
 	*/
-	//bool operator<(Event rhs);
+	bool operator<(Event rhs);
 
 	// TaskList area here.
 	bool addTaskList();

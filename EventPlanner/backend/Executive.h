@@ -11,6 +11,9 @@
 #include <vector>
 #include <algorithm>
 #include <boost/filesystem.hpp>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 /**
  * The Executive class. This deals with file IO and class interactions in the backend.
@@ -50,7 +53,7 @@ class Executive{
 		 * @return the id of the newly created event.
 		 * @throw std::logic_error if the event is invalid
 		 */
-		int generateEvent(std::string name, std::string date);
+		int generateEvent(std::string name, std::vector<std::string> date, std::vector<std::list<std::string>*> timeSlots);
 		/**
 		 * This method removes an event.
 		 * @param event_id The id of the event to be deleted.

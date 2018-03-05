@@ -2,8 +2,8 @@
 Event::Event() {
 	//This should never be called. This is here to applease the compiler.
 }
-Event::Event(std::string inputName, std::string inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum) {
-	listOfDates.push_back(inputDate);
+Event::Event(std::string inputName, std::vector<std::string> inputDate, std::string inputCreatorUsername, std::string inputCreatorRealName, int inputIDNum) {
+	listOfDates = inputDate;
 	name = inputName;
 	creatorRealName = inputCreatorRealName;
 	creatorUserName = inputCreatorUsername;
@@ -32,18 +32,18 @@ std::string Event::getCreatorRealName() {
 int Event::getIDNumber() {
 	return idNum;
 }
-/*bool Event::operator>=(Event rhs){
-return date >= rhs.date;
+bool Event::operator>=(Event rhs){
+return listOfDates.size() >= rhs.listOfDates.size();
 }
 bool Event::operator<=(Event rhs){
-return date <= rhs.date;
+return listOfDates.size() <= rhs.listOfDates.size();
 }
 bool Event::operator>(Event rhs){
-return date > rhs.date;
+return listOfDates.size() > rhs.listOfDates.size();
 }
 bool Event::operator<(Event rhs){
-return date < rhs.date;
-}*/
+return listOfDates.size() < rhs.listOfDates.size();
+}
 
 bool Event::addTaskList() {
 	if (tasks == nullptr) {

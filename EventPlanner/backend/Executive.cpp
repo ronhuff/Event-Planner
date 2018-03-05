@@ -109,10 +109,12 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 
 
 
-int Executive::generateEvent(std::string name, std::string date) throw(std::logic_error) {
+int Executive::generateEvent(std::string name, std::vector<std::string> date, std::vector<std::list<std::string>*> timeSlots) throw(std::logic_error) {
 	//This is the event we want to input data for.
 	Event new_event = Event(name, date, currentUser->getUserName(), currentUser->getRealName(), getEventNum());
-
+	for (int i = 0; i < timeSlots.size(); i++) {
+		new_event.addTimeSlot(timeSlots.at(i));
+	}
 	//Create the event at the back of the vector.
 	eventList->push_back(new_event);
 
@@ -121,7 +123,11 @@ int Executive::generateEvent(std::string name, std::string date) throw(std::logi
 	std::ofstream file_record_writer(getFileName(df_record, std::to_string((new_event.getIDNumber()))));
 
 	//Now, we write the basic information of the event to the file in question.
-	file_info_writer << new_event.getName() << '\n' << new_event.getDate(date) << '\n' << new_event.getCreatorUserName() << '\n' << new_event.getCreatorRealName() << '\n' << new_event.getIDNumber();
+	file_info_writer << new_event.getName() << '\n';
+	for(int i = 0; i < date.size(); i++) {
+		file_info_writer << new_event.getDate(date.at(i)) << '\n';
+	}
+	file_info_writer<< new_event.getCreatorUserName() << '\n' << new_event.getCreatorRealName() << '\n' << new_event.getIDNumber();
 
 	//Close the files.
 	file_info_writer.close();
@@ -189,14 +195,19 @@ void Executive::rebuildEvent(std::string filename) {
 	std::ifstream text_file("./data/events/" + filename);
 
 	int num;
-	std::string name, date, creator_user_name, creator_real_name, temp;
-
+	std::string name, creator_user_name, creator_real_name, temp;
+	std::string date;
+	std::vector<std::string> dateList;
 	if (!text_file.is_open()) {
 		throw std::logic_error("File does not exist");
 	}
 
 	//Put the information in various lines into these variables.
 	std::getline(text_file, name);
+	do {
+		std::getline(text_file, date);
+		dateList.push_back(date);
+	} while (isdigit(date[0]));
 	std::getline(text_file, date);
 	std::getline(text_file, creator_user_name);
 	std::getline(text_file, creator_real_name);
@@ -204,7 +215,7 @@ void Executive::rebuildEvent(std::string filename) {
 	std::getline(text_file, temp);
 	num = std::stoi(temp);
 	//Generate the event.
-	eventList->push_back(Event(name, date, creator_user_name, creator_real_name, num));
+	eventList->push_back(Event(name, dateList, creator_user_name, creator_real_name, num));
 }
 std::vector<Event>* Executive::getEventList() {
 	return eventList;
@@ -321,25 +332,29 @@ std::list<Record>* Executive::readRecord(int event_id)
 	//read through the file
 	while (!recordFile.eof())
 	{
-		std::string temp;
+		std::string tempt;
+		std::string tempd;
+		std::string tempu;
 		//temp will be the time string
-		getline(recordFile, temp);
+		getline(recordFile, tempt);
 
-		if (temp == "") {
+		if (tempt == "") {
 			//In this case, there is no more.
 			break;
 		}
 
-		temp = temp.substr(2);
+		tempt = tempt.substr(2);
 
+		getline(recordFile, tempd);
+		tempd = tempd.substr(2);
 		//Next, we put users back in.
-		Record tempRecord(temp);
+		Record tempRecord(tempt,tempd);
 
 		//This line represents the user list.
-		getline(recordFile, temp);
-		if (temp.size() > 1) {
+		getline(recordFile, tempu);
+		if (tempu.size() > 1) {
 			//There are attendees here.
-			std::stringstream ss = std::stringstream(temp.substr(2));
+			std::stringstream ss = std::stringstream(tempu.substr(2));
 			while (!ss.eof()) {
 				std::string username;
 				ss >> username;
@@ -537,18 +552,22 @@ Event* Executive::getEventByID(int eid) throw(std::logic_error) {
 		std::ifstream text_file(getFileName(df_event, std::to_string(eid)));
 
 		int num;
-		std::string name, date, creator_user_name, creator_real_name, temp;
-
+		std::string name, creator_user_name, creator_real_name, temp;
+		std::string date;
+		std::vector<std::string> dateList;
 		//Put the information in various lines into these variables.
 		std::getline(text_file, name);
-		std::getline(text_file, date);
+		do {
+			std::getline(text_file, date);
+			dateList.push_back(date);
+		} while (isdigit(date[0]));
 		std::getline(text_file, creator_user_name);
 		std::getline(text_file, creator_real_name);
 		//temp stores the int as a string, it will be converted.
 		std::getline(text_file, temp);
 		num = std::stoi(temp);
 		//Generate the event.
-		return new Event(name, date, creator_user_name, creator_real_name, num);
+		return new Event(name, dateList, creator_user_name, creator_real_name, num);
 	}
 	else {
 		throw std::logic_error("Event with that id does not exist");
