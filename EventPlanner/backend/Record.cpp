@@ -5,10 +5,11 @@ Record::Record()
     //This should not be call.
 }
 
-Record::Record(std::string t)
+Record::Record(std::string t, std::string d)
 {
 	userList = std::list<std::string>();
     time = t;
+	date = d;
 }
 
 Record::~Record()
@@ -44,4 +45,8 @@ std::list<std::string> Record::getUserList()
 std::string Record::getTime()
 {
 	return (time);
+}
+
+std::string Record::getDate() {
+	return(date);
 }

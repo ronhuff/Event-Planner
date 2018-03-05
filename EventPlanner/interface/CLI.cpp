@@ -332,9 +332,10 @@ void CLI::newEvent() throw(std::exception) {
 		date = year + "/" + month + "/" + day;
 		validDate = true;
     }
-
+	std::vector<std::string> dList;
+	dList.push_back(date);
 	eventID = exec.generateEvent(name, date);
-	
+	std::vector<std::list<std::string>*> tList;
 	std::cout << "\nPlease enter a beginning time for your meeting.\n";
 	std::cout << "Your time will be rounded down to the nearest 20-minite interval.\n";
 	//BEGIN NEW CODE
@@ -404,6 +405,16 @@ void CLI::newEvent() throw(std::exception) {
 		
 		times->push_back(slot);
 	}
+	tList.push_back(times);
+
+	int addNewDates;
+	std::cout << "Would you like to add more dates to this event:\n";
+	std::cout << "1) Yes\n";
+	std::cout << "2) No\n";
+	std::cout << "Enter Your Choice: ";
+	std::cin >> addNewDates;
+
+
 	std::cout << "\nWe can now include a list of tasks for the meeting!\n";
 	std::cout << "Would you like to add a list now? (you can still add one later.)\n";
 	std::cout << "1) Yes.\n";
@@ -426,7 +437,7 @@ void CLI::newEvent() throw(std::exception) {
 		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
 		//exec.writeRecord(eventID, exec.createRecordList(times), populateTaskList());
 		exec.createTaskList(tasks, eventID);
-		exec.writeRecord(eventID, exec.createRecordList(times));
+		exec.writeRecord(eventID, exec.createRecordList(tList,dList));
 		//Switch the two above functions 
 		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
 		delete times;
@@ -445,7 +456,7 @@ void CLI::newEvent() throw(std::exception) {
 		//std::vector<std::string> taskList(0); //Creates an empty task list vector
 		//exec.writeRecord(eventID, exec.createRecordList(times), taskList);
 		exec.writeTaskList(eventID, false);
-		exec.writeRecord(eventID, exec.createRecordList(times));
+		exec.writeRecord(eventID, exec.createRecordList(tList,dList));
 		delete times;
 	}
 

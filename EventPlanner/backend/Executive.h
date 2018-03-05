@@ -119,7 +119,7 @@ class Executive{
 		 * @post timeList will be deleted
 		 * @return a list of Record objects
 		 */
-		std::list<Record>* createRecordList(std::list<std::string>* timeList);
+		std::list<Record>* createRecordList(std::vector<std::list<std::string>*> timeList, std::vector<std::string> datesList);
 		/**
 		 * This method will return a list of username which are all users attending the given event.
 		 * @param eid a event id

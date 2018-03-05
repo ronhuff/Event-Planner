@@ -81,17 +81,21 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 	std::string filename = getFileName(df_record, std::to_string(eid));
 	std::list<std::string> tempUserlist;
 	std::string tempTime;
+	std::string tempDate;
 
 	//start write a new file with the same filename
 	std::ofstream outF(filename);
 	for (auto&& it = List->begin(); it != List->end(); it++)
 	{
+		//write one of the dates
+		tempDate = it->getDate();
+		outF << 0 << " " << tempDate << std::endl;
 		//write the time block
 		tempTime = it->getTime();
-		outF << 0 << " " << tempTime << std::endl;
+		outF << 1 << " " << tempTime << std::endl;
 		tempUserlist = it->getUserList();
-
-		outF << 1;
+		//write the user list
+		outF << 2;
 		for (auto it2 = tempUserlist.begin(); it2 != tempUserlist.end(); it2++)
 		{
 			//write the users
@@ -500,15 +504,17 @@ bool Executive::removeUserFrom(std::string time, std::list<Record>* List)
 	return removed;
 }
 
-std::list<Record>* Executive::createRecordList(std::list<std::string>* timeList)
+std::list<Record>* Executive::createRecordList(std::vector<std::list<std::string>*> timeList, std::vector<std::string> datesList)
 {
 	std::list<Record>* List = new std::list<Record>; //create a new pointer to a list
-
-	for (auto&& it = timeList->begin(); it != timeList->end(); it++)
-	{
-		List->push_front(Record(*it)); // push to the list
+	for (int i = 0; i < datesList.size(); i++) {
+		std::string currDate = datesList.at(i);
+		std::list<std::string>* currtimeList = timeList.at(i);
+		for (auto&& it = currtimeList->begin(); it != currtimeList->end(); it++)
+		{
+			List->push_front(Record(*it,currDate)); // push to the list
+		}
 	}
-
 	return List;
 }
 std::list<Event>* Executive::getEventByCreator(User u) {

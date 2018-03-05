@@ -20,7 +20,7 @@ class Record{
 		 * Class Constructor
 		 * @param t time block string
 		 */
-		Record(std::string t);
+		Record(std::string t, std::string d);
 	
 		/**
 		 * Class Destructor, this method will delete class member userlist
@@ -52,11 +52,13 @@ class Record{
          * @return time block string
          */
 		std::string getTime();
+		std::string getDate();
 	private:
 		/**This string stores the time at this timeslot.*/
 		std::string time; 
 		/**This list of strings stores the users at this time slot.*/
         std::list<std::string> userList; 
+		std::string date;
 };
 
 #endif
