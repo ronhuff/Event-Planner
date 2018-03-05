@@ -4,7 +4,6 @@
 
 Task::Task()
 {
-	m_taskUser = nullptr;
 	m_isAssigned = false;
 }
 
@@ -18,8 +17,21 @@ Task::~Task()
 
 }
 
-bool Task::assignTask(User* user)
+bool Task::assignTask(std::string user)
 {
-	m_taskUser = user;
-	return(m_taskUser == user);
+	m_assignName = user;
+	return(m_assignName == user);
+}
+
+std::ostream& operator<<(std::ostream& out, Task& task)
+{
+	out << task.m_name << task.m_isAssigned;
+	return(out);
+	// TODO: insert return statement here
+}
+
+std::istream& operator>>(std::istream& in, Task& task)
+{
+	in >> task.m_name >> task.m_isAssigned;
+	return(in);
 }

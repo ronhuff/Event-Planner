@@ -4,6 +4,7 @@
 #include "Event.h"
 #include "Record.h"
 #include "User.h"
+#include "TaskList.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -207,6 +208,11 @@ class Executive{
 		*/
 		int whatIsEventNum();
 
+		bool writeTaskList(int eid, std::shared_ptr<TaskList> tl);
+
+		bool createTaskList(std::vector<std::string>, int);
+
+		std::vector<std::shared_ptr<TaskList>> m_taskLists;
 	private:
 		/**
 		 * An enum representing the various information types that are saved.
@@ -215,7 +221,8 @@ class Executive{
 			df_event,		/**< Represents Event text files. */
 			df_record,		/**< Represents Event record files. */
 			df_user,		/**< Represents User text files. */
-			df_eventList	/**< Represents the event list text file. */
+			df_eventList,
+			df_taskList		/**< Represents the event list text file. */
 		};
 		/**
 		 * This helper method verifies if a file exists.

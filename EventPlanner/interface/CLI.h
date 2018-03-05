@@ -2,8 +2,15 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <vector>
 #include "../backend/Executive.h"
+#include "../backend/Record.h"
 #include "CLIInput.h"
+
+class Executive;
+class Record;
+
 
 class CLI{
     private:
@@ -34,7 +41,6 @@ class CLI{
 	     * @return: none
 	     */
         void run();
-    private:
         /**
 	     * The menu that the user sees after they have logged in.
 	     * @pre: User is logged in
@@ -79,6 +85,13 @@ class CLI{
 	     * @return: none
 	     */
         void newEvent() throw(std::exception);
+		/**
+		* The event creator to populate a list of tasks for an event
+		* @pre: none
+		* @post: new task list is created
+		* @return: none
+		*/
+		std::vector<std::string> populateTaskList();
         /**
 	     * Allows a user to view a specific event
          * @param int - the unique identifier of the event
