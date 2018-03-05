@@ -400,8 +400,9 @@ void CLI::newEvent() throw(std::exception) {
 	int newList;
 	std::cout << "Add tasks? ";
 	std::cin >> newList;
+	//std::shared_ptr<TaskList> taskList;
 
-	while (newList != 1 && newList != 2) {
+	while (newList != 1 && newList != 2) {	
 		std::cin.clear();
 		std::cin.ignore();
 		std::cout << "Only an input of 1 or 2 is accepted.\n";
@@ -410,11 +411,20 @@ void CLI::newEvent() throw(std::exception) {
 	}
 
 	if (newList == 1) {
-		populateTaskList();
+		//populateTaskList();
 		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
 		//exec.writeRecord(eventID, exec.createRecordList(times), populateTaskList());
 		exec.writeRecord(eventID, exec.createRecordList(times));
+		//Switch the two above functions 
 		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
+		delete times;
+
+		//std::shared_ptr<TaskList> temp = std::make_shared<TaskList>();
+		//temp->createTask();
+		//temp->createTask();
+		//taskList = temp;
+		//code for addint list here. Will require analysis of data structure
+		/*m_tasks = new TaskList();*/
 	}
 	else {
 		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
@@ -425,6 +435,11 @@ void CLI::newEvent() throw(std::exception) {
 		exec.writeRecord(eventID, exec.createRecordList(times));
 		delete times;
 	}
+
+	//eventID = exec.generateEvent(name, date);
+	//exec.writeRecord(eventID, exec.createRecordList(times));
+	//exec.writeTaskList(eventID, taskList);
+	//delete times;   
 }
 
 std::vector<std::string> CLI::populateTaskList() {
