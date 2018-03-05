@@ -1,3 +1,7 @@
+Team 1
+Project 2
+Process Model
+
 For this project, the process model we most closely have followed throughout was most likely the Scrum model.
 There are a few reasons that we believe this:
 
