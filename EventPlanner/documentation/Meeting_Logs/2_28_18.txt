@@ -1,0 +1,18 @@
+Record the date, time, and location (I don’t need to know anyone’s address) of all your meetings.
+Record what was discussed and planned to be completed by the next meeting.
+Record whether or not the tasks to complete for this meeting were really completed.
+
+
+Date: 2/28/18
+Time: 7:00 p.m.
+Location: Jaybreak Cafe
+
+Our tasks from previous meeting included generating a product backlog and finishing functionality of project 1. Both of these items were completed
+successfully for this meeting.
+
+Discussed:
+- Divided up the work for the new functionality between the five group members.
+
+For next meeting:
+- Have updates on the status of completing the new functionality.
+- Doxygen for documentation?

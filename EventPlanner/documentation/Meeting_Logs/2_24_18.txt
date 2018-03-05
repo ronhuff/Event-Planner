@@ -1,0 +1,17 @@
+Record the date, time, and location (I don’t need to know anyone’s address) of all your meetings.
+Record what was discussed and planned to be completed by the next meeting.
+Record whether or not the tasks to complete for this meeting were really completed.
+
+
+Date: 2/24/18
+Time: 6:00 p.m.
+Location: 1328 Spahr
+
+Our tasks from the previous included making sure everyone got Visual Studio on their computers and got the program compiling. This was successfully completed.
+
+Discussed:
+- We wrote down all necessary features and additional changes (only from Project 1 components) and went through what is and is not present.
+
+For next meeting:
+- Generate product backlog!!
+- Have a working project 1 product as per the divided tasks. 

@@ -5,14 +5,14 @@ CLI::CLI(){
 }
 
 void CLI::run(){
-	std::cout   << "\n*=========Welcome to Group 1's Project 2 Event Planner!=========*\n"
+	std::cout   << "\n*=========Welcome to Group 1's Project 2 Event Planner!==========*\n"
 				<< "*\tCredits:                                        \t*\n"
 				<< "*\t\tDiego Garcia                           \t\t*\n"
 				<< "*\t\tKyle Berkley                           \t\t*\n"
 				<< "*\t\tRon Huff                               \t\t*\n"
 				<< "*\t\tSurabhi Khachar                        \t\t*\n"
 				<< "*\t\tWeiting Wei                            \t\t*\n"
-				<< "*===============================================================*\n\n";
+				<< "*================================================================*\n\n";
 
 	struct tm newtime;
 	time_t now = time(0);
@@ -25,7 +25,7 @@ void CLI::run(){
 
 void CLI::login() {
 	int choice;
-	std::cout << "\n======================== Login Menu =======================\n";
+	std::cout << "\n========================== LOGIN MENU ===========================\n";
 	std::cout << "\t1) Login.\n";
 	std::cout << "\t2) Create Account.\n";
 	std::cout << "\t3) Exit.\n";
@@ -95,7 +95,7 @@ void CLI::menu() {
 	}
 	std::cout << "\n";
     if(action == 1) {
-        listEvents(0);
+        listEvents();
 		menu();
     }
 	else if(action == 2) {
@@ -203,56 +203,57 @@ void CLI::newAccount() {
     }
 }
 
-void CLI::listEvents(int first){
+void CLI::listEvents(){
     std::vector<Event>* list = exec.getEventList();
     int size = list->size();
 	std::cout << "\n\tCurrently Scheduled Events:\n\n";
-    
-    //Options
-    
-	//I have removed this functionality below. We can uncomment this if we wish later. We will likely need to change the "next"/"previous
-	//to some sort of integer selection.
-	
-    //if(first > 0 ){//don't remove these two if statements.....they could be implemented in the case where numMeetings > 25 or something.
-    //    std::cout << "\t\"previous\" to go back in the list\n";
-    //}
-    //if(first + 25 < size){
-    //    std::cout << "\t\"next\" to go forward in the list\n";
-    //}
-    //std::cout << "\t\"menu\" to go to the menu\n";
-
-    //Make Choice
-	//std::cout << "Please select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
+	if (size == 0) {
+		std::cout << "No events have been created yet!\n";
+		return;
+	}
+        
 	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	int maxlength = 0;
+	for (int i = 0; i < size; i++) {
+		try {
+			Event e = list->at(i);
+			if (e.getName().length() > maxlength) maxlength = e.getName().length();
+		}
+		catch (std::exception& e) {
+			return;
+		}
+	}
 
 	int choice;
 	std::string inString;
 	//The template for the below while loop was borrowed from https://stackoverflow.com/a/10553849 and modified to our needs.
 	while (1){
-		for (int i = first; i < (first + 26) && i < size; i += 1) {
+		for (int i = 0; i < size; i++) {
 			try {
 				Event e = list->at(i);
-				std::cout << std::to_string(e.getIDNumber()) + ")" << "\t" << e.getName() << "\t\t" << e.getDate(false) << "\t\t" << e.getCreatorRealName() << "\n";
+				std::string strngTabs = "\t\t";
+				int tabs = (maxlength/8) - (e.getName().length()/8);
+
+				for (int i = 0; i < tabs; i++) strngTabs += "\t";
+
+				std::cout << std::to_string(e.getIDNumber()) + ")" << "\t" << e.getName() << strngTabs << e.getDate(false) << "\t\t" << e.getCreatorRealName() << "\n";
 			}
 			catch (std::exception& e) {
+				std::cout << "Failed to load an event... :(\n";
 				return;
 			}
 		}
-		//std::cout << "\nPlease select a meeting to view or press enter to go back.\n";//NOTE: returning from this function may not actually cause the user to "go back"
-		//std::cout << "Selection: ";
+
 		inString = input.getString("\nPlease select a meeting to view or press enter to go back.\nSelection: ");
 		//getline(std::cin, inString);
-		if (inString.empty()){
-			break;
-		}
-		else if (inString.find_first_not_of("0123456789") != std::string::npos) {
-			std::cout << "Only numbers are accepted...\n\n";
-		}
+		if (inString.empty()) break;
+		else if (inString.find_first_not_of("0123456789") != std::string::npos) std::cout << "Only numbers are accepted...\n\n";
 		else if (std::stoi(inString) <= exec.whatIsEventNum() && std::stoi(inString) > 0) {
 			std::cout << "\n";
-				viewEvent(std::stoi(inString));
-				std::cout << "\n";
-			}
+			viewEvent(std::stoi(inString));
+			std::cout << "\n";
+		}
 		else {
 			std::cout << "Error: Invalid meeting number.\n";
 		}
@@ -327,57 +328,74 @@ void CLI::newEvent() throw(std::exception) {
 			continue;
 		}
 		else {
+			date = year + "/" + month + "/" + day;
 			validDate = true;
 		}
-		date = year + "/" + month + "/" + day;
-		validDate = true;
     }
-
+  
 	exec.generateEvent(name, date);
 	eventID = exec.eventNum;
 
 	std::cout << "\nPlease enter a beginning time for your meeting.\n";
 	std::cout << "Your time will be rounded down to the nearest 20-minite interval.\n";
+
 	//BEGIN NEW CODE
 	std::string stime = "";
 	std::string etime = "";
-	std::cout << "Enter start time in format HH:MM\n";
-	std::cin >> stime;
-	if (!cin) {//This will still allow for bad input for now but at least it forces it to be a string for testing.
-		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
-		std::cin >> stime;
-	}
-	std::cout << "Enter end time in format HH:MM\n";
-	std::cin >> etime;
-	if (!cin) {
-		std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
-		std::cin >> etime;
-	}
-	while (!checkTime(stime, etime)) {
-		std::cout << "Enter start time in format HH:MM\n";
-		std::cin >> stime;
-		if (!cin) {
-			std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
-			std::cin >> stime;
+
+	int startMin;
+	int endMin;
+	int myendhr;
+	stime = input.getString("\n");
+	while(1) {
+		//Start initial start time constraints
+		stime = input.getString("Enter start time in format HH:MM\n");
+		if (stime.length() != 5) {
+			std::cout << "Time must be of format \"HH:MM\"\n";
+			continue;
 		}
-		std::cout << "Enter end time in format HH:MM\n";
-		std::cin >> etime;
-		if (!cin) {
-			std::cout << "ERROR: Please enter the time in the format of HH:MM\n";
-			std::cin >> etime;
+		try {
+			stoi(std::string() + stime.at(0) + stime.at(1));
+			startMin = stoi(std::string() + stime.at(3) + stime.at(4));
+			if (stime.at(2) != ':') continue;
+
 		}
+		catch (std::exception& e) {
+			std::cout << "Your input must be valid.\n";
+			continue;
+		}
+		if (stime == "23:40" || stime == "11:40") {
+			std::cout << "There is not enough time to start an event at that time!\n";
+			continue;
+		}
+
+		//start initial end time constraints.
+		etime = input.getString("Enter end time in format HH:MM\n");
+		if (etime.length() != 5) {
+			std::cout << "End time must be of format \"HH:MM\"\n";
+			continue;
+		}
+		try {
+			myendhr = stoi(std::string() + etime.at(0) + etime.at(1));
+			endMin = stoi(std::string() + etime.at(3) + etime.at(4));
+			if (etime.at(2) != ':') continue;
+		}
+		catch (std::exception& e) {
+			std::cout << "Your input must be valid and contain integers.\n";
+			continue;
+		}
+		if (myendhr < 5 || myendhr > 24) {
+			std::cout << "Can not end event at that time.\n";
+			continue;
+		}
+		if (checkTime(stime, etime)) break;
 	}
 
 	std::string startHr = stime.substr(0, 2);
-	int startMin = stoi(stime.substr(3, 2));
 	std::string endHr = etime.substr(0, 2);
-	int endMin = stoi(etime.substr(3, 2));
-	int TOTAL_MINS = ((stoi(endHr) - stoi(startHr)) * 60 + endMin - startMin);
-	
+
+	int TOTAL_MINS = (stoi(endHr) - stoi(startHr)) * 60 + endMin - startMin;
 	int timeslots = TOTAL_MINS / 20;
-	
-	//std::cout << "Total Minutes: " + TOTAL_MINS + " timeslots: " + (TOTAL_MINS / 20) << "\n";
-	
 	
 	std::list<std::string>* times = new std::list<std::string>();
 	
@@ -401,7 +419,6 @@ void CLI::newEvent() throw(std::exception) {
 			slot = startHr + ":" + std::to_string(endMin);
 			endMin += 20;
 		}
-		
 		
 		times->push_back(slot);
 	}
@@ -464,7 +481,7 @@ std::vector<std::string> CLI::populateTaskList() {
 	int choice;
 
 	while (1) {
-		std::cout << "\nPlease choose from the following task options:\n\n" <<
+		std::cout << "\n=========================== TASK MENU ===========================\n\n" <<
 			"1) View current task list\n" <<
 			"2) Add another task\n"
 			"3) Remove a task\n" <<
@@ -637,8 +654,9 @@ void CLI::viewEvent(int i){
 
 void CLI::setAvailability(int eid){
     std::list<Record>* eventRecords = exec.readRecord(eid);
-    std::cout << "For each of the following times enter 'y' or 'n' to confirm or deny availablity.\n";
-
+    std::cout << "For each of the following times enter 'yes', or 'y', or really anything to confirm availability.\n";
+	std::cout << "Can't go at a specific time? Just press enter!\n";
+	input.getString("\n");
     for(auto i : *(eventRecords)){
         std::string slot;
         if(longtime){
@@ -647,8 +665,7 @@ void CLI::setAvailability(int eid){
             slot = to12Hour(i.getTime());
         }
 
-
-        if(input.getCharacter(slot + " - ") == 'y'){
+        if(!input.getString(slot + " - ").empty()){
             exec.addUserTo(i.getTime(), eventRecords);
         }
     }
@@ -691,81 +708,71 @@ void CLI::viewAvailability(int eid){
     delete event;
     delete eventRecords;
 }
-std::string CLI::to12Hour(std::string input){
+std::string CLI::to12Hour(std::string myInput){
 
-	int hour = std::stoi(input.substr(0, 2));
+	int hour = std::stoi(myInput.substr(0, 2));
 	if(hour <= 12){
-		return (input + " PM");
-	}else if(hour > 12){
+		return (myInput + " AM");
+	}else {                              //if(hour > 12){
 		hour -= 12;
 		std::string hrStr = std::to_string(hour);
-		if (hrStr.length() == 1){//It seems to me that we should append a '0' on these times (e.g.) 01:20 PM
-			input[0] = '0';					  //Just for now until we know if there would be errors from other code expecting this format.
-			input[1] = hrStr[0];
-			return(input + " AM");
-		}
-		else{
-			input[0], input[1] = hrStr[0], hrStr[1];
-			return(input + " PM");
-		}
-		//return (std::to_string(hour) + std::string(input.substr(delimiter)) + " PM");
-	}else{
-		return (input + " AM");
+		if (myInput == "24:00") return ("12:00 AM");
+		return(hrStr + myInput.substr(2, 3) + " PM");
 	}
 }
 
 bool CLI::checkTime(std::string stime, std::string etime){
-//HH:MM
-//Convert these values to Numbers to make math easier.
-std::string startHr = stime.substr(0, 2);
-int startMin = stoi(stime.substr(3, 2));
-std::string endHr = etime.substr(0, 2);
-int endMin = stoi(etime.substr(3, 2));
+	//HH:MM
+	//Convert these values to Numbers to make math easier.
+	std::string startHr = stime.substr(0, 2);
+	int startMin = stoi(stime.substr(3, 2));
+	std::string endHr = etime.substr(0, 2);
+	int endMin = stoi(etime.substr(3, 2));
 
-if (((startMin % 20 == 0) && (endMin % 20 == 0)) == false){
-	std::cout << "startMin || endMin not on timeslot  *DBG\n";
-	std::cout << "Meeting must begin and end on the hour or 20 minute increments thereof.\n";
-	return(false);
-}
+	if (((startMin % 20 == 0) && (endMin % 20 == 0)) == false){
+		std::cout << "startMin || endMin not on timeslot.\n";
+		std::cout << "Meeting must begin and end on the hour or 20 minute increments thereof.\n";
+		return(false);
+	}
 
-//Check for overnight
-if ((startHr >= "00" && startHr < "05") || (endHr > "00" && endHr <= "05")){
-	std::cout << "Error: Meeting Start || End overnight. *DBG \n";
-	std::cout << "Meetings may not occur between 12:00am - 5:00am\n";
-	return(false);
-}
-//Check for lunch.
-else if ((startHr >= "12" && startHr < "13") || ((endHr >= "12" && endMin > 0) && endHr <= "13")){
-	std::cout << "Error: Meeting Start || End lunch. *DBG \n";
-	std::cout << "Meetings may not occur between 12:00pm - 1:00pm\n";
-	return(false);
-}
+	//Check for overnight
+	if ((startHr >= "00" && startHr < "05") || (endHr > "00" && endHr <= "05")){
+		std::cout << "Error: Meeting Start || End overnight. \n";
+		std::cout << "Meetings may not occur between 12:00am - 5:00am\n";
+		return(false);
+	}
+	//Check for lunch.
+	else if ((startHr == "12") || (endHr == "12" && endMin > 0)){
+		std::cout << "Error: Meeting Start || End lunch. \n";
+		std::cout << "Meetings may not occur between 12:00pm - 1:00pm\n";
+		return(false);
+	}
 
-//Check if meeting would span the restricted overnight period.
-//NOTE: Even though they can choose only one day, a user could attempt to schedule
-//      an end time in the AM even though their begin time is PM. This will account for that.
-//      Also, we can use >= 13 because we already checked for meetings that span lunch.
-else if (startHr >= "13" && endHr < "13"){
-	std::cout << "Meetings must begin and end on the same calendar day.\n";
-	return(false);
-}
+	//Check if meeting would span the restricted overnight period.
+	//NOTE: Even though they can choose only one day, a user could attempt to schedule
+	//      an end time in the AM even though their begin time is PM. This will account for that.
+	//      Also, we can use >= 13 because we already checked for meetings that span lunch.
+	else if (startHr >= "13" && endHr < "13"){
+		std::cout << "Meetings must begin and end on the same calendar day.\n";
+		return(false);
+	}
 
-//Check if meeting would span the restricted lunch period.
-else if ((startHr >= "05" && startHr < "12") && endHr > "13"){
-	std::cout << "Hour values indicate that the meeting would go through lunch.\n";
-	std::cout << "Meetings may not extend through lunch.\n";
-	return(false);
-}
+	//Check if meeting would span the restricted lunch period.
+	else if ((startHr >= "05" && startHr < "12") && endHr > "13"){
+		std::cout << "Hour values indicate that the meeting would go through lunch.\n";
+		std::cout << "Meetings may not extend through lunch.\n";
+		return(false);
+	}
 
-//Check to assure that meeting will start and end on the same calendar day.
-//Perhaps redundant now but it's not broke so we won't fix it yet.
-if (etime < stime){
-	std::cout << "Meeting may not extend into next calendar day.\n";
-	std::cout << "User attempted to set end time for calendar day that is not same as start time calendar day.\n";
-	return (false);
-}
-std::cout << "Time does not appear to conflict with time constraints.\n";
-return (true);
+	//Check to assure that meeting will start and end on the same calendar day.
+	//Perhaps redundant now but it's not broke so we won't fix it yet.
+	if (etime < stime){
+		std::cout << "Meeting may not extend into next calendar day.\n";
+		std::cout << "User attempted to set end time for calendar day that is not same as start time calendar day.\n";
+		return (false);
+	}
+	std::cout << "Time does not appear to conflict with time constraints.\n";
+	return (true);
 }
 
 std::string CLI::zeroAppender(std::string time) throw(std::logic_error)
