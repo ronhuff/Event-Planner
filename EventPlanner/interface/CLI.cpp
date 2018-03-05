@@ -583,17 +583,17 @@ void CLI::newEvent() throw(std::exception) {
 					{
 						std::string slot = "";
 						//etime.substr(3, 2) this returns the endmin string
-						if (endMin >= 60) {
-							endMin = 0;
-							int hourInt = std::stoi(startHr);
+						if (eMin >= 60) {
+							eMin = 0;
+							int hourInt = std::stoi(sHr);
 							hourInt++;
-							startHr = std::to_string(hourInt);
-							slot = startHr + ":" + "00";
-							endMin += 20;
+							sHr = std::to_string(hourInt);
+							slot = sHr + ":" + "00";
+							eMin += 20;
 						}
 						else {
-							slot = startHr + ":" + std::to_string(endMin);
-							endMin += 20;
+							slot = sHr + ":" + std::to_string(eMin);
+							eMin += 20;
 						}
 						ntimes->push_back(slot);
 					}
