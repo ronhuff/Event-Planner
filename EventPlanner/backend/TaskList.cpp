@@ -53,10 +53,10 @@ std::istream & operator>>(std::istream & in, TaskList & tList)
 	std::string numTasks;
 	std::string numAvailTasks;
 
-	std::getline(in, id);
-	std::getline(in, numTasks);
-	std::getline(in, numAvailTasks);
-
+	std::getline(in, id, '\n');
+	std::getline(in, numTasks, '\n');
+	std::getline(in, numAvailTasks, '\n');
+	
 	tList.m_numTasks = std::stoi(id);
 	tList.m_numTasks = std::stoi(numTasks);
 	tList.m_numAvailTasks = std::stoi(numAvailTasks);

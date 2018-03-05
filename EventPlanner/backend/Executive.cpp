@@ -50,6 +50,7 @@ Executive::Executive(){
 	}
 	//Sort the events by date.
 	sortEventList();
+	m_currTL = std::make_shared<TaskList>();
 }
 Executive::~Executive(){
 	if(eventList != nullptr){
@@ -104,7 +105,7 @@ void  Executive::writeRecord(int eid, std::list<Record>* List)
 
 
 
-int Executive::generateEvent(std::string name, std::string date) throw(std::logic_error){
+bool Executive::generateEvent(std::string name, std::string date) throw(std::logic_error){
 	//This is the event we want to input data for.
 	Event new_event = Event(name,date,currentUser->getUserName(),currentUser->getRealName(),getEventNum());
 	
@@ -123,7 +124,7 @@ int Executive::generateEvent(std::string name, std::string date) throw(std::logi
 	file_record_writer.close();
 	
 	//Event created.
-	return new_event.getIDNumber();
+	return (true);
 }
 bool Executive::doesFileExist(DataFile type, std::string identifer){
 	//Returns whether a file exists or not.
@@ -381,12 +382,18 @@ bool Executive::readinTaskList(int eid)
 	{
 		throw std::logic_error("TaskList file does not exist.");
 	}
-	std::shared_ptr<TaskList> temp;
+	inF >> *m_currTL;
+	inF.close();
 	
-	inF >> *temp;
-
-
+	return(true);
 }
+
+//void Executive::displayTasks() {
+//	for (std::vector<std::shared_ptr<Task>>::iterator tait = m_currTL->m_tasks.begin(); tait != m_currTL->m_tasks.end(); ++tait)
+//	{
+//		std::cout << tait;
+//	}
+//}
 
 bool Executive::writeTaskList(int eid, bool hasList = false)//this is to create a blank tasklist file.
 {
@@ -432,7 +439,7 @@ bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
 			}
 			(*tlit)->m_eventId = eid;
 			(*tlit)->m_numTasks = taskVector.size();
-			m_taskLists.push_back(*tlit);
+			m_currTL = (*tlit);
 			return(true);
 		}
 

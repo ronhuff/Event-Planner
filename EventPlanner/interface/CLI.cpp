@@ -333,8 +333,9 @@ void CLI::newEvent() throw(std::exception) {
 		validDate = true;
     }
 
-	eventID = exec.generateEvent(name, date);
-	
+	exec.generateEvent(name, date);
+	eventID = exec.eventNum;
+
 	std::cout << "\nPlease enter a beginning time for your meeting.\n";
 	std::cout << "Your time will be rounded down to the nearest 20-minite interval.\n";
 	//BEGIN NEW CODE
@@ -426,6 +427,7 @@ void CLI::newEvent() throw(std::exception) {
 		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
 		//exec.writeRecord(eventID, exec.createRecordList(times), populateTaskList());
 		exec.createTaskList(tasks, eventID);
+		exec.writeTaskList(eventID, exec.m_currTL);
 		exec.writeRecord(eventID, exec.createRecordList(times));
 		//Switch the two above functions 
 		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
@@ -550,73 +552,86 @@ std::vector<std::string> CLI::populateTaskList() {
 }
 
 void CLI::viewEvent(int i){
-    try{
-        Event* e = exec.getEventByID(i);
-		std::cout << "Title:\t\t" << e->getName() << "\n" <<
-			"Creator:\t" << e->getCreatorRealName() << "\n" <<
-			"Date:\t\t" << e->getDate(false) << "\n\n" <<
-			"Start: " << /*starttime here*/ "\tEnd: " << /*endtime*/ "\n\n";
+    Event* e = exec.getEventByID(i);
+	std::cout << "Title:\t\t" << e->getName() << "\n" <<
+		"Creator:\t" << e->getCreatorRealName() << "\n" <<
+		"Date:\t\t" << e->getDate(false) << "\n\n" <<
+		"Start: " << /*starttime here*/ "\tEnd: " << /*endtime*/ "\n\n";
 
-        std::string choice;
-		bool creator = false;
-        while(choice != "quit"){//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
-			creator = exec.getCurrentUser()->getUserName() == e->getCreatorUserName();
-			/*if(exec.getcurrentuser()->getusername() != e->getcreatorusername()){
+    std::string choice;
+	bool creator = false;
+    while(choice != "quit"){//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
+		creator = exec.getCurrentUser()->getUserName() == e->getCreatorUserName();
+		/*if(exec.getcurrentuser()->getusername() != e->getcreatorusername()){
 				
-            }
-			else
-			{
-				creator = true;
-			}*/
-			
-			while (1) {
-				std::string inString = "";
-				if (creator)
-				{
-					std::cout << "1) Redisplay meeting time slots.\n";
-					std::cout << "2) Return to menu.\n";
-				}
-				else {
-					std::cout << "If you are interested in joining this event:\n";
-					std::cout << "1) Indicate your availability.\n"; //WE WILL ADD OTHER OPTIONS TO THIS MENU SO FULL MENU IMPLENTATION AT THIS POINT IS WORTH.
-					std::cout << "2) Redisplay meeting time slots.\n"; //We can make these menus way more user friendly if we start making this feel more like an actual application
-					std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
-				}
-
-				std::cout << "Selection:";//NOTE: returning from this function may not actually cause the user to "go back"
-				std::getline(std::cin, inString);
-				if (inString.empty() || stoi(inString) == 3) {
-					choice = "quit";
-					break;
-
-				}
-				else if (std::stoi(inString) == 1 && exec.getCurrentUser()->getUserName() != e->getCreatorUserName()) {
-					creator = false;
-					setAvailability(i);//unknown if/how this works at this point, but am attempting to keep things integrated with Team 8 code.
-					std::cout << "\n";
-				}
-				else if (std::stoi(inString) == 1 && creator)
-				{
-				std:: cout << "\n";
-					viewAvailability(i);
-				}
-				else if (std::stoi(inString) == 2 && !creator) {
-					viewAvailability(i);
-				}
-				else if (std::stoi(inString) == 2 && creator)
-				{
-					choice = "quit";
-					break;
-				}
-				else {
-					std::cout << "Error: Invalid meeting number.\n";
-				}
-			}
         }
-        delete e;
-    }catch(std::exception& e){
-        std::cout << "Invalid event number.\n";
+		else
+		{
+			creator = true;
+		}*/
+			
+		while (1) {
+			std::string inString = "";
+			if (creator)
+			{
+				std::cout << "1) Redisplay meeting time slots.\n";
+				std::cout << "2) Return to menu.\n";
+				std::cout << "3) Interact with TaskList.\n";
+			}
+			else {
+				std::cout << "If you are interested in joining this event:\n";
+				std::cout << "1) Indicate your availability.\n"; //WE WILL ADD OTHER OPTIONS TO THIS MENU SO FULL MENU IMPLENTATION AT THIS POINT IS WORTH.
+				std::cout << "2) Redisplay meeting time slots.\n"; //We can make these menus way more user friendly if we start making this feel more like an actual application
+				std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
+			}
+
+			std::cout << "Selection:";//NOTE: returning from this function may not actually cause the user to "go back"
+			std::getline(std::cin, inString);
+			if (inString.empty() || (stoi(inString) == 3 && !creator)) {
+				choice = "quit";
+				break;
+
+			}
+			else if (std::stoi(inString) == 1 && exec.getCurrentUser()->getUserName() != e->getCreatorUserName()) {
+				creator = false;
+				setAvailability(i);//unknown if/how this works at this point, but am attempting to keep things integrated with Team 8 code.
+				std::cout << "\n";
+			}
+			else if (std::stoi(inString) == 1 && creator)
+			{
+			std:: cout << "\n";
+				viewAvailability(i);
+			}
+			else if (std::stoi(inString) == 2 && !creator) {
+				viewAvailability(i);
+			}
+			else if (std::stoi(inString) == 2 && creator)
+			{
+				choice = "quit";
+				break;
+			}
+			else if (std::stoi(inString) == 3/* && creator*/)
+			{
+				try {
+					exec.readinTaskList(i);//i is the id parameter passed in originally.
+				}
+				catch (std::exception& e) {
+					std::cout << e.what();
+				}
+				
+				/*exec.displayTasks();*/
+				std::cout << exec.m_currTL;
+			}
+			else {
+				std::cout << "Error: Invalid meeting number.\n";
+			}
+		}
     }
+    delete e;
+
+    /*}catch(std::exception& e){
+        std::cout << "Invalid event number.\n";
+    }*/
 }
 
 void CLI::setAvailability(int eid){
