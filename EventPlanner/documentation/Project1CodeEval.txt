@@ -1,0 +1,55 @@
+Team 1, Project 1 Code Evaluation
+
+The follow is our code evaluation for the Project 1 code. We believe that this team deserved 82/100 as far as an overall grade goes.
+
+Documentation:
+
+- Doxygen: The previous team had completed their documentation through Doxygen. This is an automatic documentation generating software that can produce an html
+file. Their documentation was pretty extensive and included all important components such as pre, post, and return conditions for all methods.
+Along with this, they had fully included the references to libraries and such for code they had not written which was helpful when transitioning to the new project.
+- Visual studio: The readMe file was helpful in terms of being able to set up the code with visual studio because the software was pretty new to us.
+The only problems we encountered with Visual Studio was the added Debug and boost files that were needed to compile and successfully build the program.
+This is something that would've been helpful knowing going in to the project. Without the added files it gives about 400 errors so it seems like this is a meaningful
+item to include.
+- After seeing that there code was generated through Doxygen, we decided to use the same software because it gave a pretty good description of all that was going on in terms
+of class names, method signatures, etc. It also handled the html files in a desirable way for our team.
+
+Code extensibility:
+
+While the team did have much of the functionality implemented, it was still not very extensible code. When we tackled it, we found out that it was not
+written super efficiently. The code was clunky in a few places which mostly led to some minor issues we noticed in the front end of things. Along with that,
+there were times in the code that it felt like modularity would eventually become an issue. One of the biggest issues we felt was the process of creating a new account seemed
+clunky in nature in that when inputting the string to create a new account, one would actually have to type in "createAccount" instead of it being presented as an option in
+the pre-existing menu. The menu, once logged in, was working pretty normally disregarding aesthetically pleasing matters and inputting the options. Typing out the actual
+words as the options was a bad way to approach things, in our opinions. A console based application ought to rely more heavily on alpha/numeric options which naturally make
+the program more accessible to the user.
+-The backend of things seemed more modular to us than the front end. This is one of the reasons we felt like it was not extremely extensible. This is a direct reference to
+CLI.cpp and CLIinput.cpp.
+-Certain things that the initial developers designed did seem like they took future additions in to account. For example, the toggle was created in a separate option in the menu
+called "Manage Settings" which was a good thing because if you ever wanted to create any more settings you could add it to this option instead of having an extremely long initial
+menu.
+
+Code stability:
+
+There were no instances of the code that caused it simply just to crash upon opening. In this sense the code was stable. There was a particular instance where the program
+would go into an infinite loop when given an empty string as an input. There were also times that even though the code was stable to process the user input, there were much
+better ways to go about solving the problem. For instance, the time slots for people who were attending an event were not the best way to go about implementing the feature
+because it is extremely annoying to have to go in and write Y/N as many times is required for the time slots you have chosen. However, it did not crash and was saving data
+from file I/O pretty reliably.
+Another instance of such issues were asking the user for inputs when no input options were necessarily even present to choose from. When attempting to view meetings, it asked
+the user for an integer option when no such options were present. While we did not test every single case of input, there were definitely inputs that could have caused the progrma
+to simple crash or even go into an undesirable loop.
+
+Code readability:
+
+- In-code documentation: There were many components of the code that were self-explanatory in nature that did not need much explanation. However, certain portions
+could've definitely benefitted from better commenting.
+In general, reading through the code was not the biggest problem. It definitely seemed like it could have benefitted from better comments and better variable names
+in some places simple to add to extensibility and make it easier to add any new functionality. There were certain error messages that could have been more specific in terms
+of what they were actually trying to depict as an error. (For example, error messages for holidays). This is something we eventually see the effects in on the user side of things.
+
+
+This program as whole was functional in getting the job done (for the most part). The code was clunky at times, but readable for the most part. Speaking in terms of the requirements
+of project 1, this team completed the project strategically. The documentation was extensive and helped in figuring out what was going on in the code. Extensibility was an issue
+we had to conquer while adding new features. The usage of visual studio was helpful in hindsight, however a little more explanation regarding the installation and setup would have
+more useful. 
