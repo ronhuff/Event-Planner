@@ -1,0 +1,174 @@
+\hypertarget{class_c_l_i_input}{}\section{C\+L\+I\+Input Class Reference}
+\label{class_c_l_i_input}\index{C\+L\+I\+Input@{C\+L\+I\+Input}}
+
+
+{\ttfamily \#include $<$C\+L\+I\+Input.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_l_i_input_a1c034047988b07e0dc3c91509c9582bc}{C\+L\+I\+Input}} ()
+\item 
+string \mbox{\hyperlink{class_c_l_i_input_ac3e4a25ba4abaca1a0394e1ad5e2018c}{get\+Line}} (string message)
+\item 
+string \mbox{\hyperlink{class_c_l_i_input_ab5d95ef35791eb9bf19ecbe53756cf75}{get\+String}} (string message)
+\item 
+char \mbox{\hyperlink{class_c_l_i_input_af1fe274ad0d0cda3037506c65d9ba877}{get\+Character}} (string message)
+\item 
+double \mbox{\hyperlink{class_c_l_i_input_a7c80b9716d784128c5b39212337302a9}{get\+Double}} (string message)
+\item 
+int \mbox{\hyperlink{class_c_l_i_input_a68cd02be014eb4b3b127766ecdd0ac99}{get\+Integer}} (string message)
+\item 
+int \mbox{\hyperlink{class_c_l_i_input_a078c66fb1836105f27382b4aaa58b5e4}{get\+Integer}} (string message, int max, int min)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_l_i_input_a1c034047988b07e0dc3c91509c9582bc}\label{class_c_l_i_input_a1c034047988b07e0dc3c91509c9582bc}} 
+\index{C\+L\+I\+Input@{C\+L\+I\+Input}!C\+L\+I\+Input@{C\+L\+I\+Input}}
+\index{C\+L\+I\+Input@{C\+L\+I\+Input}!C\+L\+I\+Input@{C\+L\+I\+Input}}
+\subsubsection{\texorpdfstring{C\+L\+I\+Input()}{CLIInput()}}
+{\footnotesize\ttfamily C\+L\+I\+Input\+::\+C\+L\+I\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Command Line Input (\mbox{\hyperlink{class_c_l_i}{C\+LI}}) Constructor \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_l_i_input_af1fe274ad0d0cda3037506c65d9ba877}\label{class_c_l_i_input_af1fe274ad0d0cda3037506c65d9ba877}} 
+\index{C\+L\+I\+Input@{C\+L\+I\+Input}!get\+Character@{get\+Character}}
+\index{get\+Character@{get\+Character}!C\+L\+I\+Input@{C\+L\+I\+Input}}
+\subsubsection{\texorpdfstring{get\+Character()}{getCharacter()}}
+{\footnotesize\ttfamily char C\+L\+I\+Input\+::get\+Character (\begin{DoxyParamCaption}\item[{string}]{message }\end{DoxyParamCaption})}
+
+Obtains a character 
+\begin{DoxyParams}{Parameters}
+{\em string} & message -\/ prompt that lets the user know what to enter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: character of input 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_input_a7c80b9716d784128c5b39212337302a9}\label{class_c_l_i_input_a7c80b9716d784128c5b39212337302a9}} 
+\index{C\+L\+I\+Input@{C\+L\+I\+Input}!get\+Double@{get\+Double}}
+\index{get\+Double@{get\+Double}!C\+L\+I\+Input@{C\+L\+I\+Input}}
+\subsubsection{\texorpdfstring{get\+Double()}{getDouble()}}
+{\footnotesize\ttfamily double C\+L\+I\+Input\+::get\+Double (\begin{DoxyParamCaption}\item[{string}]{message }\end{DoxyParamCaption})}
+
+Obtains a double 
+\begin{DoxyParams}{Parameters}
+{\em string} & message -\/ prompt that lets the user know what to enter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: a double that is input 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_input_a68cd02be014eb4b3b127766ecdd0ac99}\label{class_c_l_i_input_a68cd02be014eb4b3b127766ecdd0ac99}} 
+\index{C\+L\+I\+Input@{C\+L\+I\+Input}!get\+Integer@{get\+Integer}}
+\index{get\+Integer@{get\+Integer}!C\+L\+I\+Input@{C\+L\+I\+Input}}
+\subsubsection{\texorpdfstring{get\+Integer()}{getInteger()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int C\+L\+I\+Input\+::get\+Integer (\begin{DoxyParamCaption}\item[{string}]{message }\end{DoxyParamCaption})}
+
+obtains any integer 
+\begin{DoxyParams}{Parameters}
+{\em string} & message -\/ prompt that lets the user know what to enter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: an integer that is input 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_input_a078c66fb1836105f27382b4aaa58b5e4}\label{class_c_l_i_input_a078c66fb1836105f27382b4aaa58b5e4}} 
+\index{C\+L\+I\+Input@{C\+L\+I\+Input}!get\+Integer@{get\+Integer}}
+\index{get\+Integer@{get\+Integer}!C\+L\+I\+Input@{C\+L\+I\+Input}}
+\subsubsection{\texorpdfstring{get\+Integer()}{getInteger()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int C\+L\+I\+Input\+::get\+Integer (\begin{DoxyParamCaption}\item[{string}]{message,  }\item[{int}]{max,  }\item[{int}]{min }\end{DoxyParamCaption})}
+
+Obtains an integer between min and max inclusive 
+\begin{DoxyParams}{Parameters}
+{\em string} & message -\/ prompt that lets the user know what to enter \\
+\hline
+{\em int} & max -\/ the maximum value of the integer \\
+\hline
+{\em int} & min -\/ the smallest value of the integer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: an integer between min and max 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_input_ac3e4a25ba4abaca1a0394e1ad5e2018c}\label{class_c_l_i_input_ac3e4a25ba4abaca1a0394e1ad5e2018c}} 
+\index{C\+L\+I\+Input@{C\+L\+I\+Input}!get\+Line@{get\+Line}}
+\index{get\+Line@{get\+Line}!C\+L\+I\+Input@{C\+L\+I\+Input}}
+\subsubsection{\texorpdfstring{get\+Line()}{getLine()}}
+{\footnotesize\ttfamily string C\+L\+I\+Input\+::get\+Line (\begin{DoxyParamCaption}\item[{string}]{message }\end{DoxyParamCaption})}
+
+Obtains a line of input with a modifiable message 
+\begin{DoxyParams}{Parameters}
+{\em string} & message -\/ prompt that lets the user know what to enter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: line of input as string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_input_ab5d95ef35791eb9bf19ecbe53756cf75}\label{class_c_l_i_input_ab5d95ef35791eb9bf19ecbe53756cf75}} 
+\index{C\+L\+I\+Input@{C\+L\+I\+Input}!get\+String@{get\+String}}
+\index{get\+String@{get\+String}!C\+L\+I\+Input@{C\+L\+I\+Input}}
+\subsubsection{\texorpdfstring{get\+String()}{getString()}}
+{\footnotesize\ttfamily string C\+L\+I\+Input\+::get\+String (\begin{DoxyParamCaption}\item[{string}]{message }\end{DoxyParamCaption})}
+
+Obtains all characters before new line or space 
+\begin{DoxyParams}{Parameters}
+{\em string} & message -\/ prompt that lets the user know what to enter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: string of input 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+interface/\mbox{\hyperlink{_c_l_i_input_8h}{C\+L\+I\+Input.\+h}}\item 
+interface/\mbox{\hyperlink{_c_l_i_input_8cpp}{C\+L\+I\+Input.\+cpp}}\end{DoxyCompactItemize}
