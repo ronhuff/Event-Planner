@@ -216,7 +216,7 @@ class Executive{
 		std::vector<std::shared_ptr<TaskList>> m_taskLists;
 
 		std::shared_ptr<TaskList> displayTasks();
-		std::vector<std::shared_ptr<TaskList>> m_currTL;
+		std::shared_ptr<TaskList> m_currTL;
 
 	private:
 		/**

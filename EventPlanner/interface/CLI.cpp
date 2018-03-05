@@ -427,7 +427,7 @@ void CLI::newEvent() throw(std::exception) {
 		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
 		//exec.writeRecord(eventID, exec.createRecordList(times), populateTaskList());
 		exec.createTaskList(tasks, eventID);
-		exec.writeTaskList(eventID, exec.m_currTL.at(1));
+		exec.writeTaskList(eventID, exec.m_currTL);
 		exec.writeRecord(eventID, exec.createRecordList(times));
 		//Switch the two above functions 
 		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
@@ -621,6 +621,7 @@ void CLI::viewEvent(int i){
 				
 				std::shared_ptr<TaskList> temp = exec.displayTasks();
 				temp->displayTaskList();// need functionality here for interactiong with the tasklist.
+				
 			}
 			else {
 				std::cout << "Error: Invalid meeting number.\n";

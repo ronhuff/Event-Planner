@@ -381,18 +381,22 @@ bool Executive::readinTaskList(int eid)
 	{
 		throw std::logic_error("TaskList file does not exist.");
 	}
-	std::shared_ptr<TaskList> temp = std::make_shared<TaskList>();
-	std::shared_ptr<TaskList> temp2 = temp;
-	inF >> *temp2;
-	temp->m_eventId = eid;
-	m_currTL.push_back(temp2);
+
+	if (m_currTL == nullptr)
+	{
+		m_currTL = std::make_shared<TaskList>();
+	}
+	inF >> *m_currTL;
+	m_currTL->m_eventId = eid;
+
 	inF.close();
 	
 	return(true);
 }
 
 std::shared_ptr<TaskList> Executive::displayTasks() {
-	return(m_currTL.at(0));
+
+	return(m_currTL);
 }
 
 bool Executive::writeTaskList(int eid, bool hasList = false)//this is to create a blank tasklist file.
@@ -439,7 +443,7 @@ bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
 			}
 			(*tlit)->m_eventId = eid;
 			(*tlit)->m_numTasks = taskVector.size();
-			m_currTL.at(1) = (*tlit);
+			m_currTL = (*tlit);
 			return(true);
 		}
 

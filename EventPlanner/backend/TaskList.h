@@ -15,6 +15,7 @@ public:
 	TaskList();
 	~TaskList();
 
+
 	bool addTask(std::shared_ptr<Task> task);
 	bool createTask(); // Gets name of task from user and attempts to call addTask(new Task(name));
 
