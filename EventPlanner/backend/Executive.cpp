@@ -347,7 +347,7 @@ std::list<Record>* Executive::readRecord(int event_id)
 		getline(recordFile, tempd);
 		tempd = tempd.substr(2);
 		//Next, we put users back in.
-		Record tempRecord(tempt,tempd);
+		Record tempRecord(tempd, tempt);
 
 		//This line represents the user list.
 		getline(recordFile, tempu);
@@ -560,7 +560,7 @@ Event* Executive::getEventByID(int eid) throw(std::logic_error) {
 			std::getline(text_file, date);
 			dateList.push_back(date);
 		} while (isdigit(date[0]));
-		std::getline(text_file, creator_user_name);
+		creator_user_name = date;
 		std::getline(text_file, creator_real_name);
 		//temp stores the int as a string, it will be converted.
 		std::getline(text_file, temp);

@@ -448,17 +448,17 @@ void CLI::newEvent() throw(std::exception) {
 				bool validDate = false; //Hahaha like "validate"
 				while (!validDate) {
 					std::cout << "\nPlease enter a date in the format MM/DD/YYYY.\n";
-					std::cin >> date;
+					std::cin >> nDate;
 
-					while (std::cin.fail() || date.length() != 10 || (date[2] != '/' || date[5] != '/')) {
+					while (std::cin.fail() || nDate.length() != 10 || (nDate[2] != '/' || nDate[5] != '/')) {
 						cin.clear();
 						cin.ignore(numeric_limits<streamsize>::max(), '\n');
 						std::cout << "For ease of use, enter a date in the format MM/DD/YYYY.\n";
-						std::cin >> date;
+						std::cin >> nDate;
 					}
-					std::string year = date.substr(6, 4);
-					std::string day = date.substr(3, 2);
-					std::string month = date.substr(0, 2);
+					std::string year = nDate.substr(6, 4);
+					std::string day = nDate.substr(3, 2);
+					std::string month = nDate.substr(0, 2);
 
 					try {
 						stoi(year);
@@ -501,7 +501,7 @@ void CLI::newEvent() throw(std::exception) {
 					else {
 						validDate = true;
 					}
-					date = year + "/" + month + "/" + day;
+					nDate = year + "/" + month + "/" + day;
 					validDate = true;
 				}
 				dList.push_back(nDate);
@@ -762,15 +762,12 @@ std::vector<std::string> CLI::populateTaskList() {
 }
 
 void CLI::viewEvent(int i){
-    try{
-        Event* e = exec.getEventByID(i);
+	
+		Event* e = exec.getEventByID(i);
 		std::cout << "Title:\t\t" << e->getName() << "\n" <<
 			"Creator:\t" << e->getCreatorRealName() << "\n";
 		std::cout << "Date:\t\t";
-		
-		for (int i = 0; i < e->getSizeOfDateVector(); i++) {
-			std::cout << e->getDate(i) << "\t\t";
-		}
+		std::cout << e->getDate(1) << "\t\t";
 		std::cout << "\n\n";
 		std::cout << "Tasks: ";
 
@@ -788,12 +785,12 @@ void CLI::viewEvent(int i){
 			return;
 		}
 
-		while(1) {//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
+		while (1) {//this condition is annoying and I don't want to further refactor this so I am doing a less than optimal work around.
 			int menuchoice;
 
 			std::cout << "Welcome Attendee! Here are your options:\n";
 			std::cout << "1) Indicate your availability.\n"; //WE WILL ADD OTHER OPTIONS TO THIS MENU SO FULL MENU IMPLENTATION AT THIS POINT IS WORTH.
-			std::cout << "2) Sign up for event tasks.\n"; 
+			std::cout << "2) Sign up for event tasks.\n";
 			std::cout << "3) Return to menu.\n"; //3 or a blank input will return to menu.
 
 			std::cout << "Selection:";//NOTE: returning from this function may not actually cause the user to "go back"
@@ -816,11 +813,8 @@ void CLI::viewEvent(int i){
 			else if (menuchoice == 3) {
 				break;
 			}
-        }
-        delete e;
-    }catch(std::exception& e){
-        std::cout << "Invalid event number.\n";
-    }
+		}
+		delete e;
 }
 
 void CLI::setAvailability(int eid){
