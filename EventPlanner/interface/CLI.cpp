@@ -582,7 +582,8 @@ void CLI::viewEvent(int i){
 		if (creator) {
 			std::cout << "Welcome, event creator!\n\n";
 			viewAvailability(i);
-			std::string waiter = input.getString("Press enter to continue...");
+
+			std::string waiter = input.getString("Would you like to add another day?");
 			return;
 		}
 
