@@ -477,7 +477,7 @@ std::vector<std::string> CLI::populateTaskList() {
 	int choice;
 
 	while (1) {
-		std::cout << "\nPlease choose from the following task options:\n\n" <<
+		std::cout << "\n=========================== TASK MENU ===========================\n\n" <<
 			"1) View current task list\n" <<
 			"2) Add another task\n"
 			"3) Remove a task\n" <<
@@ -582,6 +582,7 @@ void CLI::viewEvent(int i){
 		if (creator) {
 			std::cout << "Welcome, event creator!\n\n";
 			viewAvailability(i);
+			std::string waiter = input.getString("Press enter to continue...");
 			return;
 		}
 
@@ -622,8 +623,9 @@ void CLI::viewEvent(int i){
 
 void CLI::setAvailability(int eid){
     std::list<Record>* eventRecords = exec.readRecord(eid);
-    std::cout << "For each of the following times enter 'y' or 'n' to confirm or deny availablity.\n";
-
+    std::cout << "For each of the following times enter 'yes', or 'y', or really anything to confirm availability.\n";
+	std::cout << "Can't go at a specific time? Just press enter!\n";
+	input.getString("\n");
     for(auto i : *(eventRecords)){
         std::string slot;
         if(longtime){
@@ -632,7 +634,7 @@ void CLI::setAvailability(int eid){
             slot = to12Hour(i.getTime());
         }
 
-        if(input.getCharacter(slot + " - ") == 'y'){
+        if(!input.getString(slot + " - ").empty()){
             exec.addUserTo(i.getTime(), eventRecords);
         }
     }
@@ -675,26 +677,16 @@ void CLI::viewAvailability(int eid){
     delete event;
     delete eventRecords;
 }
-std::string CLI::to12Hour(std::string input){
+std::string CLI::to12Hour(std::string myInput){
 
-	int hour = std::stoi(input.substr(0, 2));
+	int hour = std::stoi(myInput.substr(0, 2));
 	if(hour <= 12){
-		return (input + " PM");
-	}else if(hour > 12){
+		return (myInput + " AM");
+	}else {                              //if(hour > 12){
 		hour -= 12;
 		std::string hrStr = std::to_string(hour);
-		if (hrStr.length() == 1){//It seems to me that we should append a '0' on these times (e.g.) 01:20 PM
-			input[0] = '0';					  //Just for now until we know if there would be errors from other code expecting this format.
-			input[1] = hrStr[0];
-			return(input + " AM");
-		}
-		else{
-			input[0], input[1] = hrStr[0], hrStr[1];
-			return(input + " PM");
-		}
-		//return (std::to_string(hour) + std::string(input.substr(delimiter)) + " PM");
-	}else{
-		return (input + " AM");
+		if (myInput == "24:00") return ("12:00 AM");
+		return(hrStr + myInput.substr(2, 3) + " PM");
 	}
 }
 
