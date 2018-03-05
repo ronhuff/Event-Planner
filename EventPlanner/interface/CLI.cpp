@@ -321,12 +321,7 @@ void CLI::newEvent() throw(std::exception) {
     }
 
 	eventID = exec.generateEvent(name, date);
-<<<<<<< HEAD
 
-
-=======
-	
->>>>>>> efb77215476a90380578a4e6d3829e550c3f5e5a
 	std::cout << "\nPlease enter a beginning time for your meeting.\n";
 	std::cout << "Your time will be rounded down to the nearest 20-minite interval.\n";
 	//BEGIN NEW CODE
