@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <vector>
 #include "../backend/Executive.h"
 #include "CLIInput.h"
 
@@ -79,6 +81,13 @@ class CLI{
 	     * @return: none
 	     */
         void newEvent() throw(std::exception);
+		/**
+		* The event creator to populate a list of tasks for an event
+		* @pre: none
+		* @post: new task list is created
+		* @return: none
+		*/
+		std::vector<std::string> populateTaskList();
         /**
 	     * Allows a user to view a specific event
          * @param int - the unique identifier of the event
