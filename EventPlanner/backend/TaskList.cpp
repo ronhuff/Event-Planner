@@ -39,9 +39,9 @@ std::ostream & operator<<(std::ostream & out, TaskList & tList)
 {
 	// TODO: insert return statement here
 	out << tList.m_eventId << tList.m_numTasks << tList.m_numAvailTasks;
-	for (int i = 1; i <= tList.m_numTasks; i++)
+	for (int i = 0; i < tList.m_numTasks; i++)
 	{
-		out << tList.m_tasks.at(i);
+		out << *tList.m_tasks.at(i);
 	}
 	return(out);
 }

@@ -380,8 +380,10 @@ bool Executive::writeTaskList(int eid, std::shared_ptr<TaskList> tl) {
 
 	for (std::vector<std::shared_ptr<TaskList>>::iterator it = m_taskLists.begin(); it != m_taskLists.end(); ++it)// loops through tasklists.
 	{
-		outF << *it;//this should outfile the tasklist which should outfile the tasks.
 
+		std::shared_ptr<TaskList> temp = (*it);
+		outF << *temp;//this should outfile the tasklist which should outfile the tasks.
+		//std::cout << *temp;
 	}
 
 	outF.close();
@@ -398,6 +400,7 @@ bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
 			for (std::vector<std::string>::iterator it = taskVector.begin(); it != taskVector.end(); ++it)
 			{
 				std::shared_ptr<Task> temp = std::make_shared<Task>(*it);
+				temp->m_isAssigned = false;
 				(*tlit)->addTask(temp);
 				(*tlit)->m_eventId = eid;
 				(*tlit)->m_numTasks = taskVector.size();

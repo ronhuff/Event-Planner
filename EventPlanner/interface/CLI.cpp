@@ -66,6 +66,13 @@ void CLI::login() {
 	else {
 		std::cout << "Have a pleasant day...\n";
 	}
+	for (std::vector<std::shared_ptr<TaskList>>::iterator tlit = exec.m_taskLists.begin(); tlit != exec.m_taskLists.end(); ++tlit)
+	{
+		int eid = (*tlit)->m_eventId;
+
+		exec.writeTaskList(eid, *tlit);
+	}
+	
 }
 
 void CLI::menu() {
@@ -109,6 +116,12 @@ void CLI::menu() {
 		login();
     }else if(action == 5) {
 		std::cout << "Have a pleasant day...\n";
+		for (std::vector<std::shared_ptr<TaskList>>::iterator tlit = exec.m_taskLists.begin(); tlit != exec.m_taskLists.end(); ++tlit)
+		{
+			int eid = (*tlit)->m_eventId;
+
+			exec.writeTaskList(eid, *tlit);
+		}
 		return;
     }
 }
