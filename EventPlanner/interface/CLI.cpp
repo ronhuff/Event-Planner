@@ -114,26 +114,26 @@ void CLI::menu() {
 }
 
 void CLI::options() {
-	std::string choice = 0;
+	int choice = 0;
 	std::cout << "Please select from the following options:\n";//We can add more here if necessary for Project 2 requirements.
 
-	while (choice != "1" && choice != "2") {
+	while (choice != 1 && choice != 2) {
 		if (longtime) std::cout << "1) Switch to 12 hour display.\n";
 		else std::cout <<          "1) Switch to 24 hour display.\n";
 
 		std::cout << "2) Close time-toggle.\n";
-		//std::cout << "\nSelection: ";
-		choice = input.getString("\nSelection: ");
+		std::cout << "\nSelection: ";
+		std::cin >> choice;  // = input.getString("\nSelection: ");
 
-		if (choice != "1" && choice != "2") {
-			//std::cin.clear(); // unset failbit
+		if (choice != 1 && choice != 2) {
+			std::cin.clear(); // unset failbit
 			std::cout << "Please simply choose one of the options (1 or 2) and press enter/return.\n";
-			//std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); // skip bad input
 			continue;
 		}
 	}
 
-	if (choice == "1") longtime = (longtime) ? false : true;
+	if (choice == 1) longtime = (longtime) ? false : true;
 	if (longtime) std::cout << "You've switched to 24 hour display mode.\n";
 	else		  std::cout << "You've switched to 12 hour display mode.\n";
 }
@@ -320,9 +320,7 @@ void CLI::newEvent() throw(std::exception) {
 		validDate = true;
     }
 
-	//=================
 	eventID = exec.generateEvent(name, date);
-
 	
 	std::cout << "\nPlease enter a beginning time for your meeting.\n";
 	std::cout << "Your time will be rounded down to the nearest 20-minite interval.\n";
