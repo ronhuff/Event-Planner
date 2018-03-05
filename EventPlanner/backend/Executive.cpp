@@ -388,7 +388,7 @@ bool Executive::readinTaskList(int eid)
 
 }
 
-bool Executive::writeTaskList(int eid, bool hasList = false)
+bool Executive::writeTaskList(int eid, bool hasList = false)//this is to create a blank tasklist file.
 {
 	std::string filename = getFileName(df_taskList, std::to_string(eid));
 	std::ofstream outF(filename);
@@ -429,11 +429,11 @@ bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
 				std::shared_ptr<Task> temp = std::make_shared<Task>(*it);
 				temp->m_isAssigned = false;
 				(*tlit)->addTask(temp);
-				(*tlit)->m_eventId = eid;
-				(*tlit)->m_numTasks = taskVector.size();
-				m_taskLists.push_back(*tlit);
-				return(true);
 			}
+			(*tlit)->m_eventId = eid;
+			(*tlit)->m_numTasks = taskVector.size();
+			m_taskLists.push_back(*tlit);
+			return(true);
 		}
 
 	}
@@ -443,6 +443,7 @@ bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
 		for (std::vector<std::string>::iterator it = taskVector.begin(); it != taskVector.end(); ++it)
 		{
 			std::shared_ptr<Task> temp = std::make_shared<Task>(*it);
+			temp->m_isAssigned = false;
 			tempTL->addTask(temp);
 		}
 		tempTL->m_eventId = eid;

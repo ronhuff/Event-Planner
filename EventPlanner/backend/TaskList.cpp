@@ -38,7 +38,7 @@ bool TaskList::createTask() {
 std::ostream & operator<<(std::ostream & out, TaskList & tList)
 {
 	// TODO: insert return statement here
-	out << tList.m_eventId << tList.m_numTasks << tList.m_numAvailTasks;
+	out << tList.m_eventId << "\n" << tList.m_numTasks << "\n" << tList.m_numAvailTasks << "\n";
 	for (int i = 0; i < tList.m_numTasks; i++)
 	{
 		out << *tList.m_tasks.at(i);
@@ -48,7 +48,20 @@ std::ostream & operator<<(std::ostream & out, TaskList & tList)
 
 std::istream & operator>>(std::istream & in, TaskList & tList)
 {
-	in >> tList.m_eventId >> tList.m_numTasks >> tList.m_numAvailTasks;
+	/*in >> tList.m_eventId >> tList.m_numTasks >> tList.m_numAvailTasks;*/
+	std::string id;
+	std::string numTasks;
+	std::string numAvailTasks;
+
+	std::getline(in, id);
+	std::getline(in, numTasks);
+	std::getline(in, numAvailTasks);
+
+	tList.m_numTasks = std::stoi(id);
+	tList.m_numTasks = std::stoi(numTasks);
+	tList.m_numAvailTasks = std::stoi(numAvailTasks);
+
+	
 	for (int i = 1; i <= tList.m_numTasks; i++)
 	{
 		std::shared_ptr<Task> temp = std::make_shared<Task>();
