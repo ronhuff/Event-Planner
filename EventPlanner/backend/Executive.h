@@ -207,7 +207,8 @@ class Executive{
 		*
 		*/
 		int whatIsEventNum();
-
+		bool readinTaskList(int);
+		bool writeTaskList(int eid, bool);//for creating a blank tasklist file.
 		bool writeTaskList(int eid, std::shared_ptr<TaskList> tl);
 
 		bool createTaskList(std::vector<std::string>, int);

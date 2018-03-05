@@ -66,6 +66,13 @@ void CLI::login() {
 	else {
 		std::cout << "Have a pleasant day...\n";
 	}
+	for (std::vector<std::shared_ptr<TaskList>>::iterator tlit = exec.m_taskLists.begin(); tlit != exec.m_taskLists.end(); ++tlit)
+	{
+		int eid = (*tlit)->m_eventId;
+
+		exec.writeTaskList(eid, *tlit);
+	}
+	
 }
 
 void CLI::menu() {
@@ -109,6 +116,12 @@ void CLI::menu() {
 		login();
     }else if(action == 5) {
 		std::cout << "Have a pleasant day...\n";
+		for (std::vector<std::shared_ptr<TaskList>>::iterator tlit = exec.m_taskLists.begin(); tlit != exec.m_taskLists.end(); ++tlit)
+		{
+			int eid = (*tlit)->m_eventId;
+
+			exec.writeTaskList(eid, *tlit);
+		}
 		return;
     }
 }
@@ -424,9 +437,10 @@ void CLI::newEvent() throw(std::exception) {
 	}
 
 	if (newList == 1) {
-		//populateTaskList();
+		std::vector<std::string> tasks = populateTaskList();
 		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
 		//exec.writeRecord(eventID, exec.createRecordList(times), populateTaskList());
+		exec.createTaskList(tasks, eventID);
 		exec.writeRecord(eventID, exec.createRecordList(times));
 		//Switch the two above functions 
 		std::cout << "\n~~~~~~~~~ Your event will be created! ~~~~~~~~~~~\n";
@@ -445,6 +459,7 @@ void CLI::newEvent() throw(std::exception) {
 
 		//std::vector<std::string> taskList(0); //Creates an empty task list vector
 		//exec.writeRecord(eventID, exec.createRecordList(times), taskList);
+		exec.writeTaskList(eventID, false);
 		exec.writeRecord(eventID, exec.createRecordList(times));
 		delete times;
 	}

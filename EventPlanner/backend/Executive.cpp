@@ -368,6 +368,33 @@ std::list<std::string>* Executive::getAttending(int eid)
 	return UserList;
 }
 
+bool Executive::readinTaskList(int eid)
+{
+
+	std::string filename = getFileName(df_taskList, std::to_string(eid));
+
+	//open file
+	std::ifstream inF(filename);
+
+	//throw if the file does not exist
+	if (!inF.is_open())
+	{
+		throw std::logic_error("TaskList file does not exist.");
+	}
+	std::shared_ptr<TaskList> temp;
+	
+	inF >> *temp;
+
+
+}
+
+bool Executive::writeTaskList(int eid, bool hasList = false)//this is to create a blank tasklist file.
+{
+	std::string filename = getFileName(df_taskList, std::to_string(eid));
+	std::ofstream outF(filename);
+	outF.close();
+	return(true);
+}
 // write TaskList here.
 bool Executive::writeTaskList(int eid, std::shared_ptr<TaskList> tl) {
 
@@ -380,8 +407,10 @@ bool Executive::writeTaskList(int eid, std::shared_ptr<TaskList> tl) {
 
 	for (std::vector<std::shared_ptr<TaskList>>::iterator it = m_taskLists.begin(); it != m_taskLists.end(); ++it)// loops through tasklists.
 	{
-		outF << *it;//this should outfile the tasklist which should outfile the tasks.
 
+		std::shared_ptr<TaskList> temp = (*it);
+		outF << *temp;//this should outfile the tasklist which should outfile the tasks.
+		//std::cout << *temp;
 	}
 
 	outF.close();
@@ -398,11 +427,13 @@ bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
 			for (std::vector<std::string>::iterator it = taskVector.begin(); it != taskVector.end(); ++it)
 			{
 				std::shared_ptr<Task> temp = std::make_shared<Task>(*it);
+				temp->m_isAssigned = false;
 				(*tlit)->addTask(temp);
-				(*tlit)->m_eventId = eid;
-				(*tlit)->m_numTasks = taskVector.size();
-				return(true);
 			}
+			(*tlit)->m_eventId = eid;
+			(*tlit)->m_numTasks = taskVector.size();
+			m_taskLists.push_back(*tlit);
+			return(true);
 		}
 
 	}
@@ -412,10 +443,12 @@ bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
 		for (std::vector<std::string>::iterator it = taskVector.begin(); it != taskVector.end(); ++it)
 		{
 			std::shared_ptr<Task> temp = std::make_shared<Task>(*it);
+			temp->m_isAssigned = false;
 			tempTL->addTask(temp);
 		}
 		tempTL->m_eventId = eid;
 		tempTL->m_numTasks = taskVector.size();
+		m_taskLists.push_back(tempTL);
 		return(true);
 	}
 	
