@@ -1,19 +1,19 @@
 For this project, the process model we most closely have followed throughout was most likely the Scrum model.
 There are a few reasons that we believe this:
 
-1. Scrum does not necessarily mean you have a lot of time to accomplish tasks. For this project, we did not have endless amounts of
+  1. Scrum does not necessarily mean you have a lot of time to accomplish tasks. For this project, we did not have endless amounts of
 time to complete old functionality and adopt new functionality.
 
-2. This limited time allows us to implement changes more quickly and test more promptly as a result.
+  2. This limited time allows us to implement changes more quickly and test more promptly as a result.
 
-3. We were very adaptive towards any changes that happened throughout the process. As a result we were also flexible in terms of how we were going
+  3. We were very adaptive towards any changes that happened throughout the process. As a result we were also flexible in terms of how we were going
 to go about the solution.
 
-4. Our meetings were to-the-point and effective in communicating bits of progress. As opposed to our last project, we met more often and
+  4. Our meetings were to-the-point and effective in communicating bits of progress. As opposed to our last project, we met more often and
 tried to tackle smaller bits of development. Such short meetings (like sprints of work) gave us the ability to have more effective communication.
 We never tried to take on more than we could handle.
 
-5. Scrum relies on self-organization; there was no real team leader, instead we all took on roles that we felt we best fit in to and could
+  5. Scrum relies on self-organization; there was no real team leader, instead we all took on roles that we felt we best fit in to and could
 contribute the most towards.
 
 The scrum process model follows agile development very closely. Agile development really focuses on iterative development across cross functional
