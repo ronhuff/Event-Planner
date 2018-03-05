@@ -1,0 +1,529 @@
+\hypertarget{class_executive}{}\section{Executive Class Reference}
+\label{class_executive}\index{Executive@{Executive}}
+
+
+{\ttfamily \#include $<$Executive.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_executive_ad870c1d741f1f313eb0c5a8336f8af6b}{Executive}} ()
+\item 
+\mbox{\hyperlink{class_executive_a4ce80c499f7640b1770ade77cf56d965}{$\sim$\+Executive}} ()
+\item 
+int \mbox{\hyperlink{class_executive_abd540db75256c14b7fe16d59c0e00d48}{get\+Event\+Num}} ()
+\item 
+bool \mbox{\hyperlink{class_executive_a0b1e894fc41ed42482896aff46a7a520}{generate\+Event}} (std\+::string name, std\+::string date)
+\item 
+bool \mbox{\hyperlink{class_executive_a14c76414b43a4149728afc38613b8cee}{delete\+Event}} (int event\+\_\+id)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_event}{Event}} $>$ $\ast$ \mbox{\hyperlink{class_executive_ab8fa8f11ea8794947da209d295c7e8fd}{get\+Event\+List}} ()
+\item 
+bool \mbox{\hyperlink{class_executive_a8010517a6dd4bbe81ce4a03a91886931}{set\+Current\+User}} (std\+::string uid)
+\item 
+bool \mbox{\hyperlink{class_executive_a5879f0c70a947b199113f1d707c53610}{write\+Current\+User}} ()
+\item 
+\mbox{\hyperlink{class_user}{User}} $\ast$ \mbox{\hyperlink{class_executive_a12621ad5db6ee3f111779a61ea82bba7}{get\+Current\+User}} ()
+\item 
+bool \mbox{\hyperlink{class_executive_a59e947ff980f9bd1ef0bb9ea8dae42b1}{add\+User\+To}} (std\+::string time, std\+::list$<$ \mbox{\hyperlink{class_record}{Record}} $>$ $\ast$List)
+\item 
+bool \mbox{\hyperlink{class_executive_a1df250bced0d7d74ce5017cd1a225e4d}{remove\+User\+From}} (std\+::string time, std\+::list$<$ \mbox{\hyperlink{class_record}{Record}} $>$ $\ast$List)
+\item 
+std\+::list$<$ \mbox{\hyperlink{class_record}{Record}} $>$ $\ast$ \mbox{\hyperlink{class_executive_a513c12461670a2a2c6b5f69a387fa43c}{create\+Record\+List}} (std\+::list$<$ std\+::string $>$ $\ast$time\+List)
+\item 
+std\+::list$<$ std\+::string $>$ $\ast$ \mbox{\hyperlink{class_executive_a68f603b8cdd1bc53a2e0565677f71f4e}{get\+Attending}} (int eid)
+\item 
+std\+::list$<$ \mbox{\hyperlink{class_event}{Event}} $>$ $\ast$ \mbox{\hyperlink{class_executive_a227a53f3d58c360c1248c9ccc3a47f58}{get\+Event\+By\+Creator}} (\mbox{\hyperlink{class_user}{User}} u)
+\item 
+\mbox{\hyperlink{class_user}{User}} $\ast$ \mbox{\hyperlink{class_executive_adbf182bb09881e5a7ab01689fd653afd}{get\+User}} (std\+::string uid)
+\item 
+\mbox{\hyperlink{class_event}{Event}} $\ast$ \mbox{\hyperlink{class_executive_a13bb89f1f430e27fe3b99d1ef10bf07b}{get\+Event\+By\+ID}} (int eid)
+\item 
+std\+::list$<$ \mbox{\hyperlink{class_record}{Record}} $>$ $\ast$ \mbox{\hyperlink{class_executive_aa0ae7cbbd2aac0b953cdae30d8692f35}{read\+Record}} (int event\+\_\+id)
+\item 
+void \mbox{\hyperlink{class_executive_a32e7d63d1978cef1db5bd55f085aa137}{write\+Record}} (int eid, std\+::list$<$ \mbox{\hyperlink{class_record}{Record}} $>$ $\ast$List)
+\item 
+bool \mbox{\hyperlink{class_executive_a3f464b27db4195c975283ce20cf3c3f9}{remove\+Record}} (int eid)
+\item 
+bool \mbox{\hyperlink{class_executive_aaf4e73a2e3e6515a1e15569d50ed7017}{create\+User}} (std\+::string uid, std\+::string pnm)
+\item 
+bool \mbox{\hyperlink{class_executive_a65588e97784c7062ba999b141b683bd0}{is\+Attending}} (int eid)
+\item 
+void \mbox{\hyperlink{class_executive_a63e7fcccc1e3992eaef93630ecc2a160}{sort\+Event\+List}} ()
+\item 
+int \mbox{\hyperlink{class_executive_a1e769171afd89ec03795717057642d5a}{what\+Is\+Event\+Num}} ()
+\item 
+bool \mbox{\hyperlink{class_executive_a13d8530957ee3c54bb355b62005177ed}{readin\+Task\+List}} (int)
+\item 
+bool \mbox{\hyperlink{class_executive_aa717a460eec1cdfe11808611dd8aeb8e}{write\+Task\+List}} (int eid, bool)
+\item 
+bool \mbox{\hyperlink{class_executive_ae4225a37c7c9f8299c59eb1cc07d221a}{write\+Task\+List}} (int eid, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_task_list}{Task\+List}} $>$ tl)
+\item 
+bool \mbox{\hyperlink{class_executive_a67738864000986968126007b8cbdbb71}{create\+Task\+List}} (std\+::vector$<$ std\+::string $>$, int)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_task_list}{Task\+List}} $>$ \mbox{\hyperlink{class_executive_aa2116b9668aa8fbae3be98ab35258db5}{display\+Tasks}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_executive_ab285c21199444e024f7b0df423f51827}{event\+Num}} = 0
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_task_list}{Task\+List}} $>$ $>$ \mbox{\hyperlink{class_executive_abaad195f97ce0a4b4be35064f905fc30}{m\+\_\+task\+Lists}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_task_list}{Task\+List}} $>$ \mbox{\hyperlink{class_executive_a80e57f901c3182811a700674066edb4d}{m\+\_\+curr\+TL}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_executive}{Executive}} class. This deals with file IO and class interactions in the backend. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_executive_ad870c1d741f1f313eb0c5a8336f8af6b}\label{class_executive_ad870c1d741f1f313eb0c5a8336f8af6b}} 
+\index{Executive@{Executive}!Executive@{Executive}}
+\index{Executive@{Executive}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{Executive()}{Executive()}}
+{\footnotesize\ttfamily Executive\+::\+Executive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+The empty constructor. This builds the \mbox{\hyperlink{class_executive}{Executive}} class. \begin{DoxyPrecond}{Precondition}
+None. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\mbox{\hyperlink{class_executive}{Executive}} is created. If data and Event\+List.\+txt don\textquotesingle{}t exist, they are created. \mbox{\hyperlink{class_executive}{Executive}} reads various files in data if they exist to recreate objects. 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_executive_a4ce80c499f7640b1770ade77cf56d965}\label{class_executive_a4ce80c499f7640b1770ade77cf56d965}} 
+\index{Executive@{Executive}!````~Executive@{$\sim$\+Executive}}
+\index{````~Executive@{$\sim$\+Executive}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{$\sim$\+Executive()}{~Executive()}}
+{\footnotesize\ttfamily Executive\+::$\sim$\+Executive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+The empty destructor. This destroys the \mbox{\hyperlink{class_executive}{Executive}} class. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_executive}{Executive}} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\mbox{\hyperlink{class_executive}{Executive}} is destroyed along with any objects it created. 
+\end{DoxyPostcond}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_executive_a59e947ff980f9bd1ef0bb9ea8dae42b1}\label{class_executive_a59e947ff980f9bd1ef0bb9ea8dae42b1}} 
+\index{Executive@{Executive}!add\+User\+To@{add\+User\+To}}
+\index{add\+User\+To@{add\+User\+To}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{add\+User\+To()}{addUserTo()}}
+{\footnotesize\ttfamily bool Executive\+::add\+User\+To (\begin{DoxyParamCaption}\item[{std\+::string}]{time,  }\item[{std\+::list$<$ \mbox{\hyperlink{class_record}{Record}} $>$ $\ast$}]{List }\end{DoxyParamCaption})}
+
+This method will add current user to a certain time block 
+\begin{DoxyParams}{Parameters}
+{\em time} & the time block \\
+\hline
+{\em List} & the pointer to the record list \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+the record list must valid 
+\end{DoxyPrecond}
+\begin{DoxyReturn}{Returns}
+\+: bool -- T\+R\+UE if the user have be added to the record 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_a513c12461670a2a2c6b5f69a387fa43c}\label{class_executive_a513c12461670a2a2c6b5f69a387fa43c}} 
+\index{Executive@{Executive}!create\+Record\+List@{create\+Record\+List}}
+\index{create\+Record\+List@{create\+Record\+List}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{create\+Record\+List()}{createRecordList()}}
+{\footnotesize\ttfamily std\+::list$<$ \mbox{\hyperlink{class_record}{Record}} $>$ $\ast$ Executive\+::create\+Record\+List (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::string $>$ $\ast$}]{time\+List }\end{DoxyParamCaption})}
+
+This method should be called when creating a new event 
+\begin{DoxyParams}{Parameters}
+{\em time\+List} & a list of time blocks \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+time\+List will be deleted 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+a list of \mbox{\hyperlink{class_record}{Record}} objects 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_a67738864000986968126007b8cbdbb71}\label{class_executive_a67738864000986968126007b8cbdbb71}} 
+\index{Executive@{Executive}!create\+Task\+List@{create\+Task\+List}}
+\index{create\+Task\+List@{create\+Task\+List}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{create\+Task\+List()}{createTaskList()}}
+{\footnotesize\ttfamily bool Executive\+::create\+Task\+List (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{task\+Vector,  }\item[{int}]{eid }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_executive_aaf4e73a2e3e6515a1e15569d50ed7017}\label{class_executive_aaf4e73a2e3e6515a1e15569d50ed7017}} 
+\index{Executive@{Executive}!create\+User@{create\+User}}
+\index{create\+User@{create\+User}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{create\+User()}{createUser()}}
+{\footnotesize\ttfamily bool Executive\+::create\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{uid,  }\item[{std\+::string}]{pnm }\end{DoxyParamCaption})}
+
+This method creates a user and writes basic information back out to a file. 
+\begin{DoxyParams}{Parameters}
+{\em uid} & user\+\_\+name for the new user \\
+\hline
+{\em pnm} & real\+\_\+name for the new user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+user\+\_\+$<$uid$>$.\+txt does not exist in the data/user directory 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+user\+\_\+$<$uid$>$.\+txt is created in the data/user directory 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if the file user\+\_\+$<$uid$>$ does not already exist, F\+A\+L\+SE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_a14c76414b43a4149728afc38613b8cee}\label{class_executive_a14c76414b43a4149728afc38613b8cee}} 
+\index{Executive@{Executive}!delete\+Event@{delete\+Event}}
+\index{delete\+Event@{delete\+Event}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{delete\+Event()}{deleteEvent()}}
+{\footnotesize\ttfamily bool Executive\+::delete\+Event (\begin{DoxyParamCaption}\item[{int}]{event\+\_\+id }\end{DoxyParamCaption})}
+
+This method removes an event. 
+\begin{DoxyParams}{Parameters}
+{\em event\+\_\+id} & The id of the event to be deleted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_executive}{Executive}} exists and the event in question with the id exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+An event is deleted in text files and in memory. 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+true if the event was deleted, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_aa2116b9668aa8fbae3be98ab35258db5}\label{class_executive_aa2116b9668aa8fbae3be98ab35258db5}} 
+\index{Executive@{Executive}!display\+Tasks@{display\+Tasks}}
+\index{display\+Tasks@{display\+Tasks}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{display\+Tasks()}{displayTasks()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_task_list}{Task\+List}} $>$ Executive\+::display\+Tasks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_executive_a0b1e894fc41ed42482896aff46a7a520}\label{class_executive_a0b1e894fc41ed42482896aff46a7a520}} 
+\index{Executive@{Executive}!generate\+Event@{generate\+Event}}
+\index{generate\+Event@{generate\+Event}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{generate\+Event()}{generateEvent()}}
+{\footnotesize\ttfamily bool Executive\+::generate\+Event (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::string}]{date }\end{DoxyParamCaption})}
+
+This method creates an event and generates files representing it. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the event. \\
+\hline
+{\em date} & The date of the event. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_executive}{Executive}} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+A new event is created in text files and in memory. 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+the id of the newly created event. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::logic\+\_\+error} & if the event is invalid \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_executive_a68f603b8cdd1bc53a2e0565677f71f4e}\label{class_executive_a68f603b8cdd1bc53a2e0565677f71f4e}} 
+\index{Executive@{Executive}!get\+Attending@{get\+Attending}}
+\index{get\+Attending@{get\+Attending}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{get\+Attending()}{getAttending()}}
+{\footnotesize\ttfamily std\+::list$<$ std\+::string $>$ $\ast$ Executive\+::get\+Attending (\begin{DoxyParamCaption}\item[{int}]{eid }\end{DoxyParamCaption})}
+
+This method will return a list of username which are all users attending the given event. 
+\begin{DoxyParams}{Parameters}
+{\em eid} & a event id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a list of username 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_a12621ad5db6ee3f111779a61ea82bba7}\label{class_executive_a12621ad5db6ee3f111779a61ea82bba7}} 
+\index{Executive@{Executive}!get\+Current\+User@{get\+Current\+User}}
+\index{get\+Current\+User@{get\+Current\+User}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{get\+Current\+User()}{getCurrentUser()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_user}{User}} $\ast$ Executive\+::get\+Current\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retriever method which returns a pointer to current\+\_\+user \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: User$\ast$ -- pointer to current\+\_\+user member 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_a227a53f3d58c360c1248c9ccc3a47f58}\label{class_executive_a227a53f3d58c360c1248c9ccc3a47f58}} 
+\index{Executive@{Executive}!get\+Event\+By\+Creator@{get\+Event\+By\+Creator}}
+\index{get\+Event\+By\+Creator@{get\+Event\+By\+Creator}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{get\+Event\+By\+Creator()}{getEventByCreator()}}
+{\footnotesize\ttfamily std\+::list$<$ \mbox{\hyperlink{class_event}{Event}} $>$ $\ast$ Executive\+::get\+Event\+By\+Creator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_user}{User}}}]{u }\end{DoxyParamCaption})}
+
+This method returns a list of events created by a user 
+\begin{DoxyParams}{Parameters}
+{\em u} & The user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+NA 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+A list of events created by the user parameter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_a13bb89f1f430e27fe3b99d1ef10bf07b}\label{class_executive_a13bb89f1f430e27fe3b99d1ef10bf07b}} 
+\index{Executive@{Executive}!get\+Event\+By\+ID@{get\+Event\+By\+ID}}
+\index{get\+Event\+By\+ID@{get\+Event\+By\+ID}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{get\+Event\+By\+I\+D()}{getEventByID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_event}{Event}} $\ast$ Executive\+::get\+Event\+By\+ID (\begin{DoxyParamCaption}\item[{int}]{eid }\end{DoxyParamCaption})}
+
+This method returns a pointer to an event based on eid. \begin{DoxyPrecond}{Precondition}
+eid is an int; ./data/users/info\+\_\+$<$eid$>$.txt exists 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+A pointer to an event with information contained in info\+\_\+$<$eid$>$.\+txt 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Error} & if info\+\_\+$<$eid$>$.\+txt does not exist \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_executive_ab8fa8f11ea8794947da209d295c7e8fd}\label{class_executive_ab8fa8f11ea8794947da209d295c7e8fd}} 
+\index{Executive@{Executive}!get\+Event\+List@{get\+Event\+List}}
+\index{get\+Event\+List@{get\+Event\+List}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{get\+Event\+List()}{getEventList()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_event}{Event}} $>$ $\ast$ Executive\+::get\+Event\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This method returns a reference to the event list. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_executive}{Executive}} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+No changes occur. 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+a reference to the event list. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_abd540db75256c14b7fe16d59c0e00d48}\label{class_executive_abd540db75256c14b7fe16d59c0e00d48}} 
+\index{Executive@{Executive}!get\+Event\+Num@{get\+Event\+Num}}
+\index{get\+Event\+Num@{get\+Event\+Num}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{get\+Event\+Num()}{getEventNum()}}
+{\footnotesize\ttfamily int Executive\+::get\+Event\+Num (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+The getter method of the event num. This gets a number to assign to a new event and increments it. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_executive}{Executive}} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\char`\"{}event\+\_\+num\char`\"{} is incremented prior to being returned. 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+The \char`\"{}event\+\_\+num\char`\"{} . 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_adbf182bb09881e5a7ab01689fd653afd}\label{class_executive_adbf182bb09881e5a7ab01689fd653afd}} 
+\index{Executive@{Executive}!get\+User@{get\+User}}
+\index{get\+User@{get\+User}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{get\+User()}{getUser()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_user}{User}} $\ast$ Executive\+::get\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{uid }\end{DoxyParamCaption})}
+
+This method will return a pointer to a \mbox{\hyperlink{class_user}{User}} whose information will be extracted from a user file with identifier uid. \begin{DoxyPrecond}{Precondition}
+uid is a valid string; ./data/users/user\+\_\+\char`\"{}uid\char`\"{}.txt exists 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+none 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em uid} & The username of the user you want. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to a user with information contained in the user\+\_\+uid text file. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::logic\+\_\+error} & if the user in question does not exist in files. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_executive_a65588e97784c7062ba999b141b683bd0}\label{class_executive_a65588e97784c7062ba999b141b683bd0}} 
+\index{Executive@{Executive}!is\+Attending@{is\+Attending}}
+\index{is\+Attending@{is\+Attending}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{is\+Attending()}{isAttending()}}
+{\footnotesize\ttfamily bool Executive\+::is\+Attending (\begin{DoxyParamCaption}\item[{int}]{eid }\end{DoxyParamCaption})}
+
+This method will check if current user is attending a event. 
+\begin{DoxyParams}{Parameters}
+{\em eid} & The event id. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+none 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_executive_a13d8530957ee3c54bb355b62005177ed}\label{class_executive_a13d8530957ee3c54bb355b62005177ed}} 
+\index{Executive@{Executive}!readin\+Task\+List@{readin\+Task\+List}}
+\index{readin\+Task\+List@{readin\+Task\+List}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{readin\+Task\+List()}{readinTaskList()}}
+{\footnotesize\ttfamily bool Executive\+::readin\+Task\+List (\begin{DoxyParamCaption}\item[{int}]{eid }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_executive_aa0ae7cbbd2aac0b953cdae30d8692f35}\label{class_executive_aa0ae7cbbd2aac0b953cdae30d8692f35}} 
+\index{Executive@{Executive}!read\+Record@{read\+Record}}
+\index{read\+Record@{read\+Record}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{read\+Record()}{readRecord()}}
+{\footnotesize\ttfamily std\+::list$<$ \mbox{\hyperlink{class_record}{Record}} $>$ $\ast$ Executive\+::read\+Record (\begin{DoxyParamCaption}\item[{int}]{event\+\_\+id }\end{DoxyParamCaption})}
+
+This method read through a existing record file and create a list pointer of record. 
+\begin{DoxyParams}{Parameters}
+{\em event\+\_\+id} & the event id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+the record file should exist. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+a list of \mbox{\hyperlink{class_record}{Record}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_a3f464b27db4195c975283ce20cf3c3f9}\label{class_executive_a3f464b27db4195c975283ce20cf3c3f9}} 
+\index{Executive@{Executive}!remove\+Record@{remove\+Record}}
+\index{remove\+Record@{remove\+Record}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{remove\+Record()}{removeRecord()}}
+{\footnotesize\ttfamily bool Executive\+::remove\+Record (\begin{DoxyParamCaption}\item[{int}]{eid }\end{DoxyParamCaption})}
+
+This method will remove a \mbox{\hyperlink{class_record}{Record}} file. 
+\begin{DoxyParams}{Parameters}
+{\em eid} & the event id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+the file should exist 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+remove the file 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_executive_a1df250bced0d7d74ce5017cd1a225e4d}\label{class_executive_a1df250bced0d7d74ce5017cd1a225e4d}} 
+\index{Executive@{Executive}!remove\+User\+From@{remove\+User\+From}}
+\index{remove\+User\+From@{remove\+User\+From}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{remove\+User\+From()}{removeUserFrom()}}
+{\footnotesize\ttfamily bool Executive\+::remove\+User\+From (\begin{DoxyParamCaption}\item[{std\+::string}]{time,  }\item[{std\+::list$<$ \mbox{\hyperlink{class_record}{Record}} $>$ $\ast$}]{List }\end{DoxyParamCaption})}
+
+This method will remove current user from a certain time block 
+\begin{DoxyParams}{Parameters}
+{\em time} & the time block \\
+\hline
+{\em List} & the pointer to the record list \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+the record list must valid 
+\end{DoxyPrecond}
+\begin{DoxyReturn}{Returns}
+\+: bool -- T\+R\+UE if the user have be removed from the record 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_a8010517a6dd4bbe81ce4a03a91886931}\label{class_executive_a8010517a6dd4bbe81ce4a03a91886931}} 
+\index{Executive@{Executive}!set\+Current\+User@{set\+Current\+User}}
+\index{set\+Current\+User@{set\+Current\+User}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{set\+Current\+User()}{setCurrentUser()}}
+{\footnotesize\ttfamily bool Executive\+::set\+Current\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{uid }\end{DoxyParamCaption})}
+
+Method which sets the current\+\_\+user variable based on uid If a matching file \char`\"{}user\+\_\+$<$uid$>$.\+txt\char`\"{} is found, then the information contained in that file is written to the $\ast$(current\+\_\+user) 
+\begin{DoxyParams}{Parameters}
+{\em uid} & The username to be searched for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: uid is a valid string 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: current\+\_\+user is set with appropiate parameters if file is found; is set to empty otherwise 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: bool -- T\+R\+UE if user\+\_\+$<$uid$>$ is found, F\+A\+L\+SE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_a63e7fcccc1e3992eaef93630ecc2a160}\label{class_executive_a63e7fcccc1e3992eaef93630ecc2a160}} 
+\index{Executive@{Executive}!sort\+Event\+List@{sort\+Event\+List}}
+\index{sort\+Event\+List@{sort\+Event\+List}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{sort\+Event\+List()}{sortEventList()}}
+{\footnotesize\ttfamily void Executive\+::sort\+Event\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This helper method sorts the event list by dates. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_executive}{Executive}} exists 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+N/A, No changes occur. 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_executive_a1e769171afd89ec03795717057642d5a}\label{class_executive_a1e769171afd89ec03795717057642d5a}} 
+\index{Executive@{Executive}!what\+Is\+Event\+Num@{what\+Is\+Event\+Num}}
+\index{what\+Is\+Event\+Num@{what\+Is\+Event\+Num}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{what\+Is\+Event\+Num()}{whatIsEventNum()}}
+{\footnotesize\ttfamily int Executive\+::what\+Is\+Event\+Num (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This method simply returns eventnum. \mbox{\Hypertarget{class_executive_a5879f0c70a947b199113f1d707c53610}\label{class_executive_a5879f0c70a947b199113f1d707c53610}} 
+\index{Executive@{Executive}!write\+Current\+User@{write\+Current\+User}}
+\index{write\+Current\+User@{write\+Current\+User}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{write\+Current\+User()}{writeCurrentUser()}}
+{\footnotesize\ttfamily bool Executive\+::write\+Current\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Method which re-\/writes information about current\+\_\+user back out to it\textquotesingle{}s file \begin{DoxyPrecond}{Precondition}
+\+: current\+\_\+user has a nonempty user\+\_\+name 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: user\+\_\+$<$current\+\_\+user -\/$>$ user\+\_\+name$>$.txt is updated with most recent data 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: T\+R\+UE if operation completed successfully, F\+A\+L\+SE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_executive_a32e7d63d1978cef1db5bd55f085aa137}\label{class_executive_a32e7d63d1978cef1db5bd55f085aa137}} 
+\index{Executive@{Executive}!write\+Record@{write\+Record}}
+\index{write\+Record@{write\+Record}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{write\+Record()}{writeRecord()}}
+{\footnotesize\ttfamily void Executive\+::write\+Record (\begin{DoxyParamCaption}\item[{int}]{eid,  }\item[{std\+::list$<$ \mbox{\hyperlink{class_record}{Record}} $>$ $\ast$}]{List }\end{DoxyParamCaption})}
+
+This method will write a \mbox{\hyperlink{class_record}{Record}} file of a given list of \mbox{\hyperlink{class_record}{Record}}. 
+\begin{DoxyParams}{Parameters}
+{\em eid} & the event id \\
+\hline
+{\em List} & the list of \mbox{\hyperlink{class_record}{Record}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+the List will be deleted and saved in files. 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_executive_aa717a460eec1cdfe11808611dd8aeb8e}\label{class_executive_aa717a460eec1cdfe11808611dd8aeb8e}} 
+\index{Executive@{Executive}!write\+Task\+List@{write\+Task\+List}}
+\index{write\+Task\+List@{write\+Task\+List}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{write\+Task\+List()}{writeTaskList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Executive\+::write\+Task\+List (\begin{DoxyParamCaption}\item[{int}]{eid,  }\item[{bool}]{has\+List = {\ttfamily false} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_executive_ae4225a37c7c9f8299c59eb1cc07d221a}\label{class_executive_ae4225a37c7c9f8299c59eb1cc07d221a}} 
+\index{Executive@{Executive}!write\+Task\+List@{write\+Task\+List}}
+\index{write\+Task\+List@{write\+Task\+List}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{write\+Task\+List()}{writeTaskList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Executive\+::write\+Task\+List (\begin{DoxyParamCaption}\item[{int}]{eid,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_task_list}{Task\+List}} $>$}]{tl }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_executive_ab285c21199444e024f7b0df423f51827}\label{class_executive_ab285c21199444e024f7b0df423f51827}} 
+\index{Executive@{Executive}!event\+Num@{event\+Num}}
+\index{event\+Num@{event\+Num}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{event\+Num}{eventNum}}
+{\footnotesize\ttfamily int Executive\+::event\+Num = 0}
+
+\mbox{\Hypertarget{class_executive_a80e57f901c3182811a700674066edb4d}\label{class_executive_a80e57f901c3182811a700674066edb4d}} 
+\index{Executive@{Executive}!m\+\_\+curr\+TL@{m\+\_\+curr\+TL}}
+\index{m\+\_\+curr\+TL@{m\+\_\+curr\+TL}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{m\+\_\+curr\+TL}{m\_currTL}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_task_list}{Task\+List}}$>$ Executive\+::m\+\_\+curr\+TL}
+
+\mbox{\Hypertarget{class_executive_abaad195f97ce0a4b4be35064f905fc30}\label{class_executive_abaad195f97ce0a4b4be35064f905fc30}} 
+\index{Executive@{Executive}!m\+\_\+task\+Lists@{m\+\_\+task\+Lists}}
+\index{m\+\_\+task\+Lists@{m\+\_\+task\+Lists}!Executive@{Executive}}
+\subsubsection{\texorpdfstring{m\+\_\+task\+Lists}{m\_taskLists}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_task_list}{Task\+List}}$>$ $>$ Executive\+::m\+\_\+task\+Lists}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+backend/\mbox{\hyperlink{_executive_8h}{Executive.\+h}}\item 
+backend/\mbox{\hyperlink{_executive_8cpp}{Executive.\+cpp}}\end{DoxyCompactItemize}
