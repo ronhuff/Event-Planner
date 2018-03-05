@@ -368,6 +368,33 @@ std::list<std::string>* Executive::getAttending(int eid)
 	return UserList;
 }
 
+bool Executive::readinTaskList(int eid)
+{
+
+	std::string filename = getFileName(df_taskList, std::to_string(eid));
+
+	//open file
+	std::ifstream inF(filename);
+
+	//throw if the file does not exist
+	if (!inF.is_open())
+	{
+		throw std::logic_error("TaskList file does not exist.");
+	}
+	std::shared_ptr<TaskList> temp;
+	
+	inF >> *temp;
+
+
+}
+
+bool Executive::writeTaskList(int eid, bool hasList = false)
+{
+	std::string filename = getFileName(df_taskList, std::to_string(eid));
+	std::ofstream outF(filename);
+	outF.close();
+	return(true);
+}
 // write TaskList here.
 bool Executive::writeTaskList(int eid, std::shared_ptr<TaskList> tl) {
 

@@ -444,6 +444,7 @@ void CLI::newEvent() throw(std::exception) {
 
 		//std::vector<std::string> taskList(0); //Creates an empty task list vector
 		//exec.writeRecord(eventID, exec.createRecordList(times), taskList);
+		exec.writeTaskList(eventID, false);
 		exec.writeRecord(eventID, exec.createRecordList(times));
 		delete times;
 	}
