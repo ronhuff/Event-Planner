@@ -74,7 +74,37 @@ int Executive::whatIsEventNum()
 	return eventNum;
 }
 
-int Executive::generateEvent(std::string name, std::string date) throw(std::logic_error){
+
+void  Executive::writeRecord(int eid, std::list<Record>* List)
+{
+	std::string filename = getFileName(df_record, std::to_string(eid));
+	std::list<std::string> tempUserlist;
+	std::string tempTime;
+
+	//start write a new file with the same filename
+	std::ofstream outF(filename);
+	for (auto&& it = List->begin(); it != List->end(); it++)
+	{
+		//write the time block
+		tempTime = it->getTime();
+		outF << 0 << " " << tempTime << std::endl;
+		tempUserlist = it->getUserList();
+
+		outF << 1;
+		for (auto it2 = tempUserlist.begin(); it2 != tempUserlist.end(); it2++)
+		{
+			//write the users
+			outF << " " << *it2;
+		}
+		outF << std::endl;
+	}
+	outF.close();
+	delete List;
+}
+
+
+
+bool Executive::generateEvent(std::string name, std::string date) throw(std::logic_error){
 	//This is the event we want to input data for.
 	Event new_event = Event(name,date,currentUser->getUserName(),currentUser->getRealName(),getEventNum());
 	
@@ -93,7 +123,7 @@ int Executive::generateEvent(std::string name, std::string date) throw(std::logi
 	file_record_writer.close();
 	
 	//Event created.
-	return new_event.getIDNumber();
+	return (true);
 }
 bool Executive::doesFileExist(DataFile type, std::string identifer){
 	//Returns whether a file exists or not.
@@ -117,6 +147,9 @@ std::string Executive::getFileName(DataFile type, std::string identifer){
 		case df_record:
 			file_name+="records/record_";
 		break;
+		case df_taskList:
+			file_name += "records/taskList_";
+			break;
 	}
 	
 	//Finally, add the identifer and .txt extension to the file.
@@ -335,31 +368,104 @@ std::list<std::string>* Executive::getAttending(int eid)
 	return UserList;
 }
 
-void  Executive::writeRecord(int eid, std::list<Record>* List)
+bool Executive::readinTaskList(int eid)
 {
-	std::string filename = getFileName(df_record, std::to_string(eid));
-	std::list<std::string> tempUserlist;
-	std::string tempTime;
-	
-	//start write a new file with the same filename
-	std::ofstream outF (filename);
-	for(auto&& it = List->begin(); it != List->end(); it++)
+
+	std::string filename = getFileName(df_taskList, std::to_string(eid));
+
+	//open file
+	std::ifstream inF(filename);
+
+	//throw if the file does not exist
+	if (!inF.is_open())
 	{
-		//write the time block
-		tempTime = it->getTime();
-		outF << 0 << " " << tempTime << std::endl;
-		tempUserlist = it->getUserList();
-		
-		outF << 1;
-		for(auto it2 = tempUserlist.begin(); it2 != tempUserlist.end(); it2++)
-		{
-			//write the users
-			outF << " " << *it2;
-		}
-		outF << std::endl;
+		throw std::logic_error("TaskList file does not exist.");
 	}
-    outF.close();
-    delete List;
+
+	if (m_currTL == nullptr)
+	{
+		m_currTL = std::make_shared<TaskList>();
+	}
+	inF >> *m_currTL;
+	m_currTL->m_eventId = eid;
+
+	inF.close();
+	
+	return(true);
+}
+
+std::shared_ptr<TaskList> Executive::displayTasks() {
+
+	return(m_currTL);
+}
+
+bool Executive::writeTaskList(int eid, bool hasList = false)//this is to create a blank tasklist file.
+{
+	std::string filename = getFileName(df_taskList, std::to_string(eid));
+	std::ofstream outF(filename);
+	outF.close();
+	return(true);
+}
+// write TaskList here.
+bool Executive::writeTaskList(int eid, std::shared_ptr<TaskList> tl) {
+
+	std::string filename = getFileName(df_taskList, std::to_string(eid));
+	
+	std::vector<std::shared_ptr<TaskList>> outTasks = m_taskLists;
+
+	//start write a new file with the same filename
+	std::ofstream outF(filename);
+
+	for (std::vector<std::shared_ptr<TaskList>>::iterator it = m_taskLists.begin(); it != m_taskLists.end(); ++it)// loops through tasklists.
+	{
+
+		std::shared_ptr<TaskList> temp = (*it);
+		outF << *temp;//this should outfile the tasklist which should outfile the tasks.
+		//std::cout << *temp;
+	}
+
+	outF.close();
+	return(true);
+}
+
+bool Executive::createTaskList(std::vector<std::string> taskVector, int eid)
+{
+	bool makeNew = true;
+	for (std::vector<std::shared_ptr<TaskList>>::iterator tlit = m_taskLists.begin(); tlit != m_taskLists.end(); ++tlit)
+	{
+		if ((*tlit)->m_eventId == eid)
+		{
+			for (std::vector<std::string>::iterator it = taskVector.begin(); it != taskVector.end(); ++it)
+			{
+				std::shared_ptr<Task> temp = std::make_shared<Task>(*it);
+				temp->m_isAssigned = false;
+				(*tlit)->addTask(temp);
+			}
+			(*tlit)->m_eventId = eid;
+			(*tlit)->m_numTasks = taskVector.size();
+			m_currTL = (*tlit);
+			return(true);
+		}
+
+	}
+	if (makeNew)
+	{
+		std::shared_ptr<TaskList> tempTL = std::make_shared <TaskList>();
+		for (std::vector<std::string>::iterator it = taskVector.begin(); it != taskVector.end(); ++it)
+		{
+			std::shared_ptr<Task> temp = std::make_shared<Task>(*it);
+			temp->m_isAssigned = false;
+			tempTL->addTask(temp);
+		}
+		tempTL->m_eventId = eid;
+		tempTL->m_numTasks = taskVector.size();
+		m_taskLists.push_back(tempTL);
+		return(true);
+	}
+	
+
+	
+	return false;
 }
 
 bool Executive::removeRecord(int eid)

@@ -6,5 +6,6 @@ int main(int argc, char* argv[]){
     interface.run();
 
 	system("pause");
-    return (0);
+
+	return (0);
 }

@@ -2,8 +2,15 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <vector>
 #include "../backend/Executive.h"
+#include "../backend/Record.h"
 #include "CLIInput.h"
+
+class Executive;
+class Record;
+
 
 class CLI{
     private:
@@ -11,8 +18,6 @@ class CLI{
         CLIInput input;
         enum EventSet{all, attending, created};
         bool longtime;
-        bool loggedin;
-        bool quit;
 
 	    /**
 		 * Helper method for checking time constraints.
@@ -36,7 +41,6 @@ class CLI{
 	     * @return: none
 	     */
         void run();
-    private:
         /**
 	     * The menu that the user sees after they have logged in.
 	     * @pre: User is logged in
@@ -58,13 +62,7 @@ class CLI{
 	     * @return: none
 	     */
         void login();
-        /**
-	     * Logs the user out of the application
-	     * @pre: none
-	     * @post: User is logged out
-	     * @return: none
-	     */
-        void logout();
+        
         /**
 	     * Gives new users the ability to create an account
 	     * @pre: none
@@ -79,7 +77,7 @@ class CLI{
 	     * @post: none
 	     * @return: none
 	     */
-        void listEvents(int);
+        void listEvents();
         /**
 	     * Allows for the creation of a new event by the user
 	     * @pre: none
@@ -87,6 +85,13 @@ class CLI{
 	     * @return: none
 	     */
         void newEvent() throw(std::exception);
+		/**
+		* The event creator to populate a list of tasks for an event
+		* @pre: none
+		* @post: new task list is created
+		* @return: none
+		*/
+		std::vector<std::string> populateTaskList();
         /**
 	     * Allows a user to view a specific event
          * @param int - the unique identifier of the event

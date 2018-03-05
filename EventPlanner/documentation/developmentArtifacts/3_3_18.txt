@@ -1,0 +1,17 @@
+Record the date, time, and location (I don’t need to know anyone’s address) of all your meetings.
+Record what was discussed and planned to be completed by the next meeting.
+Record whether or not the tasks to complete for this meeting were really completed.
+
+
+Date: 3/3/18
+Time: 6:30 p.m.
+Location: Voice meeting over Discord
+
+We accomplished tasks from previous meeting. We updated each other on the status of new functionality and figured out documentation.
+
+Discussed:
+- Why it is bad to have a superfile similar: we will lose modularity. Also discussed how to handle file IO for new implementation.
+
+For next meeting:
+- Meeting again over discord to wrap up new features tomorrow evening.
+- Have completed all tasks by tomorrow evening (including documentation, process model, etc). 

@@ -4,6 +4,7 @@
 #include "Event.h"
 #include "Record.h"
 #include "User.h"
+#include "TaskList.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -49,7 +50,7 @@ class Executive{
 		 * @return the id of the newly created event.
 		 * @throw std::logic_error if the event is invalid
 		 */
-		int generateEvent(std::string name, std::string date);
+		bool generateEvent(std::string name, std::string date);
 		/**
 		 * This method removes an event.
 		 * @param event_id The id of the event to be deleted.
@@ -206,6 +207,16 @@ class Executive{
 		*
 		*/
 		int whatIsEventNum();
+		bool readinTaskList(int);
+		bool writeTaskList(int eid, bool);//for creating a blank tasklist file.
+		bool writeTaskList(int eid, std::shared_ptr<TaskList> tl);
+
+		bool createTaskList(std::vector<std::string>, int);
+		int eventNum = 0;
+		std::vector<std::shared_ptr<TaskList>> m_taskLists;
+
+		std::shared_ptr<TaskList> displayTasks();
+		std::shared_ptr<TaskList> m_currTL;
 
 	private:
 		/**
@@ -215,7 +226,8 @@ class Executive{
 			df_event,		/**< Represents Event text files. */
 			df_record,		/**< Represents Event record files. */
 			df_user,		/**< Represents User text files. */
-			df_eventList	/**< Represents the event list text file. */
+			df_eventList,
+			df_taskList		/**< Represents the event list text file. */
 		};
 		/**
 		 * This helper method verifies if a file exists.
@@ -263,7 +275,7 @@ class Executive{
 		 * Internal running tally of event identifiers; should make provisions so that no two
 		 * events get assigned the same event identifier
 		 */
-		int eventNum = 0;
+		
 
 		/**
 		 * This is a vector of Events.

@@ -1,0 +1,18 @@
+Record the date, time, and location (I don’t need to know anyone’s address) of all your meetings.
+Record what was discussed and planned to be completed by the next meeting.
+Record whether or not the tasks to complete for this meeting were really completed.
+
+
+Date: 2/19/18
+Time: 4:55 p.m.
+Location: 1324 Spahr
+
+This was the first meeting so there were no tasks to be completed.
+
+Discussed:
+- First step is to figure out what worked and didn't work from previous team's project (any functionality that did not make it on). Build it and check it out
+and document what works and does not work.
+
+For next meeting:
+- Generate product backlog (Surabhi)
+- Document functionality 
