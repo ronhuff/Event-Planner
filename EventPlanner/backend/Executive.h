@@ -217,7 +217,6 @@ class Executive{
 		//This is the method that cli's populate method passes the string vector into.
 		bool createTaskList(std::vector<std::string>, int);
 
-		int eventNum = 0;
 		std::vector<std::shared_ptr<TaskList>> m_taskLists;
 
 		std::shared_ptr<TaskList> displayTasks();
@@ -280,7 +279,7 @@ class Executive{
 		 * Internal running tally of event identifiers; should make provisions so that no two
 		 * events get assigned the same event identifier
 		 */
-		int eventNum = 0;
+		int eventNum;
 
 		/**
 		 * This is a vector of Events.

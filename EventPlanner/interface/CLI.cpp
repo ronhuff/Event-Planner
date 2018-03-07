@@ -668,7 +668,6 @@ void CLI::newEvent() throw(std::exception) {
 		std::vector<std::string> tasks = populateTaskList();
 		//NOTE: THIS EXEC FUNCTION WILL NOT WORK WITHOUT THE UPDATED EXECUTIVE FILE
 		exec.createTaskList(tasks, eventID);
-<<<<<<< HEAD
 		exec.writeTaskList(eventID, exec.m_currTL);
 		exec.writeRecord(eventID, exec.createRecordList(tList,dList));
 		//Switch the two above functions
