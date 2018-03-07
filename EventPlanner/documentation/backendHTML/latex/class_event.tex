@@ -1,0 +1,284 @@
+\hypertarget{class_event}{}\section{Event Class Reference}
+\label{class_event}\index{Event@{Event}}
+
+
+{\ttfamily \#include $<$Event.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_event_a5a40dd4708297f7031e29b39e039ae10}{Event}} ()
+\item 
+\mbox{\hyperlink{class_event_a5104d721f8a1b03dacbb8c40ef4bcb82}{Event}} (std\+::string input\+Name, std\+::string input\+Date, std\+::string input\+Creator\+Username, std\+::string input\+Creator\+Real\+Name, int input\+I\+D\+Num)
+\item 
+\mbox{\hyperlink{class_event_a7704ec01ce91e673885792054214b3d2}{$\sim$\+Event}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_event_a1b800fe1b0055d8bbd1711b7e1c9fabd}{get\+Date}} (bool if\+IO)
+\item 
+std\+::string \mbox{\hyperlink{class_event_adf0f3e50061123d6f24200661eeb66eb}{get\+Name}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_event_a06b528ce79f5b78eeee98b6fd428522d}{get\+Creator\+Real\+Name}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_event_a89a5b51bde088fb8b85732655f593046}{get\+Creator\+User\+Name}} ()
+\item 
+int \mbox{\hyperlink{class_event_a05365632b5779127ba605cced499bb31}{get\+I\+D\+Number}} ()
+\item 
+bool \mbox{\hyperlink{class_event_a44f9197c76b0bee4aa9fd8b383165474}{operator$>$=}} (\mbox{\hyperlink{class_event}{Event}} rhs)
+\item 
+bool \mbox{\hyperlink{class_event_a4904fea0b4f4f5bd57ba4858414f32ed}{operator$<$=}} (\mbox{\hyperlink{class_event}{Event}} rhs)
+\item 
+bool \mbox{\hyperlink{class_event_aceb2fbaf2cb83f5d7e14787db516cd34}{operator$>$}} (\mbox{\hyperlink{class_event}{Event}} rhs)
+\item 
+bool \mbox{\hyperlink{class_event_a8246f658d031aac8fb87cf9ab25d6047}{operator$<$}} (\mbox{\hyperlink{class_event}{Event}} rhs)
+\item 
+bool \mbox{\hyperlink{class_event_aea4ec6f1a93920ffc1dd5b15a4ab0e19}{add\+Task\+List}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_task_list}{Task\+List}} $\ast$ \mbox{\hyperlink{class_event_a20fc63392defc87c1798e53a6f12832b}{tasks}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{class_event}{Event}} Class. The class encapsulates the basic details of an event and contains a reference to its attendence record. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_event_a5a40dd4708297f7031e29b39e039ae10}\label{class_event_a5a40dd4708297f7031e29b39e039ae10}} 
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\subsubsection{\texorpdfstring{Event()}{Event()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+The empty constructor. This builds an empty event and is not intended for use. \begin{DoxyPrecond}{Precondition}
+None. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Creates a completely empty event. 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_event_a5104d721f8a1b03dacbb8c40ef4bcb82}\label{class_event_a5104d721f8a1b03dacbb8c40ef4bcb82}} 
+\index{Event@{Event}!Event@{Event}}
+\index{Event@{Event}!Event@{Event}}
+\subsubsection{\texorpdfstring{Event()}{Event()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}\item[{std\+::string}]{input\+Name,  }\item[{std\+::string}]{input\+Date,  }\item[{std\+::string}]{input\+Creator\+Username,  }\item[{std\+::string}]{input\+Creator\+Real\+Name,  }\item[{int}]{input\+I\+D\+Num }\end{DoxyParamCaption})}
+
+The constructor that takes 4 arguments. This builds an event with information based on its input. \begin{DoxyPrecond}{Precondition}
+None. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Creates an empty event using parameters 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em input\+Name} & The name of the event. \\
+\hline
+{\em input\+Date} & The date of the event. \\
+\hline
+{\em input\+Creator\+Username} & The creator\textquotesingle{}s user name of the event. \\
+\hline
+{\em input\+Creator\+Real\+Name} & The creator\textquotesingle{}s user name of the event. \\
+\hline
+{\em input\+I\+D\+Num} & The id number associated with the event. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::logic\+\_\+error} & This error occurs whenever an event is put into a holiday. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_event_a7704ec01ce91e673885792054214b3d2}\label{class_event_a7704ec01ce91e673885792054214b3d2}} 
+\index{Event@{Event}!````~Event@{$\sim$\+Event}}
+\index{````~Event@{$\sim$\+Event}!Event@{Event}}
+\subsubsection{\texorpdfstring{$\sim$\+Event()}{~Event()}}
+{\footnotesize\ttfamily Event\+::$\sim$\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+The destructor. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_event}{Event}} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Destroys this \mbox{\hyperlink{class_event}{Event}}. This should destroy any objects created by this. 
+\end{DoxyPostcond}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_event_aea4ec6f1a93920ffc1dd5b15a4ab0e19}\label{class_event_aea4ec6f1a93920ffc1dd5b15a4ab0e19}} 
+\index{Event@{Event}!add\+Task\+List@{add\+Task\+List}}
+\index{add\+Task\+List@{add\+Task\+List}!Event@{Event}}
+\subsubsection{\texorpdfstring{add\+Task\+List()}{addTaskList()}}
+{\footnotesize\ttfamily bool Event\+::add\+Task\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_event_a06b528ce79f5b78eeee98b6fd428522d}\label{class_event_a06b528ce79f5b78eeee98b6fd428522d}} 
+\index{Event@{Event}!get\+Creator\+Real\+Name@{get\+Creator\+Real\+Name}}
+\index{get\+Creator\+Real\+Name@{get\+Creator\+Real\+Name}!Event@{Event}}
+\subsubsection{\texorpdfstring{get\+Creator\+Real\+Name()}{getCreatorRealName()}}
+{\footnotesize\ttfamily std\+::string Event\+::get\+Creator\+Real\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A getter method for the creator\textquotesingle{}s real name. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_event}{Event}} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+N/A. 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+the creator\textquotesingle{}s real name as a string. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_event_a89a5b51bde088fb8b85732655f593046}\label{class_event_a89a5b51bde088fb8b85732655f593046}} 
+\index{Event@{Event}!get\+Creator\+User\+Name@{get\+Creator\+User\+Name}}
+\index{get\+Creator\+User\+Name@{get\+Creator\+User\+Name}!Event@{Event}}
+\subsubsection{\texorpdfstring{get\+Creator\+User\+Name()}{getCreatorUserName()}}
+{\footnotesize\ttfamily std\+::string Event\+::get\+Creator\+User\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A getter method for the creator\textquotesingle{}s user name. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_event}{Event}} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+N/A. 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+the creator\textquotesingle{}s user name as a string. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_event_a1b800fe1b0055d8bbd1711b7e1c9fabd}\label{class_event_a1b800fe1b0055d8bbd1711b7e1c9fabd}} 
+\index{Event@{Event}!get\+Date@{get\+Date}}
+\index{get\+Date@{get\+Date}!Event@{Event}}
+\subsubsection{\texorpdfstring{get\+Date()}{getDate()}}
+{\footnotesize\ttfamily std\+::string Event\+::get\+Date (\begin{DoxyParamCaption}\item[{bool}]{if\+IO }\end{DoxyParamCaption})}
+
+A getter method for the date. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_event}{Event}} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+N/A. 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em bool} & True if called during file I/O else, false. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the date as a string. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_event_a05365632b5779127ba605cced499bb31}\label{class_event_a05365632b5779127ba605cced499bb31}} 
+\index{Event@{Event}!get\+I\+D\+Number@{get\+I\+D\+Number}}
+\index{get\+I\+D\+Number@{get\+I\+D\+Number}!Event@{Event}}
+\subsubsection{\texorpdfstring{get\+I\+D\+Number()}{getIDNumber()}}
+{\footnotesize\ttfamily int Event\+::get\+I\+D\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A getter method for the id number. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_event}{Event}} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+N/A. 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+the id number as an integer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_event_adf0f3e50061123d6f24200661eeb66eb}\label{class_event_adf0f3e50061123d6f24200661eeb66eb}} 
+\index{Event@{Event}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Event@{Event}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily std\+::string Event\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A getter method for the event\textquotesingle{}s name. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_event}{Event}} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+N/A. 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+the event\textquotesingle{}s name as a string. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_event_a8246f658d031aac8fb87cf9ab25d6047}\label{class_event_a8246f658d031aac8fb87cf9ab25d6047}} 
+\index{Event@{Event}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Event@{Event}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Event\+::operator$<$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}}}]{rhs }\end{DoxyParamCaption})}
+
+An operator that compares this event\textquotesingle{}s date with another\textquotesingle{}s date. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_event}{Event}} exists and rhs exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+N/A. 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The value to be compared with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the event happens before rhs. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_event_a4904fea0b4f4f5bd57ba4858414f32ed}\label{class_event_a4904fea0b4f4f5bd57ba4858414f32ed}} 
+\index{Event@{Event}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!Event@{Event}}
+\subsubsection{\texorpdfstring{operator$<$=()}{operator<=()}}
+{\footnotesize\ttfamily bool Event\+::operator$<$= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}}}]{rhs }\end{DoxyParamCaption})}
+
+An operator that compares this event\textquotesingle{}s date with another\textquotesingle{}s date. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_event}{Event}} exists and rhs exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+N/A. 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The value to be compared with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the event happens before or on the same day as rhs. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_event_aceb2fbaf2cb83f5d7e14787db516cd34}\label{class_event_aceb2fbaf2cb83f5d7e14787db516cd34}} 
+\index{Event@{Event}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Event@{Event}}
+\subsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool Event\+::operator$>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}}}]{rhs }\end{DoxyParamCaption})}
+
+An operator that compares this event\textquotesingle{}s date with another\textquotesingle{}s date. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_event}{Event}} exists and rhs exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+N/A. 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The value to be compared with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the event happens after rhs. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_event_a44f9197c76b0bee4aa9fd8b383165474}\label{class_event_a44f9197c76b0bee4aa9fd8b383165474}} 
+\index{Event@{Event}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!Event@{Event}}
+\subsubsection{\texorpdfstring{operator$>$=()}{operator>=()}}
+{\footnotesize\ttfamily bool Event\+::operator$>$= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_event}{Event}}}]{rhs }\end{DoxyParamCaption})}
+
+An operator that compares this event\textquotesingle{}s date with another\textquotesingle{}s date. \begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_event}{Event}} exists and rhs exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+N/A. 
+\end{DoxyPostcond}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The value to be compared with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the event happens after or on the same day as rhs. 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_event_a20fc63392defc87c1798e53a6f12832b}\label{class_event_a20fc63392defc87c1798e53a6f12832b}} 
+\index{Event@{Event}!tasks@{tasks}}
+\index{tasks@{tasks}!Event@{Event}}
+\subsubsection{\texorpdfstring{tasks}{tasks}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_task_list}{Task\+List}}$\ast$ Event\+::tasks}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+backend/\mbox{\hyperlink{_event_8h}{Event.\+h}}\item 
+backend/\mbox{\hyperlink{_event_8cpp}{Event.\+cpp}}\end{DoxyCompactItemize}

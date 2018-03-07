@@ -1,0 +1,12 @@
+
+Libraries Used:
+	Boost C++ Libraries
+		Found at: http://www.boost.org/
+		Documentation at: http://www.boost.org/doc/
+		License: "boost_license.txt"
+
+Documentation has been generated using Doxygen:
+    Available at: http://doxegen.org
+
+Predef, preprocessor, x86, and debug files:
+  Provided by TA (Kurt Slagle) for building Visual Studio project

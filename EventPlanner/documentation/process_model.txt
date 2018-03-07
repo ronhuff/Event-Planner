@@ -1,0 +1,31 @@
+Team 1
+Project 2
+Process Model
+
+For this project, the process model we most closely have followed throughout was most likely the Scrum model.
+There are a few reasons that we believe this:
+
+  1. Scrum does not necessarily mean you have a lot of time to accomplish tasks. For this project, we did not have endless amounts of
+time to complete old functionality and adopt new functionality.
+
+  2. This limited time allows us to implement changes more quickly and test more promptly as a result.
+
+  3. We were very adaptive towards any changes that happened throughout the process. As a result we were also flexible in terms of how we were going
+to go about the solution.
+
+  4. Our meetings were to-the-point and effective in communicating bits of progress. As opposed to our last project, we met more often and
+tried to tackle smaller bits of development. Such short meetings (like sprints of work) gave us the ability to have more effective communication.
+We never tried to take on more than we could handle.
+
+  5. Scrum relies on self-organization; there was no real team leader, instead we all took on roles that we felt we best fit in to and could
+contribute the most towards.
+
+The scrum process model follows agile development very closely. Agile development really focuses on iterative development across cross functional
+teams. There is a lot of collaboration that goes on in this process, something we saw as a benefit to this project. We felt that working in such
+a model allowed us to implement our features in a faster manner. There was a good amount of communication throughout the whole process. This time
+around, we also focused on documentation, making sure that we had organized documentation that made sense and contributed effectively towards
+the project.
+
+This process model worked well for us, better than others we had used previously. In the future, we definitely foresee utilizing some if not all
+aspects of this model again. It works well for our team as we can be more accommodating of each other. It also allows for quick development of
+features and solving problems bit by bit as opposed to taking large portions of development at once. 

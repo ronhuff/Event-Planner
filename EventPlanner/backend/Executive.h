@@ -214,9 +214,15 @@ class Executive{
 		bool writeTaskList(int eid, bool);//for creating a blank tasklist file.
 		bool writeTaskList(int eid, std::shared_ptr<TaskList> tl);
 
+		//This is the method that cli's populate method passes the string vector into.
 		bool createTaskList(std::vector<std::string>, int);
 
+		int eventNum = 0;
 		std::vector<std::shared_ptr<TaskList>> m_taskLists;
+
+		std::shared_ptr<TaskList> displayTasks();
+		std::shared_ptr<TaskList> m_currTL;
+
 	private:
 		/**
 		 * An enum representing the various information types that are saved.

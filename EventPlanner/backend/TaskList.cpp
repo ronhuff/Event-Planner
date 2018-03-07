@@ -35,6 +35,55 @@ bool TaskList::createTask() {
 	return(addTask(std::make_shared<Task>(taskName))); // this creates the shared ptr. for the new task and addTask() will push it to the m_tasks
 }
 
+bool TaskList::removeTask(int taskNum)
+{
+	m_tasks.erase(m_tasks.begin() + (taskNum - 1));
+	return true;
+}
+
+bool TaskList::assignUser(int taskNum, std::string user)
+{
+	m_tasks.at(taskNum)->m_assignName = user;
+	m_tasks.at(taskNum)->m_isAssigned = true;
+	return false;
+}
+
+bool TaskList::unassignUser(int taskNum)
+{
+	m_tasks.at(taskNum)->m_assignName = "";
+	m_tasks.at(taskNum)->m_isAssigned = false;
+	return true;
+}
+
+void TaskList::displayTaskList()
+{
+	int tasknum = 1;
+	std::cout << "Tasklist for meeting number: " + std::to_string(this->m_eventId) << std::endl << std::endl;
+	for (std::vector<std::shared_ptr<Task>>::iterator taskit = m_tasks.begin(); taskit != m_tasks.end(); ++taskit)
+	{
+		std::cout << "Task: #" << tasknum << ": ";
+		std::cout << (*taskit)->m_name << "\n";
+		std::cout << "Assignee: ";
+		tasknum++;
+		if ((*taskit)->m_isAssigned == false)
+		{
+			std::cout << "None. Feel free to sign up!\n";
+		}
+		else
+		{
+			if ((*taskit)->m_assignName.length() > 1)
+			{
+				std::cout << (*taskit)->m_assignName + "\n";
+			}
+			else
+			{
+				std::cout << "" << std::endl;
+				//print to log no error appears.
+			}
+		}
+	}
+}
+
 std::ostream & operator<<(std::ostream & out, TaskList & tList)
 {
 	// TODO: insert return statement here
@@ -53,10 +102,10 @@ std::istream & operator>>(std::istream & in, TaskList & tList)
 	std::string numTasks;
 	std::string numAvailTasks;
 
-	std::getline(in, id);
-	std::getline(in, numTasks);
-	std::getline(in, numAvailTasks);
-
+	std::getline(in, id, '\n');
+	std::getline(in, numTasks, '\n');
+	std::getline(in, numAvailTasks, '\n');
+	
 	tList.m_numTasks = std::stoi(id);
 	tList.m_numTasks = std::stoi(numTasks);
 	tList.m_numAvailTasks = std::stoi(numAvailTasks);

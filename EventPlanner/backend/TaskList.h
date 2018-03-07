@@ -15,14 +15,21 @@ public:
 	TaskList();
 	~TaskList();
 
+
 	bool addTask(std::shared_ptr<Task> task);
 	bool createTask(); // Gets name of task from user and attempts to call addTask(new Task(name));
+
+	bool removeTask(int taskNum);
+	bool assignUser(int taskNum, std::string user);
+	bool unassignUser(int taskNum);
+
 
 	int m_numTasks;
 	int m_numAvailTasks;
 	int m_eventId;
 	std::vector<std::shared_ptr<Task>> m_tasks; // contains all tasks related to this task list.
 
+	void displayTaskList();
 
 	//ADD VIEW METHODS HERE, e.g. viewTasks(bool isCreator);
 	friend std::ostream& operator<<(std::ostream& out, TaskList& tList);
