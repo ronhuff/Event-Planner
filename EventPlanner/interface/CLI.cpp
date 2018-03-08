@@ -549,12 +549,12 @@ void CLI::newEvent() throw(std::exception) {
 					else {
 						std::string lookUpDate = "";
 						int position;
-						for (int i = 0; i < dList.size(); i++) {
+						for (int i = 0; i < dList.size()-1; i++) {
 							std::cout << dList.at(i) + "\n";
 						}
 						std::cout << "Enter one of the dates from above int the same format of MM/DD/YYYY: ";
 						std::cin >> lookUpDate;
-						for (int i = 0; i < dList.size(); i++) {
+						for (int i = 0; i < dList.size()-1; i++) {
 							if (dList.at(i) == lookUpDate) {
 								position = i;
 							}
@@ -873,14 +873,17 @@ void CLI::setAvailability(int eid){
 	std::cout << "Can't go at a specific time? Just press enter!\n";
 	input.getString("\n");
     for(auto i : *(eventRecords)){
+		std::string edate;
         std::string slot;
         if(longtime){
+			edate = i.getDate();
             slot = i.getTime();
         }else{
+			edate = i.getDate();
             slot = to12Hour(i.getTime());
         }
 
-        if(!input.getString(slot + " - ").empty()){
+        if(!input.getString(edate + ": " + slot + " - ").empty()){
             exec.addUserTo(i.getTime(), eventRecords);
         }
     }
@@ -891,19 +894,21 @@ void CLI::setAvailability(int eid){
 void CLI::viewAvailability(int eid){
     std::list<Record>* eventRecords = exec.readRecord(eid);
     Event* event = exec.getEventByID(eid);
-
 	auto list_rbeg = (*eventRecords).rbegin();
 	auto list_rend = (*eventRecords).rend();
 	for (auto list_it = list_rbeg; list_it != list_rend; ++list_it)
 	{
+		std::string edate;
 		std::string slot;
 		if (longtime) {
+			edate = (*list_it).getDate();
 			slot = zeroAppender((*list_it).getTime());//here zeroAppender is taking the std::string parameter returned by i.getTime());
 		}
 		else {
+			edate = (*list_it).getDate();
 			slot = to12Hour((*list_it).getTime());
 		}
-		std::cout << "Time: " << slot << "\nAttendees: ";
+		std::cout <<"Date: "<< edate <<" Time: " << slot << "\nAttendees: ";
 
 		//SHows all attending users
 		std::list<std::string> users = (*list_it).getUserList();
@@ -916,7 +921,7 @@ void CLI::viewAvailability(int eid){
 			}
 			catch (std::exception& e) {}
 		}
-		std::cout << "\n";
+		std::cout << "\n\n";
 	}
 
 	std:: cout << "\n";
