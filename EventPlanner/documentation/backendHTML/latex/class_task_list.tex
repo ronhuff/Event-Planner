@@ -1,0 +1,145 @@
+\hypertarget{class_task_list}{}\section{Task\+List Class Reference}
+\label{class_task_list}\index{Task\+List@{Task\+List}}
+
+
+{\ttfamily \#include $<$Task\+List.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_task_list_aa98ab27bfb922941bfa9d08704f41a3d}{Task\+List}} ()
+\item 
+\mbox{\hyperlink{class_task_list_a62532b7a52881d389f94ea891e38eeb8}{$\sim$\+Task\+List}} ()
+\item 
+bool \mbox{\hyperlink{class_task_list_a1f1547ccbb7037a1b00505284241d6f6}{add\+Task}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_task}{Task}} $>$ task)
+\item 
+bool \mbox{\hyperlink{class_task_list_a74c877894c2f92c796100b1e975858ad}{create\+Task}} ()
+\item 
+bool \mbox{\hyperlink{class_task_list_a9d698ff0a0059aac3c77522029662239}{remove\+Task}} (int task\+Num)
+\item 
+bool \mbox{\hyperlink{class_task_list_ad4cfe5e33b887bf958f5623eca545ddd}{assign\+User}} (int task\+Num, std\+::string user)
+\item 
+bool \mbox{\hyperlink{class_task_list_aa67dfe4d6cdc1701c995e44bb0e59d56}{unassign\+User}} (int task\+Num)
+\item 
+void \mbox{\hyperlink{class_task_list_a234f082b802694c2e097bc42f74141df}{display\+Task\+List}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_task_list_a7ba2af1e1826f33d27e1969b77cb1727}{m\+\_\+num\+Tasks}}
+\item 
+int \mbox{\hyperlink{class_task_list_af43192a1b398aa2752fcd158976e5f57}{m\+\_\+num\+Avail\+Tasks}}
+\item 
+int \mbox{\hyperlink{class_task_list_ad347c2028b83cce0c14266a35d483bda}{m\+\_\+event\+Id}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_task}{Task}} $>$ $>$ \mbox{\hyperlink{class_task_list_a192cb3c6f59d6c4b428a6d909ce2035d}{m\+\_\+tasks}}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{class_task_list_ac872aa1fde53a5f9336c1cc4d96bc733}{operator$<$$<$}} (std\+::ostream \&out, \mbox{\hyperlink{class_task_list}{Task\+List}} \&t\+List)
+\item 
+std\+::istream \& \mbox{\hyperlink{class_task_list_a22dacdc7ddbda65560de5195bd0fad24}{operator$>$$>$}} (std\+::istream \&in, \mbox{\hyperlink{class_task_list}{Task\+List}} \&tlist)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_task_list_aa98ab27bfb922941bfa9d08704f41a3d}\label{class_task_list_aa98ab27bfb922941bfa9d08704f41a3d}} 
+\index{Task\+List@{Task\+List}!Task\+List@{Task\+List}}
+\index{Task\+List@{Task\+List}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{Task\+List()}{TaskList()}}
+{\footnotesize\ttfamily Task\+List\+::\+Task\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_task_list_a62532b7a52881d389f94ea891e38eeb8}\label{class_task_list_a62532b7a52881d389f94ea891e38eeb8}} 
+\index{Task\+List@{Task\+List}!````~Task\+List@{$\sim$\+Task\+List}}
+\index{````~Task\+List@{$\sim$\+Task\+List}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{$\sim$\+Task\+List()}{~TaskList()}}
+{\footnotesize\ttfamily Task\+List\+::$\sim$\+Task\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_task_list_a1f1547ccbb7037a1b00505284241d6f6}\label{class_task_list_a1f1547ccbb7037a1b00505284241d6f6}} 
+\index{Task\+List@{Task\+List}!add\+Task@{add\+Task}}
+\index{add\+Task@{add\+Task}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{add\+Task()}{addTask()}}
+{\footnotesize\ttfamily bool Task\+List\+::add\+Task (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_task}{Task}} $>$}]{task }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_task_list_ad4cfe5e33b887bf958f5623eca545ddd}\label{class_task_list_ad4cfe5e33b887bf958f5623eca545ddd}} 
+\index{Task\+List@{Task\+List}!assign\+User@{assign\+User}}
+\index{assign\+User@{assign\+User}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{assign\+User()}{assignUser()}}
+{\footnotesize\ttfamily bool Task\+List\+::assign\+User (\begin{DoxyParamCaption}\item[{int}]{task\+Num,  }\item[{std\+::string}]{user }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_task_list_a74c877894c2f92c796100b1e975858ad}\label{class_task_list_a74c877894c2f92c796100b1e975858ad}} 
+\index{Task\+List@{Task\+List}!create\+Task@{create\+Task}}
+\index{create\+Task@{create\+Task}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{create\+Task()}{createTask()}}
+{\footnotesize\ttfamily bool Task\+List\+::create\+Task (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_task_list_a234f082b802694c2e097bc42f74141df}\label{class_task_list_a234f082b802694c2e097bc42f74141df}} 
+\index{Task\+List@{Task\+List}!display\+Task\+List@{display\+Task\+List}}
+\index{display\+Task\+List@{display\+Task\+List}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{display\+Task\+List()}{displayTaskList()}}
+{\footnotesize\ttfamily void Task\+List\+::display\+Task\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_task_list_a9d698ff0a0059aac3c77522029662239}\label{class_task_list_a9d698ff0a0059aac3c77522029662239}} 
+\index{Task\+List@{Task\+List}!remove\+Task@{remove\+Task}}
+\index{remove\+Task@{remove\+Task}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{remove\+Task()}{removeTask()}}
+{\footnotesize\ttfamily bool Task\+List\+::remove\+Task (\begin{DoxyParamCaption}\item[{int}]{task\+Num }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_task_list_aa67dfe4d6cdc1701c995e44bb0e59d56}\label{class_task_list_aa67dfe4d6cdc1701c995e44bb0e59d56}} 
+\index{Task\+List@{Task\+List}!unassign\+User@{unassign\+User}}
+\index{unassign\+User@{unassign\+User}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{unassign\+User()}{unassignUser()}}
+{\footnotesize\ttfamily bool Task\+List\+::unassign\+User (\begin{DoxyParamCaption}\item[{int}]{task\+Num }\end{DoxyParamCaption})}
+
+
+
+\subsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_task_list_ac872aa1fde53a5f9336c1cc4d96bc733}\label{class_task_list_ac872aa1fde53a5f9336c1cc4d96bc733}} 
+\index{Task\+List@{Task\+List}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{class_task_list}{Task\+List}} \&}]{t\+List }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+\mbox{\Hypertarget{class_task_list_a22dacdc7ddbda65560de5195bd0fad24}\label{class_task_list_a22dacdc7ddbda65560de5195bd0fad24}} 
+\index{Task\+List@{Task\+List}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{operator$>$$>$}{operator>>}}
+{\footnotesize\ttfamily std\+::istream\& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{in,  }\item[{\mbox{\hyperlink{class_task_list}{Task\+List}} \&}]{tlist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_task_list_ad347c2028b83cce0c14266a35d483bda}\label{class_task_list_ad347c2028b83cce0c14266a35d483bda}} 
+\index{Task\+List@{Task\+List}!m\+\_\+event\+Id@{m\+\_\+event\+Id}}
+\index{m\+\_\+event\+Id@{m\+\_\+event\+Id}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{m\+\_\+event\+Id}{m\_eventId}}
+{\footnotesize\ttfamily int Task\+List\+::m\+\_\+event\+Id}
+
+\mbox{\Hypertarget{class_task_list_af43192a1b398aa2752fcd158976e5f57}\label{class_task_list_af43192a1b398aa2752fcd158976e5f57}} 
+\index{Task\+List@{Task\+List}!m\+\_\+num\+Avail\+Tasks@{m\+\_\+num\+Avail\+Tasks}}
+\index{m\+\_\+num\+Avail\+Tasks@{m\+\_\+num\+Avail\+Tasks}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{m\+\_\+num\+Avail\+Tasks}{m\_numAvailTasks}}
+{\footnotesize\ttfamily int Task\+List\+::m\+\_\+num\+Avail\+Tasks}
+
+\mbox{\Hypertarget{class_task_list_a7ba2af1e1826f33d27e1969b77cb1727}\label{class_task_list_a7ba2af1e1826f33d27e1969b77cb1727}} 
+\index{Task\+List@{Task\+List}!m\+\_\+num\+Tasks@{m\+\_\+num\+Tasks}}
+\index{m\+\_\+num\+Tasks@{m\+\_\+num\+Tasks}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{m\+\_\+num\+Tasks}{m\_numTasks}}
+{\footnotesize\ttfamily int Task\+List\+::m\+\_\+num\+Tasks}
+
+\mbox{\Hypertarget{class_task_list_a192cb3c6f59d6c4b428a6d909ce2035d}\label{class_task_list_a192cb3c6f59d6c4b428a6d909ce2035d}} 
+\index{Task\+List@{Task\+List}!m\+\_\+tasks@{m\+\_\+tasks}}
+\index{m\+\_\+tasks@{m\+\_\+tasks}!Task\+List@{Task\+List}}
+\subsubsection{\texorpdfstring{m\+\_\+tasks}{m\_tasks}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_task}{Task}}$>$ $>$ Task\+List\+::m\+\_\+tasks}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+backend/\mbox{\hyperlink{_task_list_8h}{Task\+List.\+h}}\item 
+backend/\mbox{\hyperlink{_task_list_8cpp}{Task\+List.\+cpp}}\end{DoxyCompactItemize}

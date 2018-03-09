@@ -1,0 +1,221 @@
+\hypertarget{class_user}{}\section{User Class Reference}
+\label{class_user}\index{User@{User}}
+
+
+{\ttfamily \#include $<$User.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_user_a4a0137053e591fbb79d9057dd7d2283d}{User}} ()
+\item 
+\mbox{\hyperlink{class_user_af7ad8135c0c766d006eadedf51e34013}{User}} (std\+::string uid, std\+::string pnm)
+\item 
+\mbox{\hyperlink{class_user_ac00b72ad64eb4149f7b21b9f5468c2b2}{$\sim$\+User}} ()
+\item 
+\mbox{\hyperlink{class_user_abf30fe432e25c1d0c1ad60a50604bc92}{User}} (std\+::string uid, std\+::string pnm, std\+::list$<$ int $>$ atev)
+\item 
+std\+::string \mbox{\hyperlink{class_user_a7eff012d6182f6829329620d8e21b124}{get\+User\+Name}} () const
+\item 
+std\+::string \mbox{\hyperlink{class_user_a708784a199b60567f59b51d5401167d3}{get\+Real\+Name}} () const
+\item 
+bool \mbox{\hyperlink{class_user_a0a703687045c47c1b3375a53e0a2f572}{operator==}} (\mbox{\hyperlink{class_user}{User}} rhs) const
+\item 
+std\+::list$<$ int $>$ $\ast$ \mbox{\hyperlink{class_user_a9ef7239820bb7fdc48f988514a79286b}{get\+Attending\+Events}} ()
+\item 
+void \mbox{\hyperlink{class_user_acb78258d9d2f5b257677746c17ef2137}{add\+Event}} (int event\+\_\+id)
+\item 
+void \mbox{\hyperlink{class_user_aa6e7e42777a61cb2c6202c3314e4bde3}{remove\+Event}} (int event\+\_\+id)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_user}{User}} class. This stores information regarding an user. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_user_a4a0137053e591fbb79d9057dd7d2283d}\label{class_user_a4a0137053e591fbb79d9057dd7d2283d}} 
+\index{User@{User}!User@{User}}
+\index{User@{User}!User@{User}}
+\subsubsection{\texorpdfstring{User()}{User()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily User\+::\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+The default constructor. Initializes user\+\_\+name and real\+\_\+name to the empty string (\char`\"{}\char`\"{}); attending\+\_\+events points to a list containing -\/1 \begin{DoxyPrecond}{Precondition}
+none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+user\+\_\+name == \char`\"{}\char`\"{} 
+
+user\+\_\+name == \char`\"{}\char`\"{} 
+
+attending\+\_\+events == new std\+::list$<$int$>$() 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_user_af7ad8135c0c766d006eadedf51e34013}\label{class_user_af7ad8135c0c766d006eadedf51e34013}} 
+\index{User@{User}!User@{User}}
+\index{User@{User}!User@{User}}
+\subsubsection{\texorpdfstring{User()}{User()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily User\+::\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{uid,  }\item[{std\+::string}]{pnm }\end{DoxyParamCaption})}
+
+Non-\/empty constructor. Initializes user\+\_\+name and real\+\_\+name to nonempty strings. attending\+\_\+events points to a list containing -\/1 
+\begin{DoxyParams}{Parameters}
+{\em uid} & String that user\+\_\+name gets initialized to \\
+\hline
+{\em pnm} & -- String that real\+\_\+name gets initialized to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: uid and pnm are valid strings 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: user\+\_\+name == uid 
+
+\+: real\+\_\+name == pnm 
+
+\+: attending\+\_\+events == new std\+::list$<$int$>$() 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_user_ac00b72ad64eb4149f7b21b9f5468c2b2}\label{class_user_ac00b72ad64eb4149f7b21b9f5468c2b2}} 
+\index{User@{User}!````~User@{$\sim$\+User}}
+\index{````~User@{$\sim$\+User}!User@{User}}
+\subsubsection{\texorpdfstring{$\sim$\+User()}{~User()}}
+{\footnotesize\ttfamily User\+::$\sim$\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_user}{User}} destructor; deallocates the data pointed to by std\+::list$<$int$>$ attending\+\_\+events \begin{DoxyPrecond}{Precondition}
+none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+data pointed to by attending\+\_\+events is deleted 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_user_abf30fe432e25c1d0c1ad60a50604bc92}\label{class_user_abf30fe432e25c1d0c1ad60a50604bc92}} 
+\index{User@{User}!User@{User}}
+\index{User@{User}!User@{User}}
+\subsubsection{\texorpdfstring{User()}{User()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily User\+::\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{uid,  }\item[{std\+::string}]{pnm,  }\item[{std\+::list$<$ int $>$}]{atev }\end{DoxyParamCaption})}
+
+Non-\/empty contructor. Initializes user\+\_\+name, real\+\_\+name, and attending\+\_\+events 
+\begin{DoxyParams}{Parameters}
+{\em uid} & String that user\+\_\+name gets initialized to \\
+\hline
+{\em pnm} & String that real\+\_\+name gets initialized to \\
+\hline
+{\em atev} & Integer list that attending\+\_\+events gets initialized to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+uid and pnm are valid strings 
+
+atev is a valid integer list container 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: user\+\_\+name == uid 
+
+\+: real\+\_\+name == pnm 
+
+\+: attending\+\_\+events has all elemets from atev 
+\end{DoxyPostcond}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_user_acb78258d9d2f5b257677746c17ef2137}\label{class_user_acb78258d9d2f5b257677746c17ef2137}} 
+\index{User@{User}!add\+Event@{add\+Event}}
+\index{add\+Event@{add\+Event}!User@{User}}
+\subsubsection{\texorpdfstring{add\+Event()}{addEvent()}}
+{\footnotesize\ttfamily void User\+::add\+Event (\begin{DoxyParamCaption}\item[{int}]{event\+\_\+id }\end{DoxyParamCaption})}
+
+Method for adding an event to attending\+\_\+events 
+\begin{DoxyParams}{Parameters}
+{\em event\+\_\+id} & event\+\_\+id to add to attending\+\_\+events \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+event\+\_\+id is valid; that is, it references an actual event 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+event\+\_\+id is added to attending\+\_\+events 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_user_a9ef7239820bb7fdc48f988514a79286b}\label{class_user_a9ef7239820bb7fdc48f988514a79286b}} 
+\index{User@{User}!get\+Attending\+Events@{get\+Attending\+Events}}
+\index{get\+Attending\+Events@{get\+Attending\+Events}!User@{User}}
+\subsubsection{\texorpdfstring{get\+Attending\+Events()}{getAttendingEvents()}}
+{\footnotesize\ttfamily std\+::list$<$ int $>$ $\ast$ User\+::get\+Attending\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retriever method for attending\+\_\+events member \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: std\+::list$<$int$>$$\ast$ -- attending\+\_\+events 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_user_a708784a199b60567f59b51d5401167d3}\label{class_user_a708784a199b60567f59b51d5401167d3}} 
+\index{User@{User}!get\+Real\+Name@{get\+Real\+Name}}
+\index{get\+Real\+Name@{get\+Real\+Name}!User@{User}}
+\subsubsection{\texorpdfstring{get\+Real\+Name()}{getRealName()}}
+{\footnotesize\ttfamily std\+::string User\+::get\+Real\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Retriever method for real\+\_\+name member. \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: std\+::string -- real\+\_\+name 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_user_a7eff012d6182f6829329620d8e21b124}\label{class_user_a7eff012d6182f6829329620d8e21b124}} 
+\index{User@{User}!get\+User\+Name@{get\+User\+Name}}
+\index{get\+User\+Name@{get\+User\+Name}!User@{User}}
+\subsubsection{\texorpdfstring{get\+User\+Name()}{getUserName()}}
+{\footnotesize\ttfamily std\+::string User\+::get\+User\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Retriever method for user\+\_\+name member. \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: std\+::string -- user\+\_\+name 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_user_a0a703687045c47c1b3375a53e0a2f572}\label{class_user_a0a703687045c47c1b3375a53e0a2f572}} 
+\index{User@{User}!operator==@{operator==}}
+\index{operator==@{operator==}!User@{User}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool User\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_user}{User}}}]{rhs }\end{DoxyParamCaption}) const}
+
+Overloaded == operator for \mbox{\hyperlink{class_user}{User}} objects; compares user\+\_\+name members. 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Some \mbox{\hyperlink{class_user}{User}} object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: rhs is a valid user object 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: (user\+\_\+name == rhs.\+user\+\_\+name) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_user_aa6e7e42777a61cb2c6202c3314e4bde3}\label{class_user_aa6e7e42777a61cb2c6202c3314e4bde3}} 
+\index{User@{User}!remove\+Event@{remove\+Event}}
+\index{remove\+Event@{remove\+Event}!User@{User}}
+\subsubsection{\texorpdfstring{remove\+Event()}{removeEvent()}}
+{\footnotesize\ttfamily void User\+::remove\+Event (\begin{DoxyParamCaption}\item[{int}]{event\+\_\+id }\end{DoxyParamCaption})}
+
+Method for removing an event from attending\+\_\+events 
+\begin{DoxyParams}{Parameters}
+{\em event\+\_\+id} & event\+\_\+id to remove from attending events \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+event\+\_\+id exists within attending\+\_\+events 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+event\+\_\+id is removed from attending\+\_\+events 
+\end{DoxyPostcond}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+backend/\mbox{\hyperlink{_user_8h}{User.\+h}}\item 
+backend/\mbox{\hyperlink{_user_8cpp}{User.\+cpp}}\end{DoxyCompactItemize}

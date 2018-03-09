@@ -1,0 +1,289 @@
+\hypertarget{class_c_l_i}{}\section{C\+LI Class Reference}
+\label{class_c_l_i}\index{C\+LI@{C\+LI}}
+
+
+{\ttfamily \#include $<$C\+L\+I.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_l_i_a1a5b0f7ec3b242c5c56e4745adbb391e}{C\+LI}} ()
+\item 
+void \mbox{\hyperlink{class_c_l_i_aeefc8cd81999836a90c2cfaced6177f1}{run}} ()
+\item 
+void \mbox{\hyperlink{class_c_l_i_acbbc753079ff02e87dd31e5b3f3bcbf9}{menu}} ()
+\item 
+void \mbox{\hyperlink{class_c_l_i_ac887b1d04b359b0687c18b7fd3c9db55}{options}} ()
+\item 
+void \mbox{\hyperlink{class_c_l_i_a4036374bc8e006272b17d762a2be8396}{login}} ()
+\item 
+void \mbox{\hyperlink{class_c_l_i_a87779d0cdc7d0d54839bfacdc0b27e9e}{new\+Account}} ()
+\item 
+void \mbox{\hyperlink{class_c_l_i_a4671c459b20aadcca2b9d1ecba63ba0c}{list\+Events}} ()
+\item 
+void \mbox{\hyperlink{class_c_l_i_a601b6eb021d5348a44450dc95c2fe4ac}{new\+Event}} ()  throw (std\+::exception)
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_c_l_i_a89320677b9fb2a4ab06a76834cbf3e33}{populate\+Task\+List}} ()
+\item 
+void \mbox{\hyperlink{class_c_l_i_ad8e11f03fc813b829ecb1a9ab717b7d7}{view\+Event}} (int)
+\item 
+void \mbox{\hyperlink{class_c_l_i_a0546e36efd50af1c80eee2ed47ac4f12}{set\+Availability}} (int)
+\item 
+void \mbox{\hyperlink{class_c_l_i_aaaacd336786c8f895b349889866cf610}{view\+Availability}} (int)
+\item 
+std\+::string \mbox{\hyperlink{class_c_l_i_ae6622010128f1170365f1e533721107e}{to12\+Hour}} (std\+::string)
+\item 
+std\+::string \mbox{\hyperlink{class_c_l_i_a7658c13977b4fe125d28dc790692ed37}{zero\+Appender}} (std\+::string time)  throw (std\+::logic\+\_\+error)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_l_i_a1a5b0f7ec3b242c5c56e4745adbb391e}\label{class_c_l_i_a1a5b0f7ec3b242c5c56e4745adbb391e}} 
+\index{C\+LI@{C\+LI}!C\+LI@{C\+LI}}
+\index{C\+LI@{C\+LI}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{C\+L\+I()}{CLI()}}
+{\footnotesize\ttfamily C\+L\+I\+::\+C\+LI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Default constructor \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: Variables are set to default values 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_l_i_a4671c459b20aadcca2b9d1ecba63ba0c}\label{class_c_l_i_a4671c459b20aadcca2b9d1ecba63ba0c}} 
+\index{C\+LI@{C\+LI}!list\+Events@{list\+Events}}
+\index{list\+Events@{list\+Events}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{list\+Events()}{listEvents()}}
+{\footnotesize\ttfamily void C\+L\+I\+::list\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Shows a list of events 
+\begin{DoxyParams}{Parameters}
+{\em int} & -\/ the starting index of the set of events \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_a4036374bc8e006272b17d762a2be8396}\label{class_c_l_i_a4036374bc8e006272b17d762a2be8396}} 
+\index{C\+LI@{C\+LI}!login@{login}}
+\index{login@{login}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily void C\+L\+I\+::login (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Verifies user exists and logges them in \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: User is logged in 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_acbbc753079ff02e87dd31e5b3f3bcbf9}\label{class_c_l_i_acbbc753079ff02e87dd31e5b3f3bcbf9}} 
+\index{C\+LI@{C\+LI}!menu@{menu}}
+\index{menu@{menu}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{menu()}{menu()}}
+{\footnotesize\ttfamily void C\+L\+I\+::menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+The menu that the user sees after they have logged in. \begin{DoxyPrecond}{Precondition}
+\+: User is logged in 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_a87779d0cdc7d0d54839bfacdc0b27e9e}\label{class_c_l_i_a87779d0cdc7d0d54839bfacdc0b27e9e}} 
+\index{C\+LI@{C\+LI}!new\+Account@{new\+Account}}
+\index{new\+Account@{new\+Account}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{new\+Account()}{newAccount()}}
+{\footnotesize\ttfamily void C\+L\+I\+::new\+Account (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gives new users the ability to create an account \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: new user is created 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_a601b6eb021d5348a44450dc95c2fe4ac}\label{class_c_l_i_a601b6eb021d5348a44450dc95c2fe4ac}} 
+\index{C\+LI@{C\+LI}!new\+Event@{new\+Event}}
+\index{new\+Event@{new\+Event}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{new\+Event()}{newEvent()}}
+{\footnotesize\ttfamily void C\+L\+I\+::new\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throw  std\+::exception) }
+
+Allows for the creation of a new event by the user \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: new event is created 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_ac887b1d04b359b0687c18b7fd3c9db55}\label{class_c_l_i_ac887b1d04b359b0687c18b7fd3c9db55}} 
+\index{C\+LI@{C\+LI}!options@{options}}
+\index{options@{options}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{options()}{options()}}
+{\footnotesize\ttfamily void C\+L\+I\+::options (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Allows the user to change programs settings \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_a89320677b9fb2a4ab06a76834cbf3e33}\label{class_c_l_i_a89320677b9fb2a4ab06a76834cbf3e33}} 
+\index{C\+LI@{C\+LI}!populate\+Task\+List@{populate\+Task\+List}}
+\index{populate\+Task\+List@{populate\+Task\+List}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{populate\+Task\+List()}{populateTaskList()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ C\+L\+I\+::populate\+Task\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+The event creator to populate a list of tasks for an event \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: new task list is created 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_aeefc8cd81999836a90c2cfaced6177f1}\label{class_c_l_i_aeefc8cd81999836a90c2cfaced6177f1}} 
+\index{C\+LI@{C\+LI}!run@{run}}
+\index{run@{run}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void C\+L\+I\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retriever method for user\+\_\+name member. \begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_a0546e36efd50af1c80eee2ed47ac4f12}\label{class_c_l_i_a0546e36efd50af1c80eee2ed47ac4f12}} 
+\index{C\+LI@{C\+LI}!set\+Availability@{set\+Availability}}
+\index{set\+Availability@{set\+Availability}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{set\+Availability()}{setAvailability()}}
+{\footnotesize\ttfamily void C\+L\+I\+::set\+Availability (\begin{DoxyParamCaption}\item[{int}]{eid }\end{DoxyParamCaption})}
+
+Allows user to set availability for the event 
+\begin{DoxyParams}{Parameters}
+{\em int} & -\/ the unique identifier of the event \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: user is not the creator 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: availability set 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_ae6622010128f1170365f1e533721107e}\label{class_c_l_i_ae6622010128f1170365f1e533721107e}} 
+\index{C\+LI@{C\+LI}!to12\+Hour@{to12\+Hour}}
+\index{to12\+Hour@{to12\+Hour}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{to12\+Hour()}{to12Hour()}}
+{\footnotesize\ttfamily std\+::string C\+L\+I\+::to12\+Hour (\begin{DoxyParamCaption}\item[{std\+::string}]{my\+Input }\end{DoxyParamCaption})}
+
+Converts 24 hour formatting to 12 hour formatting. 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & -\/ the unique identifier of the event \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: A 12 hour format version of the input string. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_aaaacd336786c8f895b349889866cf610}\label{class_c_l_i_aaaacd336786c8f895b349889866cf610}} 
+\index{C\+LI@{C\+LI}!view\+Availability@{view\+Availability}}
+\index{view\+Availability@{view\+Availability}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{view\+Availability()}{viewAvailability()}}
+{\footnotesize\ttfamily void C\+L\+I\+::view\+Availability (\begin{DoxyParamCaption}\item[{int}]{eid }\end{DoxyParamCaption})}
+
+Allows users to view availabilities for an event 
+\begin{DoxyParams}{Parameters}
+{\em int} & -\/ the unique identifier of the event \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_ad8e11f03fc813b829ecb1a9ab717b7d7}\label{class_c_l_i_ad8e11f03fc813b829ecb1a9ab717b7d7}} 
+\index{C\+LI@{C\+LI}!view\+Event@{view\+Event}}
+\index{view\+Event@{view\+Event}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{view\+Event()}{viewEvent()}}
+{\footnotesize\ttfamily void C\+L\+I\+::view\+Event (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+Allows a user to view a specific event 
+\begin{DoxyParams}{Parameters}
+{\em int} & -\/ the unique identifier of the event \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: none 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: none 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_l_i_a7658c13977b4fe125d28dc790692ed37}\label{class_c_l_i_a7658c13977b4fe125d28dc790692ed37}} 
+\index{C\+LI@{C\+LI}!zero\+Appender@{zero\+Appender}}
+\index{zero\+Appender@{zero\+Appender}!C\+LI@{C\+LI}}
+\subsubsection{\texorpdfstring{zero\+Appender()}{zeroAppender()}}
+{\footnotesize\ttfamily std\+::string C\+L\+I\+::zero\+Appender (\begin{DoxyParamCaption}\item[{std\+::string}]{time }\end{DoxyParamCaption}) throw  std\+::logic\+\_\+error) }
+
+Appends a zero to the end of a time string if it needs it(e.\+g. 13\+:00 instead of 13\+:0) 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & -\/ The string containing the time to be evaluated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\+: A time parameter is in local scope and we know it\textquotesingle{}s length $<$5 (this function does N\+OT correct strings with greater length but will disregard them.) 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+\+: If necessary, a single zero is appended to the time. If other errors, no action taken. 
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Returns}
+\+: std\+::string -\/ The time either with a zero appended or in it\textquotesingle{}s original state when passed in. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+interface/\mbox{\hyperlink{_c_l_i_8h}{C\+L\+I.\+h}}\item 
+interface/\mbox{\hyperlink{_c_l_i_8cpp}{C\+L\+I.\+cpp}}\end{DoxyCompactItemize}

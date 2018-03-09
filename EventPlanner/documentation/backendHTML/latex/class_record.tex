@@ -1,0 +1,107 @@
+\hypertarget{class_record}{}\section{Record Class Reference}
+\label{class_record}\index{Record@{Record}}
+
+
+{\ttfamily \#include $<$Record.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_record_ae8ee53ffec6ff4dac9911517d47e86a5}{Record}} ()
+\item 
+\mbox{\hyperlink{class_record_af1432c95bf127a6a3b202dcb5402397f}{Record}} (std\+::string t)
+\item 
+\mbox{\hyperlink{class_record_ad2ce1a99d866834ab53dedd788cb1ea6}{$\sim$\+Record}} ()
+\item 
+void \mbox{\hyperlink{class_record_a3f5f6ec6daac3aa600385e14c583dc32}{add\+User}} (std\+::string uid)
+\item 
+void \mbox{\hyperlink{class_record_ac52545295427a5923912f0ad4cdc4620}{remove\+User}} (std\+::string uid)
+\item 
+std\+::list$<$ std\+::string $>$ \mbox{\hyperlink{class_record_a79bd038b2a7c898441d8d638013640f9}{get\+User\+List}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_record_ac34565295efe3cbae2d5204b046aa258}{get\+Time}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{class_record}{Record}} class. This file structure stores information regarding a timeslot\textquotesingle{}s attendees. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_record_ae8ee53ffec6ff4dac9911517d47e86a5}\label{class_record_ae8ee53ffec6ff4dac9911517d47e86a5}} 
+\index{Record@{Record}!Record@{Record}}
+\index{Record@{Record}!Record@{Record}}
+\subsubsection{\texorpdfstring{Record()}{Record()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Record\+::\+Record (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Class default Constructor, this method should not be call. \mbox{\Hypertarget{class_record_af1432c95bf127a6a3b202dcb5402397f}\label{class_record_af1432c95bf127a6a3b202dcb5402397f}} 
+\index{Record@{Record}!Record@{Record}}
+\index{Record@{Record}!Record@{Record}}
+\subsubsection{\texorpdfstring{Record()}{Record()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Record\+::\+Record (\begin{DoxyParamCaption}\item[{std\+::string}]{t }\end{DoxyParamCaption})}
+
+Class Constructor 
+\begin{DoxyParams}{Parameters}
+{\em t} & time block string \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_record_ad2ce1a99d866834ab53dedd788cb1ea6}\label{class_record_ad2ce1a99d866834ab53dedd788cb1ea6}} 
+\index{Record@{Record}!````~Record@{$\sim$\+Record}}
+\index{````~Record@{$\sim$\+Record}!Record@{Record}}
+\subsubsection{\texorpdfstring{$\sim$\+Record()}{~Record()}}
+{\footnotesize\ttfamily Record\+::$\sim$\+Record (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Class Destructor, this method will delete class member userlist 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_record_a3f5f6ec6daac3aa600385e14c583dc32}\label{class_record_a3f5f6ec6daac3aa600385e14c583dc32}} 
+\index{Record@{Record}!add\+User@{add\+User}}
+\index{add\+User@{add\+User}!Record@{Record}}
+\subsubsection{\texorpdfstring{add\+User()}{addUser()}}
+{\footnotesize\ttfamily void Record\+::add\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{uid }\end{DoxyParamCaption})}
+
+This method will add a user id into the class member userlist. 
+\begin{DoxyParams}{Parameters}
+{\em uid} & username string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+add user to class member userlist. 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_record_ac34565295efe3cbae2d5204b046aa258}\label{class_record_ac34565295efe3cbae2d5204b046aa258}} 
+\index{Record@{Record}!get\+Time@{get\+Time}}
+\index{get\+Time@{get\+Time}!Record@{Record}}
+\subsubsection{\texorpdfstring{get\+Time()}{getTime()}}
+{\footnotesize\ttfamily std\+::string Record\+::get\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This method will return calss member time. \begin{DoxyReturn}{Returns}
+time block string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_record_a79bd038b2a7c898441d8d638013640f9}\label{class_record_a79bd038b2a7c898441d8d638013640f9}} 
+\index{Record@{Record}!get\+User\+List@{get\+User\+List}}
+\index{get\+User\+List@{get\+User\+List}!Record@{Record}}
+\subsubsection{\texorpdfstring{get\+User\+List()}{getUserList()}}
+{\footnotesize\ttfamily std\+::list$<$ std\+::string $>$ Record\+::get\+User\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This method will return class member userlist when it been called. \begin{DoxyReturn}{Returns}
+userlist list. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_record_ac52545295427a5923912f0ad4cdc4620}\label{class_record_ac52545295427a5923912f0ad4cdc4620}} 
+\index{Record@{Record}!remove\+User@{remove\+User}}
+\index{remove\+User@{remove\+User}!Record@{Record}}
+\subsubsection{\texorpdfstring{remove\+User()}{removeUser()}}
+{\footnotesize\ttfamily void Record\+::remove\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{uid }\end{DoxyParamCaption})}
+
+This method will remove a certain user from the class member userlist. 
+\begin{DoxyParams}{Parameters}
+{\em uid} & username string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+remove user from class member userlist 
+\end{DoxyPostcond}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+backend/\mbox{\hyperlink{_record_8h}{Record.\+h}}\item 
+backend/\mbox{\hyperlink{_record_8cpp}{Record.\+cpp}}\end{DoxyCompactItemize}
